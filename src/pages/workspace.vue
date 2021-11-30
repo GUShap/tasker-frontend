@@ -2,7 +2,6 @@
   <section>
     <header class="board-header">
       <div class="board-details">
-          <unicon name="car-wash" fill="limegreen"></unicon>
         <a>Share</a>
         <a>Proj Name</a>
         <a>show/hide</a>
@@ -17,17 +16,17 @@
       </div>
     </header>
     <board-filter />
-    <group-list />
+    <board />
   </section>
 </template>
 
 <script>
 import boardFilter from "@/cmps/board-filter.vue";
-import groupList from "@/cmps/group-list.vue";
+import board from "@/cmps/board.vue";
 export default {
   components: {
     boardFilter,
-    groupList,
+    // board,
   },
   props: [],
   data() {
