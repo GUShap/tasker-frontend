@@ -1,7 +1,8 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import landingPage from '../App.vue'
+import landingPage from '../pages/landing-page.vue'
 import about from '../pages/about.vue'
+import home from '../pages/home.vue'
 import workspace from '../pages/workspace.vue'
 import dashboard from '../pages/dashboard.vue'
 import user from '../pages/user.vue'
@@ -19,6 +20,11 @@ const routes = [
     path: '/about',
     name: 'about',
     component: about
+  },
+  {
+    path: '/home',
+    name: 'home',
+    component: home
   },
   {
     path: 'home/board/:boardId?',

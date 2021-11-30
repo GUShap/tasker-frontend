@@ -1,6 +1,13 @@
 <template>
 <section class="main-nav">
-
+<nav>
+    <div>home</div>
+    <div>home</div>
+    <div>home</div>
+    <div>home</div>
+    <div>home</div>
+    <div>home</div>
+</nav>
 </section>
 </template>
 
@@ -9,9 +16,6 @@ export default {
 components:{
 },
 props:[],
-template:
-<footer>copyrights</footer>
-,
 data(){
 return{
 }
