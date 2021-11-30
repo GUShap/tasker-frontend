@@ -26,7 +26,7 @@ import board from "@/cmps/board.vue";
 export default {
   components: {
     boardFilter,
-    // board,
+    board,
   },
   props: [],
   data() {
