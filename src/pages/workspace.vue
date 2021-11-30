@@ -3,17 +3,21 @@
     <header class="board-header">
       <div class="main-title">
         <i class="fas fa-share-alt"></i>
-        <h2 @click="editTitle" v-show="!isEdited">{{ currBoard.title }}</h2>
+        <a @click="editTxt('title')" v-show="!isEdited">{{
+          currBoard.title
+        }}</a>
         <input
           ref="title"
-          v-show="isEdited"
+          v-show="isEdited && lableEdit === 'title'"
           type="text"
           v-model="currBoard.title"
         />
         <i class="fas fa-info-circle" @click="toggleDetails"></i>
-       
-
-        <i :class="[isStared ? 'btn fa fa-star' : 'btn fa fa-star-o']" title="Stared" @click="stared"></i>
+        <i
+          :class="[isStared ? 'fas fa-star' : 'far fa-star']"
+          title="Stared"
+          @click="stared"
+        ></i>
       </div>
       <div class="more-actions">
         <a>Last seen</a>
@@ -22,8 +26,16 @@
         <i class="fas fa-plus"></i>
         <a>...</a>
       </div>
-      <div v-show="isShown">{{ currBoard.details }}</div>
     </header>
+    <div class="board-info" @click="editTxt('description')" v-show="isShown">
+      {{ currBoard.description }}
+    </div>
+    <input
+      ref="description"
+      v-show="isEdited"
+      type="text"
+      v-model="currBoard.description"
+    />
     <board-filter />
     <board-cmp />
   </section>
@@ -45,11 +57,12 @@ export default {
       isShown: false,
       currBoard: board,
       isStared: false,
+      lableEdit: false,
     };
   },
   created() {},
   methods: {
-    editTitle() {
+    editTxt(val) {
       this.isEdited = !this.isEdited;
       // saveToBoard()
     },
