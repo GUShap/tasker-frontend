@@ -13,7 +13,7 @@
         <i class="fas fa-info-circle" @click="toggleDetails"></i>
        
 
-        <i :class="[isStared ? 'btn fa fa-star' : 'btn fa fa-star-o']" title="Stared" @click="stared"></i>
+        <i :class="[isStared ? 'fas fa-star' : 'far fa-star']" title="Stared" @click="stared"></i>
       </div>
       <div class="more-actions">
         <a>Last seen</a>

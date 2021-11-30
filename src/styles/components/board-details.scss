@@ -1,24 +1,24 @@
-.workspace-container{
-   
-    .board-header{
+.workspace-container {
+    .board-header {
         min-height: 10vh;
         display: flex;
         width: 100%;
         justify-content: space-between;
-        align-items:center;
+        align-items: center;
         padding: 20px;
         margin-right: 100px;
-        
-        a{
-            text-decoration: none;
-             padding: 10px;
-             font-weight: bolder;
-       }  
-  
-       .checked{
-          background-color: gold;
-       }
 
+        a {
+            text-decoration: none;
+            padding: 10px;
+            font-weight: bolder;
+        }
+
+        .fas.fa-star {
+            color: gold;
+        }
+        .far.fa-star {
+            color: black;
+        }
     }
 }
-
