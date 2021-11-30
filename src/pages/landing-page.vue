@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <section id="app">
     <header class="home-header">
       <h1>Tasker</h1>
       <div class="main-nav">
@@ -16,7 +16,7 @@
       </div>
     </header>
       <h1>landing page</h1>
-  </div>
+  </section>
 </template>
 
 <script>
