@@ -3,6 +3,7 @@ export const board = {
     "_id": "b101",
     "title": "Robot dev proj",
     "createdAt": 1589983468418,
+    "details": "First Board! #so excited",
     "createdBy": {
         "_id": "u101",
         "fullname": "Abi Abambi",
