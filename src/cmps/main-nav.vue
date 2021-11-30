@@ -1,12 +1,8 @@
 <template>
   <section class="main-nav">
     <nav class="flex column align-center">
-      <router-link to="/home" title="Home">
-        <font-awesome-icon icon="home" class="fa"/>
-      </router-link>
-      <router-link to="/board/" title="Workspace">
-        <font-awesome-icon icon="th-large" class="fa"/>
-      </router-link>
+      <router-link to="/home" title="Home" class="fa fa-home"/>
+      <router-link to="/board/" title="Workspace" class="fa fa-th-large"/>
     </nav>
   </section>
 </template>

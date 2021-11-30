@@ -13,5 +13,8 @@
 @import './components/home-page';
 @import './components/main-nav';
 @import './components/board-details';
+@import './components/task-preview';
 
-
+@import './icons/fontawesome-free-5.15.4-web/scss/fontawesome.scss';
+$fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
+@import './icons/fontawesome-free-5.15.4-web/css/all.css';

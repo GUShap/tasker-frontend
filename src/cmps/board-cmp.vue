@@ -1,9 +1,9 @@
 <template>
   <section>
     <h1>group</h1>
-    <section v-for="(group, idx) in currBoard.groups" :key="idx">
-      <group-cmp :group="group" />
-    </section>
+    <template v-for="group in currBoard.groups">
+      <group-cmp :group="group"  :key="group.id"/>
+    </template>
   </section>
 </template>
 
