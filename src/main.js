@@ -5,8 +5,10 @@ import "./styles/styles.scss"
 import boardStore from './store/board.store'
 import ElementUI from 'element-ui';
 
-Vue.config.productionTip = false
+
+
 Vue.use(ElementUI)
+Vue.config.productionTip = false
 
 new Vue({
   router,
