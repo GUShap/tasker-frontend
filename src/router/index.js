@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import home from '../pages/home.vue'
+import landingPage from '../App.vue'
 import about from '../pages/about.vue'
-import board from '../pages/tasker-app.vue'
+import workspace from '../pages/workspace.vue'
 import dashboard from '../pages/dashboard.vue'
 import user from '../pages/user.vue'
 import login from '../pages/login.vue'
@@ -12,8 +12,8 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/',
-    name: 'home',
-    component: home
+    name: 'landing-page',
+    component: landingPage
   },
   {
     path: '/about',
@@ -21,9 +21,9 @@ const routes = [
     component: about
   },
   {
-    path: '/board/:boardId?',
-    name: 'board',
-    component: board
+    path: 'home/board/:boardId?',
+    name: 'workspace',
+    component: workspace
   },
  {        //check if same id as board-id
     path: '/dashboard/:boardId?',
