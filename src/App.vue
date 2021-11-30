@@ -10,11 +10,12 @@
       </div>
       <div class="">
          <router-link to="/tasker-app">Login</router-link>
+         <router-link to="/home">start</router-link>
           <router-link to="/tasker-app">Sign In</router-link>
 
       </div>
     </header>
-    <router-view />
+      <h1>landing page</h1>
   </div>
 </template>
 

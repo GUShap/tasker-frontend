@@ -1,15 +1,30 @@
 <template>
   <div class="home">
-    <h1>This is th HomePage</h1>
+    <h1>Home</h1>
+    <main-nav/>
+    <router-view/>
   </div>
 </template>
 
 <script>
-// import HelloWorld from '@/cmps/HelloWorld.vue'
+import mainNav from '@/cmps/main-nav.vue';
 
 export default {
-  name: 'Home',
-  components: {
-  }
-}
+ components:{
+   mainNav
+ },
+ props:[],
+ data(){
+ return{
+ }
+ },
+ created(){
+ },
+ methods: {
+ },
+ computed:{
+ },
+ destroyed(){
+ }
+ }
 </script>
