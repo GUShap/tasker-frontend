@@ -1,12 +1,9 @@
 <template>
-<section class="main-nav">
-<nav>
-    <div>home</div>
-    <div>home</div>
-    <div>home</div>
-    <div>home</div>
-    <div>home</div>
-    <div>home</div>
+<section class="main-nav" >
+<nav class="flex column">
+    <router-link to="/home">home</router-link>
+    <router-link to="/board/">Workspace</router-link>
+   
 </nav>
 </section>
 </template>

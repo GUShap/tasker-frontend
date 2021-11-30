@@ -1,7 +1,12 @@
 <template>
+<<<<<<< HEAD
   <div id="app">
     <header class="home-header flex space-between">
       <div class="">
+=======
+  <section id="app">
+    <header class="home-header">
+>>>>>>> 8929eb39fde34fd5c9c3caac11d37aed0c24f94f
       <h1>Tasker</h1>
       <div class="main-nav">
         <router-link to="/">Product</router-link> |
@@ -17,7 +22,7 @@
       </div>
     </header>
       <h1>landing page</h1>
-  </div>
+  </section>
 </template>
 
 <script>
