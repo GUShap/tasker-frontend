@@ -1,18 +1,18 @@
 <template>
   <section>
-    <h1>group List</h1>
+    <h1>group</h1>
     <section v-for="(group, idx) in currBoard.groups" :key="idx">
-      <group-list :group="group" />
+      <group :group="group" />
     </section>
   </section>
 </template>
 
 <script>
 import { board } from "../../database.js";
-import groupList from "@/cmps/group-list.vue";
+import group from "@/cmps/group.vue";
 
 export default {
-  components: {groupList},
+  components: {group},
   props: [],
 
   data() {
