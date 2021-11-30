@@ -7,14 +7,13 @@ import "./styles/styles.scss"
 
 //ICON
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faUserSecret, faCoffee } from '@fortawesome/free-solid-svg-icons'
-// import {   } from '@fortawesome/free-solid-svg-icons'
-
+import { faHome,faThLarge,faUserSecret } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
-library.add(faUserSecret, faCoffee )
+library.add(faUserSecret ,faHome, faThLarge)
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
+
 
 //=====
 Vue.config.productionTip = false

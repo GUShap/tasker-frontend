@@ -16,18 +16,18 @@
       </div>
     </header>
     <board-filter />
-    <board />
+    <board-cmp />
   </section>
 </template>
 
 <script>
 import { board } from "../../database.js";
 import boardFilter from "@/cmps/board-filter.vue";
-// import board from "@/cmps/board.vue";
+import boardCmp from "@/cmps/board-cmp.vue";
 export default {
   components: {
     boardFilter,
-    board,
+    boardCmp,
   },
   props: [],
   data() {
