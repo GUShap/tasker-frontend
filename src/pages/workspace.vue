@@ -11,11 +11,9 @@
           v-model="currBoard.title"
         />
         <i class="fas fa-info-circle" @click="toggleDetails"></i>
-        <i
-          class="far fa-star"
-          :class="{ checked: isStared }"
-          @click="stared"
-        ></i>
+       
+
+        <i :class="[isStared ? 'btn fa fa-star' : 'btn fa fa-star-o']" title="Stared" @click="stared"></i>
       </div>
       <div class="more-actions">
         <a>Last seen</a>
