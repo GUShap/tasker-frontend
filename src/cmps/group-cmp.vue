@@ -7,7 +7,7 @@
 
     <template v-for="task in group.tasks">
         <transition name="fade" :key="task.id">
-      <task-preview :task="task" :key="task.id" v-show="groupShow"/>
+      <task-preview :task="task" :key="task.id" v-show="groupShow" class="flex align-center justify-center"/>
         </transition>
     </template>
     <footer class="group-footer flex justify-center align-center"></footer>

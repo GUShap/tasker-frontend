@@ -1,6 +1,6 @@
 <template>
   <section class="task-preview flex align-center space-between">
-    <div>{{ task.title }}</div>
+    <input @change="change" type="text" name="" v-model="task.title">
     <div v-for="(member, idx) in members" :key="idx">
       {{ member }}
     </div>
@@ -17,7 +17,11 @@ export default {
     return {};
   },
   created() {},
-  methods: {},
+  methods: {
+    change(){
+      console.log('task',this.task.title);
+    }
+  },
   computed: {
     members() {
       const members = this.task.members;
