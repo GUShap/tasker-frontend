@@ -1,6 +1,5 @@
 <template>
-  <section>
-    <h1>group</h1>
+  <section class="board-container">
     <template v-for="group in currBoard.groups">
       <group-cmp :group="group"  :key="group.id"/>
     </template>

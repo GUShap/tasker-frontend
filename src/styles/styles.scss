@@ -1,20 +1,21 @@
-@import 'setup/typography';
-@import 'setup/variables';
-@import 'setup/mixins';
-@import 'setup/functions';
+@import "setup/typography";
+@import "setup/variables";
+@import "setup/mixins";
+@import "setup/functions";
 
 // BASICS
-@import 'basics/helpers';
-@import 'basics/base';
-@import 'basics/layout';
-@import 'basics/flex';
+@import "basics/helpers";
+@import "basics/base";
+@import "basics/layout";
+@import "basics/flex";
 
 // COMPONENTS
-@import './components/home-page';
-@import './components/main-nav';
-@import './components/board-details';
-@import './components/task-preview';
+@import "./components/home-page";
+@import "./components/main-nav";
+@import "./components/board-details";
+@import "./components/group-cmp";
+@import "./components/task-preview";
 
-@import './icons/fontawesome-free-5.15.4-web/scss/fontawesome.scss';
-$fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
-@import './icons/fontawesome-free-5.15.4-web/css/all.css';
+@import "./icons/fontawesome-free-5.15.4-web/scss/fontawesome.scss";
+$fa-font-path: "~@fortawesome/fontawesome-free/webfonts";
+@import "./icons/fontawesome-free-5.15.4-web/css/all.css";
