@@ -1,0 +1,42 @@
+.group {
+  margin-left: 5rem;
+
+  .group-header {
+    width: 100vw;
+    margin: 0.1rem 0;
+    background-color: #fff;
+
+    i {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      margin-right: 1rem;
+      border-radius: 50%;
+      width: 1rem;
+      height: 1rem;
+      border: 1px solid blue;
+      background-color: blue;
+      color: #fff;
+      transition: 0.3s;
+    }
+    i:hover {
+      cursor: pointer;
+      border: 1px solid #504658;
+      background-color: #fff;
+      color: #504658;
+    }
+  }
+  .group-footer {
+    height: 2rem;
+    width: 100vw;
+    margin: 0.1rem 0;
+    background-color: #fff;
+  }
+  .fade-enter-active,
+  .fade-leave-active {
+    transition: opacity 0.3s;
+  }
+  .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+    opacity: 0;
+  }
+}

@@ -1,12 +1,14 @@
 <template>
   <section class="group flex column align-center">
-    <header class="group-header flex justify-center align-center">
-      <i class="fa fa-caret-down"></i>
+    <header class="group-header flex start align-center">
+      <i @click="showGroup" class="fa fa-caret-down"></i>
       <div>{{ group.title }}</div>
     </header>
 
     <template v-for="task in group.tasks">
-      <task-preview :task="task" :key="task.id"/>
+        <transition name="fade" :key="task.id">
+      <task-preview :task="task" :key="task.id" v-show="groupShow"/>
+        </transition>
     </template>
     <footer class="group-footer flex justify-center align-center"></footer>
   </section>
@@ -19,10 +21,16 @@ export default {
   components: { taskPreview },
   props: ["group"],
   data() {
-    return {};
+    return {
+      groupShow: true,
+    };
   },
   created() {},
-  methods: {},
+  methods: {
+    showGroup() {
+      this.groupShow = !this.groupShow;
+    },
+  },
   computed: {},
   destroyed() {},
 };
