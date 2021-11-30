@@ -1,9 +1,9 @@
 <template>
-  <section>
+  <section class="workspace-container">
     <header class="board-header">
       <div class="board-details">
-        <a>Share</a>
-        <a>Proj Name</a>
+        <!-- <font-awesome-icon icon="faCoffee " /> -->
+        <a>{{ currBoard.title }}</a>
         <a>show/hide</a>
         <a>star</a>
       </div>
@@ -21,8 +21,9 @@
 </template>
 
 <script>
+import { board } from "../../database.js";
 import boardFilter from "@/cmps/board-filter.vue";
-import board from "@/cmps/board.vue";
+// import board from "@/cmps/board.vue";
 export default {
   components: {
     boardFilter,
@@ -30,7 +31,9 @@ export default {
   },
   props: [],
   data() {
-    return {};
+    return {
+      currBoard: board,
+    };
   },
   created() {},
   methods: {},
