@@ -1,12 +1,6 @@
 <template>
-<<<<<<< HEAD
-  <div id="app">
-    <header class="home-header flex space-between">
-      <div class="">
-=======
   <section id="app">
     <header class="home-header">
->>>>>>> 8929eb39fde34fd5c9c3caac11d37aed0c24f94f
       <h1>Tasker</h1>
       <div class="main-nav">
         <router-link to="/">Product</router-link> |
@@ -14,7 +8,7 @@
         <router-link to="/home">Templates</router-link> |
         <router-link to="/home">Pricing</router-link> |
       </div>
-       </div>
+       <!-- </div> -->
       <div class="action-btn">
          <router-link to="/login">Login</router-link> |
          <router-link to="/home">start</router-link> |
