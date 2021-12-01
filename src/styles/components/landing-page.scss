@@ -1,9 +1,25 @@
-header{
+header {
     display: flex;
     align-items: center;
     justify-content: space-between;
 
-    .home-header{
-        
+    .info-header {
+        margin: 0 auto;
+        height: 72px;
+        padding-left: 32px;
+        padding-right: 32px;
+        font-family: sofia;
+        position: -webkit-sticky;
+        position: sticky;
+        top: 0;
+        background-color: #fff;
+        z-index: 2;
+        box-shadow: 0 18px 30px rgb(0 0 0 / 2%);
+    }
+
+    .home-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
     }
 }
