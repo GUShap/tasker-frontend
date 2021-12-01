@@ -6,7 +6,6 @@
       <component :is="cmpType" :info="task" :key="idx" />
       <!-- <component :is="cmpType" :info="getCmpInfo(cmpType)" @updated="updateTask(cmpType, $event)" :key="idx"> -->
     </template>
-      <router-view></router-view>
   </section>
 </template>
 
