@@ -1,6 +1,14 @@
+
 <template>
   <section class="task-preview flex align-center space-between">
-    <input @change="change" type="text" name="" v-model="task.title" />
+    <template >
+      <pre>{{currGroup}}</pre>
+    </template>
+
+
+
+
+    <!-- <input @change="change" type="text" name="" v-model="task.title" />
     <div v-for="(member, idx) in members" :key="idx">
       {{ member }}
     </div>
@@ -10,7 +18,7 @@
       <el-option label="Done" value="done"></el-option>
       <el-option label="Stuck" value="stuck"></el-option>
     </el-select>
-    <div>{{ task.labelIds }}</div>
+    <div>{{ task.labelIds }}</div> -->
   </section>
 </template>
 
@@ -22,24 +30,17 @@ export default {
 
   data() {
     return {
-      labels: "empty",
     };
   },
   created() {},
   methods: {
     change() {
-      console.log("task", this.task.title);
     },
   },
   computed: {
-    members() {
-      const members = this.task.members;
-      if (members) {
-        return members.map((member) => {
-          return member.fullname;
-        });
+    currGroup() {
+        return this.$store.getters.currGroup
       }
-    },
   },
   destroyed() {},
 };
