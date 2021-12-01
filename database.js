@@ -61,7 +61,8 @@ export const board = {
             "tasks": [
                 {
                     "id": "c103",
-                    "title": "Do that"
+                    "title": "Do that",
+                    "labelId": ["done"]
                 },
                 {
                     "id": "c104",
@@ -100,7 +101,7 @@ export const board = {
                             "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
                         }
                     ],
-                    "labelIds": ["l101", "l102"],
+                    "labelId": ["done"],
                     "createdAt": 1590999730348,
                     "dueDate": 16156215211,
                     "byMember": {
@@ -133,5 +134,5 @@ export const board = {
             }
         }
     ],
-    "cmpsOrder": ["status-picker", "member-picker", "title-picker"]
+    "cmpsOrder": ["title-picker", "status-picker", "member-picker"]
 }
