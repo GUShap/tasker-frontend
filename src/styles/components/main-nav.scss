@@ -1,12 +1,26 @@
-.main-nav{
+.main-nav {
     width: rem(54px);
     height: 100vh;
-   background-color:#292f4c;
-   float: left;
+    background-color: #292f4c;
+    float: left;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: column;
+    padding: 20px;
 
-   .fa{
-    color: #fff;
-    font-size: 2rem;
-   }
+    .fab,
+    .fas,
+    .far {
+        color: #fff;
+        font-size: 1.5rem;
+    }
+    .page-nav {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        gap: 10px;
+        // justify-content: space-between;
 
+    }
 }
