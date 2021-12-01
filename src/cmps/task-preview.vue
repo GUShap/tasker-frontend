@@ -10,6 +10,7 @@
 
 <script>
 export default {
+  name:'task-preview',
   components: {},
   props: ["task"],
 
