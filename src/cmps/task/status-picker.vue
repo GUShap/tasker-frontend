@@ -1,6 +1,6 @@
 <template>
-  <div>
-    {{ info.labelId }}
+  <div class="tag corner" :class="status">
+    {{ status }}
   </div>
 </template>
 
@@ -13,7 +13,11 @@ export default {
   },
   created() {},
   methods: {},
-  computed: {},
+  computed: {
+    status(){
+      return this.info.labelId ? this.info.labelId[0] : '' ;
+    }
+  },
   destroyed() {},
 };
 </script>

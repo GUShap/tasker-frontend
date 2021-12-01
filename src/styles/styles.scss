@@ -14,12 +14,16 @@
 @import "./components/main-nav";
 @import "./components/board-details";
 @import "./components/group-cmp";
-@import "./components/task-preview";
-@import "./components/task-list";
-@import "./components/task-details";
+@import "./components/task/task-preview";
+@import "./components/task/task-list";
+@import "./components/task/task-details";
+@import "./components/task/task-dynamic-cmp";
+@import "./components/task/task-actions";
 @import "./components/list-dropdown";
-@import "./components/task-actions";
 @import "./components/landing-page";
+
+
+
 
 @import "./icons/fontawesome-free-5.15.4-web/scss/fontawesome.scss";
 $fa-font-path: "~@fortawesome/fontawesome-free/webfonts";
