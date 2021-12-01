@@ -1,32 +1,33 @@
 <template>
   <section class="board-container">
-    <group-list :groups="currGroups" />
+    <template v-for="group in currGroups">
+      <board-gruop :group="group" :key="group.id" />
+    </template>
   </section>
 </template>
 
 <script>
 // import { board } from "../../database.js";
-import groupList from "../cmps/group-list.vue";
+import boardGruop from "@/cmps/group/board-group.vue";
 
 export default {
   name: "main-board",
   components: {
-    groupList,
+    boardGruop,
   },
   props: ["board"],
 
   data() {
-    return {};
+    return {
+      groups: null,
+    };
   },
   created() {},
   methods: {},
   computed: {
     currGroups() {
-      if (this.board) {
-        return this.board.groups;
-      } else {
-        return null;
-      }
+     this.groups = this.board ? this.board.groups : null;
+     return this.groups
     },
   },
   destroyed() {},
