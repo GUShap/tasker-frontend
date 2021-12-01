@@ -1,34 +1,57 @@
 .workspace-container {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  overflow: hidden;
-
-  .board-header {
-    min-height: 10vh;
-    display: flex;
-    width: 100%;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px;
-    margin-right: 100px;
-
-    a {
-      text-decoration: none;
-      padding: 10px;
-      font-weight: bolder;
-    }
-
-    .checked {
-      background-color: gold;
-    }
-  }
-
-  .board-container {
     display: flex;
     flex-direction: column;
     flex: 1;
-    overflow-x: scroll;
-    width: 100%;
-  }
+    overflow: hidden;
+    font-size: 20px;
+
+    .board-header {
+        min-height: 10vh;
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px;
+        font-size: 20px;
+        font-family: Roboto, sans-serif;
+        border-bottom: 1px rgba(0, 0, 0, 0.11) solid;
+        flex-wrap: wrap;
+
+        a {
+            text-decoration: none;
+            padding: 10px;
+            font-weight: bolder;
+            cursor: pointer;
+        }
+        .main-title {
+            align-items: center;
+        }
+        .board-info {
+            font-weight: 400px;
+        }
+    }
+    .add-board-btn {
+        border: none;
+        background-color: inherit;
+    }
+
+    .board-container {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        overflow-x: scroll;
+        width: 100%;
+    }
+    .main-title {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+    }
+    .more-actions{
+        align-items: center;
+        justify-content: space-between;
+        margin: 10px;
+    }
+
 }

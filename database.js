@@ -3,7 +3,7 @@ export const board = {
     "_id": "b101",
     "title": "Robot dev proj",
     "createdAt": 1589983468418,
-    "description": "First Board! #so excited",
+    "description": "This board is for sprint retros. Gather topics during the sprint and track following the sprint retrospective. Have your team members vote to find the most relevant feedback. Track your action items and improve for next sprint",
     "createdBy": {
         "_id": "u101",
         "fullname": "Abi Abambi",
