@@ -18,16 +18,6 @@ export default new Vuex.Store({
     setBoards(state, { boards }) {
       state.boards = boards;
     },
-    // addToy(state, { toy }) {
-    //   state.toys.push(toy);
-    // },
-
-    updateBoard(state, { board }) {},
-    remove(state, { id }) {
-      const idx = state.toys.findIndex((currToy) => currToy._id === id);
-      const toy = state.toys.splice(idx, 1);
-      state.lastRemovedToy = toy;
-    },
   },
   actions: {
     async loadBoards({ commit }, {}) {
@@ -40,7 +30,7 @@ export default new Vuex.Store({
     },
     async editTask({ commit }, { task }) {
       try {
-        const currTask = await BoardsService.save(task);
+        const currTask = await boardService.save(task);
         if (task._id) {
           commit({ type: "updateTask", task: currTask });
         } else {
@@ -50,10 +40,13 @@ export default new Vuex.Store({
         console.log(err);
       }
     },
-    removeTask({ commit }, { id }) {
-      return BoardsService.remove(id).then(() => {
-        commit("remove", { id });
-      });
+    async removeTask({ dispatch }, { boardId, groupId, taskId }) {
+      try {
+        boardService.remove(boardId, groupId, taskId);
+        dispatch({ type: "loadBoards"});
+      } catch (err) {
+        console.log(err);
+      }
     },
   },
   modules: {},
