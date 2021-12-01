@@ -1,5 +1,5 @@
 <template>
-  <section class="main-nav">
+  <section class="main-nav" style="display:none">
     <nav class="page-nav">
       <router-link to="/home/" title="Home" class="fab fa-tumblr" />
       <router-link to="/board/" title="Workspace" class="fas fa-th-list" />
