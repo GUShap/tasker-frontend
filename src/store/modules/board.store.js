@@ -28,26 +28,26 @@ export const boardStore = {
         console.log(err);
       }
     },
-    // async editTask({ commit }, { task }) {
-    //   try {
-    //     const currTask = await boardService.save(task);
-    //     if (task._id) {
-    //       commit({ type: "updateTask", task: currTask });
-    //     } else {
-    //       commit({ type: "addTask", task: currTask });
-    //     }
-    //   } catch (err) {
-    //     console.log(err);
-    //   }
-    // },
-    // async removeTask({ dispatch }, { boardId, groupId, taskId }) {
-    //   try {
-    //     boardService.remove(boardId, groupId, taskId);
-    //     dispatch({ type: "loadBoards"});
-    //   } catch (err) {
-    //     console.log(err);
-    //   }
-    // },
+    async editTask({ commit }, { task }) {
+      try {
+        const currTask = await boardService.save(task);
+        if (task._id) {
+          commit({ type: "updateTask", task: currTask });
+        } else {
+          commit({ type: "addTask", task: currTask });
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    },
+    async removeTask({ dispatch }, { boardId, groupId, taskId }) {
+      try {
+        boardService.remove(boardId, groupId, taskId);
+        dispatch({ type: "loadBoards"});
+      } catch (err) {
+        console.log(err);
+      }
+    },
   },
   modules: {},
 };

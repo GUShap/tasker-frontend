@@ -8,7 +8,6 @@
 </template>
 
 <script>
-import { board } from "../../database.js";
 import boardFilter from "@/cmps/board-filter.vue";
 import boardHeader from "@/cmps/board-header.vue";
 import taskActionsNav from "@/cmps/task-actions-nav.vue";
@@ -24,7 +23,6 @@ export default {
   props: [],
   data() {
     return {
-      // currBoard: board,
     };
   },
   async created() {
