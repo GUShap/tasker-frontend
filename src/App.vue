@@ -1,6 +1,6 @@
 <template>
-  <section class="flex">
-    <main-nav/>
+  <section :class="[isLandingPage ? '' : 'flex']">
+    <main-nav v-if="!isLandingPage" />
     <router-view />
   </section>
 </template>
@@ -14,16 +14,21 @@ export default {
   },
   props: [],
   data() {
-    return {};
+    return {
+      isLandingPage: true,
+    };
   },
-  created() {
-
-  },
+  created() {},
   methods: {},
-  computed: {
-  },
+  computed: {},
   destroyed() {},
-  watch:{
-  }
+  watch: {
+    $route: function (newVal, OldVal) {
+      const { name } = newVal;
+      if (name !== "landing-page") {
+        this.isLandingPage = false;
+      }
+    },
+  },
 };
 </script>
