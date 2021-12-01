@@ -6,6 +6,7 @@ export const boardService = {
     save,
     remove,
     getById,
+    getTaskById
 }
 
 const gBoards = [board];
@@ -38,7 +39,16 @@ function getById(boardId) {
     return board
 }
 
-
+function getTaskById(taskId) {
+    const task = gBoards.map(brd => {
+        brd.groups.map(group => {
+            group.tasks.map(task => {
+                return task.id === taskId
+            })
+        })
+    })
+    return task
+}
 // function updateTask(cmpType, data) {
 //     // Switch
 //     // task.members = data;

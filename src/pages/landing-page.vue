@@ -23,45 +23,44 @@
           What would you like to manage with wednesday Work OS?
         </h5>
         <button>Get Started<i class="fas fa-chevron-right"></i></button>
-        <!-- <img> -->
       </section>
+      <!-- <img> -->
       <section class="more-info">
         <h3>Manage everything in one workspace</h3>
-        <h5>
+        <p>
           Planning, tracking and delivering your team's best work has never been
           easier
-        </h5>
-        <!-- <img> -->
+        </p>
+        <img :src="require(`@/pics/pic1.png`)" />
       </section>
       <section class="more-info">
         <h3>Visualize work with Views</h3>
-        <h5>View data as a kanban, danban, dashboard and more</h5>
+        <p>View data as a kanban, danban, dashboard and more</p>
         <!-- <img> -->
       </section>
       <section class="more-info">
         <h3>Setup in minutes</h3>
-        <h5>
+        <p>
           Get started fast with hundreds of visual and cutomizable templated -
           or creat your own
-        </h5>
+        </p>
         <!-- <img> -->
-        <section>
-          <section class="trial">
-            <h3>Try Tasker for your team</h3>
-            <h5>14-day free trial | No credit card needed</h5>
-            <button>Get Started</button>
-          </section>
-          <section class="links">
-            <a>About Us</a>
-            <a>Become a partner</a>
-            <a>Careers</a>
-            <a>Blog</a>
-            <a>Pricing</a>
-            <a>Contact sales</a>
-            <a>Terms and privacy</a>
-            <a>Product overview</a>
-          </section>
-        </section>
+      </section>
+
+      <section class="trial">
+        <h3>Try Tasker for your team</h3>
+        <p>14-day free trial | No credit card needed</p>
+        <button>Get Started</button>
+      </section>
+      <section class="links">
+        <a>About Us</a>
+        <a>Become a partner</a>
+        <a>Careers</a>
+        <a>Blog</a>
+        <a>Pricing</a>
+        <a>Contact sales</a>
+        <a>Terms and privacy</a>
+        <a>Product overview</a>
       </section>
     </section>
   </section>

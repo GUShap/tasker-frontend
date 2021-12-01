@@ -45,11 +45,11 @@ export const board = {
             "title": "Group 2",
             "tasks": [
                 {
-                    "id": "c101",
+                    "id": "c103",
                     "title": "Replace logo"
                 },
                 {
-                    "id": "c102",
+                    "id": "c104",
                     "title": "Add Samples"
                 }
             ],
@@ -60,12 +60,12 @@ export const board = {
             "title": "Group 3",
             "tasks": [
                 {
-                    "id": "c103",
+                    "id": "c105",
                     "title": "Do that",
                     "labelId": ["done"]
                 },
                 {
-                    "id": "c104",
+                    "id": "c106",
                     "title": "Help me",
                     "description": "description",
                     "comments": [

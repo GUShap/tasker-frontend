@@ -3,6 +3,8 @@
     <template v-for="group in currGroups">
       <board-gruop :group="group" :key="group.id" />
     </template>
+                <router-view></router-view>
+
   </section>
 </template>
 

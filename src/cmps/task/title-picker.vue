@@ -1,6 +1,6 @@
 <template>
   <div>
-    <router-link :to="'/board/' + info.id">
+    <router-link :to="'/board/'+info.id">
       {{ info.title }}
     </router-link>
   </div>
