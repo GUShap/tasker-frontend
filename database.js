@@ -133,5 +133,5 @@ export const board = {
             }
         }
     ],
-    "cmpsOrder": ["status-picker", "member-picker", "date-picker"]
+    "cmpsOrder": ["status-picker", "member-picker", "title-picker"]
 }

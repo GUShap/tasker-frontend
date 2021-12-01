@@ -1,14 +1,13 @@
 
 <template>
   <section class="task-preview flex align-center space-between">
-    <template >
-      <pre>{{currGroup}}</pre>
+    <template v-for="(cmpType, idx) in cmpsOrder">
+      <!-- <div :key="idx">{{cmpType}}</div> -->
+      <component :is="cmpType" :info="task" :key="idx" />
+      <!-- <component :is="cmpType" :info="getCmpInfo(cmpType)" @updated="updateTask(cmpType, $event)" :key="idx"> -->
     </template>
 
-
-
-
-    <input @change="change" type="text" name="" v-model="task.title" />
+    <!-- <input @change="change" type="text" name="" v-model="task.title" />
     <div v-for="(member, idx) in members" :key="idx">
       {{ member }}
     </div>
@@ -23,24 +22,23 @@
 </template>
 
 <script>
+import titlePicker from "./title-picker.vue";
+import statusPicker from "./status-picker.vue";
+import memberPicker from "./member-picker.vue";
+
 export default {
   name: "task-preview",
-  components: {},
+  components: {statusPicker, memberPicker, titlePicker},
   props: ["task"],
-
   data() {
-    return {
-    };
+    return {};
   },
   created() {},
-  methods: {
-    change() {
-    },
-  },
+  methods: {},
   computed: {
-    currGroup() {
-        return this.$store.getters.currGroup
-      }
+    cmpsOrder() {
+      return this.$store.getters.currBoard.cmpsOrder;
+    },
   },
   destroyed() {},
 };
