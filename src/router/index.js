@@ -4,6 +4,7 @@ import landingPage from '../pages/landing-page.vue'
 import about from '../pages/about.vue'
 import home from '../pages/home.vue'
 import workspace from '../pages/workspace.vue'
+import taskDetails from '../pages/task-details.vue'
 import dashboard from '../pages/dashboard.vue'
 import user from '../pages/user.vue'
 import login from '../pages/login.vue'
@@ -29,9 +30,15 @@ const routes = [
   {
     path: '/board/:boardId?',
     name: 'workspace',
-    component: workspace
+    component: workspace,
+    children: [{
+      path: ':taskId?',
+      name:'task-details',
+      component: taskDetails
+    }
+    ],
   },
- {        //check if same id as board-id
+  {        //check if same id as board-id
     path: '/dashboard/:boardId?',
     name: 'dashboard',
     component: dashboard

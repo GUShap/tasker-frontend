@@ -1,5 +1,7 @@
 <template>
-    
+    <div>
+        abcdefrklrekgkjfvefbsdfhjvb
+    </div>
 </template>
 
 <script>
