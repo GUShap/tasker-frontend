@@ -28,7 +28,7 @@ const routes = [
     component: home
   },
   {
-    path: '/board/:boardId?',
+    path: '/board',
     name: 'workspace',
     component: workspace,
     children: [{

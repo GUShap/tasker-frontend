@@ -17,7 +17,7 @@
       <el-option label="Done" value="done"></el-option>
       <el-option label="Stuck" value="stuck"></el-option>
     </el-select>
-    <div>{{ task.labelIds }}</div> -->
+    <div>{{ task.labelIds }}</div>
   </section>
 </template>
 
