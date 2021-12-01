@@ -8,7 +8,7 @@
 
 
 
-    <!-- <input @change="change" type="text" name="" v-model="task.title" />
+    <input @change="change" type="text" name="" v-model="task.title" />
     <div v-for="(member, idx) in members" :key="idx">
       {{ member }}
     </div>
@@ -18,7 +18,7 @@
       <el-option label="Done" value="done"></el-option>
       <el-option label="Stuck" value="stuck"></el-option>
     </el-select>
-    <div>{{ task.labelIds }}</div> -->
+    <div>{{ task.labelIds }}</div>
   </section>
 </template>
 
