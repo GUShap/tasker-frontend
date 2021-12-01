@@ -1,0 +1,34 @@
+.el-dropdown-menu {
+    -webkit-animation: fade-in 0.5s ease-in-out both;
+    animation: fade-in 0.5s ease-in-out both;
+    font-size: 14px;
+    line-height: 24px;
+    // padding-bottom: 15px;
+    background-color: #fff;
+    box-shadow: 0 8px 16px 0 rgb(0 0 0 / 32%);
+    border-radius: 4px;
+    cursor: pointer;
+    width: 190px;
+    top: 30px;
+    gap:10px;
+    margin-left: 10rem;
+
+    .el-dropdown-menu__item {
+        position: relative;
+        margin-top: 6px;
+        border-top: 1px solid #ebeef5;
+        list-style: none;
+        line-height: 36px;
+        padding: 0 20px;
+        margin: 0;
+        font-size: 14px;
+        color: #606266;
+        cursor: pointer;
+        outline: 0;
+    }
+
+    .el-dropdown-menu__item:hover {
+        background-color: lightgrey;
+        cursor: pointer;
+    }
+}
