@@ -1,4 +1,5 @@
 <template>
+
   <section class="group flex column align-center">
     <header class="group-header flex start align-center">
       <i @click="showGroup" class="fa fa-caret-down"></i>

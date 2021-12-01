@@ -48,6 +48,14 @@ export const boardStore = {
         console.log(err);
       }
     },
+    async getTaskById({taskId}) {
+      try {
+      return boardService.getTaskById(taskId);
+      } catch (err) {
+        console.log(err);
+      }
+    },
+    
   },
   modules: {},
 };
