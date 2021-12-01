@@ -40,6 +40,21 @@
         }
     }
 
+    .more-info {
+        display: flex;
+        flex-direction: row;
+        margin-bottom: 70px;
+    }
+
+    .first-p {
+        margin-top: 60px;
+    }
+    img {
+        max-width: 600px;
+        margin: 20px;
+        box-shadow:  6px 8px 19px rgb(0 0 0 / 30%)
+    }
+
     a {
         color: inherit;
         text-decoration: none;
@@ -68,25 +83,26 @@
             text-align: center;
             max-width: 55ch;
         }
-        button {
+        .get-started-in {
+            font-size: 20px;
+            cursor: pointer;
             color: #fff;
             background-color: #4353ff;
             border-radius: 40px;
             border: none;
-            padding: 8px 16px;
+            padding: 11px 48px;
             transition: all 0.3s ease;
-            font-size: 24px;
-            cursor: pointer;
 
             .fas {
                 margin-left: 5px;
+                text-align: center;
             }
         }
 
-        img {
+        .main-img {
             margin-top: 50px;
             max-width: 1000px;
-            border-radius: 30px;
+            box-shadow:  6px 8px 19px rgb(0 0 0 / 30%)
         }
 
         h3 {
@@ -101,6 +117,15 @@
             font-size: 20px;
             line-height: 32px;
             word-break: break-word;
+            max-width: 45ch;
+            text-align: center;
+        }
+
+        .logo {
+            font-size: 30px;
+            width: 100%;
+            color: #2b2c5d;
+            padding-bottom: 30px;
         }
 
         .trial {
@@ -111,10 +136,14 @@
             padding-bottom: 104px;
             text-align: center;
 
-            button {
-                background-color: white;
-                color: #4353ff;
-                cursor: pointer;
+            a {
+                color: #fff;
+                background-color: #4353ff;
+                border-radius: 40px;
+                border: none;
+                padding: 8px 16px;
+                // margin-left: 32px;
+                transition: all 0.3s ease;
             }
         }
         .links {
@@ -123,9 +152,25 @@
             display: flex;
             gap: 10px;
 
-            a{
+            a {
                 cursor: pointer;
             }
         }
+
+        .phone-pic {
+            max-height: 300px;
+            max-width: 450px;
+            box-shadow:  6px 8px 19px rgb(0 0 0 / 30%)
+        }
+    }
+
+    .txt {
+        padding: 40px;
+    }
+
+    .imgs {
+        margin-left: 30px;
+        display: flex;
+        // gap: 10px;
     }
 }
