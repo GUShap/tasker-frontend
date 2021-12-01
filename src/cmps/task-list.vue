@@ -2,7 +2,7 @@
 <template>
   <section>
     <div class="task-list" v-for="task in tasks" :key="task.id">
-      <i class="fa fa-caret-down"></i>
+      <task-dropdown />
       <task-preview :task="task" class="flex align-center justify-center" />
     </div>
   </section>
@@ -15,6 +15,7 @@ export default {
   name: "task-list",
   components: {
     taskPreview,
+    taskDropdown,
   },
   props: ["tasks"],
 };

@@ -1,6 +1,6 @@
 <template>
   <section class="action-btn">
-    <button>New Item</button>
+    <button class="add-task-btn">New Item</button>
     <button>Search</button>
     <button>Person</button>
     <button>Filter</button>
