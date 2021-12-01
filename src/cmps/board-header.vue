@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <section v-if="currBoard">
     <header class="board-header">
       <div class="main-title flex">
         <div class="board-info">
@@ -13,7 +13,7 @@
             ref="title"
             v-show="isEditedMode && currEditedVal === 'title'"
             type="text"
-            v-model="currBoard.title"
+            v-model="board.title"
             v-on:keyup.enter="updateInfo"
             @blur="updateInfo"
           />
@@ -24,7 +24,7 @@
             @click="stared"
           ></i>
         </div>
-        <div class="more-actions flex ">
+        <div class="more-actions flex">
           <a>Last seen</a>
           <a>Invite</a>
           <a>Activities</a>
@@ -39,14 +39,14 @@
         v-if="isShown"
       >
         {{ currBoard.description }}
-      <input
-        ref="description"
-        v-show="isEditedMode && currEditedVal === 'description'"
-        type="text"
-        v-model="currBoard.description"
-        v-on:keyup.enter="updateInfo"
-        @blur="updateInfo"
-      />
+        <input
+          ref="description"
+          v-show="isEditedMode && currEditedVal === 'description'"
+          type="text"
+          v-model="board.description"
+          v-on:keyup.enter="updateInfo"
+          @blur="updateInfo"
+        />
       </div>
     </header>
   </section>
@@ -56,7 +56,7 @@
 <script>
 export default {
   name: "board-header",
-  props: ["currBoard"],
+  props: ["board"],
   data() {
     return {
       isShown: true,
@@ -85,6 +85,11 @@ export default {
     stared() {
       this.isStared = !this.isStared;
       console.log("added");
+    },
+  },
+  computed: {
+    currBoard() {
+      return this.board ? this.board : null;
     },
   },
 };

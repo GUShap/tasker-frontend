@@ -1,8 +1,8 @@
 <template>
   <section>
-    <div v-for="group in groups" :key="group.id">
-      <group-preview v-show="groupShow" :group="group"/>
-    </div>
+    <template v-for="group in currGroups" >
+      <group-preview v-show="groupShow" :group="group" :key="group.id"/>
+    </template>
   </section>
 </template>
 
@@ -26,7 +26,16 @@ export default {
       this.groupShow = !this.groupShow;
     },
   },
-  computed: {},
+  computed: {
+    currGroups() {
+      const currGroups = this.groups;
+      if (currGroups) {
+        return currGroups;
+      } else {
+        return null;
+      }
+    },
+  },
   destroyed() {},
 };
 </script>

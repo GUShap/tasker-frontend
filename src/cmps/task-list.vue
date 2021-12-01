@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import taskPreview from "@/cmps/task-preview.vue";
+import taskPreview from "@/cmps/task/task-preview.vue";
 
 export default {
   name: "task-list",

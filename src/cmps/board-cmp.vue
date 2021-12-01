@@ -1,11 +1,11 @@
 <template>
   <section class="board-container">
-    <group-list :groups="currBoard.groups" />
+    <group-list :groups="currGroups" />
   </section>
 </template>
 
 <script>
-import { board } from "../../database.js";
+// import { board } from "../../database.js";
 import groupList from "../cmps/group-list.vue";
 
 export default {
@@ -13,19 +13,20 @@ export default {
   components: {
     groupList,
   },
-  props: [],
+  props: ["board"],
 
   data() {
-    return {
-      currBoard: board,
-      boards: null,
-    };
+    return {};
   },
   created() {},
   methods: {},
   computed: {
-    getBoards() {
-      this.boards = this.$store.getters.boardsToShow;
+    currGroups() {
+      if (this.board) {
+        return this.board.groups;
+      } else {
+        return null;
+      }
     },
   },
   destroyed() {},

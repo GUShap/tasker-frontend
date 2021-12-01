@@ -24,16 +24,6 @@ export default {
   },
   destroyed() {},
   watch:{
-    //  $route (newVal, oldVal) {
-    //    console.log('newVal',newVal);
-    //    console.log('oldVal',oldVal);
-    //   const { name } = this.$route;
-    //   if (name === 'landing-page'){
-    //     return false
-    //   } else{
-    //     return true
-    //   }
-    // },
   }
 };
 </script>
