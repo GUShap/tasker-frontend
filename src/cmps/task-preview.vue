@@ -1,9 +1,15 @@
 <template>
   <section class="task-preview flex align-center space-between">
-    <input @change="change" type="text" name="" v-model="task.title">
+    <el-input @change="change" type="text" name="" v-model="task.title"/>
     <div v-for="(member, idx) in members" :key="idx">
       {{ member }}
     </div>
+    <el-select v-model="labels">
+      <el-option label=" " value="empty"></el-option>
+      <el-option label="Working on it" value="working"></el-option>
+      <el-option label="Done" value="done"></el-option>
+      <el-option label="Stuck" value="stuck"></el-option>
+    </el-select>
     <div>{{ task.labelIds }}</div>
   </section>
 </template>
@@ -15,7 +21,9 @@ export default {
   props: ["task"],
 
   data() {
-    return {};
+    return {
+      labels : 'empty'
+    };
   },
   created() {},
   methods: {

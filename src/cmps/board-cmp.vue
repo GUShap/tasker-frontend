@@ -1,6 +1,6 @@
 <template>
   <section class="board-container">
-      <group-list :groups="currBoard.groups"/>
+    <group-list :groups="currBoard.groups" />
   </section>
 </template>
 
@@ -9,20 +9,25 @@ import { board } from "../../database.js";
 import groupList from "../cmps/group-list.vue";
 
 export default {
-  name:'main-board',
+  name: "main-board",
   components: {
-    groupList
-    },
+    groupList,
+  },
   props: [],
 
   data() {
     return {
       currBoard: board,
+      boards: null,
     };
   },
   created() {},
   methods: {},
-  computed: {},
+  computed: {
+    getBoards() {
+      this.boards = this.$store.getters.boardsToShow;
+    },
+  },
   destroyed() {},
 };
 </script>
