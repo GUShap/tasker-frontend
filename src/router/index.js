@@ -32,7 +32,7 @@ const routes = [
     name: 'workspace',
     component: workspace,
     children: [{
-      path: ':taskId?',
+      path: ':taskId',
       name:'task-details',
       component: taskDetails
     }
