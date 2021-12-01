@@ -1,6 +1,6 @@
 <template>
   <section class="task-preview flex align-center space-between">
-    <input @change="change" type="text" name="" v-model="task.title">
+    <input @change="change" type="text" name="" v-model="task.title" />
     <div v-for="(member, idx) in members" :key="idx">
       {{ member }}
     </div>
@@ -10,7 +10,7 @@
 
 <script>
 export default {
-  name:'task-preview',
+  name: "task-preview",
   components: {},
   props: ["task"],
 
@@ -19,9 +19,9 @@ export default {
   },
   created() {},
   methods: {
-    change(){
-      console.log('task',this.task.title);
-    }
+    change() {
+      console.log("task", this.task.title);
+    },
   },
   computed: {
     members() {

@@ -38,11 +38,38 @@ function getById(boardId) {
     return board
 }
 
-function _makeId(length = 5) {
-    var txt = '';
-    var possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    for (let i = 0; i < length; i++) {
-        txt += possible.charAt(Math.floor(Math.random() * possible.length));
-    }
-    return txt;
-}
+
+// function updateTask(cmpType, data) {
+//     // Switch
+//     // task.members = data;
+//     // task.status = data;
+// }
+
+
+// Store - saveTask
+// function storeSaveTask(task, activity) {
+//     const activity = {
+//         "id": makeId(),
+//         "txt": "Changed Color",
+//         "createdAt": Date.now(),
+//         "byMember": userService.getLoggedinUser(),
+//         "task": task
+//     }
+//     board = boardService.saveTask(boardId, groupId, task, activity)
+//     commit(board)
+// }
+
+// boardService
+// function saveTask(boardId, groupId, task, activity) {
+//     const board = getById(boardId)
+//     // TODO: find the task, and update
+//     board.activities.unshift(activity)
+//     saveBoard(board)
+//     return board
+// }
+
+// boardStore-action
+// async function loadAndWatchBoard(boardId) {
+//     // load from service
+//     // subscribe to socket
+// }
