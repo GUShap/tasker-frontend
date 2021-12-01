@@ -1,17 +1,18 @@
 <template>
   <section class="board-container">
-    <template v-for="group in currBoard.groups">
-      <group-cmp :group="group"  :key="group.id"/>
-    </template>
+      <group-list :groups="currBoard.groups"/>
   </section>
 </template>
 
 <script>
 import { board } from "../../database.js";
-import groupCmp from "@/cmps/group-cmp.vue";
+import groupList from "../cmps/group-list.vue";
 
 export default {
-  components: {groupCmp},
+  name:'main-board',
+  components: {
+    groupList
+    },
   props: [],
 
   data() {
