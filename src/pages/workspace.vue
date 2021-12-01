@@ -3,28 +3,27 @@
     <board-header :board="currBoard" />
     <task-actions-nav />
     <board-filter />
-    <board-cmp :board="currBoard" />
+    <board-details :board="currBoard" />
   </section>
 </template>
 
 <script>
-import { board } from "../../database.js";
 import boardFilter from "@/cmps/board-filter.vue";
 import boardHeader from "@/cmps/board-header.vue";
 import taskActionsNav from "@/cmps/task-actions-nav.vue";
-import boardCmp from "@/cmps/board-cmp.vue";
+import boardDetails from "@/cmps/board/board-details.vue";
 
 export default {
+  name:'workspace',
   components: {
     boardFilter,
-    boardCmp,
+    boardDetails,
     boardHeader,
     taskActionsNav,
   },
   props: [],
   data() {
     return {
-      // currBoard: board,
     };
   },
   async created() {
