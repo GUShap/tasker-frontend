@@ -49,6 +49,21 @@
         />
       </div>
     </header>
+    <!-- <section class="board-btns">
+      <div>
+        <button>Main Table</button>
+        <button>Calendar</button>
+        <button>Chart</button>
+        <button>Table</button>
+        <button>More</button>
+        <button>Add View</button>
+      </div>
+      <div>
+        <div class="share"></div>
+        <button>Automate</button>
+        <button></button>
+      </div>
+    </section> -->
   </section>
 </template>
 

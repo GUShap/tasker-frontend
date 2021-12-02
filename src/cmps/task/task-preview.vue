@@ -1,13 +1,14 @@
 
 <template>
   <section class="task-preview flex align-center space-between">
-    <task-dropdown :key="idx" />
+    <task-dropdown />
   <section class="task-preview flex align-center">
     <template v-for="(cmpType, idx) in cmpsOrder">
       <!-- <div :key="idx">{{cmpType}}</div> -->
       <component :is="cmpType" :info="task" :key="idx"/>
       <!-- <component :is="cmpType" :info="getCmpInfo(cmpType)" @updated="updateTask(cmpType, $event)" :key="idx"> -->
     </template>
+    </section>
   </section>
 </template>
 
