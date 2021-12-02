@@ -2,10 +2,14 @@
   <section id="app" class="landing-page">
     <header class="home-header align-center">
       <section class="home-nav">
-        <a class="logo-home">Tasker</a>
+        <a class="logo-home">tasker.com</a>
         <div class="extra-info">
-          <router-link to="/">Product</router-link>
-          <router-link to="/about">Solutions</router-link>
+          <router-link to="/"
+            >Product<i class="fas fa-chevron-down"></i
+          ></router-link>
+          <router-link to="/about"
+            >Solutions<i class="fas fa-chevron-down"></i
+          ></router-link>
           <router-link to="/home">Templates</router-link>
           <router-link to="/home">Pricing</router-link>
         </div>
@@ -24,15 +28,19 @@
         </h5>
       </section>
       <div class="icons">
-        <span><i class="fas fa-stream"></i>Project Management</span>
-        <span><i class="fas fa-chart-line"></i>Scales and CRM</span>
-        <span><i class="fas fa-bullhorn"></i>Marketing</span>
-        <span><i class="fas fa-shapes"></i>Creative and design</span>
-        <span><i class="fas fa-code"></i>Software development</span>
-        <span><i class="fas fa-check"></i>Task management</span>
-        <span><i class="fas fa-cog"></i>Operations</span>
-        <span><i class="far fa-user"></i>HR and recruitment</span
-        ><span><i class="fas fa-sliders-h"></i>IT</span>
+        <div>
+          <span><i class="fas fa-stream"></i>Project Management</span>
+          <span><i class="fas fa-chart-line"></i>Scales and CRM</span>
+          <span><i class="fas fa-bullhorn"></i>Marketing</span>
+          <span><i class="fas fa-shapes"></i>Creative and design</span>
+        </div>
+        <div>
+          <span><i class="fas fa-code"></i>Software development</span>
+          <span><i class="fas fa-check"></i>Task management</span>
+          <span><i class="fas fa-cog"></i>Operations</span>
+          <span><i class="far fa-user"></i>HR and recruitment</span
+          ><span><i class="fas fa-sliders-h"></i>IT</span>
+        </div>
         <span><i class="fas fa-dot-circle"></i>200+ workflows</span>
       </div>
       <router-link class="get-started-in" to="/home">
@@ -72,19 +80,43 @@
       <section class="trial">
         <h3>Try Tasker for your team</h3>
         <h5>14-day free trial | No credit card needed</h5>
-        <router-link to="/home">Get Started</router-link>
+        <router-link to="/home"
+          >Get Started<i class="fas fa-chevron-right"></i
+        ></router-link>
       </section>
       <section class="links">
-        <a>About Us</a>
-        <a>Become a partner</a>
-        <a>Careers</a>
-        <a>Blog</a>
-        <a>Pricing</a>
-        <a>Contact sales</a>
-        <a>Terms and privacy</a>
-        <a>Product overview</a>
+        <div class="about-us">
+          <a>About Us</a>
+          <a>Become a partner</a>
+          <a>Careers</a>
+          <a>Blog</a>
+          <a>Pricing</a>
+          <a>Contact sales</a>
+          <a>Terms and privacy</a>
+          <a>Product overview</a>
+          <a>Investor relations</a>
+        </div>
+        <div class="general">
+          <a>Contact us</a>
+          <a><i class="fas fa-universal-access"></i>Accessibility statement</a>
+          <a
+            ><i class="fas fa-globe"></i>Contact us<i
+              class="fas fa-chevron-down"
+            ></i
+          ></a>
+        </div>
       </section>
-      <section class="logo">Tasker</section>
+      <footer>
+        <h1 class="logo">Tasker</h1>
+        <p>All Rights Reserved <i class="far fa-copyright"></i> tasket.com</p>
+        <div class="social-contact">
+          <i class="fab fa-twitter"></i>
+          <i class="fab fa-linkedin-in"></i>
+          <i class="fab fa-facebook"></i>
+          <i class="fab fa-youtube"></i>
+          <i class="fab fa-instagram-square"></i>
+        </div>
+      </footer>
     </section>
   </section>
 </template>
