@@ -7,7 +7,7 @@
         <i class="fas fa-plus-circle"></i>
         <i class="fas fa-user-circle"></i>
         <span>|</span>
-
+</div>
       <el-dropdown class="dropdown" trigger="click">
         <i class="fas fa-ellipsis-h"></i>
         <el-dropdown-menu trigger="click" size="large" slot="dropdown">
