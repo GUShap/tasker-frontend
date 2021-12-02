@@ -45,7 +45,6 @@ export const boardDb = {
                             }
                         }
                     ],
-                    "title": "1"
                 },
                 {
                     "id": "t102",

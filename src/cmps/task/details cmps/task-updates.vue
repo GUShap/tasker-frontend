@@ -6,11 +6,9 @@
     <a href="#"><i class="far fa-envelope"></i>Write updates via email:</a>
     <div class="updates-container">
       <ul>
-          <li v-for="(comment,idx) in task.comments" :key="idx">
-              <img :src= comment.imgUrl>
-              
-              {{comment.txt}}
-              </li> 
+        <li v-for="(comment, idx) in task.comments" :key="idx">
+          {{ comment.txt }}
+        </li>
       </ul>
     </div>
   </section>
