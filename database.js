@@ -46,11 +46,13 @@ export const board = {
             "tasks": [
                 {
                     "id": "c103",
-                    "title": "Replace logo"
+                    "title": "Replace logo",
+                    "labelId": ["stuck"]
                 },
                 {
                     "id": "c104",
-                    "title": "Add Samples"
+                    "title": "Add Samples",
+                    "labelId": ["work"]
                 }
             ],
             "style": {}
