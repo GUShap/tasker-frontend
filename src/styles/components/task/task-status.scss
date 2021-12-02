@@ -1,13 +1,6 @@
-.tag{
+.tag {
   $prime-color: rgb(167, 167, 167);
   @include task-status($prime-color, darken($prime-color, 30%));
-
-  input {
-    background-color: rgba(255, 255, 255, 0);
-    text-align: center;
-    border: none;
-    outline: none;
-  }
 }
 
 .done {
@@ -23,4 +16,3 @@
   $prime-color: #e2445c;
   @include task-status($prime-color, darken($prime-color, 30%));
 }
-

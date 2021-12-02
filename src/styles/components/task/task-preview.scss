@@ -3,4 +3,40 @@
   height: 2rem;
   margin: 0.1rem 0;
   background-color: #f5f6f8;
+
+  div {
+    flex-basis: rem(200px);
+    flex: 1;
+  }
+  .title-picker {
+    display: flex;
+    justify-content: start;
+  }
+  .status-picker {
+    display: flex;
+    justify-content: center;
+    max-width: 400px;
+    height: 100%;
+
+  }
+  .member-picker {
+    div{
+      display: inline-block;
+      margin: 0 auto ;
+    }
+  }
+}
+
+.status-modal{
+  padding: 1rem;
+  background-color: #f5f6f8;
+  position: absolute;
+  z-index: 100;
+  box-shadow: 1px 1px 5px 2px rgba(0, 0, 0, 0.26);
+  li{
+    text-align: center;
+    margin: .5rem;
+    padding: .5rem 1.5rem;
+  }
+  // width: 160px;
 }

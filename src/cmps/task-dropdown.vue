@@ -13,9 +13,7 @@
           ><i class="far fa-copy"></i>Duplicate task</el-dropdown-item
         >
         <el-dropdown-item @click.native="openTaskDetails">
-          <i class="fas fa-expand-alt">
-            Open Details
-          </i>
+          <i class="fas fa-expand-alt"> Open Details </i>
         </el-dropdown-item>
       </el-dropdown-menu>
     </el-dropdown>
@@ -41,8 +39,8 @@ export default {
   openTaskDetails() {
     console.log("c");
   },
-  toggleEditMode(){
-    console.log('hello')
-  }
+  toggleEditMode() {
+    console.log("hello");
+  },
 };
 </script>
