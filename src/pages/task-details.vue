@@ -41,7 +41,7 @@
     </div>
     <hr />
     <template>
-    <component :is="component"></component>
+    <component :is="component" :task="task"></component>
     </template>
   </section>
 </template>
