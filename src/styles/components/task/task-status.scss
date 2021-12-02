@@ -1,0 +1,13 @@
+.done {
+  $prime-color: #30c875;
+  @include task-status($prime-color, darken($prime-color, 30%));
+}
+
+.work {
+  $prime-color: #fbab3e;
+  @include task-status($prime-color, darken($prime-color, 30%));
+}
+.stuck {
+  $prime-color: #e2445c;
+  @include task-status($prime-color, darken($prime-color, 30%));
+}
