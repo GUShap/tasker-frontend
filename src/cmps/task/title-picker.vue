@@ -32,10 +32,8 @@ export default {
     openDetails() {
       if(this.edit) return
       this.$router.push(`/board/task/${this.info.id}`);
-      console.log('title.picker',this.info.id);
     },
     editTitle() {
-      console.log(this.edit);
       this.edit = !this.edit;
     },
   },

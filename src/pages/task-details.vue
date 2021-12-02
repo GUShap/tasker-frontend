@@ -6,9 +6,8 @@
       <div class="users">
         <i class="fas fa-plus-circle"></i>
         <i class="fas fa-user-circle"></i>
-      </div>
-      <span>|</span>
-
+        <span>|</span>
+</div>
       <el-dropdown class="dropdown" trigger="click">
         <i class="fas fa-ellipsis-h"></i>
         <el-dropdown-menu trigger="click" size="large" slot="dropdown">
@@ -35,12 +34,12 @@
       </el-dropdown>
     </div>
     <div class="log-menu flex">
-      <div class="item-btns flex">
-        <button class="under-line">updates</button>
-        <button>files</button>
-        <button>activity log</button>
+      <button class="under-line">updates</button>
+      <button>files</button>
+      <button>activity log</button>
+      <div class="add-btn">
+        <span>|</span> <button>+ add view</button>
       </div>
-      <button><span>|</span> + add view</button>
     </div>
     <hr />
   </section>
