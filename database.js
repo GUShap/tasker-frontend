@@ -64,7 +64,21 @@ export const boardDb = {
                 {
                     "id": "c105",
                     "title": "Do that",
-                    "labelId": "done"
+                    "labelId": "done",
+                    "members": [
+                        {
+                            "_id": "u101",
+                            "username": "Sundos",
+                            "fullname": "Sundos Gutty",
+                            "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
+                        },
+                        {
+                            "_id": "u101",
+                            "username": "Ishay",
+                            "fullname": "Ishay Nitzan",
+                            "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
+                        }
+                    ],
                 },
                 {
                     "id": "c106",
@@ -98,8 +112,8 @@ export const boardDb = {
                     "members": [
                         {
                             "_id": "u101",
-                            "username": "Tal",
-                            "fullname": "Tal Tarablus",
+                            "username": "Guy",
+                            "fullname": "Guy Shapira",
                             "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
                         }
                     ],
