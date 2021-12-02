@@ -3,43 +3,48 @@
     <i class="fa fa-times" @click="exitModal"></i>
     <div class="details-title flex">
       <input placeholder="task-title" />
-      <div class="users">
+      <div class="title-btns flex">
         <i class="fas fa-plus-circle"></i>
         <i class="fas fa-user-circle"></i>
-      </div>
-      <span>|</span>
+        <span>|</span>
 
-      <el-dropdown class="dropdown" trigger="click">
-        <i class="fas fa-ellipsis-h"></i>
-        <el-dropdown-menu trigger="click" size="large" slot="dropdown">
-          <el-dropdown-item @click.native="removeTask"
-            ><i class="far fa-trash-alt"></i>Manage subscribers</el-dropdown-item
-          >
-          <el-dropdown-item @click.native="removeTask"
-            ><i class="far fa-envelope"></i>Email preferences</el-dropdown-item
-          >
-          <el-dropdown-item @click.native="removeTask"
-            ><i class="far fa-file-excel"></i>Export to Excel</el-dropdown-item
-          >
-          <el-dropdown-item @click.native="removeTask"
-            ><i class="fas fa-link"></i>Copy item link</el-dropdown-item
-          >
-          <el-dropdown-item @click.native="removeTask"
-            ><i class="fas fa-archive"></i>Archive</el-dropdown-item
-          >
-          <el-dropdown-item @click.native="removeTask"
-            ><i class="far fa-trash-alt"></i>Delete</el-dropdown-item
-          >
-        </el-dropdown-menu>
-      </el-dropdown>
+        <el-dropdown class="dropdown" trigger="click">
+          <i class="fas fa-ellipsis-h"></i>
+          <el-dropdown-menu trigger="click" size="large" slot="dropdown">
+            <el-dropdown-item @click.native="removeTask"
+              ><i class="far fa-trash-alt"></i>Manage
+              subscribers</el-dropdown-item
+            >
+            <el-dropdown-item @click.native="removeTask"
+              ><i class="far fa-envelope"></i>Email
+              preferences</el-dropdown-item
+            >
+            <hr />
+            <el-dropdown-item @click.native="removeTask"
+              ><i class="far fa-file-excel"></i>Export to
+              Excel</el-dropdown-item
+            >
+            <hr />
+            <el-dropdown-item @click.native="removeTask"
+              ><i class="fas fa-link"></i>Copy item link</el-dropdown-item
+            >
+            <el-dropdown-item @click.native="removeTask"
+              ><i class="fas fa-archive"></i>Archive</el-dropdown-item
+            >
+            <el-dropdown-item @click.native="removeTask"
+              ><i class="far fa-trash-alt"></i>Delete</el-dropdown-item
+            >
+          </el-dropdown-menu>
+        </el-dropdown>
+      </div>
     </div>
     <div class="log-menu flex">
-      <div class="item-btns flex">
-        <button class="under-line">updates</button>
-        <button>files</button>
-        <button>activity log</button>
+      <button class="under-line">updates</button>
+      <button>files</button>
+      <button>activity log</button>
+      <div class="add-btn">
+        <span>|</span> <button>+ add view</button>
       </div>
-      <button><span>|</span> + add view</button>
     </div>
     <hr />
   </section>
