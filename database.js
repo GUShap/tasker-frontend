@@ -30,11 +30,11 @@ export const boardDb = {
             "title": "Group 1",
             "tasks": [
                 {
-                    "id": "c101",
+                    "id": "t101",
                     "title": "Replace logo"
                 },
                 {
-                    "id": "c102",
+                    "id": "t102",
                     "title": "Add Samples"
                 }
             ],
@@ -45,12 +45,12 @@ export const boardDb = {
             "title": "Group 2",
             "tasks": [
                 {
-                    "id": "c103",
+                    "id": "t201",
                     "title": "Replace logo",
                     "labelId": "stuck"
                 },
                 {
-                    "id": "c104",
+                    "id": "t202",
                     "title": "Add Samples",
                     "labelId": "work"
                 }
@@ -62,7 +62,7 @@ export const boardDb = {
             "title": "Group 3",
             "tasks": [
                 {
-                    "id": "c105",
+                    "id": "t301",
                     "title": "Do that",
                     "labelId": "done",
                     "members": [
@@ -81,7 +81,7 @@ export const boardDb = {
                     ],
                 },
                 {
-                    "id": "c106",
+                    "id": "t302",
                     "title": "Help me",
                     "description": "description",
                     "comments": [

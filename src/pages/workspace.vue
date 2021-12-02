@@ -1,5 +1,5 @@
 <template>
-  <section class="sub-workspace flex" style="width:100%;">
+  <section class="sub-workspace flex" style="width: 100%">
     <section class="workspace-container">
       <board-header :board="currBoard" />
       <task-actions-nav />
@@ -26,14 +26,14 @@ export default {
   },
   props: [],
   data() {
-    return {};
+    return {
+      boards: null,
+      currBoardIdx: 0,
+    };
   },
   async created() {
-    try {
-      await this.$store.dispatch("loadBoards");
-    } catch (err) {
-      console.log("loadBoards error:", err);
-    }
+     this.boards = this.$store.dispatch({type: "loadBoards", currBoardIdx: this.currBoardIdx,
+      });
   },
   methods: {},
   computed: {

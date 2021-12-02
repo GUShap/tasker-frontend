@@ -1,9 +1,12 @@
 .task-preview {
   width: 100%;
-  // max-width: 900px;
   height: 2rem;
   margin: 0.1rem 0;
   background-color: #f5f6f8;
+
+  &:hover{
+    background-color: #e7e7e7;
+  }
 
   div {
     flex-basis: rem(200px);

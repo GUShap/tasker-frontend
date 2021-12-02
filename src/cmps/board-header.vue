@@ -63,16 +63,18 @@
       <div class="share">
         <i class="fas fa-plug"></i>
         <h5>Integrate</h5>
-        <img
-          class="icon-pic"
-          style="max-width: 20px"
-          :src="require(`@/pics/slack.png`)"
-        />
-        <img
-          class="icon-pic"
-          style="max-width: 20px"
-          :src="require(`@/pics/gmail.png`)"
-        />
+        <div>
+          <img
+            class="icon-pic"
+            style="max-width: 20px"
+            :src="require(`@/pics/slack.png`)"
+          />
+          <img
+            class="icon-pic"
+            style="max-width: 20px"
+            :src="require(`@/pics/gmail.png`)"
+          />
+        </div>
 
         <button>Automate</button>
         <!-- <button></button> -->

@@ -14,16 +14,17 @@ export const boardStore = {
     },
   },
   mutations: {
-    setBoards(state, { boards }) {
+    setBoards(state, { boards, currBoardIdx }) {
       state.boards = boards;
-      state.currBoard = boards[0];
+      state.currBoard = boards[currBoardIdx];
     },
   },
   actions: {
-    async loadBoards({ commit }) {
+    async loadBoards({ commit }, { currBoardIdx }) {
       try {
         const boards = await boardService.query();
-        commit({ type: "setBoards", boards: boards });
+        commit({ type: "setBoards", boards: boards, currBoardIdx });
+        return boards;
       } catch (err) {
         console.log(err);
       }
@@ -43,19 +44,22 @@ export const boardStore = {
     async removeTask({ dispatch }, { boardId, groupId, taskId }) {
       try {
         boardService.remove(boardId, groupId, taskId);
-        dispatch({ type: "loadBoards"});
+        dispatch({ type: "loadBoards" });
       } catch (err) {
         console.log(err);
       }
     },
-    async getTaskById(state, {taskId}) {
+    async getTaskById({ state }, { taskId }) {
       try {
-      return boardService.getTaskById(taskId);
+        const currTask = await boardService.getTaskById(
+          state.currBoard._id,
+          taskId
+        );
+        return currTask;
       } catch (err) {
         console.log(err);
       }
     },
-    
   },
   modules: {},
 };

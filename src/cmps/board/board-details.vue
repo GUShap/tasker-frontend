@@ -1,21 +1,20 @@
 <template>
-  <!-- <section class="flex sub-workspace"> -->
-    <section class="board-container">
+  <section class="flex sub-workspace">
+    <section class="board-container" >
       <template v-for="group in currGroups">
-        <board-gruop :group="group" :key="group.id" />
+        <board-group :group="group" :key="group.id" />
       </template>
     </section>
-    <!-- <router-view></router-view>
-  </section> -->
+  </section>
 </template>
 
 <script>
-import boardGruop from "@/cmps/group/board-group.vue";
+import boardGroup from "@/cmps/group/board-group.vue";
 
 export default {
   name: "main-board",
   components: {
-    boardGruop,
+    boardGroup,
   },
   props: ["board"],
 
