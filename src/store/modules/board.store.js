@@ -4,6 +4,7 @@ export const boardStore = {
   state: {
     boards: null,
     currBoard: null,
+    currBoardIdx: null,
   },
   getters: {
     currBoard(state) {
@@ -17,6 +18,7 @@ export const boardStore = {
     setBoards(state, { boards, currBoardIdx }) {
       state.boards = boards;
       state.currBoard = boards[currBoardIdx];
+      state.currBoardIdx = currBoardIdx;
     },
   },
   actions: {
@@ -41,20 +43,17 @@ export const boardStore = {
         console.log(err);
       }
     },
-    async removeTask({ dispatch }, { boardId, groupId, taskId }) {
+    async removeTask({ state, dispatch  }, { taskId }) {
       try {
-        boardService.remove(boardId, groupId, taskId);
-        dispatch({ type: "loadBoards" });
+        await boardService.remove(taskId);
+        dispatch({ type: "loadBoards", currBoardIdx: state.currBoardIdx });
       } catch (err) {
         console.log(err);
       }
     },
-    async getTaskById({ state }, { taskId }) {
+    async getTaskById({ taskId }) {
       try {
-        const currTask = await boardService.getTaskById(
-          state.currBoard._id,
-          taskId
-        );
+        const currTask = await boardService.getTaskById(taskId);
         return currTask;
       } catch (err) {
         console.log(err);

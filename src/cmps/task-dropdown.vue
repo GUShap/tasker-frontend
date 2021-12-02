@@ -6,10 +6,10 @@
         <el-dropdown-item @click.native="openTaskDetails">
           <i class="fas fa-expand-alt"></i> Open Details
         </el-dropdown-item>
-        <el-dropdown-item @click.native="removeTask"
+        <el-dropdown-item @click.native="active"
           ><i class="far fa-check-square"></i>Select item</el-dropdown-item
         >
-        <el-dropdown-item @click.native="removeTask"
+        <el-dropdown-item @click.native="active"
           ><i class="fas fa-long-arrow-alt-right"></i>Move to<i
             class="fas fa-angle-right"
           ></i
@@ -17,27 +17,27 @@
         <el-dropdown-item @click.native="duplicateTask"
           ><i class="far fa-copy"></i>Duplicate<i class="fas fa-angle-right"></i
         ></el-dropdown-item>
-        <el-dropdown-item @click.native="removeTask"
+        <el-dropdown-item @click.native="active"
           ><i class="fas fa-text-height"></i>Copy name</el-dropdown-item
         >
-        <el-dropdown-item class="last-child" @click.native="removeTask"
+        <el-dropdown-item class="last-child" @click.native="active"
           ><i class="fas fa-arrows-alt-h"></i>Copy Item link</el-dropdown-item
         >
-        <el-dropdown-item @click.native="removeTask"
+        <el-dropdown-item @click.native="active"
           ><i class="fas fa-pen"></i>Add subitems
         </el-dropdown-item>
-        <el-dropdown-item @click.native="removeTask"
+        <el-dropdown-item @click.native="active"
           ><i class="fas fa-arrows-alt-v"></i>Expand subitems
         </el-dropdown-item>
-        <el-dropdown-item @click.native="removeTask"
+        <el-dropdown-item @click.native="active"
           ><i class="fas fa-level-down-alt"></i>Convert to subitems<i
             class="fas fa-angle-right"
           ></i>
         </el-dropdown-item>
-        <el-dropdown-item class="last-child" @click.native="removeTask"
+        <el-dropdown-item class="last-child" @click.native="active"
           ><i class="fas fa-plus"></i>Create new item below
         </el-dropdown-item>
-        <el-dropdown-item @click.native="removeTask"
+        <el-dropdown-item @click.native="active"
           ><i class="fas fa-archive"></i>Archive
         </el-dropdown-item>
         <el-dropdown-item @click.native="removeTask"
@@ -53,12 +53,13 @@
 <script>
 export default {
   name: "task-dropDown",
+  prop: [],
   data() {
     return {};
   },
   methods: {
     removeTask() {
-      console.log("h");
+      this.$emit("removeTask")
     },
     duplicateTask() {
       console.log("b");

@@ -1,5 +1,5 @@
 <template>
-  <section class="sub-workspace flex" style="width: 100%">
+  <section class="sub-workspace flex" >
     <section class="workspace-container">
       <board-header :board="currBoard" />
       <task-actions-nav />

@@ -8,6 +8,9 @@
     justify-content: space-between;
     flex-direction: column;
     padding: 20px;
+    overflow: hidden;
+    position: fixed;
+    height: 100%;
 
     .fab,
     .fas,
