@@ -28,12 +28,12 @@ const routes = [
     component: home
   },
   {
-    path: '/board',
+    path: '/board/:boardId?',
     name: 'workspace',
     component: workspace,
     children: [
     {
-      path: ':taskId?',
+      path: 'task/:taskId?',
       name: 'task-details',
       component: taskDetails
     }

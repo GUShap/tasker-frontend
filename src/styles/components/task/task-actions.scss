@@ -1,9 +1,17 @@
-.action-btn {
+.task-action-btn {
+    margin-top: 1rem;
     margin-left: 1rem;
+    margin-bottom: 1rem;
     display: flex;
+    flex-direction: row;
+    width: 100%;
+    gap: 20px;
+    color: #504658;
 
     button{
    border: none;
+   background-color: inherit;
+   color: #504658dc;
     }
 
     .add-task-btn {
@@ -13,8 +21,7 @@
         font-size: 14px;
         font-weight: 400;
         line-height: 22px;
-        color: #323338;
-        color: var(--primary-text-color);
+        color: white;
         padding: 4px 8px;
         height: 32px;
         line-height: 24px;

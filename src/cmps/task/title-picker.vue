@@ -2,7 +2,7 @@
   <div
     @mouseover="hover = true"
     @mouseleave="hover = false"
-    class="title-picker"
+    class="title-picker title-container flex grow-1"
     @click="openDetails"
   >
     <span v-if="!edit">{{ title }}</span>
@@ -17,6 +17,7 @@
       v-model="title"
     />
     <button v-if="hover && !edit" @click.stop.prevent="editTitle">Edit</button>
+    <!-- <button class="hover-edit-btn" v-if="hover && !edit" @click="editTitle">edit</button> -->
   </div>
 </template>
 

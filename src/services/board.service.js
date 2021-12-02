@@ -1,4 +1,4 @@
-import { board } from "../../database.js"
+import { boardDb } from "../../database.js"
 
 
 export const boardService = {
@@ -9,7 +9,7 @@ export const boardService = {
     getTaskById
 }
 
-const gBoards = [board];
+const gBoards = [boardDb];
 
 function query() {
     return gBoards
@@ -40,13 +40,15 @@ function getById(boardId) {
 }
 
 function getTaskById(taskId) {
-    const task = gBoards.map(brd => {
-        brd.groups.map(group => {
+    const task = gBoards.map(board => {
+        board.groups.map(group => {
             group.tasks.map(task => {
-                return task.id === taskId
+                return task.id === taskId;
             })
         })
     })
+
+    console.log(task)
     return task
 }
 // function updateTask(cmpType, data) {

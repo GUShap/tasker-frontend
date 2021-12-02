@@ -48,7 +48,7 @@ export const boardStore = {
         console.log(err);
       }
     },
-    async getTaskById({taskId}) {
+    async getTaskById(state, {taskId}) {
       try {
       return boardService.getTaskById(taskId);
       } catch (err) {
