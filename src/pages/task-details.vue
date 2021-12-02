@@ -7,7 +7,7 @@
         <i class="fas fa-plus-circle"></i>
         <i class="fas fa-user-circle"></i>
         <span>|</span>
-</div>
+      </div>
       <el-dropdown class="dropdown" trigger="click">
         <i class="fas fa-ellipsis-h"></i>
         <el-dropdown-menu trigger="click" size="large" slot="dropdown">
@@ -34,23 +34,34 @@
       </el-dropdown>
     </div>
     <div class="log-menu flex">
-      <button class="under-line">updates</button>
-      <button>files</button>
-      <button>activity log</button>
-      <div class="add-btn">
-        <span>|</span> <button>+ add view</button>
-      </div>
+      <button :class="{underline: component==='task-updates'}" @click="component='task-updates'">updates</button>
+      <button :class="{underline: component==='task-files'}" @click="component='task-files'">files</button>
+      <button :class="{underline: component==='activity-log'}" @click="component='activity-log'">activity log</button>
+      <div class="add-btn"><span>|</span> <button>+ add view</button></div>
     </div>
     <hr />
+    <template>
+    <component :is="component"></component>
+    </template>
   </section>
 </template>
 
 <script>
+import taskUpdates from "@/cmps/task/details cmps/task-updates.vue";
+import taskFiles from "@/cmps/task/details cmps/task-files.vue";
+import activityLog from "@/cmps/task/details cmps/activity-log.vue";
+
 export default {
   name: "task-details",
+  components: {
+    taskUpdates,
+    taskFiles,
+    activityLog,
+  },
   data() {
     return {
       task: null,
+      component:'task-updates'
     };
   },
   methods: {
@@ -59,19 +70,18 @@ export default {
     },
   },
   async created() {
-    console.log('hi tom');
-    try{
-      const { taskId } =  this.$route.params;
+    console.log("hi tom");
+    try {
+      const { taskId } = this.$route.params;
       this.task = await this.$store.dispatch({
         type: "getTaskById",
         taskId: taskId,
-      })
-    console.log('this.task',this.task);
-    }catch(err){
-      console.log('Error',err);
+      });
+      console.log("this.task", this.task);
+    } catch (err) {
+      console.log("Error", err);
     }
   },
-  computed: {
-  },
+  computed: {},
 };
 </script>

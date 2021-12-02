@@ -31,11 +31,15 @@ export const boardDb = {
             "tasks": [
                 {
                     "id": "t101",
-                    "title": "Replace logo"
+                    "title": "1"
                 },
                 {
                     "id": "t102",
-                    "title": "Add Samples"
+                    "title": "2"
+                },
+                {
+                    "id": "t103",
+                    "title": "3"
                 }
             ],
             "style": {}
