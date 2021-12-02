@@ -20,19 +20,32 @@
         <h1 class="info-heading">Work Without Limits</h1>
         <h5 class="opening-para">
           Easily build, run, and scale your dream workflows on one platform.
-          What would you like to manage with wednesday Work OS?
+          What would you like to manage with tasker.com Work OS?
         </h5>
-        <router-link class="get-started-in" to="/home">
-          Get Started<i class="fas fa-chevron-right"></i
-        ></router-link>
       </section>
+      <div class="icons">
+        <span><i class="fas fa-stream"></i>Project Management</span>
+        <span><i class="fas fa-chart-line"></i>Scales and CRM</span>
+        <span><i class="fas fa-bullhorn"></i>Marketing</span>
+        <span><i class="fas fa-shapes"></i>Creative and design</span>
+        <span><i class="fas fa-code"></i>Software development</span>
+        <span><i class="fas fa-check"></i>Task management</span>
+        <span><i class="fas fa-cog"></i>Operations</span>
+        <span><i class="far fa-user"></i>HR and recruitment</span
+        ><span><i class="fas fa-sliders-h"></i>IT</span>
+        <span><i class="fas fa-dot-circle"></i>200+ workflows</span>
+      </div>
+      <router-link class="get-started-in" to="/home">
+        Get Started<i class="fas fa-chevron-right"></i
+      ></router-link>
       <img class="main-img" :src="require(`@/pics/picture1.jpeg`)" />
       <section class="more-info first-p">
         <img :src="require(`@/pics/picture2.png`)" />
         <div class="txt">
           <h3>Manage everything in one workspace</h3>
           <p>
-            Planning, tracking and delivering your team's best work has never been easier
+            Planning, tracking and delivering your team's best work has never
+            been easier
           </p>
         </div>
       </section>
