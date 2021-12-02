@@ -2,21 +2,17 @@
   <div
     @mouseover="hover = true"
     @mouseleave="hover = false"
-    class="title-container flex grow-1"
+    class="title-picker title-container flex grow-1"
+    @click="openDetails"
   >
-    <!-- @click="openDetails" -->
     <span v-if="!edit">{{ title }}</span>
     <input
       v-on:keyup.enter="editTitle"
-      @blur="
-        {
-          edit = false;
-        }
-      "
+      @blur="{edit = false}"
       v-else
       v-model="title"
     />
-    <button class="hover-edit-btn" v-if="hover && !edit" @click="editTitle">edit</button>
+    <button v-if="hover && !edit" @click.stop.prevent="editTitle" class="btn-edit">Edit</button>
   </div>
 </template>
 
@@ -34,7 +30,8 @@ export default {
   created() {},
   methods: {
     openDetails() {
-      this.$router.push(`'/board/task/' + ${info.id}`);
+      if(this.edit) return
+      this.$router.push(`/board/task/${this.info.id}`);
     },
     editTitle() {
       console.log(this.edit);

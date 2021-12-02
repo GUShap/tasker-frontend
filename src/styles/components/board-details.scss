@@ -1,3 +1,5 @@
+
+
 .workspace-container {
     display: flex;
     flex-direction: column;
@@ -13,7 +15,6 @@
         align-items: center;
         padding: 20px;
         font-size: 20px;
-        font-family: Roboto, sans-serif;
         border-bottom: 1px rgba(0, 0, 0, 0.11) solid;
         flex-wrap: wrap;
 
@@ -38,9 +39,11 @@
     .board-container {
         display: flex;
         flex-direction: column;
+        height: 100%;
         flex: 1;
         overflow-x: scroll;
         width: 100%;
+        // padding-right: 20px;
     }
     .main-title {
         display: flex;
@@ -53,8 +56,6 @@
         justify-content: space-between;
         margin: 10px;
     }
-
-
 }
 
 
