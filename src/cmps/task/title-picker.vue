@@ -8,16 +8,11 @@
     <span v-if="!edit">{{ title }}</span>
     <input
       v-on:keyup.enter="editTitle"
-      @blur="
-        {
-          edit = false;
-        }
-      "
+      @blur="{edit = false}"
       v-else
       v-model="title"
     />
-    <button v-if="hover && !edit" @click.stop.prevent="editTitle">Edit</button>
-    <!-- <button class="hover-edit-btn" v-if="hover && !edit" @click="editTitle">edit</button> -->
+    <button v-if="hover && !edit" @click.stop.prevent="editTitle" class="btn-edit">Edit</button>
   </div>
 </template>
 

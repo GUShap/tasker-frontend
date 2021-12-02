@@ -13,7 +13,7 @@
       <li @click="editStatus('done')" class="tag done">Done</li>
       <li @click="editStatus('work')" class="tag work">Working on it</li>
       <li @click="editStatus('stuck')" class="tag stuck">Stuck</li>
-      <li @click="editStatus"><button>Edit</button></li>
+      <li @click="editStatus"><button >Edit</button></li>
     </ul>
   </div>
 
