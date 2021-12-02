@@ -2,8 +2,8 @@
   <div
     @mouseover="hover = true"
     @mouseleave="hover = false"
-    class="title-picker title-container flex grow-1"
-    @click="openDetails"
+    class="title-picker flex grow-1"
+    @click.prevent.stop="openDetails"
   >
     <span v-if="!edit">{{ title }}</span>
     <input
@@ -32,6 +32,7 @@ export default {
     openDetails() {
       if(this.edit) return
       this.$router.push(`/board/task/${this.info.id}`);
+      console.log('title.picker',this.info.id);
     },
     editTitle() {
       console.log(this.edit);

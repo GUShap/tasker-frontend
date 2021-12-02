@@ -39,7 +39,14 @@ function getById(boardId) {
     return board
 }
 
-function getTaskById(taskId) {
+function getTaskById(boardId, taskId) {
+    // const task = gBoards.map(board => {
+    //     board.groups.map(group => {
+    //         group.tasks.map(task => {
+    //             return task.id === taskId;
+    //         })
+    //     })
+    // })
     const task = gBoards.map(board => {
         board.groups.map(group => {
             group.tasks.map(task => {
@@ -47,10 +54,16 @@ function getTaskById(taskId) {
             })
         })
     })
-
-    console.log(task)
-    return task
+    console.log('task',task);
+    console.log('boardService',gBoards[0].groups[0].tasks[0]);
+    return gBoards[0].groups[0].tasks[0]
 }
+
+
+
+
+
+
 // function updateTask(cmpType, data) {
 //     // Switch
 //     // task.members = data;
