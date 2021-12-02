@@ -1,12 +1,12 @@
 
 <template>
-  <section class="task-preview flex align-center ">
-    <task-dropdown />
   <section class="task-preview flex align-center">
-    <template v-for="(cmpType, idx) in cmpsOrder">
-      <component :is="cmpType" :info="task" :key="idx"/>
-      <!-- <component :is="cmpType" :info="getCmpInfo(cmpType)" @updated="updateTask(cmpType, $event)" :key="idx"> -->
-    </template>
+    <task-dropdown @removeTask="removeTask" />
+    <section class="task-preview flex align-center">
+      <template v-for="(cmpType, idx) in cmpsOrder">
+        <component :is="cmpType" :info="task" :key="idx" />
+        <!-- <component :is="cmpType" :info="getCmpInfo(cmpType)" @updated="updateTask(cmpType, $event)" :key="idx"> -->
+      </template>
     </section>
   </section>
 </template>
@@ -25,7 +25,15 @@ export default {
     return {};
   },
   created() {},
-  methods: {},
+  methods: {
+    async removeTask() {
+      try {
+        this.$store.dispatch({ type: "removeTask", taskId: this.task.id });
+      } catch (err) {
+        console.log("Error", err);
+      }
+    },
+  },
   computed: {
     cmpsOrder() {
       return this.$store.getters.currBoard.cmpsOrder;

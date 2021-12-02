@@ -1,75 +1,75 @@
-import { boardDb } from "../../database.js"
-
+import { boardDb } from "../../database.js";
 
 export const boardService = {
-    query,
-    save,
-    remove,
-    getById,
-    getTaskById
-}
+  query,
+  save,
+  remove,
+  getById,
+  getTaskById,
+};
 
 const gBoards = [boardDb];
 
 function query() {
-    return gBoards
+  return JSON.parse(JSON.stringify(gBoards)) ;
 }
 
 function save(board) {
-    if (board._id) {
-        console.log('board', board);
-        const idx = gBoards.findIndex(currBoard => currBoard._id === board._id)
-        gBoards[idx] = board
-    }
-    else {
-        board._id = _makeId()
-        gBoards.push(board)
-    }
-    return board
+  if (board._id) {
+    console.log("board", board);
+    const idx = gBoards.findIndex((currBoard) => currBoard._id === board._id);
+    gBoards[idx] = board;
+  } else {
+    board._id = _makeId();
+    gBoards.push(board);
+  }
+  return board;
 }
 
-function remove(boardId) {
-    const idx = gBoards.findIndex(board => board._id === boardId)
-    gBoards.splice(idx, 1)
-    return gBoards
+async function remove(taskId) {
+  try {
+    const idx = gBoards.map((board) => {
+      board.groups.map((group) => {
+        var tasks = group.tasks;
+        var idx = tasks.findIndex((task) => task.id === taskId);
+        if(idx>=0){
+            tasks.splice(idx, 1);
+            console.log(tasks);
+        }
+      });
+    });
+  } catch (err) {
+    console.log("Error", err);
+    throw err;
+  }
 }
 
 function getById(boardId) {
-    const board = gBoards.find(board => board._id === boardId)
-    return board
+  const board = gBoards.find((board) => board._id === boardId);
+  return board;
 }
 
-function getTaskById(boardId, taskId) {
-    // const task = gBoards.map(board => {
-    //     board.groups.map(group => {
-    //         group.tasks.map(task => {
-    //             return task.id === taskId;
-    //         })
-    //     })
-    // })
-    const task = gBoards.map(board => {
-        board.groups.map(group => {
-            group.tasks.map(task => {
-                return task.id === taskId;
-            })
-        })
-    })
-    console.log('task',task);
-    console.log('boardService',gBoards[0].groups[0].tasks[0]);
-    return gBoards[0].groups[0].tasks[0]
+async function getTaskById(taskId) {
+  try {
+    const task = gBoards.map((board) => {
+      board.groups.map((group) => {
+        group.tasks.map((task) => {
+          return task.id === taskId;
+        });
+      });
+    });
+    return task;
+  } catch (err) {
+    console.log("Error", err);
+    throw err;
+  }
 }
-
-
-
-
-
 
 // function updateTask(cmpType, data) {
 //     // Switch
 //     // task.members = data;
 //     // task.status = data;
 // }
-
 
 // Store - saveTask
 // function storeSaveTask(task, activity) {
