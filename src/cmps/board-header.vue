@@ -49,21 +49,37 @@
         />
       </div>
     </header>
-    <!-- <section class="board-btns">
-      <div>
-        <button>Main Table</button>
-        <button>Calendar</button>
-        <button>Chart</button>
-        <button>Table</button>
-        <button>More</button>
-        <button>Add View</button>
+    <section class="board-btns">
+      <div class="board-action-btns">
+        <button>
+          <i class="fas fa-table"></i><i class="fas fa-home"></i>Main Table
+        </button>
+        <button><i class="far fa-chart-bar"></i>Calendar</button>
+        <button><i class="far fa-chart-bar"></i>Chart</button>
+        <button><i class="fas fa-table"></i>Table</button>
+        <button>More<i class="fas fa-chevron-down"></i></button>
+        <button><i class="fas fa-plus"></i>Add View</button>
       </div>
-      <div>
-        <div class="share"></div>
+      <div class="share">
+        <i class="fas fa-plug"></i>
+        <h5>Integrate</h5>
+        <div>
+          <img
+            class="icon-pic"
+            style="max-width: 20px"
+            :src="require(`@/pics/slack.png`)"
+          />
+          <img
+            class="icon-pic"
+            style="max-width: 20px"
+            :src="require(`@/pics/gmail.png`)"
+          />
+        </div>
+
         <button>Automate</button>
-        <button></button>
+        <!-- <button></button> -->
       </div>
-    </section> -->
+    </section>
   </section>
 </template>
 

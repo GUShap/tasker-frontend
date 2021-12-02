@@ -1,7 +1,8 @@
 .main-nav {
     width: rem(54px);
-    height: 100vh;
+    max-height: 200vh;
     background-color: #292f4c;
+    float: left;
     display: flex;
     align-items: center;
     justify-content: space-between;

@@ -11,7 +11,7 @@
           v-show="groupShow"
           :key="task.id"
           :task="task"
-          class="flex align-center justify-center"
+          class="flex"
         />
       </transition>
     </template>
