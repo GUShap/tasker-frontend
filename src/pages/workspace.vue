@@ -1,9 +1,12 @@
 <template>
-  <section class="workspace-container">
-    <board-header :board="currBoard" />
-    <task-actions-nav />
-    <board-filter />
-    <board-details :board="currBoard" />
+  <section class="sub-workspace flex" style="width:100%;">
+    <section class="workspace-container">
+      <board-header :board="currBoard" />
+      <task-actions-nav />
+      <board-filter />
+      <board-details :board="currBoard" />
+    </section>
+    <router-view></router-view>
   </section>
 </template>
 
@@ -14,7 +17,7 @@ import taskActionsNav from "@/cmps/task-actions-nav.vue";
 import boardDetails from "@/cmps/board/board-details.vue";
 
 export default {
-  name:'workspace',
+  name: "workspace",
   components: {
     boardFilter,
     boardDetails,
@@ -23,8 +26,7 @@ export default {
   },
   props: [],
   data() {
-    return {
-    };
+    return {};
   },
   async created() {
     try {
@@ -33,8 +35,7 @@ export default {
       console.log("loadBoards error:", err);
     }
   },
-  methods: {
-  },
+  methods: {},
   computed: {
     currBoard() {
       return this.$store.getters.currBoard;

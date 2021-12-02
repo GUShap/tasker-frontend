@@ -1,3 +1,5 @@
+
+
 .workspace-container {
     display: flex;
     flex-direction: column;
@@ -38,9 +40,11 @@
     .board-container {
         display: flex;
         flex-direction: column;
+        height: 100%;
         flex: 1;
         overflow-x: scroll;
         width: 100%;
+        // padding-right: 20px;
     }
     .main-title {
         display: flex;
@@ -53,6 +57,4 @@
         justify-content: space-between;
         margin: 10px;
     }
-
-   
 }

@@ -1,5 +1,5 @@
 
-export const board = {
+export const boardDb = {
     "_id": "b101",
     "title": "Robot dev proj",
     "createdAt": 1589983468418,
