@@ -1,0 +1,16 @@
+.board-btns {
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: 10px;
+     button{
+         border: none;
+         background-color: inherit;
+     }
+
+     .board-action-btns{
+         display: flex;
+         gap: 10px;
+     }
+}
