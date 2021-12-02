@@ -47,12 +47,12 @@ export const board = {
                 {
                     "id": "c103",
                     "title": "Replace logo",
-                    "labelId": ["stuck"]
+                    "labelId": "stuck"
                 },
                 {
                     "id": "c104",
                     "title": "Add Samples",
-                    "labelId": ["work"]
+                    "labelId": "work"
                 }
             ],
             "style": {}
@@ -64,7 +64,7 @@ export const board = {
                 {
                     "id": "c105",
                     "title": "Do that",
-                    "labelId": ["done"]
+                    "labelId": "done"
                 },
                 {
                     "id": "c106",
@@ -103,7 +103,7 @@ export const board = {
                             "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
                         }
                     ],
-                    "labelId": ["done"],
+                    "labelId": "done",
                     "createdAt": 1590999730348,
                     "dueDate": 16156215211,
                     "byMember": {
