@@ -3,8 +3,8 @@
     @mouseover="hover = true"
     @mouseleave="hover = false"
     class="title-container flex grow-1"
+    @click="openDetails"
   >
-    <!-- @click="openDetails" -->
     <span v-if="!edit">{{ title }}</span>
     <input
       v-on:keyup.enter="editTitle"
@@ -34,7 +34,7 @@ export default {
   created() {},
   methods: {
     openDetails() {
-      this.$router.push(`'/board/task/' + ${info.id}`);
+      this.$router.push(`/board/task/${this.info.id}`);
     },
     editTitle() {
       console.log(this.edit);
