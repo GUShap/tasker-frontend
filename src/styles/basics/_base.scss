@@ -1,42 +1,47 @@
 * {
-    margin: 0;
-    padding: 0;
-    font-size: 16px;
-    box-sizing: border-box;
-    font-family: sofia-pro;
-    color: #5D5E62
+  margin: 0;
+  padding: 0;
+  font-size: 16px;
+  box-sizing: border-box;
+  font-family: sofia-pro;
+  color: #5d5e62;
 }
 
 html {
-   color: $clr2;
-   line-height: 1.8;
+  color: $clr2;
+  line-height: 1.8;
 }
 
 body {
-    margin: 0;
-     background-size: 400px;
+  margin: 0;
+  background-size: 400px;
 }
 
-h1, h2, h3, h4, h5, h6 {
-    font-weight: 500;
-    margin: 0 0 1rem;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 500;
+  margin: 0 0 1rem;
 }
-
 
 img {
-    width: 100%;
+  width: 100%;
 }
-
 
 ul li {
-   text-decoration: none;
-   list-style: none;
+  text-decoration: none;
+  list-style: none;
 }
 
-a{
-    text-decoration: none;
+a {
+  text-decoration: none;
 }
 
-.fa, .fas, .far{
-    cursor: pointer;
+.fa,
+.fas,
+.far {
+  cursor: pointer;
 }
