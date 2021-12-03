@@ -1,5 +1,4 @@
 <template>
-  
     <section class="board-container">
       <template v-for="group in currGroups">
         <board-group

@@ -1,9 +1,7 @@
 <template>
   <section :class="[isLandingPage || isHomePage ? '' : 'flex']">
-    <div>
       <main-nav v-if="!isLandingPage" />
       <router-view style="margin-left: 3rem" />
-    </div>
   </section>
 </template>
 
