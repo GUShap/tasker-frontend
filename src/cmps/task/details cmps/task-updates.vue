@@ -75,11 +75,5 @@
 export default {
   name: "task-updates",
   props: ["task"],
-
-  data() {
-    return {
-      isHover: false
-    };
-  },
 };
 </script>
