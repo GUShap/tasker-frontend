@@ -3,8 +3,11 @@
     <header class="group-header flex start align-center">
       <!-- <group-dropdown /> -->
       <i @click="showGroup" class="fa fa-caret-down"></i>
-      {{ group.title }}
+      <div>{{ group.title }}</div>
+      <div>Status</div>
+      <div>Members</div>
     </header>
+
     <!-- <button @click="removeGroup">x</button> -->
     <template v-for="task in currTasks">
       <transition name="fade" :key="task.id">
@@ -16,6 +19,7 @@
         />
       </transition>
     </template>
+
     <section class="add-task color-marker">
       <input
         type="text"
@@ -25,6 +29,7 @@
       />
       <button class="btn-add-task" @click="addTask">Add</button>
     </section>
+
     <footer class="group-footer flex justify-center align-center"></footer>
   </section>
 </template>

@@ -32,6 +32,7 @@ export const boardDb = {
                 {
                     "id": "t101",
                     "title": "Replace logo",
+                    "labelId": "Done",
                     "description": "description",
                     "comments": [
                         {
@@ -58,11 +59,13 @@ export const boardDb = {
                 },
                 {
                     "id": "t102",
-                    "title": "2"
+                    "title": "Have to have full CRUD!",
+                    "labelId": "Work"
                 },
                 {
                     "id": "t103",
-                    "title": "3"
+                    "title": "Let's do Dungeon & Dragons ",
+                    "labelId": "Stuck"
                 }
             ],
             "style": {}
@@ -74,12 +77,12 @@ export const boardDb = {
                 {
                     "id": "t201",
                     "title": "Replace logo",
-                    "labelId": "stuck"
+                    "labelId": "Stuck"
                 },
                 {
                     "id": "t202",
                     "title": "Add Samples",
-                    "labelId": "work"
+                    "labelId": "Work"
                 }
             ],
             "style": {}
@@ -91,7 +94,7 @@ export const boardDb = {
                 {
                     "id": "t301",
                     "title": "Do that",
-                    "labelId": "done",
+                    "labelId": "Done",
                     "members": [
                         {
                             "_id": "u101",
@@ -144,7 +147,7 @@ export const boardDb = {
                             "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
                         }
                     ],
-                    "labelId": "done",
+                    "labelId": "Done",
                     "createdAt": 1590999730348,
                     "dueDate": 16156215211,
                     "byMember": {

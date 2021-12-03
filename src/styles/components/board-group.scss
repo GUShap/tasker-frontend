@@ -86,13 +86,25 @@ max-width: 96%;
 
 .color-marker {
   &::before {
-    content: "";
-    display: block;
-    width: rem(10px);
-    height: rem(35px);
     position: relative;
-    right: 0px;
+    content: "";
+    display:block;
+    min-width: rem(10px);
+    height: rem(35px);
+    left: 0px;
     top: 0px;
-    background: blue;
+    background: rgba(0, 0, 255, 0.678);
+  }
+}
+.color-marker-after {
+  &::after {
+    position: relative;
+    content: "";
+    display:block;
+    min-width: rem(10px);
+    height: rem(35px);
+    left: 0px;
+    top: 0px;
+    background: #e6e9ef;
   }
 }
