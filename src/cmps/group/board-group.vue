@@ -1,6 +1,7 @@
 <template>
   <section class="group flex column align-center">
     <header class="group-header flex start align-center">
+      <!-- <group-dropdown /> -->
       <i @click="showGroup" class="fa fa-caret-down"></i>
       {{ group.title }}
     </header>
