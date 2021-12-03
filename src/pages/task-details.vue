@@ -34,14 +34,29 @@
       </el-dropdown>
     </div>
     <div class="log-menu flex">
-      <button :class="{underline: component==='task-updates'}" @click="component='task-updates'">updates</button>
-      <button :class="{underline: component==='task-files'}" @click="component='task-files'">files</button>
-      <button :class="{underline: component==='activity-log'}" @click="component='activity-log'">activity log</button>
+      <button
+        :class="{ underline: component === 'task-updates' }"
+        @click="component = 'task-updates'"
+      >
+        updates
+      </button>
+      <button
+        :class="{ underline: component === 'task-files' }"
+        @click="component = 'task-files'"
+      >
+        files
+      </button>
+      <button
+        :class="{ underline: component === 'activity-log' }"
+        @click="component = 'activity-log'"
+      >
+        activity log
+      </button>
       <div class="add-btn"><span>|</span> <button>+ add view</button></div>
     </div>
     <hr />
     <template>
-    <component :is="component" :task="task"></component>
+      <component :is="component" :task="task"></component>
     </template>
   </section>
 </template>
@@ -61,7 +76,7 @@ export default {
   data() {
     return {
       task: null,
-      component:'task-updates'
+      component: "task-updates",
     };
   },
   methods: {
@@ -74,9 +89,9 @@ export default {
       const { taskId } = this.$route.params;
       this.task = await this.$store.dispatch({
         type: "getTaskById",
-        taskId: taskId,
+        taskId,
       });
-      console.log("this.task", this.task);
+      // console.log("this.task", this.task);
     } catch (err) {
       console.log("Error", err);
     }

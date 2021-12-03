@@ -30,7 +30,6 @@ export default {
   watch: {
     $route: function (newVal, OldVal) {
       const { name } = newVal;
-      console.log("watch route", name);
       if (name !== "landing-page") {
         this.isLandingPage = false;
       }

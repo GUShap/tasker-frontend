@@ -6,8 +6,8 @@
       <task-actions-nav />
       <board-filter />
       <board-details :board="currBoard" @addTask="addTask"/>
-    </section>
     <router-view></router-view>
+    </section>
   </section>
 </template>
 

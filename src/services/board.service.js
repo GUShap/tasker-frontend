@@ -64,14 +64,14 @@ function getById(boardId) {
 
 async function getTaskById(taskId) {
   try {
-    const task = gBoards.map((board) => {
-      board.groups.map((group) => {
-        group.tasks.map((task) => {
-          return task.id === taskId;
-        });
-      });
-    });
+    const task = gBoards.map(board => {
+      board.groups.map(group => {
+        group.tasks.map(task => task.id === taskId)
+      })
+    })
+    console.log(task);
     return task;
+
   } catch (err) {
     console.log("Error", err);
     throw err;

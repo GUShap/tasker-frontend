@@ -49,7 +49,7 @@ export const boardStore = {
         console.log(err);
       }
     },
-    async removeTask({ state, dispatch  }, { taskId }) {
+    async removeTask({ state, dispatch }, { taskId }) {
       try {
         await boardService.remove(taskId);
         dispatch({ type: "loadBoards", currBoardIdx: state.currBoardIdx });
@@ -58,10 +58,10 @@ export const boardStore = {
       }
     },
 
-    async getTaskById({ taskId }) {
-      console.log(taskId);
+    async getTaskById({state},{ taskId }) {
       try {
         const currTask = await boardService.getTaskById(taskId);
+        // console.log(taskId);
         return currTask;
       } catch (err) {
         console.log(err);
