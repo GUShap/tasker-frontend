@@ -16,7 +16,7 @@
     </template>
     <section class="add-task color-marker">
       <input type="text" placeholder="+Add">
-      <button>+Add</button>
+      <button class="btn-add-task">Add</button>
       </section>
     <footer class="group-footer flex justify-center align-center"></footer>
   </section>

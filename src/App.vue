@@ -1,8 +1,9 @@
 <template>
-  <section :class="[isLandingPage ? '' : 'flex']">
-    <main-nav v-if="!isLandingPage" />
-    <!-- <main-nav /> -->
-    <router-view style="margin-left: 3rem" />
+  <section :class="[isLandingPage || isHomePage ? '' : 'flex']">
+    <div>
+      <main-nav v-if="!isLandingPage" />
+      <router-view style="margin-left: 3rem" />
+    </div>
   </section>
 </template>
 
@@ -17,11 +18,16 @@ export default {
   data() {
     return {
       isLandingPage: true,
+      isHomePage: true,
     };
   },
   created() {
+    console.log(this.$route.name);
     if (this.$route.name !== "landing-page") {
       this.isLandingPage = false;
+      if (this.$route.name !== "home") {
+        this.isHomePage = false;
+      }
     }
   },
   methods: {},
@@ -30,9 +36,11 @@ export default {
   watch: {
     $route: function (newVal, OldVal) {
       const { name } = newVal;
-      console.log("watch route", name);
       if (name !== "landing-page") {
         this.isLandingPage = false;
+      }
+      if (this.$route.name !== "home") {
+        this.isHomePage = false;
       }
     },
   },

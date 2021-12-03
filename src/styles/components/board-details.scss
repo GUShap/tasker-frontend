@@ -4,10 +4,11 @@
     flex: 1;
     overflow: hidden;
     font-size: 20px;
+
     .board-header {
         min-height: 10vh;
         display: flex;
-        width: 95%;
+        width: 92%;
         justify-content: space-between;
         align-items: center;
         padding: 20px;
@@ -19,6 +20,12 @@
             padding: 10px;
             font-weight: bolder;
             cursor: pointer;
+        }
+
+        .board-title {
+            font-size: 24px;
+            letter-spacing: -0.2px;
+            line-height: 32px;
         }
         .main-title {
             align-items: center;
@@ -38,8 +45,7 @@
         height: 100%;
         flex: 1;
         overflow-x: scroll;
-        width: 100%;
-      
+        max-width: 91%;
 
         // padding-right: 20px;
     }

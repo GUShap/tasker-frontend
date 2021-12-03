@@ -1,16 +1,22 @@
 .side-bar-expanded {
+    background-color: #f5f6f8;
+    border-right: 1px solid #e6e9ef;
     .side-nav-open {
         margin-left: 1rem;
     }
-    .fas.fa-chevron-circle-right {
-        left: 2rem;
-        top: 20%;
+    .fas.fa-chevron-right {
+        left: 1rem;
+        top: 4.2%;
         position: relative;
         padding: 3px 7px;
-        // background-color: #fff;
+        background-color: #fff;
         border-radius: 50%;
         border: 1px solid #e6e9ef;
         transition: right 0.3s;
         z-index: 4;
     }
+
+    // .fas.fa-chevron-right:hover {
+    //     // background-color: black;
+    // }
 }
