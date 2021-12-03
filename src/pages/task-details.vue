@@ -12,7 +12,7 @@
         <i class="fas fa-ellipsis-h"></i>
         <el-dropdown-menu trigger="click" size="large" slot="dropdown">
           <el-dropdown-item @click.native="removeTask"
-            ><i class="far fa-trash-alt"></i>Manage
+            ><i class="fas fa-user-plus"></i>Manage
             subscribers</el-dropdown-item
           >
           <el-dropdown-item @click.native="removeTask"
@@ -37,7 +37,9 @@
       <div class="nav-btn">
       <button
         :class="{ underline: component === 'task-updates' }"
-        @click="component = 'task-updates'">updates</button>
+        @click="component = 'task-updates'"
+        @mouseover="hover"
+        @mouseleave="hover">updates</button>
       <button
         :class="{ underline: component === 'task-files' }"
         @click="component = 'task-files'"
@@ -78,12 +80,18 @@ export default {
     return {
       task: null,
       component: "task-updates",
+      isHover: false
     };
   },
   methods: {
     exitModal() {
       this.$router.push("/board");
     },
+
+    hover(){
+      this.isHover=!this.isHover
+      console.log(this.isHover);
+    }
   },
 
 // temp!!!!!
