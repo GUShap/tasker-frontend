@@ -1,12 +1,10 @@
 .task-details {
     display: flex;
     flex-direction: column;
-    border: 1px solid;
     padding: 20px 10px;
     top: 10px;
     height: 100vh;
     min-width: 300px;
-    // position: absolute;
 
     // !!!!!!!!!
     width: 700px;
@@ -24,11 +22,11 @@
 
     .details-title {
         margin-right: -10px;
-        gap: 30px;
+        gap: 20px;
+        margin-top: 10px;
         input {
-            // margin-top: 40px;
             height: 40px;
-            width: 70%;
+            width: 77%;
             border: none;
             padding-left: 10px;
         }
@@ -41,7 +39,7 @@
             padding-left: 35px;
         }
 
-        .title-btns>*{
+        .title-btns > * {
             padding: 0 5px;
         }
     }
@@ -50,16 +48,23 @@
         margin: 0;
         gap: 20px;
         padding: 0 24px;
+        text-align: left;
+
+        .nav-btn {
+            width: 77%;
+        }
+        .add-btn{
+            margin: 0;
+            padding: 0;
+            width: 12%;
+        }
     }
 
-    .add-btn {
     
-        padding-left: 90px;
-        min-width: 38%;
         span {
             padding: 0;
         }
-    }
+    
 
     button {
         text-transform: capitalize;
@@ -77,7 +82,7 @@
 
     .underline {
         border-radius: 0;
-        border-bottom:2px solid rgb(35, 83, 240);
+        border-bottom: 2px solid rgb(35, 83, 240);
     }
 
     .fas.fa-user-circle {
@@ -89,10 +94,93 @@
         margin-left: -10px;
         font-size: 14px;
     }
-
-
 }
 
-.task-updates{
+.task-updates {
     flex-direction: column;
+    margin-top: 30px;
+    padding: 0 30px;
+
+    input {
+        width: 100%;
+        padding: 10px;
+        border-radius: 8px;
+        border: 1px solid rgba(170, 88, 238, 0.698);
+    }
+
+    .update-card {
+        border-radius: 8px;
+        margin-top: 30px;
+        border: 1px solid rgba(180, 171, 171, 0.397);
+        border-top: 2px solid rgb(170, 88, 238);
+        text-align: left;
+
+        .top {
+            padding: 15px;
+        }
+
+        .card-btn {
+            float: right;
+        }
+        .card-btn > * {
+            display: inline-block;
+            margin: 0;
+            margin-left: 10px;
+        }
+
+        .dropdown {
+            .fas.fa-sort-down {
+                transform: translateY(-20%);
+            }
+
+            .dropdown-menu {
+                margin-right: 100px;
+            }
+        }
+
+        .user-info {
+            h3 {
+                transform: translateY(40%);
+                padding-left: 60px;
+            }
+
+            img {
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+            }
+
+            p {
+                padding: 20px 40px;
+            }
+        }
+
+        .watchers {
+            text-align: right;
+
+            p {
+                padding-left: 4px;
+            }
+        }
+        .watchers > * {
+            display: inline-block;
+        }
+
+        hr {
+            border: 2px solid rgba(180, 171, 171, 0.397);
+        }
+
+        .action-btn {
+            border-top: 1px solid rgba(180, 171, 171, 0.397);
+        }
+        .action-btn :not(:last-child) {
+            border-right: 1px solid rgba(180, 171, 171, 0.397);
+        }
+        .action-btn > * {
+            flex-basis: 50%;
+        }
+        button {
+            width: 100%;
+        }
+    }
 }

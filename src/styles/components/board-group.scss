@@ -1,16 +1,18 @@
 .group {
   margin-left: 1rem;
+max-width: 96%;
 
   .add-task {
     display: flex;
     width: 100%;
     margin-left: 2.1rem;
     border: 1px solid #f5f6f8;
+    
     input {
       display: flex;
       flex: 1;
+      max-width: 95.2%;
     }
-
   }
 
   .group-header {

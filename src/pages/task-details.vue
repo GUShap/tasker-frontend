@@ -6,8 +6,8 @@
       <div class="users">
         <i class="fas fa-plus-circle"></i>
         <i class="fas fa-user-circle"></i>
-        <span>|</span>
       </div>
+        <span>|</span>
       <el-dropdown class="dropdown" trigger="click">
         <i class="fas fa-ellipsis-h"></i>
         <el-dropdown-menu trigger="click" size="large" slot="dropdown">
@@ -34,12 +34,10 @@
       </el-dropdown>
     </div>
     <div class="log-menu flex">
+      <div class="nav-btn">
       <button
         :class="{ underline: component === 'task-updates' }"
-        @click="component = 'task-updates'"
-      >
-        updates
-      </button>
+        @click="component = 'task-updates'">updates</button>
       <button
         :class="{ underline: component === 'task-files' }"
         @click="component = 'task-files'"
@@ -52,7 +50,8 @@
       >
         activity log
       </button>
-      <div class="add-btn"><span>|</span> <button>+ add view</button></div>
+      </div>
+      <span>|</span><button class="add-btn">+ add view</button>
     </div>
     <hr />
     <template>
@@ -62,6 +61,8 @@
 </template>
 
 <script>
+import { boardService } from "../services/board.service.js";
+
 import taskUpdates from "@/cmps/task/details cmps/task-updates.vue";
 import taskFiles from "@/cmps/task/details cmps/task-files.vue";
 import activityLog from "@/cmps/task/details cmps/activity-log.vue";
@@ -84,18 +85,24 @@ export default {
       this.$router.push("/board");
     },
   },
-  async created() {
-    try {
-      const { taskId } = this.$route.params;
-      this.task = await this.$store.dispatch({
-        type: "getTaskById",
-        taskId,
-      });
-      // console.log("this.task", this.task);
-    } catch (err) {
-      console.log("Error", err);
-    }
-  },
-  computed: {},
+
+// temp!!!!!
+  created(){
+    var boards = boardService.query()
+    this.task = boards[0].groups[0].tasks[0]
+  }
+
+  // async created() {
+  //   try {
+  //     const { taskId } = this.$route.params;
+  //     this.task = await this.$store.dispatch({
+  //       type: "getTaskById",
+  //       taskId,
+  //     });
+  //     console.log("this.task", this.task);
+  //   } catch (err) {
+  //     console.log("Error", err);
+  //   }
+  // },
 };
 </script>
