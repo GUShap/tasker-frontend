@@ -20,6 +20,11 @@ export const boardStore = {
       state.currBoard = boards[currBoardIdx];
       state.currBoardIdx = currBoardIdx;
     },
+    updateTask(state, { boards, currBoardIdx }) {
+      state.boards = boards;
+      state.currBoard = boards[currBoardIdx];
+      state.currBoardIdx = currBoardIdx;
+    },
   },
   actions: {
     async loadBoards({ commit }, { currBoardIdx }) {
@@ -33,7 +38,8 @@ export const boardStore = {
     },
     async editTask({ commit }, { task }) {
       try {
-        const currTask = await boardService.save(task);
+        const currTask = await boardService.saveTask(task);
+        return
         if (task._id) {
           commit({ type: "updateTask", task: currTask });
         } else {

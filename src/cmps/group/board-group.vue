@@ -15,9 +15,14 @@
       </transition>
     </template>
     <section class="add-task color-marker">
-      <input type="text" placeholder="+Add">
-      <button>+Add</button>
-      </section>
+      <input
+        type="text"
+        placeholder="+Add"
+        v-model="newTask"
+        @keyup.enter="addTask"
+      />
+      <button @click="addTask">+Add</button>
+    </section>
     <footer class="group-footer flex justify-center align-center"></footer>
   </section>
 </template>
@@ -35,7 +40,7 @@ export default {
   props: ["group"],
   data() {
     return {
-      // group: null,
+      newTask: null,
       groupShow: true,
     };
   },
@@ -43,6 +48,10 @@ export default {
   methods: {
     showGroup() {
       this.groupShow = !this.groupShow;
+    },
+    addTask() {
+      this.$emit("addTask", {title: this.newTask, groupId: this.group.id});
+      this.newTask = null;
     },
   },
   computed: {

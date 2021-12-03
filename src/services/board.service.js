@@ -3,6 +3,7 @@ import { boardDb } from "../../database.js";
 export const boardService = {
   query,
   save,
+  saveTask,
   remove,
   getById,
   getTaskById,
@@ -11,7 +12,7 @@ export const boardService = {
 const gBoards = [boardDb];
 
 function query() {
-  return JSON.parse(JSON.stringify(gBoards)) ;
+  return JSON.parse(JSON.stringify(gBoards));
 }
 
 function save(board) {
@@ -25,6 +26,17 @@ function save(board) {
   }
   return board;
 }
+function saveTask(taskInfo) {
+  console.log("saveTask", taskInfo);
+  const task = {
+    title: taskInfo.title,
+  };
+  return
+  const boards = query();
+  boards[bIdx].groups[gIdx].tasks[tIdx].push(task);
+
+ 
+}
 
 async function remove(taskId) {
   try {
@@ -32,9 +44,9 @@ async function remove(taskId) {
       board.groups.map((group) => {
         var tasks = group.tasks;
         var idx = tasks.findIndex((task) => task.id === taskId);
-        if(idx>=0){
-            tasks.splice(idx, 1);
-            console.log(tasks);
+        if (idx >= 0) {
+          tasks.splice(idx, 1);
+          console.log(tasks);
         }
       });
     });
@@ -59,6 +71,39 @@ async function getTaskById(taskId) {
       });
     });
     return task;
+  } catch (err) {
+    console.log("Error", err);
+    throw err;
+  }
+}
+async function getTaskIdx(taskId) {
+  try {
+    return gBoards.findIndex((board) => {
+      board.groups.findIndex((group) => {
+        group.tasks.findIndex((task) => task.id === taskId);
+      });
+    });
+  } catch (err) {
+    console.log("Error", err);
+    throw err;
+  }
+}
+async function getGroupIdx(groupId) {
+  try {
+    return gBoards.findIndex((board) => {
+      board.groups.findIndex((group) => group.some(group.id === groupId));
+    });
+  } catch (err) {
+    console.log("Error", err);
+    throw err;
+  }
+}
+
+console.log(getBoardIdx("b101"))
+console.log(getGroupIdx("g103"))
+async function getBoardIdx(boardId) {
+  try {
+    return gBoards.findIndex((board) => board._id === boardId);
   } catch (err) {
     console.log("Error", err);
     throw err;
