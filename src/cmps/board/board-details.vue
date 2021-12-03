@@ -1,15 +1,13 @@
 <template>
-  <section class="flex sub-workspace">
-    <section class="board-container">
-      <template v-for="group in currGroups">
-        <board-group
-          :group="group"
-          :key="group.id"
-          @addTask="addTask"
-          @removeGroup="removeGroup"
-        />
-      </template>
-      </section>
+  <section class="board-container">
+    <template v-for="group in currGroups">
+      <board-group
+        :group="group"
+        :key="group.id"
+        @addTask="addTask"
+        @removeGroup="removeGroup"
+      />
+    </template>
   </section>
 </template>
 
