@@ -36,7 +36,7 @@ export const boardStore = {
         console.log(err);
       }
     },
-    async editTask({ dispatch, commit }, { task }) {
+    async editTask({ state, dispatch, commit }, { task }) {
       try {
         const currTask = await boardService.saveTask(task);
         if (task._id) {

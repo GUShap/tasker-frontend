@@ -1,5 +1,5 @@
 import { boardDb } from "../../database.js";
-
+import { storageService } from "./storage.service";
 export const boardService = {
   query,
   save,
@@ -13,9 +13,12 @@ export const boardService = {
   removeGroup,
 };
 
-const gBoards = [boardDb];
-
 function query() {
+  const boards = storageService.load("gBoards");
+  if (boards) return boards;
+
+  const gBoards = [boardDb];
+  storageService.store("gBoards", gBoards);
   return JSON.parse(JSON.stringify(gBoards));
 }
 
@@ -30,24 +33,35 @@ function save(board) {
   }
   return board;
 }
-function saveTask(taskInfo) {
-  if (taskInfo.id) {
-    console.log("update task");
-  } else {
-    console.log("saveTask", taskInfo);
-    const currTask = {
-      title: taskInfo.title,
-    };
-    gBoards[taskInfo.boardId].groups[taskInfo.groupId].push(currTask);
+
+async function saveTask(taskInfo) {
+  try {
+    if (taskInfo.id) {
+      console.log("update task");
+    } else {
+      console.log("saveTask", taskInfo.boardId, taskInfo.groupId);
+      const currTask = {
+        title: taskInfo.title,
+      };
+      const bIdx = await getBoardIdx(taskInfo.boardId);
+      const gIdx = await getGroupIdx(taskInfo.boardId, taskInfo.groupId);
+
+      const gBoards = query();
+      gBoards[bIdx].groups[gIdx].tasks.push(currTask);
+      _loadToStorage(gBoards);
+    }
+    return;
+  } catch (err) {
+    console.log(err);
   }
-  return;
 }
 
 async function removeGroup(boardIdx, { groupId }) {
   try {
+    const gBoards = query();
     const idx = await getGroupIdx(gBoards[boardIdx]._id, groupId);
     gBoards[boardIdx].groups.splice(idx, 1);
-    // console.log(gBoards[boardIdx])
+    _loadToStorage(gBoards);
   } catch (err) {
     console.log(err);
   }
@@ -55,6 +69,7 @@ async function removeGroup(boardIdx, { groupId }) {
 
 async function remove(taskId) {
   try {
+    const gBoards = query();
     const idx = gBoards.map((board) => {
       board.groups.map((group) => {
         var tasks = group.tasks;
@@ -65,6 +80,7 @@ async function remove(taskId) {
         }
       });
     });
+    _loadToStorage(gBoards);
   } catch (err) {
     console.log("Error", err);
     throw err;
@@ -72,13 +88,14 @@ async function remove(taskId) {
 }
 
 function getById(boardId) {
+  const gBoards = query();
   const board = gBoards.find((board) => board._id === boardId);
   return board;
 }
 
-getTaskById("t101");
 async function getTaskById(taskId) {
   try {
+    const gBoards = query();
     const task = gBoards.map((board) => {
       board.groups.map((group) => {
         group.tasks.map((task) => {
@@ -95,6 +112,7 @@ async function getTaskById(taskId) {
 
 async function getTaskIdx(boardId, groupId, taskId) {
   try {
+    const gBoards = query();
     const boardIdx = await getBoardIdx(boardId);
     const groupIdx = await getGroupIdx(boardId, groupId);
     const taskIdx = gBoards[boardIdx].groups[groupIdx].tasks.findIndex(
@@ -109,8 +127,8 @@ async function getTaskIdx(boardId, groupId, taskId) {
 
 async function getGroupIdx(boardId, groupId) {
   try {
+    const gBoards = query();
     const boardIdx = await getBoardIdx(boardId);
-
     return gBoards[boardIdx].groups.findIndex((group) => group.id === groupId);
   } catch (err) {
     console.log("Error", err);
@@ -120,6 +138,7 @@ async function getGroupIdx(boardId, groupId) {
 
 async function getBoardIdx(boardId) {
   try {
+    const gBoards = query();
     return gBoards.findIndex((board) => board._id === boardId);
   } catch (err) {
     console.log("Error", err);
@@ -162,3 +181,7 @@ async function getBoardIdx(boardId) {
 //     // load from service
 //     // subscribe to socket
 // }
+
+function _loadToStorage(gBoards){
+  storageService.store("gBoards", gBoards);
+}
