@@ -31,14 +31,14 @@ function save(board) {
   return board;
 }
 function saveTask(taskInfo) {
-  if(taskInfo.id){
-    console.log('update task');
-  }else{
+  if (taskInfo.id) {
+    console.log("update task");
+  } else {
     console.log("saveTask", taskInfo);
-    const task = {
+    const currTask = {
       title: taskInfo.title,
     };
-  
+    gBoards[taskInfo.boardId].groups[taskInfo.groupId].push(currTask);
   }
   return;
 }
