@@ -70,7 +70,6 @@ export default {
     },
   },
   async created() {
-    console.log("hi tom");
     try {
       const { taskId } = this.$route.params;
       this.task = await this.$store.dispatch({
