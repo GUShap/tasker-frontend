@@ -4,7 +4,7 @@
       <div class="main-title flex">
         <div class="board-info">
           <i class="fas fa-share-alt"></i>
-          <a
+          <a class="board-title"
             @click="setEdit('title')"
             v-show="!isEditedMode || currEditedVal !== 'title'"
             >{{ currBoard.title }}</a
@@ -63,7 +63,7 @@
       <div class="share">
         <i class="fas fa-plug"></i>
         <h5>Integrate</h5>
-        <div>
+        <!-- <div> -->
           <img
             class="icon-pic"
             style="max-width: 20px"
@@ -79,7 +79,7 @@
             style="max-width: 20px"
             :src="require(`@/pics/twilio.jpg`)"
           />
-        </div>
+        <!-- </div> -->
 
         <button>Automate</button>
         <!-- <button></button> -->

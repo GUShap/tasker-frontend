@@ -5,13 +5,33 @@ max-width: 96%;
   .add-task {
     display: flex;
     width: 100%;
-    margin-left: 2.1rem;
-    border: 1px solid #f5f6f8;
-    
+    margin-left: 2.2rem;
     input {
       display: flex;
-      flex: 1;
-      max-width: 95.2%;
+      border: none;
+      height: rem(35px);
+      cursor: pointer;
+      width: calc(100% - 77px);
+      border: 1px rgba(0, 0, 0, 0.089) solid;
+      // // font-family: roboto-light,helvetica,sans-serif;
+      position: sticky;
+      border-inline-end: none;
+      // // .color-marker &::before {
+      // //   opacity: .5
+      // // }
+    }
+
+    .btn-add-task {
+      height: 36px;
+      padding: 0 10px;
+      background-color: #0073ea;
+      color: #fff;
+      border: none;
+      transition: 0.3s ease;
+      cursor: pointer;
+      // // font-family: roboto-light, helvetica, sans-serif;
+      // position: -webkit-sticky;
+      position: sticky;
     }
   }
 

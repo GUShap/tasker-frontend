@@ -1,6 +1,6 @@
 <template>
   <section class="side-bar-expanded">
-    <i class="fas fa-chevron-circle-right" @click="toggleNav"></i>
+    <i class="fas fa-chevron-right" @click="toggleNav"></i>
     <div class="side-nav-open flex column" :class="[isShown ? 'show' : 'hide']">
       <a href="#/">Logo</a>
       <h1>My Workspace</h1>

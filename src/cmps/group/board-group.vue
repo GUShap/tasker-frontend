@@ -21,7 +21,7 @@
         v-model="newTask"
         @keyup.enter="addTask"
       />
-      <button @click="addTask">+Add</button>
+      <button class="btn-add-task" @click="addTask">Add</button>
     </section>
     <footer class="group-footer flex justify-center align-center"></footer>
   </section>
@@ -50,7 +50,7 @@ export default {
       this.groupShow = !this.groupShow;
     },
     addTask() {
-      this.$emit("addTask", {title: this.newTask, groupId: this.group.id});
+      this.$emit("addTask", { title: this.newTask, groupId: this.group.id });
       this.newTask = null;
     },
   },

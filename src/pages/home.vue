@@ -1,6 +1,7 @@
 <template>
   <div class="home">
-    <h1>Welcome home (user)</h1>
+    <h1>Tasker</h1>
+    <h1>Welcome to your Workspace</h1>
   </div>
 </template>
 
