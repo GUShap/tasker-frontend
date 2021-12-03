@@ -31,7 +31,20 @@ export const boardDb = {
             "tasks": [
                 {
                     "id": "t101",
-                    "title": "1"
+                    "title": "Replace logo",
+                    "description": "description",
+                    "comments": [
+                        {
+                            "id": "ZdPnm",
+                            "txt": "also @yaronb please CR this",
+                            "createdAt": 1590999817436,
+                            "byMember": {
+                                "_id": "u101",
+                                "fullname": "Tal Tarablus",
+                                "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
+                            }
+                        }
+                    ],
                 },
                 {
                     "id": "t102",
