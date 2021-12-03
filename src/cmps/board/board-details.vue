@@ -9,7 +9,6 @@
           @removeGroup="removeGroup"
         />
       </template>
-    </section>
   </section>
 </template>
 
