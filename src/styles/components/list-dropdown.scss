@@ -1,50 +1,56 @@
+.dropdown{
+    margin-right: rem(5px);
+    margin-left: rem(2.5px);
+}
+
 .el-dropdown-menu {
-    -webkit-animation: fade-in 0.5s ease-in-out both;
-    animation: fade-in 0.5s ease-in-out both;
-    font-size: 7px;
-    line-height: 24px;
-    // padding-bottom: 15px;
-    background-color: #fff;
-    box-shadow: 0 8px 16px 0 rgb(0 0 0 / 32%);
-    border-radius: 15px;
+  -webkit-animation: fade-in 0.5s ease-in-out both;
+  animation: fade-in 0.5s ease-in-out both;
+  font-size: 7px;
+  line-height: 24px;
+  // padding-bottom: 15px;
+  background-color: #fff;
+  box-shadow: 0 8px 16px 0 rgb(0 0 0 / 32%);
+  border-radius: 15px;
+  cursor: pointer;
+  width: 240px;
+  top: 30px;
+  gap: 10px;
+  margin-left: 14rem;
+  left: -105px;
+
+  .el-dropdown-menu__item {
+    position: relative;
+    margin-top: 6px;
+    // font: 14px roboto, sans-serif;
+    // border-top: 1px solid #ebeef5;
+    list-style: none;
+    line-height: 36px;
+    padding: 0 20px;
+    margin: 0;
+    font-size: 15px;
+    color: #606266;
     cursor: pointer;
-    width: 240px;
-    top: 30px;
-    gap: 10px;
-    margin-left: 10rem;
-    left: -105px;
+    outline: 0;
+  }
 
-    .el-dropdown-menu__item {
-        position: relative;
-        margin-top: 6px;
-        // border-top: 1px solid #ebeef5;
-        list-style: none;
-        line-height: 36px;
-        padding: 0 20px;
-        margin: 0;
-        font-size: 15px;
-        color: #606266;
-        cursor: pointer;
-        outline: 0;
-    }
+  .el-dropdown-menu__item:hover {
+    background-color: lightgrey;
+    cursor: pointer;
+  }
 
-    .el-dropdown-menu__item:hover {
-        background-color: lightgrey;
-        cursor: pointer;
-    }
+  .fas,
+  .fa,
+  .far {
+    margin-right: 20px;
+  }
 
-    .fas,
-    .fa,
-    .far {
-        margin-right: 20px;
-    }
-
-    .fas.fa-angle-right{
-        margin-top: 5px;
-        text-align: center;
-        margin-left: 20px;
-    }
-    .last-child{
-        border-bottom: 1px solid rgba(0, 0, 0, 0.199);
-    }
+  .fas.fa-angle-right {
+    margin-top: 5px;
+    text-align: center;
+    margin-left: 20px;
+  }
+  .last-child {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.199);
+  }
 }

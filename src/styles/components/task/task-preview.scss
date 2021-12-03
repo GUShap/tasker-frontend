@@ -1,11 +1,16 @@
+.task-container{
+  width: 100%;
+}
+
 .task-preview {
-  width: 90%;
-  height: 2rem;
-  margin: 0.1rem 0;
+  width: 100%;
+  height: rem(35px);
+  margin: rem(1px) 0;
+  border-bottom: 1px solid #e7e7e7;
   background-color: #f5f6f8;
   margin-left: 1.8rem;
 
-  &:hover{
+  &:hover {
     background-color: #e7e7e7;
   }
 
@@ -16,13 +21,8 @@
   .title-picker {
     display: flex;
     justify-content: start;
-    .btn-edit {
-      border: none;
-      background-color: inherit;
-      margin-left: 20px;
-      cursor: pointer;
-      color: #504658dc;
-    }
+    margin-left: .5rem;
+
   }
   .status-picker {
     display: flex;
@@ -53,5 +53,4 @@
     margin: 0.5rem;
     padding: 0.5rem 1.5rem;
   }
-  // width: 160px;
 }

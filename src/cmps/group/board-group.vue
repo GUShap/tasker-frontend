@@ -1,6 +1,5 @@
 <template>
-
-  <section class="group flex column">
+  <section class="group flex column align-center">
     <header class="group-header flex start align-center">
       <i @click="showGroup" class="fa fa-caret-down"></i>
       {{ group.title }}
@@ -15,6 +14,10 @@
         />
       </transition>
     </template>
+    <section class="add-task color-marker">
+      <input type="text" placeholder="+Add">
+      <button>+Add</button>
+      </section>
     <footer class="group-footer flex justify-center align-center"></footer>
   </section>
 </template>
@@ -45,7 +48,7 @@ export default {
   computed: {
     currTasks() {
       this.tasks = this.group ? this.group.tasks : null;
-      return this.tasks
+      return this.tasks;
     },
   },
 };

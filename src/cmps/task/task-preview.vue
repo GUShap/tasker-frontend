@@ -1,10 +1,10 @@
 
 <template>
-  <section class="task-preview flex align-center">
+  <section class="task-container  flex align-center">
     <task-dropdown @removeTask="removeTask" />
-    <section class="task-preview flex align-center">
+    <section class="task-preview color-marker flex align-center">
       <template v-for="(cmpType, idx) in cmpsOrder">
-        <component :is="cmpType" :info="task" :key="idx" />
+        <component :is="cmpType" :info="task" :key="idx"/>
         <!-- <component :is="cmpType" :info="getCmpInfo(cmpType)" @updated="updateTask(cmpType, $event)" :key="idx"> -->
       </template>
     </section>
