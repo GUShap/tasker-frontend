@@ -1,0 +1,16 @@
+.side-bar-expanded {
+    .side-nav-open {
+        margin-left: 1rem;
+    }
+    .fas.fa-chevron-circle-right {
+        left: 2rem;
+        top: 20%;
+        position: relative;
+        padding: 3px 7px;
+        // background-color: #fff;
+        border-radius: 50%;
+        border: 1px solid #e6e9ef;
+        transition: right 0.3s;
+        z-index: 4;
+    }
+}

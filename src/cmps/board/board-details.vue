@@ -2,7 +2,7 @@
   <section class="flex sub-workspace">
     <section class="board-container" >
       <template v-for="group in currGroups">
-        <board-group :group="group" :key="group.id" />
+        <board-group :group="group" :key="group.id" @addTask="addTask" />
       </template>
     </section>
   </section>
@@ -25,7 +25,12 @@ export default {
     };
   },
   created() {},
-  methods: {},
+  methods: {
+    addTask(task) {
+      task.boardId = this.board._id
+      this.$emit("addTask", task )
+    }
+  },
   computed: {
     currGroups() {
       this.groups = this.board ? this.board.groups : null;

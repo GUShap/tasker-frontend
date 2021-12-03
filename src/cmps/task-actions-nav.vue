@@ -1,6 +1,6 @@
 <template>
   <section class="task-action-btn">
-    <button class="add-task-btn">New Item</button>
+    <button class="new-task-btn">New Item</button>
     <button><i class="fas fa-search"></i>Search</button>
     <button><i class="far fa-user-circle"></i>Person</button>
     <button><i class="fas fa-filter"></i>Filter<i class="fas fa-chevron-down"></i></button>
