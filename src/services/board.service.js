@@ -3,15 +3,19 @@ import { boardDb } from "../../database.js";
 export const boardService = {
   query,
   save,
+  saveTask,
   remove,
   getById,
   getTaskById,
+  getTaskIdx,
+  getGroupIdx,
+  getBoardIdx
 };
 
 const gBoards = [boardDb];
 
 function query() {
-  return JSON.parse(JSON.stringify(gBoards)) ;
+  return JSON.parse(JSON.stringify(gBoards));
 }
 
 function save(board) {
@@ -25,6 +29,15 @@ function save(board) {
   }
   return board;
 }
+function saveTask(taskInfo) {
+  console.log("saveTask", taskInfo);
+  const task = {
+    title: taskInfo.title,
+  };
+  return
+  const boards = query();
+  boards[bIdx].groups[gIdx].tasks[tIdx].push(task);
+}
 
 async function remove(taskId) {
   try {
@@ -32,9 +45,9 @@ async function remove(taskId) {
       board.groups.map((group) => {
         var tasks = group.tasks;
         var idx = tasks.findIndex((task) => task.id === taskId);
-        if(idx>=0){
-            tasks.splice(idx, 1);
-            console.log(tasks);
+        if (idx >= 0) {
+          tasks.splice(idx, 1);
+          console.log(tasks);
         }
       });
     });
@@ -51,19 +64,52 @@ function getById(boardId) {
 
 async function getTaskById(taskId) {
   try {
-    const task = gBoards.map((board) => {
-      board.groups.map((group) => {
-        group.tasks.map((task) => {
-          return task.id === taskId;
-        });
-      });
-    });
+    const task = gBoards.map(board => {
+      board.groups.map(group => {
+        group.tasks.map(task => task.id === taskId)
+      })
+    })
+    console.log(task);
     return task;
+
   } catch (err) {
     console.log("Error", err);
     throw err;
   }
 }
+
+async function getTaskIdx(boardId, groupId, taskId) {
+  try {
+    const boardIdx = await getBoardIdx(boardId)
+    const groupIdx = await getGroupIdx(boardId, groupId)
+    const taskIdx = gBoards[boardIdx].groups[groupIdx].tasks.findIndex(task => task.id === taskId)
+    return taskIdx
+  } catch (err) {
+    console.log("Error", err);
+    throw err;
+  }
+}
+
+async function getGroupIdx(boardId, groupId) {
+  try {
+    const boardIdx = await getBoardIdx(boardId)
+    return gBoards[boardIdx].groups.findIndex(group => group.id === groupId)
+  } catch (err) {
+    console.log("Error", err);
+    throw err;
+  }
+}
+
+async function getBoardIdx(boardId) {
+  try {
+    return gBoards.findIndex((board) => board._id === boardId);
+  } catch (err) {
+    console.log("Error", err);
+    throw err;
+  }
+}
+
+// console.log(getTaskIdx("b101","g101", "t102"))
 
 // function updateTask(cmpType, data) {
 //     // Switch

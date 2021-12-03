@@ -4,14 +4,14 @@
     <div class="side-nav-open flex column" :class="[isShown ? 'show' : 'hide']">
       <a href="#/">Logo</a>
       <h1>My Workspace</h1>
-      <el-select>
+      <!-- <el-select>
         <el-option value="bala">
           <input type="text" />
         </el-option>
         <el-option value="bala">Favorites</el-option>
         <el-option value="bala">Favorites</el-option>
         <el-option value="bala">Favorites</el-option>
-      </el-select>
+      </el-select> -->
       <button>Add</button>
       <button>Filter</button>
       <button>Search</button>

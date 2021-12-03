@@ -20,6 +20,11 @@ export const boardStore = {
       state.currBoard = boards[currBoardIdx];
       state.currBoardIdx = currBoardIdx;
     },
+    updateTask(state, { boards, currBoardIdx }) {
+      state.boards = boards;
+      state.currBoard = boards[currBoardIdx];
+      state.currBoardIdx = currBoardIdx;
+    },
   },
   actions: {
     async loadBoards({ commit }, { currBoardIdx }) {
@@ -33,7 +38,8 @@ export const boardStore = {
     },
     async editTask({ commit }, { task }) {
       try {
-        const currTask = await boardService.save(task);
+        const currTask = await boardService.saveTask(task);
+        return
         if (task._id) {
           commit({ type: "updateTask", task: currTask });
         } else {
@@ -43,7 +49,7 @@ export const boardStore = {
         console.log(err);
       }
     },
-    async removeTask({ state, dispatch  }, { taskId }) {
+    async removeTask({ state, dispatch }, { taskId }) {
       try {
         await boardService.remove(taskId);
         dispatch({ type: "loadBoards", currBoardIdx: state.currBoardIdx });
@@ -51,11 +57,11 @@ export const boardStore = {
         console.log(err);
       }
     },
-    
-    async getTaskById({ taskId }) {
+
+    async getTaskById({state},{ taskId }) {
       try {
-        console.log(taskId);
         const currTask = await boardService.getTaskById(taskId);
+        // console.log(taskId);
         return currTask;
       } catch (err) {
         console.log(err);

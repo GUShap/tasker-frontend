@@ -5,9 +5,9 @@
       <board-header :board="currBoard" />
       <task-actions-nav />
       <board-filter />
-      <board-details :board="currBoard" />
-    </section>
+      <board-details :board="currBoard" @addTask="addTask"/>
     <router-view></router-view>
+    </section>
   </section>
 </template>
 
@@ -40,7 +40,16 @@ export default {
       currBoardIdx: this.currBoardIdx,
     });
   },
-  methods: {},
+  methods: {
+    async addTask(task) {
+      try{
+        await this.$store.dispatch({type:"editTask", task })
+        console.log('New task add!');
+      }catch(err){
+        console.log('Error',err);
+      }
+    }
+  },
   computed: {
     currBoard() {
       return this.$store.getters.currBoard;
