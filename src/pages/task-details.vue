@@ -8,7 +8,7 @@
         <i class="fas fa-user-circle"></i>
       </div>
       <span>|</span>
-      <el-dropdown class="dropdown" trigger="click">
+      <el-dropdown trigger="click">
         <i class="fas fa-ellipsis-h"></i>
         <el-dropdown-menu trigger="click" size="large" slot="dropdown">
           <el-dropdown-item @click.native="removeTask"
@@ -35,23 +35,29 @@
     </div>
     <div class="log-menu flex">
       <div class="nav-btn flex">
-        <button class="flex"
+        <button
+          class="flex"
           :class="{ underline: component === 'task-updates' }"
           @click="component = 'task-updates'"
           @mouseover="hover('updates')"
           @mouseleave="hover(null)"
-        >
-          updates<btn-dropdown class="dropdown-btn" v-if="isHover && hoveredBtn === 'updates'" />
+        >updates
+        <btn-dropdown
+            class="dropdown-btn"
+            v-if="isHover && hoveredBtn === 'updates'"
+          />
         </button>
-        <button class="flex"
+        <button
+          class="flex"
           :class="{ underline: component === 'task-files' }"
           @click="component = 'task-files'"
           @mouseover="hover('files')"
           @mouseleave="hover(null)"
         >
-          files<btn-dropdown v-if="isHover && hoveredBtn === 'files'" />
+          files<btn-dropdown  v-if="isHover && hoveredBtn === 'files'" />
         </button>
-        <button class="flex"
+        <button
+          class="flex"
           :class="{ underline: component === 'activity-log' }"
           @click="component = 'activity-log'"
           @mouseover="hover('log')"
