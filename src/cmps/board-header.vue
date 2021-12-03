@@ -4,7 +4,8 @@
       <div class="main-title flex">
         <div class="board-info">
           <i class="fas fa-share-alt"></i>
-          <a class="board-title"
+          <a
+            class="board-title"
             @click="setEdit('title')"
             v-show="!isEditedMode || currEditedVal !== 'title'"
             >{{ currBoard.title }}</a
@@ -57,28 +58,42 @@
         <button><i class="far fa-chart-bar"></i>Calendar</button>
         <button><i class="far fa-chart-bar"></i>Chart</button>
         <button><i class="fas fa-table"></i>Table</button>
-        <button>More<i class="fas fa-chevron-down"></i></button>
+
+        <el-dropdown class="dropdown-style-opt" trigger="click">
+          <a>More<i class="fas fa-chevron-down"></i></a>
+          <el-dropdown-menu trigger="click" size="large" slot="dropdown">
+            <el-dropdown-item
+              ><i class="far fa-sticky-note"></i>Cards
+            </el-dropdown-item>
+            <el-dropdown-item
+              ><i class="fab fa-wpforms"></i>Form</el-dropdown-item
+            >
+            <el-dropdown-item
+              ><i class="fab fa-trello"></i>Kanban</el-dropdown-item
+            >
+          </el-dropdown-menu>
+        </el-dropdown>
         <button><i class="fas fa-plus"></i>Add View</button>
       </div>
       <div class="share">
         <i class="fas fa-plug"></i>
         <h5>Integrate</h5>
         <!-- <div> -->
-          <img
-            class="icon-pic"
-            style="max-width: 20px"
-            :src="require(`@/pics/slack.png`)"
-          />
-          <img
-            class="icon-pic"
-            style="max-width: 20px"
-            :src="require(`@/pics/gmail.png`)"
-          />
-          <img
-            class="icon-pic"
-            style="max-width: 20px"
-            :src="require(`@/pics/twilio.jpg`)"
-          />
+        <img
+          class="icon-pic"
+          style="max-width: 20px"
+          :src="require(`@/pics/slack.png`)"
+        />
+        <img
+          class="icon-pic"
+          style="max-width: 20px"
+          :src="require(`@/pics/gmail.png`)"
+        />
+        <img
+          class="icon-pic"
+          style="max-width: 20px"
+          :src="require(`@/pics/twilio.jpg`)"
+        />
         <!-- </div> -->
 
         <button>Automate</button>

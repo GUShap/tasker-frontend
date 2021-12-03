@@ -5,8 +5,12 @@
       <board-header :board="currBoard" />
       <task-actions-nav />
       <board-filter />
-      <board-details :board="currBoard" @addTask="addTask"/>
-    <router-view></router-view>
+      <board-details
+        :board="currBoard"
+        @addTask="addTask"
+        @removeGroup="removeGroup"
+      />
+      <router-view></router-view>
     </section>
   </section>
 </template>
@@ -16,7 +20,7 @@ import boardFilter from "@/cmps/board-filter.vue";
 import boardHeader from "@/cmps/board-header.vue";
 import taskActionsNav from "@/cmps/task-actions-nav.vue";
 import boardDetails from "@/cmps/board/board-details.vue";
-import popUpNav from "@/cmps/pop-up-nav.vue"
+import popUpNav from "@/cmps/pop-up-nav.vue";
 
 export default {
   name: "workspace",
@@ -25,7 +29,7 @@ export default {
     boardDetails,
     boardHeader,
     taskActionsNav,
-    popUpNav
+    popUpNav,
   },
   props: [],
   data() {
@@ -42,13 +46,21 @@ export default {
   },
   methods: {
     async addTask(task) {
-      try{
-        await this.$store.dispatch({type:"editTask", task })
-        console.log('New task add!');
-      }catch(err){
-        console.log('Error',err);
+      try {
+        await this.$store.dispatch({ type: "editTask", task });
+        console.log("New task add!");
+      } catch (err) {
+        console.log("Error", err);
       }
-    }
+    },
+    async removeGroup(groupId) {
+      try {
+        await this.$store.dispatch({ type: "removeGroup", groupId });
+        console.log("Group was deleted!");
+      } catch (err) {
+        console.log("Error", err);
+      }
+    },
   },
   computed: {
     currBoard() {

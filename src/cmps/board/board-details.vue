@@ -1,8 +1,13 @@
 <template>
   <section class="flex sub-workspace">
-    <section class="board-container" >
+    <section class="board-container">
       <template v-for="group in currGroups">
-        <board-group :group="group" :key="group.id" @addTask="addTask" />
+        <board-group
+          :group="group"
+          :key="group.id"
+          @addTask="addTask"
+          @removeGroup="removeGroup"
+        />
       </template>
     </section>
   </section>
@@ -27,9 +32,13 @@ export default {
   created() {},
   methods: {
     addTask(task) {
-      task.boardId = this.board._id
-      this.$emit("addTask", task )
-    }
+      task.boardId = this.board._id;
+      this.$emit("addTask", task);
+    },
+    removeGroup(groupId) {
+      this.$emit("removeGroup", groupId);
+      console.log(groupId);
+    },
   },
   computed: {
     currGroups() {
@@ -40,8 +49,7 @@ export default {
   destroyed() {},
 
   watch: {
-    $route: (newVal, oldVal) => {
-    },
+    $route: (newVal, oldVal) => {},
   },
 };
 </script>

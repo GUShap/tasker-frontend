@@ -57,11 +57,19 @@ export const boardStore = {
         console.log(err);
       }
     },
+    async removeGroup({ state, dispatch }, { groupId }) {
+      try {
+        await boardService.removeGroup(state.currBoardIdx, groupId);
+        dispatch({ type: "loadBoards", currBoardIdx: state.currBoardIdx });
+      } catch (err) {
+        console.log(err);
+      }
+    },
 
-    async getTaskById({state},{ taskId }) {
+    async getTaskById({ state }, { taskId }) {
       try {
         const currTask = await boardService.getTaskById(taskId);
-        // console.log(taskId);
+        console.log(taskId);
         return currTask;
       } catch (err) {
         console.log(err);

@@ -7,14 +7,14 @@
     gap: 10px;
     margin-left: 1rem;
     border-bottom: 1px solid rgba(0, 0, 0, 0.226);
-    max-width: 90%;
+    max-width: 87%;
     button {
         border: none;
         background-color: inherit;
         padding: 10px;
         border-radius: 5px;
     }
-    button:hover{
+    button:hover {
         background-color: #c4c4c494;
     }
 
@@ -29,5 +29,13 @@
         align-items: center;
         justify-content: center;
         gap: 10px;
+    }
+
+    el-dropdown {
+        // width: 100px;
+        top: 265px;
+        left: 271px;
+        width: 200px;
+        background-color: black;
     }
 }

@@ -1,27 +1,96 @@
 .main-nav {
-    width: rem(54px);
+    width: rem(66px);
     max-height: 200vh;
     background-color: #292f4c;
     float: left;
     display: flex;
-    align-items: center;
+    // align-items: center;
     justify-content: space-between;
     flex-direction: column;
-    padding: 20px;
+    // padding: 20px;
     overflow: hidden;
     position: fixed;
     height: 100%;
+
+    .fab.fa-tumblr {
+        margin-top: 15px;
+    }
 
     .fab,
     .fas,
     .far {
         color: #fff;
-        font-size: 1.5rem;
+        font-size: 1.1rem;
+        font-weight: 600;
+        padding: 3px;
     }
     .page-nav {
         display: flex;
         align-items: center;
         flex-direction: column;
         gap: 20px;
+    }
+
+    a:hover {
+        background-color: rgba(192, 196, 255, 0.178);
+        border-radius: 5px;
+    }
+
+    .side-msg {
+        min-height: 140px;
+        width: 38px;
+        border-radius: 0 16px 16px 0;
+        background-color: #258750;
+        // margin-left: -32px px;
+        display: -webkit-flex;
+        display: flex;
+        text-align: center;
+        -webkit-align-items: center;
+        align-items: center;
+        -webkit-justify-content: center;
+        justify-content: center;
+        cursor: pointer;
+
+        span {
+            color: white;
+            -webkit-transform: rotate(270deg);
+            transform: rotate(270deg);
+            font-size: 0.875rem;
+            text-align: center;
+            white-space: nowrap;
+        }
+
+        .far.fa-star {
+            font-size: 10px;
+        }
+    }
+
+    .side-msg:hover {
+        background-color: darkgreen;
+        width: 44px;
+    }
+    .user-nav {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        gap: 20px;
+
+        .fas {
+            color: #fff;
+            font-size: 1.1rem;
+            font-weight: 600;
+            // padding: 3px;
+            // gap: 20px;
+        }
+
+        .fas.fa-user {
+            padding-bottom: 10px;
+            font-size: 2rem;
+        }
+        .fas.fa-user:hover {
+            font-size: 1.5rem;
+            background-color: inherit;
+        }
     }
 }

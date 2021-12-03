@@ -9,7 +9,8 @@ export const boardService = {
   getTaskById,
   getTaskIdx,
   getGroupIdx,
-  getBoardIdx
+  getBoardIdx,
+  removeGroup
 };
 
 const gBoards = [boardDb];
@@ -37,6 +38,17 @@ function saveTask(taskInfo) {
   return
   const boards = query();
   boards[bIdx].groups[gIdx].tasks[tIdx].push(task);
+}
+
+
+async function removeGroup(boardIdx, { groupId }) {
+  try {
+    const idx = await getGroupIdx(gBoards[boardIdx]._id, groupId)
+    gBoards[boardIdx].groups.splice(idx, 1)
+    // console.log(gBoards[boardIdx])
+  } catch (err) {
+    console.log(err)
+  }
 }
 
 async function remove(taskId) {
@@ -92,8 +104,15 @@ async function getTaskIdx(boardId, groupId, taskId) {
 
 async function getGroupIdx(boardId, groupId) {
   try {
+
     const boardIdx = await getBoardIdx(boardId)
-    return gBoards[boardIdx].groups.findIndex(group => group.id === groupId)
+
+    return gBoards[boardIdx].groups.findIndex(group => {
+      console.log(groupId, group.id)
+      // console.log(group.id === groupId)
+      return group.id === groupId
+
+    })
   } catch (err) {
     console.log("Error", err);
     throw err;

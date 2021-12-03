@@ -4,6 +4,7 @@
       <i @click="showGroup" class="fa fa-caret-down"></i>
       {{ group.title }}
     </header>
+    <!-- <button @click="removeGroup">x</button> -->
     <template v-for="task in currTasks">
       <transition name="fade" :key="task.id">
         <task-preview
@@ -52,6 +53,10 @@ export default {
     addTask() {
       this.$emit("addTask", { title: this.newTask, groupId: this.group.id });
       this.newTask = null;
+    },
+    removeGroup() {
+      this.$emit("removeGroup", { groupId: this.group.id });
+      // console.log(this.group.id);
     },
   },
   computed: {

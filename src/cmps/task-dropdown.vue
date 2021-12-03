@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <section class="task-dropdown">
     <el-dropdown class="dropdown" trigger="click">
       <i class="fa fa-caret-down"></i>
       <el-dropdown-menu trigger="click" size="large" slot="dropdown">
