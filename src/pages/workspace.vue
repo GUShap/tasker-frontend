@@ -10,7 +10,6 @@
         @addTask="addTask"
         @removeGroup="removeGroup"
       />
-      <router-view></router-view>
     </section>
     <router-view></router-view>
   </section>
