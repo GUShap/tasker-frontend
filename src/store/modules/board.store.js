@@ -51,8 +51,10 @@ export const boardStore = {
         console.log(err);
       }
     },
+    
     async getTaskById({ taskId }) {
       try {
+        console.log(taskId);
         const currTask = await boardService.getTaskById(taskId);
         return currTask;
       } catch (err) {

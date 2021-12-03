@@ -74,6 +74,11 @@
             style="max-width: 20px"
             :src="require(`@/pics/gmail.png`)"
           />
+          <img
+            class="icon-pic"
+            style="max-width: 20px"
+            :src="require(`@/pics/twilio.jpg`)"
+          />
         </div>
 
         <button>Automate</button>
