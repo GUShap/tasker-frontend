@@ -1,10 +1,29 @@
 <template>
   <div class="activity-log">
-    <button>filter log<i class="fas fa-chevron-down"></i></button>
+    <div class="actions flex">
+      <p>other activities</p>
+      <div>
+          <button>integration activity</button>
+          <button>automation activity</button>
+      </div>
+    </div>
+    <div class="log-header flex">
+      <div class="filter-btn flex">
+        <button>filter log<i class="fas fa-chevron-down"></i></button>
+        <span class="flex"
+          ><i class="fas fa-user-circle"></i>
+          <p>preson</p></span
+        >
+      </div>
 
+      <div class="export-sync flex">
+        <i class="fas fa-sync-alt"></i>
+        <i class="far fa-file-excel"></i>
+      </div>
+    </div>
     <ul>
       <li v-for="(activity, idx) in activities" :key="idx">
-        <div class="activity-list">
+        <div class="activity-item">
           <div class="log-time">
             <i class="far fa-clock"><span>19h</span></i>
           </div>

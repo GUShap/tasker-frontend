@@ -4,7 +4,6 @@
     <section class="workspace-container">
       <board-header :board="currBoard" />
       <task-actions-nav @sortBy="sortBy" @addNewGroup="addNewGroup" />
-      <task-actions-nav  />
       <board-filter />
       <board-details
         :board="currBoard"
