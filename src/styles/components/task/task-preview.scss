@@ -1,4 +1,4 @@
-.task-container{
+.task-container {
   width: 100%;
 }
 
@@ -14,20 +14,26 @@
   }
 
   div {
+    display: flex;
     flex-basis: rem(200px);
-    flex: 1;
   }
   .title-picker {
+    position:sticky;
     display: flex;
     justify-content: start;
-    margin-left: .5rem;
-
+    margin-left: 0.5rem;
+    min-width: rem(290px);
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    display: block;
   }
   .status-picker {
     display: flex;
     justify-content: center;
     align-items: center;
-    max-width: 400px;
+    min-width: rem(200px);
+    max-width: rem(400px);
     height: 100%;
   }
   .member-picker {

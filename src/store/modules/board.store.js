@@ -36,14 +36,14 @@ export const boardStore = {
         console.log(err);
       }
     },
-    async editTask({ commit }, { task }) {
+    async editTask({ state, dispatch, commit }, { task }) {
       try {
         const currTask = await boardService.saveTask(task);
-        return
         if (task._id) {
           commit({ type: "updateTask", task: currTask });
         } else {
-          commit({ type: "addTask", task: currTask });
+          dispatch({ type: "loadBoards", currBoardIdx: state.currBoardIdx });
+          // commit({ type: "addTask", task: currTask });
         }
       } catch (err) {
         console.log(err);

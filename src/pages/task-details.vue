@@ -7,12 +7,12 @@
         <i class="fas fa-plus-circle"></i>
         <i class="fas fa-user-circle"></i>
       </div>
-        <span>|</span>
-      <el-dropdown class="dropdown" trigger="click">
+      <span>|</span>
+      <el-dropdown trigger="click">
         <i class="fas fa-ellipsis-h"></i>
         <el-dropdown-menu trigger="click" size="large" slot="dropdown">
           <el-dropdown-item @click.native="removeTask"
-            ><i class="far fa-trash-alt"></i>Manage
+            ><i class="fas fa-user-plus"></i>Manage
             subscribers</el-dropdown-item
           >
           <el-dropdown-item @click.native="removeTask"
@@ -34,22 +34,37 @@
       </el-dropdown>
     </div>
     <div class="log-menu flex">
-      <div class="nav-btn">
-      <button
-        :class="{ underline: component === 'task-updates' }"
-        @click="component = 'task-updates'">updates</button>
-      <button
-        :class="{ underline: component === 'task-files' }"
-        @click="component = 'task-files'"
-      >
-        files
-      </button>
-      <button
-        :class="{ underline: component === 'activity-log' }"
-        @click="component = 'activity-log'"
-      >
-        activity log
-      </button>
+      <div class="nav-btn flex">
+        <button
+          class="flex"
+          :class="{ underline: component === 'task-updates' }"
+          @click="component = 'task-updates'"
+          @mouseover="hover('updates')"
+          @mouseleave="hover(null)"
+        >updates
+        <btn-dropdown
+            class="dropdown-btn"
+            v-if="isHover && hoveredBtn === 'updates'"
+          />
+        </button>
+        <button
+          class="flex"
+          :class="{ underline: component === 'task-files' }"
+          @click="component = 'task-files'"
+          @mouseover="hover('files')"
+          @mouseleave="hover(null)"
+        >
+          files<btn-dropdown  v-if="isHover && hoveredBtn === 'files'" />
+        </button>
+        <button
+          class="flex"
+          :class="{ underline: component === 'activity-log' }"
+          @click="component = 'activity-log'"
+          @mouseover="hover('log')"
+          @mouseleave="hover(null)"
+        >
+          activity log<btn-dropdown v-if="isHover && hoveredBtn === 'log'" />
+        </button>
       </div>
       <span>|</span><button class="add-btn">+ add view</button>
     </div>
@@ -66,6 +81,7 @@ import { boardService } from "../services/board.service.js";
 import taskUpdates from "@/cmps/task/details cmps/task-updates.vue";
 import taskFiles from "@/cmps/task/details cmps/task-files.vue";
 import activityLog from "@/cmps/task/details cmps/activity-log.vue";
+import btnDropdown from "@/cmps/task/details cmps/btn-dropdown.vue";
 
 export default {
   name: "task-details",
@@ -73,24 +89,32 @@ export default {
     taskUpdates,
     taskFiles,
     activityLog,
+    btnDropdown,
   },
   data() {
     return {
       task: null,
       component: "task-updates",
+      isHover: false,
+      hoveredBtn: null,
     };
   },
   methods: {
     exitModal() {
       this.$router.push("/board");
     },
+
+    hover(val) {
+      this.isHover = !this.isHover;
+      this.hoveredBtn = val;
+    },
   },
 
-// temp!!!!!
-  created(){
-    var boards = boardService.query()
-    this.task = boards[0].groups[0].tasks[0]
-  }
+  // temp!!!!!
+  created() {
+    var boards = boardService.query();
+    this.task = boards[0].groups[0].tasks[0];
+  },
 
   // async created() {
   //   try {

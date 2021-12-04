@@ -1,6 +1,8 @@
 .task-details {
+    position: sticky;
     display: flex;
     flex-direction: column;
+    box-shadow: 0px 0px 5px 5px rgba(0, 0, 0, 0.178);
     padding: 20px 10px;
     top: 10px;
     height: 100vh;
@@ -42,6 +44,11 @@
         .title-btns > * {
             padding: 0 5px;
         }
+
+    }
+    .dropdown-btn {
+        text-align: right;
+        padding-left: 10px;
     }
 
     .log-menu {
@@ -53,18 +60,16 @@
         .nav-btn {
             width: 77%;
         }
-        .add-btn{
+        .add-btn {
             margin: 0;
             padding: 0;
             width: 12%;
         }
     }
 
-    
-        span {
-            padding: 0;
-        }
-    
+    span {
+        padding: 0;
+    }
 
     button {
         text-transform: capitalize;
@@ -96,91 +101,3 @@
     }
 }
 
-.task-updates {
-    flex-direction: column;
-    margin-top: 30px;
-    padding: 0 30px;
-
-    input {
-        width: 100%;
-        padding: 10px;
-        border-radius: 8px;
-        border: 1px solid rgba(170, 88, 238, 0.698);
-    }
-
-    .update-card {
-        border-radius: 8px;
-        margin-top: 30px;
-        border: 1px solid rgba(180, 171, 171, 0.397);
-        border-top: 2px solid rgb(170, 88, 238);
-        text-align: left;
-
-        .top {
-            padding: 15px;
-        }
-
-        .card-btn {
-            float: right;
-        }
-        .card-btn > * {
-            display: inline-block;
-            margin: 0;
-            margin-left: 10px;
-        }
-
-        .dropdown {
-            .fas.fa-sort-down {
-                transform: translateY(-20%);
-            }
-
-            .dropdown-menu {
-                margin-right: 100px;
-            }
-        }
-
-        .user-info {
-            h3 {
-                transform: translateY(40%);
-                padding-left: 60px;
-            }
-
-            img {
-                width: 40px;
-                height: 40px;
-                border-radius: 50%;
-            }
-
-            p {
-                padding: 20px 40px;
-            }
-        }
-
-        .watchers {
-            text-align: right;
-
-            p {
-                padding-left: 4px;
-            }
-        }
-        .watchers > * {
-            display: inline-block;
-        }
-
-        hr {
-            border: 2px solid rgba(180, 171, 171, 0.397);
-        }
-
-        .action-btn {
-            border-top: 1px solid rgba(180, 171, 171, 0.397);
-        }
-        .action-btn :not(:last-child) {
-            border-right: 1px solid rgba(180, 171, 171, 0.397);
-        }
-        .action-btn > * {
-            flex-basis: 50%;
-        }
-        button {
-            width: 100%;
-        }
-    }
-}

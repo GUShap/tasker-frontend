@@ -8,14 +8,18 @@
       />
       <i @click="showGroup" class="fa fa-caret-down"></i>
       <input
-        class="input-group-name"
+        class="input-group-name grow1"
         :class="[isFocusOn ? 'border' : 'no-boder']"
         type="text"
         v-model="group.title"
         v-on:keyup.enter="updateInfo"
         @blur="updateInfo"
       />
+      <div>Status</div>
+      <div>Members</div>
     </header>
+
+    <!-- <button @click="removeGroup">x</button> -->
     <template v-for="task in currTasks">
       <transition name="fade" :key="task.id">
         <task-preview
@@ -26,6 +30,7 @@
         />
       </transition>
     </template>
+
     <section class="add-task color-marker">
       <input
         type="text"
@@ -35,6 +40,7 @@
       />
       <button class="btn-add-task" @click="addTask">Add</button>
     </section>
+
     <footer class="group-footer flex justify-center align-center"></footer>
   </section>
 </template>
