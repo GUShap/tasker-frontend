@@ -35,7 +35,7 @@ export default {
   },
   methods: {
     editStatus(status) {
-      console.log("status", status);
+      // console.log("status", status);
       if (status !== "edit") {
         this.status = status;
         this.statusStyle = status.toLowerCase();

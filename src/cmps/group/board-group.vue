@@ -112,7 +112,6 @@ export default {
     },
     cmpsOrder() {
       const cmps =this.$store.getters.currBoard.cmpsOrder
-      console.log('cmps',cmps);
       this.cmpHeaders = cmps.slice(1)
       return cmps
     },
