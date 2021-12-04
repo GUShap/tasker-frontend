@@ -24,11 +24,11 @@
             @blur="updateInfo"
           />
         </div>
-        <!-- <div v-for="(cmp,idx) in cmpsOrder" :key="idx"> -->
-        <!-- {{cmpHeader[2]}} -->
-        <!-- </div> -->
-        <div>Status</div>
-        <div>Members</div>
+        <div v-for="(cmp, idx) in cmpHeaders" :key="idx">
+          {{ cmpHeader(cmp) }}
+        </div>
+        <!-- <div>Status</div>
+        <div>Members</div> -->
       </section>
     </header>
 
@@ -78,6 +78,7 @@ export default {
       groupShow: true,
       isFocusOn: false,
       hover: false,
+      cmpHeaders: null
     };
   },
   created() {},
@@ -98,6 +99,11 @@ export default {
     updateInfo() {
       this.isFocusOn = false;
     },
+    cmpHeader(val) {
+      if (val === "status-picker") return "Status";
+      if (val === "member-picker") return "Member";
+      return val;
+    },
   },
   computed: {
     currTasks() {
@@ -105,12 +111,11 @@ export default {
       return this.tasks;
     },
     cmpsOrder() {
-      return this.$store.getters.currBoard.cmpsOrder;
+      const cmps =this.$store.getters.currBoard.cmpsOrder
+      console.log('cmps',cmps);
+      this.cmpHeaders = cmps.slice(1)
+      return cmps
     },
-    cmpHeader(val){
-      console.log('val',val);
-      return 'x'
-    }
   },
 };
 </script>

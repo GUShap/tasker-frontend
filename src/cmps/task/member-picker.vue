@@ -1,9 +1,7 @@
 <template>
   <div class="member-picker">
     <section>
-      <div v-for="member in members" :key="member._id">
-        <avatar :size="25" :username="member" :key="member._id"></avatar>
-      </div>
+        <avatar v-for="member in members" :size="25" :username="member" :key="member._id"></avatar>
     </section>
   </div>
 </template>
