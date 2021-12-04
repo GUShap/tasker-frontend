@@ -4,7 +4,7 @@
       <li v-for="(activity, idx) in activities" :key="idx">
         <div class="activity-list flex">
             <i class="far fa-clock"><span>19h</span></i>
-            <i class="fas fa-user-circle"></i>
+            <img class="user-img" :src="require(`@/pics/${activity.byMember.imgUrl}`)" />
             <p>{{activity.task.title}}</p>
         </div>
       </li>

@@ -20,7 +20,7 @@ export const boardDb = {
     "members": [
         {
             "_id": "u101",
-            "fullname": "Tal Tarablus",
+            "fullname": "Guy Shapira",
             "imgUrl": "https://www.google.com"
         }
     ],
@@ -42,7 +42,7 @@ export const boardDb = {
                             "byMember": {
                                 "_id": "u101",
                                 "fullname": "Guy Shapira",
-                                "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
+                                "imgUrl": "guy-img.jpeg"
                             }
                         },
                         {
@@ -52,7 +52,7 @@ export const boardDb = {
                             "byMember": {
                                 "_id": "u101",
                                 "fullname": "Guy Shapira",
-                                "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
+                                "imgUrl": "guy-img.jpeg"
                             }
                         }
                     ],
@@ -121,8 +121,9 @@ export const boardDb = {
                             "createdAt": 1590999817436.0,
                             "byMember": {
                                 "_id": "u101",
-                                "fullname": "Tal Tarablus",
-                                "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
+                                "fullname": "Guy Shapira",
+                                "imgUrl":"guy-img.jpeg"
+
                             }
                         }
                     ],
@@ -144,7 +145,7 @@ export const boardDb = {
                             "_id": "u101",
                             "username": "Guy",
                             "fullname": "Guy Shapira",
-                            "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
+                            "imgUrl": "guy-img.jpeg"
                         }
                     ],
                     "labelId": "Done",
@@ -153,8 +154,8 @@ export const boardDb = {
                     "byMember": {
                         "_id": "u101",
                         "username": "Tal",
-                        "fullname": "Tal Tarablus",
-                        "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
+                        "fullname": "Guy Shapira",
+                        "imgUrl": "guy-img.jpeg"
                     },
                     "style": {
                         "bgColor": "#26de81"
@@ -167,12 +168,12 @@ export const boardDb = {
     "activities": [
         {
             "id": "a101",
-            "txt": "Changed Color",
+            "type": "color",
             "createdAt": 154514,
             "byMember": {
                 "_id": "u101",
                 "fullname": "Abi Abambi",
-                "imgUrl": "http://some-img"
+                "imgUrl": "guy-img.jpeg"
             },
             "task": {
                 "id": "t101",
@@ -181,12 +182,12 @@ export const boardDb = {
         },
         {
             "id": "a102",
-            "txt": "titeling srifos",
+            "type": "status",
             "createdAt": 154514,
             "byMember": {
                 "_id": "u101",
                 "fullname": "Abi Abambi",
-                "imgUrl": "http://some-img"
+                "imgUrl": "guy-img.jpeg"
             },
             "task": {
                 "id": "t101",
@@ -195,12 +196,12 @@ export const boardDb = {
         },
         {
             "id": "a103",
-            "txt": "styling Creeepeee",
+            "type": "member",
             "createdAt": 154514,
             "byMember": {
                 "_id": "u101",
                 "fullname": "Abi Abambi",
-                "imgUrl": "http://some-img"
+                "imgUrl": "guy-img.jpeg"
             },
             "task": {
                 "id": "t101",
