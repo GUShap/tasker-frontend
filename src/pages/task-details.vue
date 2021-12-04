@@ -41,8 +41,9 @@
           @click="component = 'task-updates'"
           @mouseover="hover('updates')"
           @mouseleave="hover(null)"
-        >updates
-        <btn-dropdown
+        >
+          updates
+          <btn-dropdown
             class="dropdown-btn"
             v-if="isHover && hoveredBtn === 'updates'"
           />
@@ -54,7 +55,7 @@
           @mouseover="hover('files')"
           @mouseleave="hover(null)"
         >
-          files<btn-dropdown  v-if="isHover && hoveredBtn === 'files'" />
+          files<btn-dropdown v-if="isHover && hoveredBtn === 'files'" />
         </button>
         <button
           class="flex"
