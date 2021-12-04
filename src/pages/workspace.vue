@@ -1,9 +1,9 @@
 <template>
-  <section class="sub-workspace flex">
+  <section class="sub-workspace flex" style="margin-left: 3rem">
     <pop-up-nav class="pop-up-nav"></pop-up-nav>
     <section class="workspace-container">
       <board-header :board="currBoard" />
-      <task-actions-nav />
+      <task-actions-nav @sortBy="sortBy" />
       <board-filter />
       <board-details
         :board="currBoard"
@@ -61,10 +61,15 @@ export default {
         console.log("Error", err);
       }
     },
+    sortBy(sortBy) {
+      this.$store.commit({ type: "setSort", sortBy });
+      this.$store.dispatch({ type: "loadBoards" });
+    },
   },
   computed: {
     currBoard() {
       return this.$store.getters.currBoard;
+      // return this.$store.getters.sortedBoard;
     },
   },
   destroyed() {},

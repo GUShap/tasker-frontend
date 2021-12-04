@@ -1,14 +1,26 @@
 .home{
     padding-top: 30px;
-    background-image: url(~@/pics/team-work.png);
-    background-repeat: no-repeat;
+    // background-repeat: no-repeat;
     height: 100vh;
     background-position: center;
     font-weight: bolder;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
 
     h1{
         margin: auto;
-        text-align: center
+        text-align: center;
+        font-weight: bolder;
+        font-size: 25px;
+        color: #535768;
+        
+    }
+
+    .home-img{
+        width: 25%;
+        display: inline;
     }
  
 }

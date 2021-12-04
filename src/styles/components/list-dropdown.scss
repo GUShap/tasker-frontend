@@ -21,7 +21,6 @@
   margin-left: 14rem;
   left: -105px;
 
-
   .el-dropdown-menu__item {
     position: relative;
     margin-top: 6px;
@@ -57,3 +56,13 @@
     border-bottom: 1px solid rgba(0, 0, 0, 0.199);
   }
 }
+
+.fa.fa-caret-down {
+  color: white;
+}
+
+.fa.fa-caret-down:hover {
+  color: black;
+}
+
+

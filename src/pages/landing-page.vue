@@ -114,7 +114,7 @@
           <i class="fab fa-linkedin-in"></i>
           <i class="fab fa-facebook"></i>
           <i class="fab fa-youtube"></i>
-          <i class="fab fa-instagram-square"></i>
+          <i class="fab fa-instagram"></i>
         </div>
       </footer>
     </section>
