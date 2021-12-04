@@ -11,6 +11,8 @@ export const boardService = {
   getGroupIdx,
   getBoardIdx,
   removeGroup,
+  getEmptyComment,
+  getEmptyActivity
 };
 
 function query() {
@@ -146,6 +148,39 @@ async function getBoardIdx(boardId) {
   }
 }
 
+function _loadToStorage(gBoards) {
+  storageService.store("gBoards", gBoards);
+}
+
+function getEmptyComment() {
+  return {
+    txt: '',
+    createdAt: Date.now(),
+    byMember: {
+      _id: null,
+      fullname: null,
+      imgUrl: ''
+    }
+  }
+}
+
+function getEmptyActivity() {
+  return {
+    txt: '',
+    createdAt: Date.now(),
+    byMember: {
+      _id: "u101",
+      fullname: "Abi Abambi",
+      imgUrl: "http://some-img"
+    },
+    task: {
+      id: "t101",
+      title: "Replace Logo"
+    }
+  }
+}
+
+
 // console.log(getTaskIdx("b101","g101", "t102"))
 
 // function updateTask(cmpType, data) {
@@ -182,6 +217,3 @@ async function getBoardIdx(boardId) {
 //     // subscribe to socket
 // }
 
-function _loadToStorage(gBoards){
-  storageService.store("gBoards", gBoards);
-}
