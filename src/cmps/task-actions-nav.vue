@@ -76,7 +76,7 @@ export default {
   name: "task-actions",
   data() {
     return {
-      isShown: true,
+      isShown: false,
       sortBy: {
         val: null,
         order: "ascending",

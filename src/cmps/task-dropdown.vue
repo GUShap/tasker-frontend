@@ -14,7 +14,7 @@
             class="fas fa-angle-right"
           ></i
         ></el-dropdown-item>
-        <el-dropdown-item
+        <el-dropdown-item @click.native="clone"
           ><i class="far fa-copy"></i>Duplicate<i class="fas fa-angle-right"></i
         ></el-dropdown-item>
         <el-dropdown-item
@@ -55,7 +55,9 @@ export default {
   name: "task-dropDown",
   prop: [],
   data() {
-    return {};
+    return {
+
+    };
   },
   methods: {
     removeTask() {
@@ -64,6 +66,9 @@ export default {
     openTaskDetails() {
       this.$emit("openTaskDetails");
     },
+    clone(){
+      this.$emit("clone");
+    }
   },
 };
 </script>
