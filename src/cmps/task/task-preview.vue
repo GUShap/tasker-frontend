@@ -4,6 +4,7 @@
     <task-dropdown
       @removeTask="removeTask"
       @openTaskDetails="openTaskDetails"
+      @clone="clone"
     />
     <section class="task-preview color-marker flex align-center">
       <template v-for="(cmpType, idx) in cmpsOrder">
@@ -19,11 +20,12 @@ import titlePicker from "./title-picker.vue";
 import statusPicker from "./status-picker.vue";
 import memberPicker from "./member-picker.vue";
 import taskDropdown from "../task-dropdown.vue";
+import { utilService } from "../../services/util.service.js";
 
 export default {
   name: "task-preview",
   components: { statusPicker, memberPicker, titlePicker, taskDropdown },
-  props: ["task","cmpsOrder"],
+  props: ["task", "cmpsOrder"],
   data() {
     return {};
   },
@@ -39,9 +41,18 @@ export default {
     openTaskDetails() {
       this.$router.push(`/board/task/${this.task.id}`);
     },
+    clone() {
+      try {
+        let task = this.task;
+        let taskCopy = { ...task };
+        delete taskCopy.id;
+        this.$store.dispatch({ type: "editTask", task: taskCopy });
+      } catch (err) {
+        console.log(err);
+      }
+    },
   },
-  computed: {
-  },
+  computed: {},
   destroyed() {},
 };
 </script>

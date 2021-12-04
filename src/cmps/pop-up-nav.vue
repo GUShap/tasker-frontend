@@ -1,30 +1,29 @@
 <template>
   <section class="side-bar-expanded">
-    <i
-      class="fas fa-chevron-right"
+    <i 
       @click="toggleNav"
-      :class="[isShown ? 'move' : 'fix']"
+      :class="[isShown ? 'fas fa-chevron-left' : 'fas fa-chevron-right']"
     ></i>
-    <div class="side-nav-open flex column" :class="[isShown ? 'show' : 'hide']">
-      <a href="#/">Logo</a>
-      <h1>My Workspace</h1>
-      <!-- <el-select>
-        <el-option value="bala">
-          <input type="text" />
-        </el-option>
-        <el-option value="bala">Favorites</el-option>
-        <el-option value="bala">Favorites</el-option>
-        <el-option value="bala">Favorites</el-option>
-      </el-select> -->
-      <div class="action-btn">
-        <button><i class="fas fa-plus"></i>Add</button>
-        <button><i class="fas fa-filter"></i>Filter</button>
-        <button><i class="fas fa-search"></i>Search</button>
+    <transition name="fade">
+      <div
+        class="side-nav-open flex column"
+        :class="[isShown ? 'show' : 'hide']"
+      >
+        <div class="logo">
+          <a href="#/">Logo</a>
+          <h1>My Workspace</h1>
+        </div>
+
+        <div class="action-btns">
+          <button><i class="fas fa-plus"></i>Add</button>
+          <button><i class="fas fa-filter"></i>Filter</button>
+          <button><i class="fas fa-search"></i>Search</button>
+        </div>
+        <div class="my-boards">
+          <button>My Boards</button>
+        </div>
       </div>
-      <div>
-        <button>My Boards</button>
-      </div>
-    </div>
+    </transition>
   </section>
 </template>
 
@@ -44,3 +43,17 @@ export default {
   },
 };
 </script>
+
+
+
+<style>
+.fade-enter-active,
+.fade-leave-active,
+.side-nav-open {
+  transition: all 0.9s;
+}
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+}
+</style>

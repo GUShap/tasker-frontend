@@ -39,6 +39,7 @@ function save(board) {
 }
 
 async function saveTask(taskInfo) {
+  console.log(taskInfo)
   try {
     if (taskInfo.id) {
       console.log("update task");
@@ -48,6 +49,7 @@ async function saveTask(taskInfo) {
         title: taskInfo.title,
         id: utilService.makeId(),
       };
+      console.log()
       const bIdx = await getBoardIdx(taskInfo.boardId);
       const gIdx = await getGroupIdx(taskInfo.boardId, taskInfo.groupId);
 
