@@ -52,7 +52,9 @@
     .type {
         // transform: translateY(-12%);
         min-width: 150px;
-        font-size: 15px;
+        &>*{
+            font-size: 15px;
+        }
     }
     .tag-container{
 
@@ -79,6 +81,10 @@
         i{
             color: rgba(167, 167, 167, 0.486);
         }
+    }
+
+    .name-container{
+        gap: 10px;
     }
 
 }
