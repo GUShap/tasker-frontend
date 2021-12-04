@@ -22,13 +22,12 @@
             <span><i class="fas fa-chevron-right"></i></span>
             <div class="log-tag log-done">done</div>
           </div>
-          <div class="name-container flex">
+          <div class="name-container flex" v-if="activity.type === 'name'">
             <div>old title</div>
             <span><i class="fas fa-chevron-right"></i></span>
             <div>new title</div>
           </div>
         </div>
-        <hr />
       </li>
     </ul>
   </div>
