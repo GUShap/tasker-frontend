@@ -119,10 +119,6 @@ export default {
   methods: {
     setEdit(val) {
       console.log(val);
-      //         focusInput() {
-      //   this.$refs.input.focus()
-      //   this.$refs.val.focus()
-      // }
       this.isEditedMode = true;
       this.currEditedVal = val;
     },

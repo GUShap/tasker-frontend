@@ -1,6 +1,15 @@
 .group {
   margin-left: 1rem;
-max-width: 96%;
+  max-width: 96%;
+
+  .border{
+    border: solid 1px black;
+  }
+
+
+  .no-boder{
+    border: none;
+  }
 
   .add-task {
     display: flex;
@@ -21,6 +30,12 @@ max-width: 96%;
       // // }
     }
 
+    .input-group-name {
+      position: absolute;
+      left: 100px;
+      margin-left: 1.8rem;
+    }
+
     .btn-add-task {
       height: 36px;
       padding: 0 10px;
@@ -39,6 +54,7 @@ max-width: 96%;
     width: 100%;
     margin: 0.1rem 0;
     background-color: #fff;
+
     // margin-left: 2rem;
 
     i {
@@ -96,3 +112,4 @@ max-width: 96%;
     background: blue;
   }
 }
+

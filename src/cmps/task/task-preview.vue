@@ -1,10 +1,13 @@
 
 <template>
-  <section class="task-container  flex align-center">
-    <task-dropdown @removeTask="removeTask" />
+  <section class="task-container flex align-center">
+    <task-dropdown
+      @removeTask="removeTask"
+      @openTaskDetails="openTaskDetails"
+    />
     <section class="task-preview color-marker flex align-center">
       <template v-for="(cmpType, idx) in cmpsOrder">
-        <component :is="cmpType" :info="task" :key="idx"/>
+        <component :is="cmpType" :info="task" :key="idx" />
         <!-- <component :is="cmpType" :info="getCmpInfo(cmpType)" @updated="updateTask(cmpType, $event)" :key="idx"> -->
       </template>
     </section>
@@ -32,6 +35,9 @@ export default {
       } catch (err) {
         console.log("Error", err);
       }
+    },
+    openTaskDetails() {
+      this.$router.push(`/board/task/${this.task.id}`);
     },
   },
   computed: {

@@ -1,11 +1,21 @@
 <template>
   <section class="group flex column align-center">
     <header class="group-header flex start align-center">
-      <!-- <group-dropdown /> -->
+      <group-dropdown
+        @removeGroup="removeGroup"
+        @showGroup="showGroup"
+        @setEdit="setEdit"
+      />
       <i @click="showGroup" class="fa fa-caret-down"></i>
-      {{ group.title }}
+      <input
+        class="input-group-name"
+        :class="[isFocusOn ? 'border' : 'no-boder']"
+        type="text"
+        v-model="group.title"
+        v-on:keyup.enter="updateInfo"
+        @blur="updateInfo"
+      />
     </header>
-    <!-- <button @click="removeGroup">x</button> -->
     <template v-for="task in currTasks">
       <transition name="fade" :key="task.id">
         <task-preview
@@ -32,11 +42,13 @@
 
 <script>
 import taskPreview from "@/cmps/task/task-preview.vue";
+import groupDropdown from "@/cmps/group/group-dropdown.vue";
 
 export default {
   name: "board-group",
   components: {
     taskPreview,
+    groupDropdown,
   },
 
   props: ["group"],
@@ -44,6 +56,7 @@ export default {
     return {
       newTask: null,
       groupShow: true,
+      isFocusOn: false,
     };
   },
   created() {},
@@ -57,7 +70,12 @@ export default {
     },
     removeGroup() {
       this.$emit("removeGroup", { groupId: this.group.id });
-      // console.log(this.group.id);
+    },
+    setEdit() {
+      this.isFocusOn = true;
+    },
+    updateInfo() {
+      this.isFocusOn = false;
     },
   },
   computed: {
