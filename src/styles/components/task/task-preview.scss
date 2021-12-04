@@ -18,7 +18,7 @@
     flex-basis: rem(200px);
   }
   .title-picker {
-    position:sticky;
+    position: sticky;
     display: flex;
     justify-content: start;
     margin-left: 0.5rem;
@@ -40,9 +40,11 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    div {
-      display: inline-block;
-      margin: 0 auto;
+    section {
+      display: flex;
+     &>*{
+       margin-right: -5px;
+     }
     }
   }
 }

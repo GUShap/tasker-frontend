@@ -20,6 +20,7 @@
 
 <script>
 export default {
+  name: "status-picker",
   components: {},
   props: ["info"],
   data() {
