@@ -56,20 +56,35 @@
 
     // margin-left: 2rem;
 
-    div {
+    .column-headers {
+      width: 100%;
       display: flex;
-      justify-content: center;
-      min-width: rem(200px);
-
-      &:first-of-type {
-        justify-content: start;
+      justify-items: center;
+      .input {
         min-width: rem(306px);
       }
-      &:last-of-type {
-        margin-right: rem(10px);
+      div {
+        display: flex;
+        justify-content: center;
+        justify-items: center;
+        min-width: rem(200px);
+
+        &:first-of-type {
+          display: flex;
+          flex-grow: 1;
+          justify-content: start;
+          align-items: center;
+          min-width: rem(302px);
+          i {
+            margin-right: .5rem;
+          }
+        }
+        &:last-of-type {
+          margin-right: rem(10px);
+        }
       }
     }
-    i {
+    i.fa {
       display: inline-flex;
       justify-content: center;
       align-items: center;
@@ -82,7 +97,7 @@
       color: #fff;
       transition: 0.3s;
     }
-    i:hover {
+    i.fa:hover {
       cursor: pointer;
       border: 1px solid #504658;
       background-color: #fff;
