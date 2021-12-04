@@ -168,7 +168,7 @@ export const boardDb = {
     "activities": [
         {
             "id": "a101",
-            "type": "color",
+            "type": "name",
             "createdAt": 154514,
             "byMember": {
                 "_id": "u101",

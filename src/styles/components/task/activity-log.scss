@@ -1,8 +1,84 @@
 .activity-log {
-
-    .user-img{
-        border-radius: 50%;
-        height: 40px;
-        width: 40px;
+    margin-top: 50px;
+    .activity-list {        
+        display: flex;
+        flex: 1.5 0 0;
+        padding: 10px 0 0;
+        height: 55px;
+        
     }
+
+    button{
+        display:flex;
+        transform: translateY(-50%);
+        background-color: #0073EA;
+        color: white;
+        text-align: left;
+        padding:  10px;
+        height: 40px;
+        width: 110px;
+        &>*{
+            transform: translateY(50%);
+            margin-left: 10px;
+            color: white;
+            font-size: 11px;
+        }
+    }
+
+    .activity-list > * {
+        margin-left: 20px;
+    }
+    .log-time{
+        i{
+            font-size: 14px;
+        }
+        span{
+            font-size: 14px;
+            font-family: roboto;
+            padding-left: 5px;
+            letter-spacing: 1px;
+        }
+    }
+    .user-img {
+        border-radius: 50%;
+        height: 30px;
+        width: 30px;
+    }
+    p {
+        min-width: 130px;
+        text-align: left;
+    }
+    
+    .type {
+        // transform: translateY(-12%);
+        min-width: 150px;
+        font-size: 15px;
+    }
+    .tag-container{
+
+        gap: 10px;
+
+        &>*{
+            text-transform: capitalize;
+            color: wheat;
+            padding-top: 4px;
+        }
+        .log-tag{
+            height: 40px;
+            width: 80px;
+            border-radius: 2px;
+        }
+        
+        .log-done{
+            background-color: #30c875
+        }
+        .log-stuck{
+            background-color: #e2445c;
+        }
+
+        i{
+            color: rgba(167, 167, 167, 0.486);
+        }
+    }
+
 }

@@ -95,7 +95,7 @@ export default {
   data() {
     return {
       task: null,
-      component: "task-updates",
+      component: "activity-log",
       isHover: false,
       hoveredBtn: null,
     };
