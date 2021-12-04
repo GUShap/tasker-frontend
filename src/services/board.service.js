@@ -1,5 +1,6 @@
 import { boardDb } from "../../database.js";
 import { storageService } from "./storage.service";
+import { utilService } from "./util.service";
 export const boardService = {
   query,
   save,
@@ -11,8 +12,9 @@ export const boardService = {
   getGroupIdx,
   getBoardIdx,
   removeGroup,
+  addNewGroup,
   getEmptyComment,
-  getEmptyActivity
+  getEmptyActivity,
 };
 
 function query() {
@@ -44,6 +46,7 @@ async function saveTask(taskInfo) {
       console.log("saveTask", taskInfo.boardId, taskInfo.groupId);
       const currTask = {
         title: taskInfo.title,
+        id: utilService.makeId(),
       };
       const bIdx = await getBoardIdx(taskInfo.boardId);
       const gIdx = await getGroupIdx(taskInfo.boardId, taskInfo.groupId);
@@ -69,6 +72,21 @@ async function removeGroup(boardIdx, { groupId }) {
   }
 }
 
+async function addNewGroup(boardIdx) {
+  try {
+    const gBoards = query();
+    const currGroup = {
+      title: "New group",
+      id: utilService.makeId(),
+      tasks: [],
+    };
+    gBoards[boardIdx].groups.unshift(currGroup);
+    _loadToStorage(gBoards);
+  } catch (err) {
+    console.log(err);
+  }
+}
+
 async function remove(taskId) {
   try {
     const gBoards = query();
@@ -78,7 +96,6 @@ async function remove(taskId) {
         var idx = tasks.findIndex((task) => task.id === taskId);
         if (idx >= 0) {
           tasks.splice(idx, 1);
-          console.log(tasks);
         }
       });
     });
@@ -154,32 +171,31 @@ function _loadToStorage(gBoards) {
 
 function getEmptyComment() {
   return {
-    txt: '',
+    txt: "",
     createdAt: Date.now(),
     byMember: {
       _id: null,
       fullname: null,
-      imgUrl: ''
-    }
-  }
+      imgUrl: "",
+    },
+  };
 }
 
 function getEmptyActivity() {
   return {
-    txt: '',
+    txt: "",
     createdAt: Date.now(),
     byMember: {
       _id: "u101",
       fullname: "Abi Abambi",
-      imgUrl: "http://some-img"
+      imgUrl: "http://some-img",
     },
     task: {
       id: "t101",
-      title: "Replace Logo"
-    }
-  }
+      title: "Replace Logo",
+    },
+  };
 }
-
 
 // console.log(getTaskIdx("b101","g101", "t102"))
 
@@ -216,4 +232,3 @@ function getEmptyActivity() {
 //     // load from service
 //     // subscribe to socket
 // }
-

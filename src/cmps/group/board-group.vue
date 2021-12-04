@@ -9,7 +9,7 @@
       <section class="column-headers">
         <div @mouseover="hover = true" @mouseleave="hover = false">
           <i
-            @click="showGroup"
+            @click="showGroup(false)"
             v-show="hover"
             :class="[
               groupShow ? 'fas fa-caret-square-up' : 'fas fa-caret-square-down',
@@ -83,8 +83,14 @@ export default {
   },
   created() {},
   methods: {
-    showGroup() {
-      this.groupShow = !this.groupShow;
+    showGroup(val=null) {
+      console.log('label',val);
+      if(val){
+        this.groupShow =false;
+      } else{
+        this.groupShow = !this.groupShow;
+      }
+
     },
     addTask() {
       this.$emit("addTask", { title: this.newTask, groupId: this.group.id });
@@ -112,7 +118,6 @@ export default {
     },
     cmpsOrder() {
       const cmps =this.$store.getters.currBoard.cmpsOrder
-      console.log('cmps',cmps);
       this.cmpHeaders = cmps.slice(1)
       return cmps
     },

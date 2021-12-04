@@ -11,7 +11,7 @@
       <span><i class="far fa-star"></i>See plans</span>
     </div>
     <nav class="user-nav">
-      <router-link to="/home/" class="fas fa-puzzle-piece"/>
+      <router-link to="/cards/" class="fas fa-puzzle-piece"/>
       <router-link to="/home/" class="fas fa-user-plus"/>
       <router-link to="/home/" class="fas fa-search"/>
       <router-link to="/home/" class="fas fa-question"/>

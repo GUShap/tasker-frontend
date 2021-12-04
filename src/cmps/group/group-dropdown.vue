@@ -3,7 +3,7 @@
     <el-dropdown class="dropdown" trigger="click">
       <i class="fa fa-caret-down"></i>
       <el-dropdown-menu trigger="click" size="large" slot="dropdown">
-        <el-dropdown-item @click.native="showGroup">
+        <el-dropdown-item @click.native="showGroup(true)">
           <i class="fas fa-compress-alt"></i>Collapse this group
         </el-dropdown-item>
         <el-dropdown-item
@@ -55,8 +55,8 @@ export default {
     removeGroup() {
       this.$emit("removeGroup");
     },
-    showGroup() {
-      this.$emit("showGroup");
+    showGroup(val) {
+      this.$emit("showGroup",val);
     },
     setEdit() {
       console.log("hello");
