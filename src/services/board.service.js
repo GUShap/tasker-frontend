@@ -15,6 +15,7 @@ export const boardService = {
   addNewGroup,
   getEmptyComment,
   getEmptyActivity,
+  saveNewTask
 };
 
 function query() {
@@ -62,6 +63,21 @@ async function saveTask(taskInfo) {
     console.log(err);
   }
 }
+
+
+async function saveNewTask(task) {
+  console.log(task)
+  // try {
+  //   task.id = utilService.makeId()
+  //   const gBoards = query()
+  //   gBoards.map()
+
+  // } catch (err) {
+  //   console.log(err)
+  // }
+
+}
+
 
 async function removeGroup(boardIdx, { groupId }) {
   try {
