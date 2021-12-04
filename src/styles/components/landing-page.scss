@@ -2,6 +2,8 @@
     display: flex;
     flex-direction: column;
     height: inherit;
+    font-family: sofia-pro;
+
 
     .home-header {
         display: flex;
@@ -96,6 +98,7 @@
             .fas {
                 margin-left: 5px;
                 text-align: center;
+                color: white;
             }
         }
 
@@ -109,6 +112,7 @@
             font-size: 2.5rem;
             line-height: 48px;
             word-break: break-word;
+            color: #333333;
         }
 
         p {
@@ -117,6 +121,7 @@
             word-break: break-word;
             max-width: 45ch;
             text-align: center;
+            color: #414141cc
         }
 
         .logo {
@@ -136,11 +141,13 @@
             h3 {
                 font-size: 60px;
                 font-weight: bolder;
+                color: white;
             }
 
             h5 {
                 font-size: 25px;
                 padding-bottom: 30px;
+                color: white;
             }
 
             a {
@@ -190,6 +197,7 @@
 
     .txt {
         padding: 40px;
+        max-width: 450px;
     }
 
     .imgs {
@@ -272,7 +280,13 @@
             i {
                 font-size: 20px;
                 color: #535768;
+                cursor: pointer;
             }
+           .fab:hover{
+             color: #4353ff;
+           }
+
+
         }
     }
 }

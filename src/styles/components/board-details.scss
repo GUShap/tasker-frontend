@@ -1,73 +1,80 @@
-.sub-workspace{
-    width:100%;
-<<<<<<< HEAD
-    padding-right: 20px;
-=======
+.sub-workspace {
+    width: 100%;
     padding-right: rem(20px);
->>>>>>> 85edf61597a65ebe685f9cc75e8ebfe3d30e68bb
+    font-family: roboto;
 
-
-.workspace-container {
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-    overflow: hidden;
-    font-size: rem(20px);
-
-    .board-header {
-        min-height: 10vh;
-        display: flex;
-        width: 98%;
-        justify-content: space-between;
-        align-items: center;
-        padding: 20px;
-        font-size: 20px;
-        flex-wrap: wrap;
-
-        a {
-            text-decoration: none;
-            padding: 10px;
-            font-weight: bolder;
-            cursor: pointer;
-        }
-
-        .board-title {
-            font-size: 24px;
-            letter-spacing: -0.2px;
-            line-height: 32px;
-        }
-        .main-title {
-            align-items: center;
-        }
-        .board-info {
-            font-weight: 400px;
-        }
-    }
-    .add-board-btn {
-        border: none;
-        background-color: inherit;
-    }
-
-    .board-container {
+    .workspace-container {
         display: flex;
         flex-direction: column;
-        height: 100%;
         flex: 1;
-        overflow-x: scroll;
-        max-width: 100%;
+        overflow: hidden;
+        font-size: rem(20px);
+        font-family: roboto;
 
-        // padding-right: 20px;
+
+        .board-header {
+            min-height: 10vh;
+            display: flex;
+            width: 98%;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            font-size: 20px;
+            flex-wrap: wrap;
+            font-family: roboto;
+
+            a {
+                text-decoration: none;
+                padding: 10px;
+                font-weight: bolder;
+                cursor: pointer;
+            }
+
+            .board-title {
+                font-size: 24px;
+                letter-spacing: -0.2px;
+                line-height: 32px;
+                font-family: roboto;
+            }
+            .main-title {
+                align-items: center;
+                font-family: roboto;
+
+            }
+            .board-info {
+                font-weight: 400px;
+                font-family: roboto;
+
+            }
+        }
+        .add-board-btn {
+            border: none;
+            background-color: inherit;
+            font-family: roboto;
+
+        }
+
+        .board-container {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            flex: 1;
+            overflow-x: scroll;
+            max-width: 100%;
+            font-family: roboto;
+
+            // padding-right: 20px;
+        }
+        .main-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+        .more-actions {
+            align-items: center;
+            justify-content: space-between;
+            margin: 10px;
+        }
     }
-    .main-title {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        width: 100%;
-    }
-    .more-actions {
-        align-items: center;
-        justify-content: space-between;
-        margin: 10px;
-    }
-}
 }

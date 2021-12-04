@@ -52,9 +52,7 @@
     </header>
     <section class="board-btns">
       <div class="board-action-btns">
-        <button>
-          <i class="fas fa-table"></i><i class="fas fa-home"></i>Main Table
-        </button>
+        <button><i class="fas fa-table"></i>Main Table</button>
         <button><i class="far fa-chart-bar"></i>Calendar</button>
         <button><i class="far fa-chart-bar"></i>Chart</button>
         <button><i class="fas fa-table"></i>Table</button>

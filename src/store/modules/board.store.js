@@ -5,6 +5,11 @@ export const boardStore = {
     boards: null,
     currBoard: null,
     currBoardIdx: null,
+    sortedBoard: null,
+    sortBy: {
+      val: '',
+      order: ''
+    }
   },
   getters: {
     currBoard(state) {
@@ -13,6 +18,16 @@ export const boardStore = {
     allBoards(state) {
       return JSON.parse(JSON.stringify(state.boards));
     },
+    sortBoard(state) {
+      const filteredTasks = []
+      state.sortedBoard = JSON.parse(JSON.stringify(state.currBoard));
+      // state.sortBy = JSON.parse(JSON.stringify(sortBy));
+      // const regex = new RegExp(state.sortBy.val.name, 'i');
+      state.sortedBoard.groups.forEach((group) => {
+        group.tasks.sort((task1, task2) => { task1.title.toLowerCase() > task2.title.toLowerCase() ? 1 : -1 })
+      })
+      return state.boards.tasks = filteredTasks
+    }
   },
   mutations: {
     setBoards(state, { boards, currBoardIdx }) {
@@ -24,6 +39,9 @@ export const boardStore = {
       state.boards = boards;
       state.currBoard = boards[currBoardIdx];
       state.currBoardIdx = currBoardIdx;
+    },
+    setSort(state, { sortBy }) {
+      state.sortBy = sortBy
     },
   },
   actions: {
