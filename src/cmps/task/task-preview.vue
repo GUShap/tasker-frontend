@@ -23,7 +23,7 @@ import taskDropdown from "../task-dropdown.vue";
 export default {
   name: "task-preview",
   components: { statusPicker, memberPicker, titlePicker, taskDropdown },
-  props: ["task"],
+  props: ["task","cmpsOrder"],
   data() {
     return {};
   },
@@ -41,9 +41,6 @@ export default {
     },
   },
   computed: {
-    cmpsOrder() {
-      return this.$store.getters.currBoard.cmpsOrder;
-    },
   },
   destroyed() {},
 };
