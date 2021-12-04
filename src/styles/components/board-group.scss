@@ -1,6 +1,6 @@
 .group {
   margin-left: 1rem;
-max-width: 96%;
+  max-width: 96%;
 
   .add-task {
     display: flex;
@@ -41,6 +41,19 @@ max-width: 96%;
     background-color: #fff;
     // margin-left: 2rem;
 
+    div {
+      display: flex;
+      justify-content: center;
+      min-width: rem(200px);
+      
+          &:first-of-type{
+            justify-content: start;
+            min-width: rem(306px);
+          }
+          &:last-of-type{
+            margin-right: rem(10px);
+          }
+    }
     i {
       display: inline-flex;
       justify-content: center;
@@ -88,7 +101,7 @@ max-width: 96%;
   &::before {
     position: relative;
     content: "";
-    display:block;
+    display: block;
     min-width: rem(10px);
     height: rem(35px);
     left: 0px;
@@ -100,7 +113,7 @@ max-width: 96%;
   &::after {
     position: relative;
     content: "";
-    display:block;
+    display: block;
     min-width: rem(10px);
     height: rem(35px);
     left: 0px;

@@ -3,7 +3,7 @@
     <header class="group-header flex start align-center">
       <!-- <group-dropdown /> -->
       <i @click="showGroup" class="fa fa-caret-down"></i>
-      <div>{{ group.title }}</div>
+      <div class="grow-1">{{ group.title }}</div>
       <div>Status</div>
       <div>Members</div>
     </header>
