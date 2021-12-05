@@ -1,7 +1,7 @@
 <template>
-  <section class="sub-workspace flex" style="margin-left: 3rem">
+  <section class="workspace-container flex" style="margin-left: 3rem">
     <pop-up-nav class="pop-up-nav"></pop-up-nav>
-    <section class="workspace-container">
+    <section class="workspace">
       <board-header :board="currBoard" />
       <task-actions-nav @sortBy="sortBy" @addNewGroup="addNewGroup" />
       <board-filter />

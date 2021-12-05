@@ -13,7 +13,7 @@
     background-color: #e7e7e7;
   }
 
-  div {
+  & > div {
     display: flex;
     flex-basis: rem(200px);
   }
@@ -42,8 +42,8 @@
     align-items: center;
     section {
       display: flex;
-     &>*{
-       margin-right: -5px;
+     &>div{
+       margin-inline:-.2rem;
      }
     }
   }

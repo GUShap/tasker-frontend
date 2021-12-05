@@ -10,14 +10,14 @@
     </section>
     <ul v-if="edit" @blur="editStatus('edit')" class="status-modal">
       <li v-for="member in members" :key="member._id" class="flex justify-center align-center">
-        <div >
+        <section>
       <avatar
         :size="25"
         :username="member"
         :key="member._id"
       ></avatar>
-      </div>
       {{member}}
+      </section>
       </li>
       <li @click.prevent.stop="editStatus"><button>Edit</button></li>
     </ul>
