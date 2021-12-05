@@ -3,6 +3,7 @@
     padding-right: rem(20px);
     font-family: roboto;
     height: 100vh;
+    overflow: scroll;
 
     .workspace {
         display: flex;
@@ -60,7 +61,7 @@
             flex-direction: column;
             height: 100%;
             flex: 1;
-            overflow-x: scroll;
+            // overflow-x: scroll;
             max-width: 100%;
             font-family: roboto;
 
