@@ -1,19 +1,25 @@
 <template>
   <section class="task-updates flex">
     <form>
-      <input type="text" placeholder="Write an update..." />
+      <div ></div>
+      <input type="text" placeholder="Write an update..." @focus="setEdit" @blur="setEdit"/>
     </form>
     <a href="#"><i class="far fa-envelope"></i>Write updates via email:</a>
-      <ul>
-        <li v-for="(comment, idx) in task.comments" :key="idx">
-    <div class="update-card">
+    <ul>
+      <li v-for="(comment, idx) in task.comments" :key="idx">
+        <div class="update-card">
           <div class="top">
             <div class="card-btn">
               <i class="far fa-clock"><span>19h</span></i>
               <i class="far fa-bell"></i>
               <el-dropdown class="dropdown" trigger="click">
                 <i class="fas fa-sort-down"></i>
-                <el-dropdown-menu class="dropdown-menu" trigger="click" size="large" slot="dropdown">
+                <el-dropdown-menu
+                  class="dropdown-menu"
+                  trigger="click"
+                  size="large"
+                  slot="dropdown"
+                >
                   <el-dropdown-item @click.native="removeTask"
                     ><i class="fas fa-thumbtack"></i>Pin to
                     top</el-dropdown-item
@@ -42,7 +48,10 @@
             </div>
             <div class="user-info">
               <div class="flex">
-              <img class="user-img" :src="require(`@/pics/${comment.byMember.imgUrl}`)" />
+                <img
+                  class="user-img"
+                  :src="require(`@/pics/${comment.byMember.imgUrl}`)"
+                />
                 <h3>{{ comment.byMember.fullname }}</h3>
               </div>
               <p>{{ comment.txt }}</p>
@@ -60,9 +69,9 @@
               <button><i class="fas fa-reply"></i> reply</button>
             </div>
           </div>
-    </div>
-        </li>
-      </ul>
+        </div>
+      </li>
+    </ul>
   </section>
 </template>
 
@@ -70,5 +79,17 @@
 export default {
   name: "task-updates",
   props: ["task"],
+  data() {
+    return {
+      isEditMode: false,
+    };
+  },
+  methods: {
+    saveComment() {},
+    setEdit() {
+      this.isEditMode = !this.isEditMode;
+      console.log(this.isEditMode);
+    },
+  },
 };
 </script>
