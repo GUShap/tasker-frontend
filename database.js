@@ -14,7 +14,15 @@ export const boardDb = {
         {
             "id": "l101",
             "title": "Done",
-            "color": "#61bd4f"
+            "color": "#61bd4f",
+            "members": [
+                {
+                    "_id": "u101",
+                    "username": "Guy",
+                    "fullname": "Guy Shapira",
+                    "imgUrl": "guy-img.jpeg"
+                }
+            ],
         }
     ],
     "members": [
@@ -153,7 +161,7 @@ export const boardDb = {
                     "dueDate": 16156215211,
                     "byMember": {
                         "_id": "u101",
-                        "username": "Tal",
+                        "username": "Guy",
                         "fullname": "Guy Shapira",
                         "imgUrl": "guy-img.jpeg"
                     },
