@@ -1,70 +1,132 @@
+
 <template>
-  <div class="groups">
-    <div class="group">
-      <Container  :get-child-payload="getChildPayload1" @drop="onDrop('items1', $event)">
-        <Draggable v-for="item in items1" :key="item.id">
-          <div >
-            {{item.data}}
-          </div>
-        </Draggable>
-      </Container>
-    </div>
-    <div class="group">
-      <Container  :get-child-payload="getChildPayload2" @drop="onDrop('items2', $event)">
-        <Draggable v-for="item in items2" :key="item.id">
-          <div >
-            {{item.data}}
-          </div>
-        </Draggable>
-        
-      </Container>
-    </div>
- 
-   
+  <div class="card-list-container">
+    <Container
+      drag-class="card-ghost"
+      drop-class="card-ghost-drop"
+      :get-child-payload="getChildPayload1"
+      group-name="1"
+      @drop="onDrop('listOne', $event)"
+    >
+      <Draggable v-for="(item, idx) in listOne" :key="idx">
+        <div>{{ item }}</div>
+      </Draggable>
+    </Container>
+
+
+    <Container
+      drag-class="card-ghost"
+      drop-class="card-ghost-drop"
+      :drop-placeholder="dropPlaceholderOptions"
+      :get-child-payload="getChildPayload2"
+      group-name="1"
+      @drop="onDrop('listTwo', $event)"
+    >
+      <Draggable v-for="(item, idx) in listTwo" :key="idx">
+        <div>{{ item }}</div>
+      </Draggable>
+    </Container>
   </div>
 </template>
-
 <script>
-import { Container, Draggable, smoothDnD } from 'vue-smooth-dnd'
-import { applyDrag, generateItems } from './card-helper'
+import { Container, Draggable } from "vue-smooth-dnd";
+import { applyDrag } from "./card-helper.js";
 export default {
-  name: 'Groups',
-  components: {Container, Draggable},
-  data () {
+  name: "CardList",
+  components: {
+    Container,
+    Draggable,
+  },
+  data() {
     return {
-      items1: generateItems(15, i => ({
-        id: '1' + i,
-        data: `ishay 1 - ${i}`
-      })),
-      items2: generateItems(15, i => ({
-        id: '2' + i,
-        data: `guy 2 - ${i}`
-      })),
-    }
+      dropPlaceholderOptions: {
+        className: "drop-preview",
+        animationDuration: "150",
+        showOnTop: false,
+      },
+      listOne: [
+        {
+          id: 0,
+          text: `List 1 Text 0`,
+        },
+        {
+          id: 1,
+          text: `List 1 Text 1`,
+        },
+        {
+          id: 2,
+          text: `List 1 Text 2`,
+        },
+        {
+          id: 3,
+          text: `List 1 Text 3`,
+        },
+      ],
+      listTwo: [
+        {
+          id: 2123,
+          text: `List 2 Text 0`,
+        },
+        {
+          id: 1515,
+          text: `List 2 Text 1`,
+        },
+        {
+          id: 254323,
+          text: `List 2 Text 2`,
+        },
+        {
+          id: 3235,
+          text: `List 2 Text 3`,
+        },
+      ],
+    };
   },
   methods: {
-    onDrop (collection, dropResult) {
-      this[collection] = applyDrag(this[collection], dropResult)
+    onDrop(collection, dropResult) {
+console.log('this',this);
+      this[collection] = applyDrag(this[collection], dropResult);
     },
-    getChildPayload1 (index) {
-      return this.items1[index]
-    },
-    getChildPayload2 (index) {
-      return this.items2[index]
-    },
-  }
-}
-</script>
+    getChildPayload1(index) {
+            console.log('getChildPayload1',index);
 
-<style lang="css" scoped>
-  .groups {
-    display: flex;
-    justify-content: stretch;
-    margin-top: 50px;
-    margin-left: 200px;
-  }
-  .group {
-    margin-left: 50px;
-    flex: 1;
-  }
+      return this.listOne[index];
+    },
+    getChildPayload2(index) {
+                  console.log('getChildPayload2',index);
+
+      return this.listTwo[index];
+    },
+
+  },
+};
+</script>
+<style scoped>
+.card-list-container {
+  display: flex;
+  justify-content: space-evenly;
+}
+.smooth-dnd-container {
+  display: flex;
+  flex-direction: column;
+  width: 40%;
+  max-width: 40%;
+  flex: 0 0 40%;
+  height: 100%;
+  border: 1px solid #dcebf4;
+  border-radius: 6px;
+  padding: 1rem 1rem 0 1rem;
+  margin-top: 5rem;
+  margin-right: 2.5rem;
+  margin-left: 1rem;
+}
+.card-ghost {
+  transition: transform 0.18s ease;
+  transform: rotateZ(5deg);
+}
+.card-ghost-drop {
+  transition: transform 0.18s ease-in-out;
+  transform: rotateZ(0deg);
+}
 </style>
+view rawCardListFinal.vue hosted with ❤ by GitHub

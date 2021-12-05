@@ -30,18 +30,26 @@
         </div>
       </section>
     </header>
-    <template v-for="task in currTasks">
-      <transition name="fade" :key="task.id">
-        <task-preview
-          v-show="groupShow"
-          :key="task.id"
-          :task="task"
-          :cmpsOrder="cmpsOrder"
-          class="flex"
-          @addTask="addTask"
-        />
-      </transition>
-    </template>
+    <Container
+      :drop-placeholder="dropPlaceholderOptions"
+      :get-child-payload="getChildPayload"
+      group-name="1"
+      @drop="onDrop('tasksList' , $event)"
+    >
+      <Draggable v-for="(task, $index) in currTasks" :key="$index">
+        <transition name="fade" :key="task.id">
+          <task-preview
+            v-show="groupShow"
+            
+            :task="task"
+            :cmpsOrder="cmpsOrder"
+            class="flex"
+            @addTask="addTask"
+          />
+        </transition>
+      </Draggable>
+    </Container>
+
     <transition>
       <section class="add-task color-marker" v-show="groupShow">
         <input
@@ -61,12 +69,16 @@
 <script>
 import taskPreview from "@/cmps/task/task-preview.vue";
 import groupDropdown from "@/cmps/group/group-dropdown.vue";
+import { Container, Draggable } from "vue-smooth-dnd";
+import { applyDrag } from "../../pages/card-helper.js";
 
 export default {
   name: "board-group",
   components: {
     taskPreview,
     groupDropdown,
+    Container,
+    Draggable,
   },
 
   props: ["group"],
@@ -77,6 +89,12 @@ export default {
       isFocusOn: false,
       hover: false,
       cmpHeaders: null,
+      tasksList : null,
+      dropPlaceholderOptions: {
+        className: "drop-preview",
+        animationDuration: "150",
+        showOnTop: false,
+      },
     };
   },
   created() {},
@@ -116,11 +134,24 @@ export default {
       if (val === "member-picker") return "Member";
       return val;
     },
+    onDrop(collection, dropResult) {
+      console.log('collection',collection);
+      this[collection] = applyDrag(this[collection], dropResult);
+    },
+    getChildPayload(index) {
+      console.log('index',index);
+      return this.tasksList[index];
+    },
   },
   computed: {
     currTasks() {
-      this.tasks = this.group ? this.group.tasks : null;
-      return this.tasks;
+      if(!this.group) return
+      if(!this.tasksList){
+        this.tasksList =  this.group.tasks;
+      }
+      console.log('this',this);
+        console.log('currTasks',this.tasksList.map(t => t.id) )
+      return this.tasksList;
     },
     cmpsOrder() {
       const cmps = this.$store.getters.currBoard.cmpsOrder;
