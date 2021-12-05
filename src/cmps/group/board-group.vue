@@ -18,6 +18,7 @@
           <input
             class="input-group-name"
             :class="[isFocusOn ? 'border' : 'no-boder']"
+            ref='title'
             type="text"
             v-model="group.title"
             v-on:keyup.enter="updateInfo"
@@ -100,6 +101,7 @@ export default {
       this.$emit("removeGroup", { groupId: this.group.id });
     },
     setEdit() {
+      this.$refs.title.focus()
       this.isFocusOn = true;
     },
     updateInfo() {

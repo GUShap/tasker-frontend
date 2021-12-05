@@ -60,10 +60,7 @@
         <el-dropdown class="dropdown-style-opt" trigger="click">
           <a>More<i class="fas fa-chevron-down"></i></a>
           <el-dropdown-menu trigger="click" size="large" slot="dropdown">
-            <el-dropdown-item
-              ><i class="far fa-sticky-note"></i>Cards
-            </el-dropdown-item>
-            <el-dropdown-item
+              <el-dropdown-item
               ><i class="fab fa-wpforms"></i>Form</el-dropdown-item
             >
             <el-dropdown-item
@@ -74,8 +71,8 @@
         <button><i class="fas fa-plus"></i>Add View</button>
       </div>
       <div class="share">
-        <i class="fas fa-plug"></i>
-        <h5>Integrate</h5>
+        <!-- <i class="fas fa-plug"></i>
+        <h5>Integrate</h5> -->
         <!-- <div> -->
         <img
           class="icon-pic"

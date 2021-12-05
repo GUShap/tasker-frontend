@@ -15,9 +15,9 @@
         </div>
 
         <div class="action-btns">
-          <button><i class="fas fa-plus"></i>Add</button>
-          <button><i class="fas fa-filter"></i>Filter</button>
-          <button><i class="fas fa-search"></i>Search</button>
+          <div><button><i class="fas fa-plus"></i>Add</button></div>
+          <div><button><i class="fas fa-filter"></i>Filter</button></div>
+          <div><button><i class="fas fa-search"></i>Search</button></div>
         </div>
         <div class="my-boards">
           <button>My Boards</button>

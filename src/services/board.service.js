@@ -67,15 +67,20 @@ async function saveTask(taskInfo) {
 
 async function saveNewTask(task) {
   console.log(task)
-  // try {
-  //   task.id = utilService.makeId()
-  //   const gBoards = query()
-  //   gBoards.map()
+  try {
+    task.id = utilService.makeId()
+    const gBoards = query()
+    const currGroup = gBoards.map((board) => {
+      board.groups.map((group) => {
+        return group.tasks.includes(task)
+      })
+      return currGroup
+    })
+    gBoards.currGroup.tasks.push(task)
 
-  // } catch (err) {
-  //   console.log(err)
-  // }
-
+  } catch (err) {
+    console.log(err)
+  }
 }
 
 

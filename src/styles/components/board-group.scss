@@ -21,7 +21,7 @@
       border: none;
       height: rem(35px);
       cursor: pointer;
-      width: calc(100% - 77px);
+      width: calc(100% - 70px);
       border: 1px rgba(0, 0, 0, 0.089) solid;
       // // font-family: roboto-light,helvetica,sans-serif;
       position: sticky;
@@ -38,7 +38,7 @@
     }
 
     .btn-add-task {
-      height: 36px;
+      height: 100%;
       padding: 0 10px;
       background-color: #0073ea;
       color: #fff;
