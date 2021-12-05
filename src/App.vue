@@ -20,7 +20,7 @@ export default {
     };
   },
   created() {
-    console.log(this.$route.name);
+    // console.log(this.$route.name);
     if (this.$route.name !== "landing-page") {
       this.isLandingPage = false;
       if (this.$route.name !== "home") {
