@@ -72,6 +72,7 @@ async function saveNewTask(task) {
     const gBoards = query()
     const currGroup = gBoards.map((board) => {
       board.groups.map((group) => {
+        console.log(group.tasks)
         return group.tasks.includes(task)
       })
       return currGroup
