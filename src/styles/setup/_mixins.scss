@@ -6,6 +6,12 @@
   }
 }
 
+@mixin to-icon($content) {
+  &:before {
+    content: $content;
+  }
+}
+
 @mixin for-narrow-layout {
   @media (min-width: $break-narrow) {
     @content;

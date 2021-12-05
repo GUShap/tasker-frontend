@@ -9,6 +9,13 @@
     url(~@/styles/fonts/roboto/Roboto-Regular.ttf) ;
 }
 
+
+@font-face {
+    font-family: 'monday';
+    src: local('monday'),
+    url(~@/styles/fonts/monday/monday.woff) ;
+}
+
 // @font-face {
 //     font-family: Opensans;
 //     // src: url(~@/assets/fonts/OpenSans/OpenSans-Regular.ttf);
