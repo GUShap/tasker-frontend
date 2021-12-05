@@ -15,7 +15,6 @@ export const boardService = {
   addNewGroup,
   getEmptyComment,
   getEmptyActivity,
-  saveNewTask
 };
 
 function query() {
@@ -67,29 +66,6 @@ async function saveTask(taskInfo) {
     console.log(err);
   }
 }
-
-
-async function saveNewTask(task) {
-  console.log(task)
-  //   try {
-  //     task.id = utilService.makeId()
-  //     console.log(task)
-  //     const gBoards = query()
-  //     const currGroup = gBoards.map((board) => {
-  //       board.groups.map((group) => {
-  //         console.log(task.title)
-  //         console.log(group.tasks.includes(task.title))
-  //         return group.tasks.includes(task.title)
-  //       })
-  //       console.log(currGroup)
-  //       return currGroup
-  //     })
-  //     gBoards[currGroup].tasks.push(task)
-  //   } catch (err) {
-  //     console.log(err)
-  //   }
-}
-
 
 async function removeGroup(boardIdx, { groupId }) {
   try {
