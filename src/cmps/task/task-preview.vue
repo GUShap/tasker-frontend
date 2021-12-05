@@ -41,16 +41,11 @@ export default {
     openTaskDetails() {
       this.$router.push(`/board/task/${this.task.id}`);
     },
-    async clone() {
+    clone() {
       let task = this.task;
       let taskCopy = { ...task };
       delete taskCopy.id;
-      try {
-        await this.$store.dispatch({ type: "cloneTask", task: taskCopy });
-        console.log("New task add!");
-      } catch (err) {
-        console.log("Error", err);
-      }
+      this.$emit("addTask",  taskCopy );
     },
   },
   computed: {},

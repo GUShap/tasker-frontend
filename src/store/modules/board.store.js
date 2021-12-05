@@ -84,14 +84,14 @@ export const boardStore = {
         console.log(err);
       }
     },
-    async cloneTask({ state, dispatch }, { task }) {
-      try {
-        await boardService.saveNewTask(task);
-        dispatch({ type: "loadBoards", currBoardIdx: state.currBoardIdx });
-      } catch (err) {
-        console.log(err);
-      }
-    },
+    // async cloneTask({ state, dispatch }, { task }) {
+    //   try {
+    //     await boardService.saveNewTask(task);
+    //     dispatch({ type: "loadBoards", currBoardIdx: state.currBoardIdx });
+    //   } catch (err) {
+    //     console.log(err);
+    //   }
+    // },
     async removeGroup({ state, dispatch }, { groupId }) {
       try {
         await boardService.removeGroup(state.currBoardIdx, groupId);

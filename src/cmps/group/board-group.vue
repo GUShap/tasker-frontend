@@ -18,7 +18,7 @@
           <input
             class="input-group-name"
             :class="[isFocusOn ? 'border' : 'no-boder']"
-            ref='title'
+            ref="title"
             type="text"
             v-model="group.title"
             v-on:keyup.enter="updateInfo"
@@ -42,6 +42,7 @@
           :task="task"
           :cmpsOrder="cmpsOrder"
           class="flex"
+          @addTask="addTask"
         />
       </transition>
     </template>
@@ -51,9 +52,9 @@
           type="text"
           placeholder="+Add"
           v-model="newTask"
-          @keyup.enter="addTask"
+          @keyup.enter="addTask('new')"
         />
-        <button class="btn-add-task" @click="addTask">Add</button>
+        <button class="btn-add-task" @click="addTask('new')">Add</button>
       </section>
     </transition>
     <footer class="group-footer flex justify-center align-center"></footer>
@@ -79,29 +80,36 @@ export default {
       groupShow: true,
       isFocusOn: false,
       hover: false,
-      cmpHeaders: null
+      cmpHeaders: null,
     };
   },
   created() {},
   methods: {
-    showGroup(val=null) {
-      console.log('label',val);
-      if(val){
-        this.groupShow =false;
-      } else{
+    showGroup(val = null) {
+      console.log("label", val);
+      if (val) {
+        this.groupShow = false;
+      } else {
         this.groupShow = !this.groupShow;
       }
-
     },
-    addTask() {
-      this.$emit("addTask", { title: this.newTask, groupId: this.group.id });
-      this.newTask = null;
+    addTask(task) {
+      if (task === "new") {
+        this.$emit("addTask", { title: this.newTask, groupId: this.group.id });
+        this.newTask = null;
+      } else {
+        task.clone = true;
+        this.$emit("addTask", {
+          task,
+          groupId: this.group.id,
+        });
+      }
     },
     removeGroup() {
       this.$emit("removeGroup", { groupId: this.group.id });
     },
     setEdit() {
-      this.$refs.title.focus()
+      this.$refs.title.focus();
       this.isFocusOn = true;
     },
     updateInfo() {
@@ -119,9 +127,9 @@ export default {
       return this.tasks;
     },
     cmpsOrder() {
-      const cmps =this.$store.getters.currBoard.cmpsOrder
-      this.cmpHeaders = cmps.slice(1)
-      return cmps
+      const cmps = this.$store.getters.currBoard.cmpsOrder;
+      this.cmpHeaders = cmps.slice(1);
+      return cmps;
     },
   },
 };
