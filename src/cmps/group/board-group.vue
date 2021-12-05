@@ -28,12 +28,8 @@
         <div v-for="(cmp, idx) in cmpHeaders" :key="idx">
           {{ cmpHeader(cmp) }}
         </div>
-        <!-- <div>Status</div>
-        <div>Members</div> -->
       </section>
     </header>
-
-    <!-- <button @click="removeGroup">x</button> -->
     <template v-for="task in currTasks">
       <transition name="fade" :key="task.id">
         <task-preview
@@ -95,7 +91,7 @@ export default {
     },
     addTask(task) {
       if (task === "new") {
-        if (!this.title) return
+        if (!this.title) return;
         this.$emit("addTask", { title: this.title, groupId: this.group.id });
         this.title = null;
       } else {

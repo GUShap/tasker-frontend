@@ -2,5 +2,9 @@
     font-family: monday;
     @include to-icon("\f333");
 }
+.icon-person{
+    font-family: monday;
+    @include to-icon("\f1c7");
+}
 
 
