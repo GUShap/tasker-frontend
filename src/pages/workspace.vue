@@ -21,7 +21,6 @@ import boardHeader from "@/cmps/board-header.vue";
 import taskActionsNav from "@/cmps/task-actions-nav.vue";
 import boardDetails from "@/cmps/board/board-details.vue";
 import popUpNav from "@/cmps/pop-up-nav.vue";
-import { Container, Draggable } from 'vue-smooth-dnd'
 
 export default {
   name: "workspace",

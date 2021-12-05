@@ -83,6 +83,8 @@ import taskUpdates from "@/cmps/task/details cmps/task-updates.vue";
 import taskFiles from "@/cmps/task/details cmps/task-files.vue";
 import activityLog from "@/cmps/task/details cmps/activity-log.vue";
 import btnDropdown from "@/cmps/task/details cmps/btn-dropdown.vue";
+import { Container, Draggable } from 'vue-smooth-dnd'
+
 
 export default {
   name: "task-details",
