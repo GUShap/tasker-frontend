@@ -1,8 +1,19 @@
 <template>
   <section class="task-updates flex">
     <form>
-      <div ></div>
-      <input type="text" placeholder="Write an update..." @focus="setEdit" @blur="setEdit"/>
+      <div class="text-edit">
+        <i class="fas fa-paragraph"></i>
+        <i class="fas fa-bold"></i>
+        <i class="fas fa-italic"></i>
+        <i class="fas fa-underline"></i>
+        <i class="fas fa-strikethrough"></i>
+      </div>
+      <input
+        type="text"
+        placeholder="Write an update..."
+        @focus="setEdit"
+        @blur="setEdit"
+      />
     </form>
     <a href="#"><i class="far fa-envelope"></i>Write updates via email:</a>
     <ul>

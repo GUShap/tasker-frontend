@@ -3,11 +3,17 @@
     margin-top: 30px;
     padding: 0 30px;
 
-    input {
-        width: 100%;
-        padding: 10px;
-        border-radius: 8px;
-        border: 1px solid rgba(170, 88, 238, 0.698);
+    form {
+        .text-edit {
+            
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid rgba(170, 88, 238, 0.698);
+        }
     }
 
     .update-card {
