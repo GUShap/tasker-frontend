@@ -45,12 +45,16 @@ async function saveTask(taskInfo) {
     if (taskInfo.id) {
       console.log("update task");
     } else {
-      console.log("saveTask", taskInfo.boardId, taskInfo.groupId);
-      const currTask = {
-        title: taskInfo.title,
-        id: utilService.makeId(),
-      };
-      console.log()
+      var currTask
+      if (taskInfo.task.clone) {
+        currTask = taskInfo.task
+        currTask.id = utilService.makeId()
+      } else {
+        currTask = {
+          title: taskInfo.title,
+          id: utilService.makeId(),
+        };
+      }
       const bIdx = await getBoardIdx(taskInfo.boardId);
       const gIdx = await getGroupIdx(taskInfo.boardId, taskInfo.groupId);
 
@@ -67,21 +71,23 @@ async function saveTask(taskInfo) {
 
 async function saveNewTask(task) {
   console.log(task)
-  try {
-    task.id = utilService.makeId()
-    const gBoards = query()
-    const currGroup = gBoards.map((board) => {
-      board.groups.map((group) => {
-        console.log(group.tasks)
-        return group.tasks.includes(task)
-      })
-      return currGroup
-    })
-    gBoards.currGroup.tasks.push(task)
-
-  } catch (err) {
-    console.log(err)
-  }
+  //   try {
+  //     task.id = utilService.makeId()
+  //     console.log(task)
+  //     const gBoards = query()
+  //     const currGroup = gBoards.map((board) => {
+  //       board.groups.map((group) => {
+  //         console.log(task.title)
+  //         console.log(group.tasks.includes(task.title))
+  //         return group.tasks.includes(task.title)
+  //       })
+  //       console.log(currGroup)
+  //       return currGroup
+  //     })
+  //     gBoards[currGroup].tasks.push(task)
+  //   } catch (err) {
+  //     console.log(err)
+  //   }
 }
 
 
