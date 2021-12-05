@@ -1,6 +1,6 @@
 <template>
   <section class="side-bar-expanded">
-    <i 
+    <i
       @click="toggleNav"
       :class="[isShown ? 'fas fa-chevron-left' : 'fas fa-chevron-right']"
     ></i>
@@ -13,11 +13,16 @@
           <a href="#/">Logo</a>
           <h1>My Workspace</h1>
         </div>
-
         <div class="action-btns">
-          <div><button><i class="fas fa-plus"></i>Add</button></div>
-          <div><button><i class="fas fa-filter"></i>Filter</button></div>
-          <div><button><i class="fas fa-search"></i>Search</button></div>
+          <div>
+            <button><i class="fas fa-plus"></i>Add</button>
+          </div>
+          <div>
+            <button><i class="fas fa-filter"></i>Filter</button>
+          </div>
+          <div>
+            <button><i class="fas fa-search"></i>Search</button>
+          </div>
         </div>
         <div class="my-boards">
           <button>My Boards</button>

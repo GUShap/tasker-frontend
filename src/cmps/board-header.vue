@@ -3,6 +3,7 @@
     <header class="board-header">
       <div class="main-title flex">
         <div class="board-info">
+          <span class="filter1"></span>
           <i class="fas fa-share-alt"></i>
           <a
             class="board-title"
