@@ -48,7 +48,7 @@
             v-if="isHover && hoveredBtn === 'updates'"
           />
         </button>
-        <button
+        <!-- <button
           class="flex"
           :class="{ underline: component === 'task-files' }"
           @click="component = 'task-files'"
@@ -56,7 +56,7 @@
           @mouseleave="hover(null)"
         >
           files<btn-dropdown v-if="isHover && hoveredBtn === 'files'" />
-        </button>
+        </button> -->
         <button
           class="flex"
           :class="{ underline: component === 'activity-log' }"
@@ -110,12 +110,6 @@ export default {
       this.hoveredBtn = val;
     },
   },
-
-  // temp!!!!!
-  // created() {
-  //   var boards = boardService.query();
-  //   this.task = boards[0].groups[0].tasks[0];
-  // },
 
   async created() {
     try {
