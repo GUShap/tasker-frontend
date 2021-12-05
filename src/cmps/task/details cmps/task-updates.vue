@@ -32,7 +32,7 @@
             slot-scope="{ events: { click: clickEvent } }"
             @click.stop="clickEvent"
           >
-            <button type="button"><i class="far fa-smile"></i> Emoji</button>
+            <button type="button"><span class="far fa-smile"></span> Emoji</button>
           </div>
           <div class="emoji-picker" slot="emoji-picker" slot-scope="{ emojis, insert,}">
             <div>
