@@ -19,19 +19,19 @@
             v-on:keyup.enter="updateInfo"
             @blur="updateInfo"
           />
-          <i class="fas fa-info-circle" @click="toggleDetails"></i>
-          <i
-            :class="[isStared ? 'fas fa-star' : 'far fa-star']"
+          <a class="icon-info" @click="toggleDetails"></a>
+          <a
+            :class="[isStared ? 'icon-star-yellow' : 'icon-star']"
             title="Stared"
             @click="stared"
-          ></i>
+          ></a>
         </div>
         <div class="more-actions flex">
-          <a>Last seen</a>
-          <a>Invite</a>
-          <a>Activities</a>
-          <a class="add-board-btn">Add Board</a>
-          <i class="fas fa-ellipsis-h"></i>
+          <div v-for="(member, idx) in currBoard.members" :key="idx">
+            <a>Board members {{ member.fullname }}</a>
+          </div>
+          <a><span class="icon-activities"></span>Activities</a>
+          <a class="btn-add-board"><span class="icon-plus"></span>Add Board</a>
         </div>
       </div>
 
@@ -53,47 +53,13 @@
     </header>
     <section class="board-btns">
       <div class="board-action-btns">
-        <button><i class="fas fa-table"></i>Main Table</button>
-        <button><i class="far fa-chart-bar"></i>Calendar</button>
-        <button><i class="far fa-chart-bar"></i>Chart</button>
-        <button><i class="fas fa-table"></i>Table</button>
-
-        <el-dropdown class="dropdown-style-opt" trigger="click">
-          <a>More<i class="fas fa-chevron-down"></i></a>
-          <el-dropdown-menu trigger="click" size="large" slot="dropdown">
-              <el-dropdown-item
-              ><i class="fab fa-wpforms"></i>Form</el-dropdown-item
-            >
-            <el-dropdown-item
-              ><i class="fab fa-trello"></i>Kanban</el-dropdown-item
-            >
-          </el-dropdown-menu>
-        </el-dropdown>
-        <button><i class="fas fa-plus"></i>Add View</button>
+        <button><span class="icon-main-table"></span><span class="icon-home"></span> Table</button>
+        <button><span class="icon-calender"></span>Calendar</button>
+        <button><span class="icon-calender"></span>Chart</button>
+        <button><span class="icon-kanban"></span>Kanban</button>
       </div>
       <div class="share">
-        <!-- <i class="fas fa-plug"></i>
-        <h5>Integrate</h5> -->
-        <!-- <div> -->
-        <img
-          class="icon-pic"
-          style="max-width: 20px"
-          :src="require(`@/pics/slack.png`)"
-        />
-        <img
-          class="icon-pic"
-          style="max-width: 20px"
-          :src="require(`@/pics/gmail.png`)"
-        />
-        <img
-          class="icon-pic"
-          style="max-width: 20px"
-          :src="require(`@/pics/twilio.jpg`)"
-        />
-        <!-- </div> -->
-
         <button>Automate</button>
-        <!-- <button></button> -->
       </div>
     </section>
   </section>
@@ -101,7 +67,9 @@
 
 
 <script>
+import Avatar from "vue-avatar";
 export default {
+  components: { Avatar },
   name: "board-header",
   props: ["board"],
   data() {

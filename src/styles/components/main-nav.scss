@@ -1,38 +1,60 @@
 .main-nav {
-    width: rem(66px);
+    width: rem(71px);
     max-height: 200vh;
     background-color: #292f4c;
     float: left;
     display: flex;
-    // align-items: center;
     justify-content: space-between;
     flex-direction: column;
-    // padding: 20px;
     overflow: hidden;
     position: fixed;
     height: 100%;
+    color: white;
 
-    .fab.fa-tumblr {
-        margin-top: 15px;
+    .logo-img {
+        max-width: rem(45px);
+        margin-top: rem(15px);
     }
 
+    .icon-workspace {
+        font-size: 1.3rem;
+    }
     .fab,
     .fas,
     .far {
         color: #fff;
-        font-size: 1.1rem;
-        font-weight: 600;
-        padding: 3px;
+        font-size: 1.3rem;
+        font-weight: 400;
+        // padding: 3px;
+        // font-weight: 400;
     }
     .page-nav {
         display: flex;
         align-items: center;
         flex-direction: column;
-        gap: 20px;
+
+        .pages {
+            // gap: 20px;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            // margin-top: 8px;
+            // margin-bottom: 0px;
+        }
+        a{
+            padding: 8px;
+            color: white;
+        }
+        .fas.fa-inbox{
+            color: white;
+          font-weight: 800px;
+        }
+
+
     }
 
     a:hover {
-        background-color: rgba(192, 196, 255, 0.178);
+        background-color: rgba(0, 0, 0, 0.6);
         border-radius: 5px;
     }
 
@@ -41,7 +63,6 @@
         width: 38px;
         border-radius: 0 16px 16px 0;
         background-color: #258750;
-        // margin-left: -32px px;
         display: -webkit-flex;
         display: flex;
         text-align: center;
@@ -63,6 +84,11 @@
         .far.fa-star {
             font-size: 10px;
         }
+
+        .icon-add-user,
+        .icon-search {
+            padding: 10px;
+        }
     }
 
     .side-msg:hover {
@@ -74,9 +100,14 @@
         align-items: center;
         justify-content: center;
         flex-direction: column;
-        gap: 20px;
+        // gap: 20px;
+
+        a{
+            padding: 10px;
+        }
 
         .fas {
+            // padding: 10px;
             color: #fff;
             font-size: 1.1rem;
             font-weight: 600;
@@ -84,13 +115,17 @@
             // gap: 20px;
         }
 
-        .fas.fa-user {
+        .question-mark {
+            // padding: 5px;
+            color: white;
+            font-size: 20px;
+
+        }
+
+        .far.fa-user-circle {
             padding-bottom: 10px;
             font-size: 2rem;
-        }
-        .fas.fa-user:hover {
-            font-size: 1.5rem;
-            background-color: inherit;
+            // padding: 10px;
         }
     }
 }
