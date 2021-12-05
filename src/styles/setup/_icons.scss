@@ -3,6 +3,16 @@
     @include to-icon("\f333");
 }
 
+.icon-members{
+    font-family: monday;
+    @include to-icon("\f226");
+}
+
+.icon-clip{
+    font-family: monday;
+    @include to-icon("\f13b");
+}
+
 // .icon-format{
 //     font-family: monday;
 //     @include to-icon("\f105");
