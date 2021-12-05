@@ -9,6 +9,7 @@
         :board="currBoard"
         @addTask="addTask"
         @removeGroup="removeGroup"
+        @addNewGroup="addNewGroup"
       />
     </section>
     <router-view></router-view>

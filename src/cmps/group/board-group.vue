@@ -98,7 +98,7 @@ export default {
         this.$emit("addTask", { title: this.newTask, groupId: this.group.id });
         this.newTask = null;
       } else {
-        task.clone = true;
+        // task.clone = true;
         this.$emit("addTask", {
           task,
           groupId: this.group.id,

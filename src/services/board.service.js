@@ -45,7 +45,7 @@ async function saveTask(taskInfo) {
       console.log("update task");
     } else {
       var currTask
-      if (taskInfo.task.clone) {
+      if (taskInfo.task) {
         currTask = taskInfo.task
         currTask.id = utilService.makeId()
       } else {
