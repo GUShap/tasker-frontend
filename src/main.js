@@ -9,6 +9,8 @@ import "./styles/styles.scss"
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faHome,faSortDown,faThLarge,faUserSecret } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import {InlineSvgPlugin} from 'vue-inline-svg';
+
 
 
 library.add(faUserSecret ,faHome, faThLarge,faSortDown)
@@ -17,12 +19,16 @@ Vue.component('font-awesome-icon', FontAwesomeIcon)
 
 
 //=====
+Vue.use(InlineSvgPlugin);
 Vue.config.productionTip = false
-Vue.use(ElementUI)
+Vue.use(ElementUI,  EmojiPickerPlugin)
 Vue.config.productionTip = false
 
 new Vue({
   router,
   store,
+  components:{
+    EmojiPicker: window.EmojiPicker
+  },
   render: h => h(App)
 }).$mount('#app')

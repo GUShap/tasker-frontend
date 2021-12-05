@@ -1,21 +1,17 @@
 <template>
   <section>
     <section class="task-action-btn">
-      <button @click="addNewGroup"  class="btn-new-task">New Item</button>
-      <button><i class="fas fa-search"></i>Search</button>
-      <button><i class="far fa-user-circle"></i>Person</button>
+      <button @click="addNewGroup" class="btn-new-task">New Board</button>
+      <span class="icon-workspace"></span>
+      <button><span class="icon-search"></span>Search</button>
       <button>
-        <i class="fas fa-filter"></i>Filter<i class="fas fa-chevron-down"></i>
+        <span class="icon-filter"></span>Filter<span
+          class="icon-arrow-down"
+        ></span>
       </button>
       <button @click="showModal">
-        <i class="fas fa-long-arrow-alt-up"></i
-        ><i class="fas fa-long-arrow-alt-down"></i>Sort
+        <span class="icon-sort-up-down"></span>Sort
       </button>
-      <button><i class="fas fa-thumbtack"></i></button>
-      <button><i class="far fa-eye-slash"></i></button>
-      <button><i class="fas fa-sort-amount-up-alt"></i></button>
-      <button><i class="fas fa-fill-drip"></i></button>
-      <button><i class="far fa-edit"></i></button>
     </section>
     <section class="pop-up-modal">
       <div class="menu-modal sort-menu" v-if="isShown">
@@ -87,7 +83,7 @@ export default {
     showModal() {
       this.isShown = !this.isShown;
     },
-     addNewGroup() {
+    addNewGroup() {
       this.$emit("addNewGroup");
     },
     sortVal(value) {

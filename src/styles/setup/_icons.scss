@@ -7,4 +7,133 @@
     @include to-icon("\f1c7");
 }
 
+.icon-search{
+    font-family: monday;
+    color: white;
+    @include to-icon("\f3aa")
+}
+
+
+.icon-activities{
+    font-family: monday;
+    @include to-icon("\f468")
+}
+
+
+.icon-two-stars{
+    font-family: monday;
+    @include to-icon("\f28d")
+}
+
+
+.icon-main-table{
+    font-family: monday;
+    @include to-icon("\f420")
+}
+
+.icon-home{
+    font-family: monday;
+    @include to-icon("\f471")
+}
+
+
+.icon-arrow-down{
+    font-family: monday;
+    @include to-icon("\f106")
+}
+
+.icon-sort-up-down{
+    font-family: monday;
+    @include to-icon("\f3d4")
+}
+
+.icon-workspace{
+    font-family: monday;
+    color: white;
+    @include to-icon("\f105")
+}
+
+
+.icon-add-user{
+    font-family: monday;
+    color: white;
+    @include to-icon("\f3fb")
+}
+
+
+.icon-star{
+    font-family: monday;
+    @include to-icon("\f3dc")
+}
+
+.icon-star-yellow{
+    font-family: monday;
+    color: #FFCB00;
+    @include to-icon("\f3db")
+
+}
+
+.icon-info{
+    font-family: monday;
+    @include to-icon("\f345")
+}
+
+.icon-plus{
+    font-family: monday;
+    @include to-icon("\f47b")
+}
+
+.icon-calender{
+    font-family: monday;
+    @include to-icon("\f385")
+}
+
+
+.icon-kanban{
+    font-family:monday;
+    @include to-icon("\f359")
+}
+
+
+
+.icon-members{
+    font-family: monday;
+    @include to-icon("\f226");
+}
+
+.icon-clip{
+    font-family: monday;
+    @include to-icon("\f13b");
+}
+
+// .icon-format{
+//     font-family: monday;
+//     @include to-icon("\f105");
+// }
+
+// .icon-bold{
+//     font-family: monday;
+//     @include to-icon("\e903");
+// }
+
+// .icon-italic{
+//     font-family: monday;
+//     @include to-icon("\e915");
+// }
+
+// .icon-underline{
+//     font-family: monday;
+//     @include to-icon("\e924");
+// }
+
+// .icon-linethrough{
+//     font-family: monday;
+//     @include to-icon("\e907");
+// }
+
+// .icon-alignment{
+//     font-family: monday;
+//     @include to-icon("\e901");
+// }
+
 
