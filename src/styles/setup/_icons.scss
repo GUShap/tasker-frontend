@@ -92,5 +92,44 @@
 
 
 
+.icon-members{
+    font-family: monday;
+    @include to-icon("\f226");
+}
+
+.icon-clip{
+    font-family: monday;
+    @include to-icon("\f13b");
+}
+
+// .icon-format{
+//     font-family: monday;
+//     @include to-icon("\f105");
+// }
+
+// .icon-bold{
+//     font-family: monday;
+//     @include to-icon("\e903");
+// }
+
+// .icon-italic{
+//     font-family: monday;
+//     @include to-icon("\e915");
+// }
+
+// .icon-underline{
+//     font-family: monday;
+//     @include to-icon("\e924");
+// }
+
+// .icon-linethrough{
+//     font-family: monday;
+//     @include to-icon("\e907");
+// }
+
+// .icon-alignment{
+//     font-family: monday;
+//     @include to-icon("\e901");
+// }
 
 
