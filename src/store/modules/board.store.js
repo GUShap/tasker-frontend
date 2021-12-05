@@ -104,7 +104,6 @@ export const boardStore = {
     async getTaskById({ state }, { taskId }) {
       try {
         const currTask = await boardService.getTaskById(taskId);
-        console.log(taskId);
         return currTask;
       } catch (err) {
         console.log(err);

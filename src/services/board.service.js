@@ -96,8 +96,8 @@ async function addNewGroup(boardIdx) {
 async function remove(taskId) {
   try {
     const gBoards = query();
-    const idx = gBoards.map((board) => {
-      board.groups.map((group) => {
+    gBoards.forEach((board) => {
+      board.groups.forEach((group) => {
         var tasks = group.tasks;
         var idx = tasks.findIndex((task) => task.id === taskId);
         if (idx >= 0) {
@@ -121,14 +121,16 @@ function getById(boardId) {
 async function getTaskById(taskId) {
   try {
     const gBoards = query();
-    const task = gBoards.map((board) => {
-      board.groups.map((group) => {
-        group.tasks.map((task) => {
-          return task.id === taskId;
+    var currTask;
+    gBoards.forEach((board) => {
+      board.groups.forEach((group) => {
+        group.tasks.forEach((task) => {
+          if (task.id === taskId) currTask = task
         });
       });
     });
-    return task;
+    return currTask;
+
   } catch (err) {
     console.log("Error", err);
     throw err;

@@ -77,13 +77,11 @@
 </template>
 
 <script>
-import { boardService } from "../services/board.service.js";
 
 import taskUpdates from "@/cmps/task/details cmps/task-updates.vue";
 import taskFiles from "@/cmps/task/details cmps/task-files.vue";
 import activityLog from "@/cmps/task/details cmps/activity-log.vue";
 import btnDropdown from "@/cmps/task/details cmps/btn-dropdown.vue";
-import { Container, Draggable } from 'vue-smooth-dnd'
 
 
 export default {
@@ -97,7 +95,7 @@ export default {
   data() {
     return {
       task: null,
-      component: "activity-log",
+      component: "task-updates",
       isHover: false,
       hoveredBtn: null,
     };
@@ -114,22 +112,22 @@ export default {
   },
 
   // temp!!!!!
-  created() {
-    var boards = boardService.query();
-    this.task = boards[0].groups[0].tasks[0];
-  },
-
-  // async created() {
-  //   try {
-  //     const { taskId } = this.$route.params;
-  //     this.task = await this.$store.dispatch({
-  //       type: "getTaskById",
-  //       taskId,
-  //     });
-  //     console.log("this.task", this.task);
-  //   } catch (err) {
-  //     console.log("Error", err);
-  //   }
+  // created() {
+  //   var boards = boardService.query();
+  //   this.task = boards[0].groups[0].tasks[0];
   // },
+
+  async created() {
+    try {
+      const { taskId } = this.$route.params;
+      this.task = await this.$store.dispatch({
+        type: "getTaskById",
+        taskId,
+      });
+      console.log("this.task", this.task);
+    } catch (err) {
+      console.log("Error", err);
+    }
+  },
 };
 </script>
