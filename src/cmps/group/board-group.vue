@@ -51,7 +51,7 @@
         <input
           type="text"
           placeholder="+Add"
-          v-model="newTask"
+          v-model="title"
           @keyup.enter="addTask('new')"
         />
         <button class="btn-add-task" @click="addTask('new')">Add</button>
@@ -76,7 +76,7 @@ export default {
   props: ["group"],
   data() {
     return {
-      newTask: null,
+      title: null,
       groupShow: true,
       isFocusOn: false,
       hover: false,
@@ -95,8 +95,9 @@ export default {
     },
     addTask(task) {
       if (task === "new") {
-        this.$emit("addTask", { title: this.newTask, groupId: this.group.id });
-        this.newTask = null;
+        if (!this.title) return
+        this.$emit("addTask", { title: this.title, groupId: this.group.id });
+        this.title = null;
       } else {
         this.$emit("addTask", {
           task,

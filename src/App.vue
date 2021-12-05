@@ -1,5 +1,5 @@
 <template>
-  <section :class="[isLandingPage || isHomePage ? '' : 'flex']">
+  <section :class="[isWorkspace ? 'flex' : '']">
     <main-nav v-if="!isLandingPage" />
     <router-view />
   </section>
@@ -16,16 +16,16 @@ export default {
   data() {
     return {
       isLandingPage: true,
-      isHomePage: true,
+      isWorkspace: false,
     };
   },
   created() {
     console.log(this.$route.name);
+    if (this.$route.name !== "workspace") {
+      this.isWorkspace = true;
+    }
     if (this.$route.name !== "landing-page") {
       this.isLandingPage = false;
-      if (this.$route.name !== "home") {
-        this.isHomePage = false;
-      }
     }
   },
   methods: {},
@@ -36,9 +36,6 @@ export default {
       const { name } = newVal;
       if (name !== "landing-page") {
         this.isLandingPage = false;
-      }
-      if (this.$route.name !== "home") {
-        this.isHomePage = false;
       }
     },
   },
