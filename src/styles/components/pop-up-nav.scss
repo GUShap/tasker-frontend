@@ -1,10 +1,10 @@
 .side-bar-expanded {
     background-color: #f5f6f8;
     border-right: 1px solid #e6e9ef;
-    margin-left: 1.4rem;
     display: flex;
     flex-direction: column;
     gap: 10px;
+    min-height: 100%;
 
     .side-nav-open {
         overflow: hidden;

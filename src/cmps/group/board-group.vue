@@ -59,7 +59,7 @@
           v-show="groupShow"
           :key="task.id"
           :task="task"
-          :style="{ 'color-marker': group.style.color }"
+          :style="{ background: group.style.color}"
           :cmpsOrder="cmpsOrder"
           class="flex"
           @addTask="addTask"
@@ -109,8 +109,7 @@ export default {
       isFocusOn: false,
       hover: false,
       cmpHeaders: null,
-      color: null,
-      taskList: null,
+      tasksList : null,
       dropPlaceholderOptions: {
         className: "drop-preview",
         animationDuration: "150",
