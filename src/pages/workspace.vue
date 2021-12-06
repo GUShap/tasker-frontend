@@ -1,6 +1,6 @@
 <template>
   <section class="workspace-container flex">
-    <pop-up-nav class="pop-up-nav"></pop-up-nav>
+    <pop-up-nav class="pop-up-nav" :board="currBoard"></pop-up-nav>
     <section class="workspace">
       <board-header :board="currBoard" />
       <task-actions-nav @sortBy="sortBy" @addNewGroup="addNewGroup" />
