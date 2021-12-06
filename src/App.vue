@@ -1,5 +1,5 @@
 <template>
-  <section :class="[isWorkspace ? 'flex' : '']" class="main-app">
+  <section :class="[isLandingPage ? '' : 'flex']" class="main-app">
     <main-nav v-if="!isLandingPage" />
     <router-view />
     <div class="cover" v-if="isTaskDetailsHover"></div>
@@ -16,18 +16,15 @@ export default {
   props: [],
   data() {
     return {
-      isLandingPage: true,
-      isWorkspace: false,
+      isLandingPage: null,
       isTaskDetails: null,
     };
   },
   created() {
-    if (this.$route.name !== "workspace") {
-      this.isWorkspace = true;
-    }
-    if (this.$route.name !== "landing-page") {
-      this.isLandingPage = false;
-    }
+    console.log('$rout',this.$route.name);
+      if (this.$route.name === "landing-page") {
+        this.isLandingPage = true;
+      }
   },
   methods: {
     detailsHover(isHovered) {
@@ -41,8 +38,10 @@ export default {
   },
   destroyed() {},
   watch: {
-    $route: function (newVal, OldVal) {
+    '$route': function (newVal, OldVal) {
+      console.log('newVal',newVal);
       const { name } = newVal;
+      console.log('name',name);
       if (name !== "landing-page") {
         this.isLandingPage = false;
       }

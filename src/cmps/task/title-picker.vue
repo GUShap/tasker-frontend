@@ -27,7 +27,8 @@ export default {
       title: this.info.title,
     };
   },
-  created() {},
+  created() {
+  },
   methods: {
     openDetails() {
       if(this.edit) return

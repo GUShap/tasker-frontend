@@ -185,6 +185,168 @@ export const boardDb = {
         bgColor: "#26de81",
       },
     },
+    {
+      id: "g104",
+      title: "Group 4",
+      tasks: [
+        {
+          id: "t01",
+          title: "Do that",
+          labelId: "Done",
+          members: [
+            {
+              _id: "u101",
+              username: "Sundos",
+              fullname: "Sundos Gutty",
+              imgUrl:
+                "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg",
+            },
+            {
+              _id: "u101",
+              username: "Ishay",
+              fullname: "Ishay Nitzan",
+              imgUrl:
+                "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg",
+            },
+          ],
+        },
+        {
+          id: "t302",
+          title: "Help me",
+          description: "description",
+          comments: [
+            {
+              id: "ZdPnm",
+              txt: "also @yaronb please CR this",
+              createdAt: 1590999817436.0,
+              byMember: {
+                _id: "u101",
+                fullname: "Guy Shapira",
+                imgUrl: "guy-img.jpeg",
+              },
+            },
+          ],
+          checklists: [
+            {
+              id: "YEhmF",
+              title: "Checklist",
+              todos: [
+                {
+                  id: "212jX",
+                  title: "To Do 1",
+                  isDone: false,
+                },
+              ],
+            },
+          ],
+          members: [
+            {
+              _id: "u101",
+              username: "Guy",
+              fullname: "Guy Shapira",
+              imgUrl: "guy-img.jpeg",
+            },
+          ],
+          labelId: "Done",
+          createdAt: 1590999730348,
+          dueDate: 16156215211,
+          byMember: {
+            _id: "u101",
+            username: "Guy",
+            fullname: "Guy Shapira",
+            imgUrl: "guy-img.jpeg",
+          },
+          style: {
+            bgColor: "#26de81",
+          },
+        },
+      ],
+      style: {
+        color: "#26de81",
+        bgColor: "#26de81",
+      },
+    },
+    {
+      id: "g105",
+      title: "Group 5",
+      tasks: [
+        {
+          id: "t01",
+          title: "Do that",
+          labelId: "Done",
+          members: [
+            {
+              _id: "u101",
+              username: "Sundos",
+              fullname: "Sundos Gutty",
+              imgUrl:
+                "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg",
+            },
+            {
+              _id: "u101",
+              username: "Ishay",
+              fullname: "Ishay Nitzan",
+              imgUrl:
+                "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg",
+            },
+          ],
+        },
+        {
+          id: "t302",
+          title: "Help me",
+          description: "description",
+          comments: [
+            {
+              id: "ZdPnm",
+              txt: "also @yaronb please CR this",
+              createdAt: 1590999817436.0,
+              byMember: {
+                _id: "u101",
+                fullname: "Guy Shapira",
+                imgUrl: "guy-img.jpeg",
+              },
+            },
+          ],
+          checklists: [
+            {
+              id: "YEhmF",
+              title: "Checklist",
+              todos: [
+                {
+                  id: "212jX",
+                  title: "To Do 1",
+                  isDone: false,
+                },
+              ],
+            },
+          ],
+          members: [
+            {
+              _id: "u101",
+              username: "Guy",
+              fullname: "Guy Shapira",
+              imgUrl: "guy-img.jpeg",
+            },
+          ],
+          labelId: "Done",
+          createdAt: 1590999730348,
+          dueDate: 16156215211,
+          byMember: {
+            _id: "u101",
+            username: "Guy",
+            fullname: "Guy Shapira",
+            imgUrl: "guy-img.jpeg",
+          },
+          style: {
+            bgColor: "#26de81",
+          },
+        },
+      ],
+      style: {
+        color: "#26de81",
+        bgColor: "#26de81",
+      },
+    },
   ],
   activities: [
     {
@@ -230,5 +392,5 @@ export const boardDb = {
       },
     },
   ],
-  cmpsOrder: ["title-picker", "status-picker", "member-picker", "timeline-picker"],
+  cmpsOrder: ["title-picker", "status-picker", "member-picker"],
 };

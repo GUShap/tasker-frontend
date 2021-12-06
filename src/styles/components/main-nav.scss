@@ -1,13 +1,10 @@
 .main-nav {
-    width: rem(71px);
-    max-height: 200%;
+    min-width: rem(71px);
     background-color: #292f4c;
-    float: left;
     display: flex;
     justify-content: space-between;
     flex-direction: column;
     overflow: hidden;
-    position: fixed;
     height: 100%;
     color: white;
 
