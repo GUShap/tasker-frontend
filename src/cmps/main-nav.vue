@@ -19,7 +19,6 @@
           title="calender"
           class="far fa-calendar-check"
         />
-        <router-link to="/home/" class="far fa-calendar-check"/>
       </div>
     </nav>
     <div class="side-msg">
@@ -31,7 +30,6 @@
       <router-link to="/cards/" class="fas fa-puzzle-piece" />
       <router-link to="/cards/" class="icon-add-user" />
       <router-link to="/cards/" class="icon-search" />
-      <router-link to="/cards/" class="fas fa-question" />
       <router-link to="/home/" class="far fa-user-circle" />
       <!-- <img src="https://cdn.monday.com/icons/dapulse-person-column.svg"> -->
     </nav>

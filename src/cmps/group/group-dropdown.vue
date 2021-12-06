@@ -64,7 +64,6 @@ export default {
       this.$emit("showGroup", val);
     },
     setEdit() {
-      console.log("hello");
       this.$emit("setEdit");
     },
     openColorModal() {
