@@ -37,16 +37,19 @@ function save(board) {
   }
   return board;
 }
+saveTask({id: "t101"})
 
 async function saveTask(taskInfo) {
   try {
     if (taskInfo.id) {
       console.log("update task");
+      const x = await getTaskOrigin(taskInfo.id)
+      console.log('x',x);
     } else {
-      var currTask
+      var currTask;
       if (taskInfo.task) {
-        currTask = taskInfo.task
-        currTask.id = utilService.makeId()
+        currTask = taskInfo.task;
+        currTask.id = utilService.makeId();
       } else {
         currTask = {
           title: taskInfo.title,
@@ -124,12 +127,34 @@ async function getTaskById(taskId) {
     gBoards.forEach((board) => {
       board.groups.forEach((group) => {
         group.tasks.forEach((task) => {
-          if (task.id === taskId) currTask = task
+          if (task.id === taskId) currTask = task;
         });
       });
     });
     return currTask;
+  } catch (err) {
+    console.log("Error", err);
+    throw err;
+  }
+}
 
+async function getTaskOrigin(taskId) {
+  try {
+    const gBoards = await query();
+    var taskInfo = {
+      taskId,
+    };
+
+    gBoards.forEach((board) => {
+      taskInfo.boardId = board._id;
+      board.groups.forEach((group) => {
+        taskInfo.groupId = group.id;
+        group.tasks.forEach((task) => {
+          task.id === taskId;
+        });
+      });
+    });
+    return  taskInfo;
   } catch (err) {
     console.log("Error", err);
     throw err;
