@@ -1,5 +1,5 @@
 <template>
-  <div
+  <section
     @mouseover="hover = true"
     @mouseleave="hover = false"
     class="title-picker flex grow-2"
@@ -13,13 +13,13 @@
       v-model="title"
     />
     <button v-if="hover && !edit" @click.stop.prevent="editTitle" class="btn-edit">Edit</button>
-  </div>
+  </section>
 </template>
 
 <script>
 export default {
   components: {},
-  props: ["info"],
+  props: ["info" ],
   data() {
     return {
       hover: false,

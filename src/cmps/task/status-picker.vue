@@ -1,5 +1,5 @@
 <template>
-  <div class="status-picker">
+  <section class="status-picker">
     <div
       @click="editStatus('edit')"
       v-if="!edit"
@@ -15,7 +15,7 @@
       <li @click="editStatus('Stuck')" class="tag stuck">Stuck</li>
       <li @click="editStatus"><button>Edit</button></li>
     </ul>
-  </div>
+  </section>
 </template>
 
 <script>

@@ -1,5 +1,5 @@
 <template>
-  <div @click="editStatus('edit')" class="member-picker">
+  <section @click="editStatus('edit')" class="member-picker">
     <section v-if="!edit">
       <section v-if="!members">
         <avatar :size="25" username="i" />
@@ -25,7 +25,7 @@
       </li>
       <li @click.prevent.stop="editStatus"><button>Edit</button></li>
     </ul>
-  </div>
+  </section>
 </template>
 
 <script>

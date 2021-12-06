@@ -1,12 +1,15 @@
 
 <template>
-  <section class="task-container color-marker-after flex align-center">
+  <section
+    class="task-container color-marker-after flex align-center"
+    style="{border : 1px solid red }"
+  >
     <task-dropdown
       @removeTask="removeTask"
       @openTaskDetails="openTaskDetails"
       @clone="clone"
     />
-    <section class="task-preview color-marker flex align-center">
+    <section class="task-preview flex align-center">
       <template v-for="(cmpType, idx) in cmpsOrder">
         <component :is="cmpType" :info="task" :key="idx" />
         <!-- <component :is="cmpType" :info="getCmpInfo(cmpType)" @updated="updateTask(cmpType, $event)" :key="idx"> -->
@@ -25,7 +28,13 @@ import { utilService } from "../../services/util.service.js";
 
 export default {
   name: "task-preview",
-  components: { statusPicker, memberPicker, titlePicker,timelinePicker, taskDropdown },
+  components: {
+    statusPicker,
+    memberPicker,
+    titlePicker,
+    timelinePicker,
+    taskDropdown,
+  },
   props: ["task", "cmpsOrder"],
   data() {
     return {};

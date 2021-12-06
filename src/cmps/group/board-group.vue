@@ -33,35 +33,17 @@
         </div>
       </section>
     </header>
-    <Container
-      :drop-placeholder="dropPlaceholderOptions"
-      :get-child-payload="getChildPayload"
-      group-name="1"
-      @drop="onDrop('taskList', $event)"
-    >
-        <Draggable v-for="(task, index) in currTasks" :key="index">
-      <transition name="fade">
-          <task-preview
-            v-show="groupShow"
-            :task="task"
-            :cmpsOrder="cmpsOrder"
-            class="flex"
-            @addTask="addTask"
-          />
-      </transition>
-        </Draggable>
-    </Container>
-
-    <!-- <button @click="removeGroup">x</button> -->
+   
     <template v-for="task in currTasks">
       <transition name="fade" :key="task.id">
         <task-preview
           v-show="groupShow"
           :key="task.id"
           :task="task"
-          :style="{ background: group.style.color}"
+          :markerColor="markerColor"
           :cmpsOrder="cmpsOrder"
           class="flex"
+          style="{'border-inline-left' : 1px solid red }"
           @addTask="addTask"
         />
       </transition>
@@ -70,7 +52,6 @@
       <section
         class="add-task color-marker"
         v-show="groupShow"
-        :style="{ background: group.style.color }"
       >
         <input
           type="text"
@@ -109,6 +90,7 @@ export default {
       isFocusOn: false,
       hover: false,
       cmpHeaders: null,
+      markerColor: null,
       tasksList : null,
       dropPlaceholderOptions: {
         className: "drop-preview",
@@ -130,8 +112,14 @@ export default {
     addTask(task) {
       if (task === "new") {
         if (!this.title) return;
-        this.$emit("addTask", { title: this.title, groupId: this.group.id });
-        this.title = null;
+
+        const newTask = {
+          title : this.title,
+          }
+
+        this.$emit("addTask",  newTask );
+
+        this.title = null; //clear input
       } else {
         this.$emit("addTask", {
           task,
@@ -140,9 +128,8 @@ export default {
       }
     },
     changeColor(color) {
-      this.color = color;
-      console.log(this.color);
-      this.$emit("changeColor", color);
+      console.log(color);
+      this.markerColor = color;
     },
     removeGroup() {
       this.$emit("removeGroup", { groupId: this.group.id });
@@ -185,6 +172,11 @@ export default {
       this.cmpHeaders = cmps.slice(1);
       return cmps;
     },
+     marker(){
+       if(!this.markerColor) this.markerColor ="red"
+       console.log(`1px solid ${this.markerColor}`);
+      return `1px solid ${this.markerColor}`
+    }
   },
 };
 </script>

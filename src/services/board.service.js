@@ -37,7 +37,6 @@ function save(board) {
   }
   return board;
 }
-saveTask({id: "t101"})
 
 async function saveTask(taskInfo) {
   try {

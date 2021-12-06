@@ -1,5 +1,5 @@
 <template>
-  <div class="timeline-picker">
+  <section class="timeline-picker">
     <section v-if="!edit" @click="editStatus()">
       xxxx
     </section>
@@ -30,7 +30,7 @@
         </el-date-picker>
       </div>
     </section>
-  </div>
+  </section>
 </template>
 
 <script>
