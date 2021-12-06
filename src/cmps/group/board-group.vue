@@ -43,7 +43,6 @@
           :markerColor="markerColor"
           :cmpsOrder="cmpsOrder"
           class="flex"
-          style="{'border-inline-left' : 1px solid red }"
           @addTask="addTask"
         />
       </transition>
@@ -88,7 +87,7 @@ export default {
       hover: false,
       cmpHeaders: null,
       markerColor: null,
-      tasksList : null,
+      tasksList: null,
       dropPlaceholderOptions: {
         className: "drop-preview",
         animationDuration: "150",
@@ -109,13 +108,20 @@ export default {
     addTask(task) {
       if (task === "new") {
         if (!this.title) return;
-        const newTask = { title:this.title}
+
+        const newTask = {
+          title: this.title,
+        };
+
         this.$emit("addTask", newTask);
-        this.title = null;
+
+        this.title = null; //clear input
       } else {
-        this.$emit("addTask", task);
+        this.$emit("addTask", {
+          task,
+          groupId: this.group.id,
+        });
       }
-    }
     },
     changeColor(color) {
       console.log(color);
@@ -151,6 +157,7 @@ export default {
       console.log("index", index);
       return this.taskList[index];
     },
+  },
   computed: {
     currTasks() {
       this.taskList = this.group ? this.group.tasks : null;
@@ -161,11 +168,11 @@ export default {
       this.cmpHeaders = cmps.slice(1);
       return cmps;
     },
-     marker(){
-       if(!this.markerColor) this.markerColor ="red"
-       console.log(`1px solid ${this.markerColor}`);
-      return `1px solid ${this.markerColor}`
-    }
+    marker() {
+      if (!this.markerColor) this.markerColor = "red";
+      console.log(`1px solid ${this.markerColor}`);
+      return `1px solid ${this.markerColor}`;
+    },
   },
 };
 </script>

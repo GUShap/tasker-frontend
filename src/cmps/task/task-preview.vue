@@ -9,7 +9,10 @@
       @openTaskDetails="openTaskDetails"
       @clone="clone"
     />
-    <section class="task-preview flex align-center">
+    <section class="task-preview flex align-center"
+              :style="{'border-left': marker}"
+
+    >
       <template v-for="(cmpType, idx) in cmpsOrder">
         <component :is="cmpType" :info="task" :key="idx" />
         <!-- <component :is="cmpType" :info="getCmpInfo(cmpType)" @updated="updateTask(cmpType, $event)" :key="idx"> -->
@@ -59,7 +62,11 @@ export default {
       this.$emit("addTask", taskCopy);
     },
   },
-  computed: {},
+  computed: {
+    marker(){
+      return `10px solid red`
+    }
+  },
   destroyed() {},
 };
 </script>
