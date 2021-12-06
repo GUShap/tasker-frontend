@@ -129,27 +129,4 @@
   color: #504658dc;
 }
 
-.color-marker {
-  &::before {
-    position: relative;
-    content: "";
-    display: block;
-    min-width: rem(10px);
-    height: rem(35px);
-    left: 0px;
-    top: 0px;
-    background-color: yellow;
-  }
-}
-.color-marker-after {
-  &::after {
-    position: relative;
-    content: "";
-    display: block;
-    min-width: rem(10px);
-    height: rem(35px);
-    left: 0px;
-    top: 0px;
-    background: #e6e9ef;
-  }
-}
+

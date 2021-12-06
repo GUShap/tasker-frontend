@@ -1,7 +1,7 @@
 
 <template>
   <section
-    class="task-container color-marker-after flex align-center"
+    class="task-container flex align-center"
     style="{border : 1px solid red }"
   >
     <task-dropdown
@@ -64,7 +64,7 @@ export default {
   },
   computed: {
     marker(){
-      return `10px solid red`
+      return `8px solid red`
     }
   },
   destroyed() {},
