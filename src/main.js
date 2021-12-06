@@ -21,7 +21,7 @@ Vue.component('font-awesome-icon', FontAwesomeIcon)
 //=====
 Vue.use(InlineSvgPlugin);
 Vue.config.productionTip = false
-Vue.use(ElementUI,  EmojiPickerPlugin)
+Vue.use(ElementUI)
 Vue.config.productionTip = false
 
 new Vue({

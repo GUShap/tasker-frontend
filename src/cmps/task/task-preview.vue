@@ -45,7 +45,7 @@ export default {
       let task = this.task;
       let taskCopy = { ...task };
       delete taskCopy.id;
-      this.$emit("addTask",  taskCopy );
+      this.$emit("addTask", taskCopy);
     },
   },
   computed: {},
