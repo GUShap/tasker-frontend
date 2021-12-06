@@ -25,7 +25,7 @@ import taskDropdown from "../task-dropdown.vue";
 export default {
   name: "task-preview",
   components: { statusPicker, memberPicker, titlePicker,timelinePicker, taskDropdown },
-  props: ["task", "cmpsOrder","taskIdx"],
+  props: ["task", "cmpsOrder","taskIdx", "color"],
   data() {
     return {};
   },

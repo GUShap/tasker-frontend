@@ -39,17 +39,18 @@
       group-name="1"
       @drop="onDrop('taskList', $event)"
     >
-        <Draggable v-for="(task, index) in currTasks" :key="index">
-      <transition name="fade">
+      <Draggable v-for="(task, index) in currTasks" :key="index">
+        <transition name="fade">
           <task-preview
             v-show="groupShow"
             :task="task"
+            :color="color"
             :cmpsOrder="cmpsOrder"
             class="flex"
             @addTask="addTask"
           />
-      </transition>
-        </Draggable>
+        </transition>
+      </Draggable>
     </Container>
 
     <!-- <button @click="removeGroup">x</button> -->
@@ -59,7 +60,6 @@
           v-show="groupShow"
           :key="task.id"
           :task="task"
-          :style="{ background: group.style.color}"
           :cmpsOrder="cmpsOrder"
           class="flex"
           @addTask="addTask"
@@ -67,11 +67,7 @@
       </transition>
     </template>
     <transition>
-      <section
-        class="add-task color-marker"
-        v-show="groupShow"
-        :style="{ background: group.style.color }"
-      >
+      <section class="add-task color-marker" v-show="groupShow" :style="{ background: color }">
         <input
           type="text"
           placeholder="+Add"
@@ -109,7 +105,8 @@ export default {
       isFocusOn: false,
       hover: false,
       cmpHeaders: null,
-      tasksList : null,
+      tasksList: null,
+      color: null,
       dropPlaceholderOptions: {
         className: "drop-preview",
         animationDuration: "150",
@@ -138,9 +135,8 @@ export default {
       }
     },
     changeColor(color) {
+      console.log(color);
       this.color = color;
-      console.log(this.color);
-      this.$emit("changeColor", color);
     },
     removeGroup() {
       this.$emit("removeGroup", { groupId: this.group.id });
