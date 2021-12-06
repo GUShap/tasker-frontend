@@ -40,7 +40,7 @@
           ref="description"
           type="text"
           v-model="currBoard.description"
-          :class="[isFocusOn ? 'border' : 'no-boder']"
+          :class="[isFocus ? 'border' : 'no-boder']"
           v-on:keyup.enter="updateInfo"
           @blur="updateInfo"
         />
