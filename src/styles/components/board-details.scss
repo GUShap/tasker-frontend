@@ -7,15 +7,13 @@
         display: flex;
         flex-direction: column;
         flex: 1;
-        overflow: scroll;
-        // overflow: hidden;
+        overflow: hidden;
         font-size: rem(20px);
         font-family: roboto;
 
         .board-header {
-            // min-height: 10vh;
             display: flex;
-            width: 98%;
+            width: 95%;
             justify-content: space-between;
             align-items: center;
             padding-left: 20px;
@@ -65,7 +63,6 @@
             flex-direction: row;
             align-items: center;
             justify-content: center;
-            padding-top: 13px;
              gap: 2px;
 
             .fas.fa-share-alt{
@@ -84,7 +81,7 @@
             flex-direction: column;
             height: 100%;
             flex: 1;
-            // overflow-x: scroll;
+            overflow: scroll;
             max-width: 100%;
             font-family: roboto;
             margin-left:1.5rem;

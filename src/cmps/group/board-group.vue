@@ -39,8 +39,8 @@
       group-name="1"
       @drop="onDrop('taskList', $event)"
     >
-      <Draggable v-for="(task, index) in currTasks" :key="index">
-        <transition name="fade" :key="task.id">
+        <Draggable v-for="(task, index) in currTasks" :key="index">
+      <transition name="fade">
           <task-preview
             v-show="groupShow"
             :task="task"
@@ -48,8 +48,8 @@
             class="flex"
             @addTask="addTask"
           />
-        </transition>
-      </Draggable>
+      </transition>
+        </Draggable>
     </Container>
 
     <!-- <button @click="removeGroup">x</button> -->
@@ -59,7 +59,7 @@
           v-show="groupShow"
           :key="task.id"
           :task="task"
-          :style="{ 'color-marker': group.style.color }"
+          :style="{ background: group.style.color}"
           :cmpsOrder="cmpsOrder"
           class="flex"
           @addTask="addTask"
@@ -109,8 +109,7 @@ export default {
       isFocusOn: false,
       hover: false,
       cmpHeaders: null,
-      color: null,
-      tasksList: null,
+      tasksList : null,
       dropPlaceholderOptions: {
         className: "drop-preview",
         animationDuration: "150",
@@ -166,23 +165,23 @@ export default {
     },
     onDrop(collection, dropResult) {
       this[collection] = applyDrag(this[collection], dropResult);
+
       this.taskList.map((t) => t.id);
-      // const groupInfo = { group: this.tasksList, groupIdx: this.groupIdx };
-      // this.$store.commit({
-      //   type: "saveGroup",
-      //   groupInfo: groupInfo,
-      // });
+
+      const groupInfo = { group: this.tasksList, groupIdx: this.groupIdx };
+      this.$store.commit({
+        type: "saveGroup",
+        groupInfo: groupInfo,
+      });
     },
     getChildPayload(index) {
+      console.log("index", index);
       return this.taskList[index];
     },
   },
   computed: {
     currTasks() {
-      // console.log('this.group.tasks',this.group.tasks);
-      if (!this.taskList) {
-        this.taskList = this.group ? this.group.tasks : null;
-      }
+      this.taskList = this.group ? this.group.tasks : null;
       return this.taskList;
     },
     cmpsOrder() {
