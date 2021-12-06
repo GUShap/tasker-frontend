@@ -41,7 +41,7 @@
     white-space: nowrap;
     text-overflow: ellipsis;
     display: block;
-
+    // z-index: 100;
   }
   .status-picker {
     display: flex;
@@ -88,3 +88,4 @@
     padding: 0.5rem 1.5rem;
   }
 }
+

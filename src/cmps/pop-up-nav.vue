@@ -10,18 +10,17 @@
         :class="[isShown ? 'show' : 'hide']"
       >
         <div class="logo">
-          <a href="#/">Logo</a>
-          <h1>My Workspace</h1>
+          <h1>Workspace</h1>
         </div>
         <div class="action-btns">
-          <div>
-            <button><i class="fas fa-plus"></i>Add</button>
-          </div>
-          <div>
-            <button><i class="fas fa-filter"></i>Filter</button>
-          </div>
-          <div>
-            <button><i class="fas fa-search"></i>Search</button>
+          <el-select name="board" id="boards" v-if="currBoard" value="board">
+            <el-option value="board1">{{ currBoard.title }}</el-option>
+            <el-option value="board2">Board 2?</el-option>
+          </el-select>
+          <div class="search-btns">
+            <button><span class="icon-plus"></span>Add</button>
+            <button><span class="icon-filter"></span>Filter</button>
+            <button><span class="icon-search"></span>Search</button>
           </div>
         </div>
         <div class="my-boards">
@@ -36,6 +35,7 @@
 
 <script>
 export default {
+  props: ["board"],
   data() {
     return {
       isShown: false,
@@ -44,6 +44,11 @@ export default {
   methods: {
     toggleNav() {
       this.isShown = !this.isShown;
+    },
+  },
+  computed: {
+    currBoard() {
+      return this.board ? this.board : null;
     },
   },
 };

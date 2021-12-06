@@ -1,17 +1,21 @@
 
 <template>
   <section
-    class="task-container flex align-center"
-    style="{border : 1px solid red }"
+    class="task-container color-marker-after flex align-center"
+    style="
+       {
+        border: 1px solid red;
+      }
+    "
   >
     <task-dropdown
       @removeTask="removeTask"
       @openTaskDetails="openTaskDetails"
       @clone="clone"
     />
-    <section class="task-preview flex align-center"
-              :style="{'border-left': marker}"
-
+    <section
+      class="task-preview flex align-center"
+      :style="{ 'border-left': marker }"
     >
       <template v-for="(cmpType, idx) in cmpsOrder">
         <component :is="cmpType" :info="task" :key="idx" />
@@ -37,13 +41,11 @@ export default {
     timelinePicker,
     taskDropdown,
   },
-  props: ["task", "cmpsOrder"],
+  props: ["task", "cmpsOrder", "markerColor"],
   data() {
     return {};
   },
-  created() {
-    
-  },
+  created() {},
   methods: {
     async removeTask() {
       try {
@@ -63,9 +65,10 @@ export default {
     },
   },
   computed: {
-    marker(){
-      return `8px solid red`
-    }
+    marker() {
+      if (!this.markerColor) return `10px solid #579BFC`;
+      return `10px solid ${this.markerColor}`;
+    },
   },
   destroyed() {},
 };

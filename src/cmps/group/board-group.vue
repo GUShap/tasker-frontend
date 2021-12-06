@@ -8,6 +8,7 @@
         @showGroup="showGroup"
         @setEdit="setEdit"
         @changeColor="changeColor"
+        @showGroups="showGroups"
       />
       <section class="column-headers">
         <div @mouseover="hover = true" @mouseleave="hover = false">
@@ -26,7 +27,7 @@
             ref="title"
             type="text"
             v-model="group.title"
-            :style="{ color: group.style.color }"
+            :style="{ color: fontColor }"
             v-on:keyup.enter="updateInfo"
             @blur="updateInfo"
           />
@@ -59,14 +60,21 @@
     </Container>
 
     <transition>
-      <section class="add-task color-marker" v-show="groupShow">
+      <section
+        class="add-task"
+        v-show="groupShow"
+        :style="{ 'border-left': marker }"
+      >
         <input
           type="text"
           placeholder="+Add"
           v-model="title"
+          @click="showBtn"
           @keyup.enter="addTask('new')"
         />
-        <button class="btn-add-task" @click="addTask('new')">Add</button>
+        <button class="btn-add-task" @click="addTask('new')" v-if="isSeen">
+          Add
+        </button>
       </section>
     </transition>
     <footer class="group-footer flex justify-center align-center"></footer>
@@ -106,6 +114,7 @@ export default {
       markerColor: null,
       isFocusOn: false,
       hover: false,
+      isSeen: false,
       dropPlaceholderOptions: {
         className: "drop-preview",
         animationDuration: "150",
@@ -122,6 +131,9 @@ export default {
       } else {
         this.groupShow = !this.groupShow;
       }
+    },
+    showBtn() {
+      this.isSeen = !this.isSeen;
     },
     addTask(task) {
       if (task === "new") {
@@ -142,8 +154,11 @@ export default {
       }
     },
     changeColor(color) {
-      console.log(color);
       this.markerColor = color;
+    },
+    showGroups(val) {
+      console.log(val);
+      this.$emit("showGroups", val);
     },
     removeGroup() {
       this.$emit("removeGroup", { groupId: this.group.id });
@@ -225,9 +240,12 @@ export default {
     //   return cmps;
     // },
     marker() {
-      if (!this.markerColor) this.markerColor = "red";
-      console.log(`1px solid ${this.markerColor}`);
-      return `1px solid ${this.markerColor}`;
+      if (!this.markerColor) return `10px solid #579BFC`;
+      return `10px solid ${this.markerColor}`;
+    },
+    fontColor() {
+      if (!this.markerColor) return "#579BFC";
+      return this.markerColor;
     },
   },
   watch: {

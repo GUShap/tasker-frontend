@@ -7,7 +7,9 @@
         :board="board"
         :groupIdx="groupIdx"
         @addTask="addTask"
+        @showGroups="showGroups"
         @removeGroup="removeGroup"
+        v-show="groupsShow"
       />
     </template>
   </section>
@@ -27,6 +29,7 @@ export default {
     return {
       groups: null,
       openModal: false,
+      groupsShow: true,
     };
   },
   created() {},
@@ -38,6 +41,14 @@ export default {
     removeGroup(groupId) {
       this.$emit("removeGroup", groupId);
       console.log(groupId);
+    },
+    showGroups(val = null) {
+      // if (val) {
+      //   const tasks = this.groups.map((group) => {
+      //     return group.tasks;
+      //   });
+      //   return tasks;
+      // }
     },
   },
   computed: {
