@@ -17,7 +17,7 @@
   width: 100%;
   height: rem(35px);
   margin: rem(1px) 0;
-  border-bottom: 1px solid #e7e7e7;
+  box-shadow: 0 1px 0 0 #e7e7e7;
   background-color: #f5f6f8;
   border-right: 8px solid #e6e9ef;
 
@@ -32,15 +32,16 @@
     border-right: 1px solid white;
   }
   .title-picker {
-    position: sticky;
     display: flex;
+    position:sticky;
+    height: 100%;
     justify-content: start;
     margin-left: 0.5rem;
     min-width: rem(400px);
     white-space: nowrap;
     text-overflow: ellipsis;
     display: block;
-    z-index: 100;
+
   }
   .status-picker {
     display: flex;
