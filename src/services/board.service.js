@@ -39,7 +39,6 @@ function save(board) {
 }
 
 async function saveTask(taskInfo) {
-  console.log(taskInfo)
   try {
     if (taskInfo.id) {
       console.log("update task");

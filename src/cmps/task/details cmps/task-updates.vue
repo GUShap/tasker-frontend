@@ -7,7 +7,7 @@
       @focus="setEdit"
     />
 
-    <form v-if="isEditMode" @submit="saveComment" @blur="setEdit">
+    <form v-if="isEditMode" @submit.prevent="saveComment" @blur="setEdit">
       <div class="comment-form">
         <div class="text-edit">
           <i class="fas fa-paragraph"></i>
@@ -18,7 +18,7 @@
         </div>
         <hr />
         <div class="comment-input">
-          <input type="text" v-model="input"/>
+          <input type="text" v-model="input" ref="input" />
         </div>
       </div>
 
@@ -64,7 +64,7 @@
           </emoji-picker>
           <button>@ mention</button>
         </div>
-        <button class="save-btn" type="submit">Update</button>
+        <button class="save-btn">Update</button>
       </div>
     </form>
     <a href="#" v-if="!isEditMode"
@@ -165,12 +165,13 @@ export default {
     insert(emoji) {
       this.input += emoji;
     },
-    async saveComment(ev) {
+    async saveComment() {
       try {
-        this.newComment.txt = ev.target[0].value;
+        this.newComment.txt = this.$refs.input.value;
+        if (!this.task.comments) this.task.comments = [];
         this.task.comments.push(this.newComment);
         await this.$store.dispatch({ type: "editTask", task: this.task });
-        this.setEdit()
+        this.setEdit();
       } catch (err) {
         console.log("Error", err);
       }
