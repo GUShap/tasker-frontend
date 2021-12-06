@@ -14,7 +14,7 @@
     </Container>
 
 
-    <!-- <Container
+    <Container
       drag-class="card-ghost"
       drop-class="card-ghost-drop"
       :drop-placeholder="dropPlaceholderOptions"
@@ -25,7 +25,7 @@
       <Draggable v-for="(item, idx) in listTwo" :key="idx">
         <div>{{ item }}</div>
       </Draggable>
-    </Container> -->
+    </Container>
   </div>
 </template>
 <script>
