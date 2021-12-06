@@ -1,148 +1,132 @@
+
 <template>
-  <div class="card-scene">
+  <div class="card-list-container">
     <Container
-      orientation="vertical"
-      @drop="onColumnDrop($event)"
-      drag-handle-selector=".column-drag-handle"
-      @drag-start="dragStart"
-      :drop-placeholder="upperDropPlaceholderOptions"
+      drag-class="card-ghost"
+      drop-class="card-ghost-drop"
+      :get-child-payload="getChildPayload1"
+      group-name="1"
+      @drop="onDrop('listOne', $event)"
     >
-      <Draggable v-for="column in scene.children" :key="column.id">
-        <div :class="column.props.className">
-          <div class="card-column-header">
-            <span class="column-drag-handle">&#x2630;</span>
-            {{ column.name }}
-          </div>
-          <Container
-            group-name="col"
-            @drop="(e) => onCardDrop(column.id, e)"
-            @drag-start="(e) => log('drag start', e)"
-            @drag-end="(e) => log('drag end', e)"
-            :get-child-payload="getCardPayload(column.id)"
-            drag-class="card-ghost"
-            drop-class="card-ghost-drop"
-            :drop-placeholder="dropPlaceholderOptions"
-          >
-            <Draggable v-for="card in column.children" :key="card.id">
-              <div :class="card.props.className" :style="card.props.style">
-                <p>{{ card.data }}</p>
-              </div>
-            </Draggable>
-          </Container>
-        </div>
+      <Draggable v-for="(item, idx) in listOne" :key="idx">
+        <div>{{ item }}</div>
+      </Draggable>
+    </Container>
+
+
+    <Container
+      drag-class="card-ghost"
+      drop-class="card-ghost-drop"
+      :drop-placeholder="dropPlaceholderOptions"
+      :get-child-payload="getChildPayload2"
+      group-name="1"
+      @drop="onDrop('listTwo', $event)"
+    >
+      <Draggable v-for="(item, idx) in listTwo" :key="idx">
+        <div>{{ item }}</div>
       </Draggable>
     </Container>
   </div>
 </template>
-
 <script>
-import { Container, Draggable } from 'vue-smooth-dnd'
-import { applyDrag, generateItems } from './card-helper.js'
-
-const lorem = `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
-Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
-Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.`
-
-const columnNames = ['Lorem', 'Ipsum', 'Consectetur', 'Eiusmod']
-
-const cardColors = [
-  'azure',
-  'beige',
-  'bisque',
-  'blanchedalmond',
-  'burlywood',
-  'cornsilk',
-  'gainsboro',
-  'ghostwhite',
-  'ivory',
-  'khaki'
-]
-
-const pickColor = () => {
-  const rand = Math.floor(Math.random() * 10)
-  return cardColors[rand]
-}
-
-const scene = {
-  type: 'container',
-  props: {
-    orientation: 'horizontal'
-  },
-  children: generateItems(2, i => ({
-    id: `column${i}`,
-    type: 'container',
-    name: columnNames[i],
-    props: {
-      orientation: 'vertical',
-      className: 'card-container'
-    },
-    children: generateItems(+(Math.random() * 10).toFixed() + 5, j => ({
-      type: 'draggable',
-      id: `${i}${j}`,
-      props: {
-        className: 'card',
-        style: {backgroundColor: pickColor()}
-      },
-      data: lorem.slice(0, Math.floor(Math.random() * 150) + 30)
-    }))
-  }))
-}
-
+import { Container, Draggable } from "vue-smooth-dnd";
+import { applyDrag } from "./card-helper.js";
 export default {
-  name: 'Cards',
-
-  components: {Container, Draggable},
-
-  data () {
-    return {
-      scene,
-      upperDropPlaceholderOptions: {
-        className: 'cards-drop-preview',
-        animationDuration: '150',
-        showOnTop: true
-      },
-      dropPlaceholderOptions: {
-        className: 'drop-preview',
-        animationDuration: '150',
-        showOnTop: true
-      }
-    }
+  name: "CardList",
+  components: {
+    Container,
+    Draggable,
   },
-
+  data() {
+    return {
+      dropPlaceholderOptions: {
+        className: "drop-preview",
+        animationDuration: "150",
+        showOnTop: false,
+      },
+      listOne: [
+        {
+          id: 0,
+          text: `List 1 Text 0`,
+        },
+        {
+          id: 1,
+          text: `List 1 Text 1`,
+        },
+        {
+          id: 2,
+          text: `List 1 Text 2`,
+        },
+        {
+          id: 3,
+          text: `List 1 Text 3`,
+        },
+      ],
+      listTwo: [
+        {
+          id: 2123,
+          text: `List 2 Text 0`,
+        },
+        {
+          id: 1515,
+          text: `List 2 Text 1`,
+        },
+        {
+          id: 254323,
+          text: `List 2 Text 2`,
+        },
+        {
+          id: 3235,
+          text: `List 2 Text 3`,
+        },
+      ],
+    };
+  },
   methods: {
-    onColumnDrop (dropResult) {
-      const scene = Object.assign({}, this.scene)
-      scene.children = applyDrag(scene.children, dropResult)
-      this.scene = scene
+    onDrop(collection, dropResult) {
+console.log('this',this);
+      this[collection] = applyDrag(this[collection], dropResult);
+    },
+    getChildPayload1(index) {
+            console.log('getChildPayload1',index);
+
+      return this.listOne[index];
+    },
+    getChildPayload2(index) {
+                  console.log('getChildPayload2',index);
+
+      return this.listTwo[index];
     },
 
-    onCardDrop (columnId, dropResult) {
-      if (dropResult.removedIndex !== null || dropResult.addedIndex !== null) {
-        const scene = Object.assign({}, this.scene)
-        const column = scene.children.filter(p => p.id === columnId)[0]
-        const columnIndex = scene.children.indexOf(column)
-
-        const newColumn = Object.assign({}, column)
-        newColumn.children = applyDrag(newColumn.children, dropResult)
-        scene.children.splice(columnIndex, 1, newColumn)
-
-        this.scene = scene
-      }
-    },
-
-    getCardPayload (columnId) {
-      return index => {
-        return this.scene.children.filter(p => p.id === columnId)[0].children[index]
-      }
-    },
-
-    dragStart () {
-      console.log('drag started')
-    },
-
-    log (...params) {
-      console.log(...params)
-    }
-  }
-}
+  },
+};
 </script>
+<style scoped>
+.card-list-container {
+  display: flex;
+  justify-content: space-evenly;
+}
+.smooth-dnd-container {
+  display: flex;
+  flex-direction: column;
+  width: 40%;
+  max-width: 40%;
+  flex: 0 0 40%;
+  height: 100%;
+  border: 1px solid #dcebf4;
+  border-radius: 6px;
+  padding: 1rem 1rem 0 1rem;
+  margin-top: 5rem;
+  margin-right: 2.5rem;
+  margin-left: 1rem;
+}
+.card-ghost {
+  transition: transform 0.18s ease;
+  transform: rotateZ(5deg);
+}
+.card-ghost-drop {
+  transition: transform 0.18s ease-in-out;
+  transform: rotateZ(0deg);
+}
+</style>
+view rawCardListFinal.vue hosted with ❤ by GitHub
