@@ -41,6 +41,10 @@ export const boardStore = {
       state.currBoard = boards[currBoardIdx];
       state.currBoardIdx = currBoardIdx;
     },
+    saveBoard(state, { board }) {
+      console.log('label',board.groups.map(g=>g.tasks.map(t=>t.id)));
+      state.currBoard = board;
+    },
     updateTask(state, { boards, currBoardIdx }) {
       state.boards = boards;
       state.currBoard = boards[currBoardIdx];
@@ -67,6 +71,15 @@ export const boardStore = {
         const boards = await boardService.query();
         commit({ type: "setBoards", boards: boards, currBoardIdx });
         return boards;
+      } catch (err) {
+        console.log(err);
+      }
+    },
+    async saveBoard({ commit, state }, { board }) {
+      try {
+        // console.log('board',board);
+        const currBoard = await boardService.saveBoard(board, state.currBoardIdx);
+        commit({ type: "saveBoard", board: currBoard });
       } catch (err) {
         console.log(err);
       }
@@ -127,17 +140,17 @@ export const boardStore = {
         console.log(err);
       }
     },
-    // async saveGroups({ commit, state }, { groupsInfo }) {
-    //   try {
-    //     console.log("groups", groupsInfo);
-    //     groupsInfo.boardIdx = state.currBoardIdx;
-    //     const currGroups = await boardService.saveGroups(groupsInfo);
-    //     commit({ type: "saveGroups", groupsInfo });
-    //     return currGroups;
-    //   } catch (err) {
-    //     console.log(err);
-    //   }
-    // },
+    async saveGroups({ commit, state }, { groupsInfo }) {
+      try {
+        console.log("groups", groupsInfo);
+        groupsInfo.boardIdx = state.currBoardIdx;
+        const currGroups = await boardService.saveGroups(groupsInfo);
+        commit({ type: "saveGroups", groupsInfo });
+        return currGroups;
+      } catch (err) {
+        console.log(err);
+      }
+    },
   },
   modules: {},
 };

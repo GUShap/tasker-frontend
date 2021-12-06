@@ -5,22 +5,16 @@ export const applyDrag = (arr, dragResult) => {
   
     const result = [...arr]
     let itemToAdd = payload
-  
     if (removedIndex !== null) {
+      console.log('removedIndex',removedIndex);
       itemToAdd = result.splice(removedIndex, 1)[0]
     }
   
     if (addedIndex !== null) {
+      console.log('addedIndex',addedIndex);
       result.splice(addedIndex, 0, itemToAdd)
     }
-  
+    console.log('result',result);
     return result
   }
   
-  export const generateItems = (count, creator) => {
-    const result = []
-    for (let i = 0; i < count; i++) {
-      result.push(creator(i))
-    }
-    return result
-  }

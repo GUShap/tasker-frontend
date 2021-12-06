@@ -5,6 +5,7 @@ export const boardService = {
   query,
   save,
   saveTask,
+  saveBoard,
   remove,
   getById,
   getTaskById,
@@ -66,6 +67,17 @@ async function saveTask(task) {
   }
 }
 
+async function saveBoard(board,boardIdx ) {
+  try {
+    const gBoards = query();
+    gBoards.splice(boardIdx,1,board)
+    _saveToStorage(gBoards);
+    return gBoards[boardIdx];
+  } catch (err) {
+    console.log(err);
+  }
+}
+
 async function removeGroup(boardIdx, { groupId }) {
   try {
     const gBoards = query();
@@ -76,6 +88,8 @@ async function removeGroup(boardIdx, { groupId }) {
     console.log(err);
   }
 }
+
+
 async function saveGroup(groupInfo) {
   try {
     console.log('groupInfo',groupInfo);
