@@ -178,17 +178,9 @@ export default {
       if (!this.taskList) {
       this.taskList = this.group ? this.group.tasks : null;
       }
-<<<<<<< HEAD
-      console.log(
-        "currTasks",
-        this.taskList.map((t) => t.id)
-      );
-      return this.taskList;
-=======
       // console.log('this',this);
       //   console.log('currTasks',this.tasksList.map(t => t.id) )
-      return this.tasksList;
->>>>>>> 7ed569dba64379c26d8bbd8c47a28c1cf26935f1
+      return this.taskList;
     },
     cmpsOrder() {
       const cmps = this.$store.getters.currBoard.cmpsOrder;
