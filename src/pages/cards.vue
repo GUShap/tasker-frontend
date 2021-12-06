@@ -85,7 +85,6 @@ export default {
   methods: {
     onDrop(collection, dropResult) {
       this[collection] = applyDrag(this[collection], dropResult);
-      
     },
     getChildPayload1(index) {
             console.log('getChildPayload1',index);

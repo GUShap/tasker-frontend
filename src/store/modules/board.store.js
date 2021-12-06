@@ -7,10 +7,10 @@ export const boardStore = {
     currBoardIdx: null,
     sortedBoard: null,
     sortBy: {
-      val: '',
-      order: ''
+      val: "",
+      order: "",
     },
-    isTaskDetailsHover: false
+    isTaskDetailsHover: false,
   },
   getters: {
     currBoard(state) {
@@ -20,18 +20,20 @@ export const boardStore = {
       return JSON.parse(JSON.stringify(state.boards));
     },
     sortBoard(state) {
-      const filteredTasks = []
+      const filteredTasks = [];
       state.sortedBoard = JSON.parse(JSON.stringify(state.currBoard));
       // state.sortBy = JSON.parse(JSON.stringify(sortBy));
       // const regex = new RegExp(state.sortBy.val.name, 'i');
       state.sortedBoard.groups.forEach((group) => {
-        group.tasks.sort((task1, task2) => { task1.title.toLowerCase() > task2.title.toLowerCase() ? 1 : -1 })
-      })
-      return state.boards.tasks = filteredTasks
+        group.tasks.sort((task1, task2) => {
+          task1.title.toLowerCase() > task2.title.toLowerCase() ? 1 : -1;
+        });
+      });
+      return (state.boards.tasks = filteredTasks);
     },
     taskHover(state) {
-      return state.isTaskDetailsHover
-    }
+      return state.isTaskDetailsHover;
+    },
   },
   mutations: {
     setBoards(state, { boards, currBoardIdx }) {
@@ -45,15 +47,19 @@ export const boardStore = {
       state.currBoardIdx = currBoardIdx;
     },
     setSort(state, { sortBy }) {
-      state.sortBy = sortBy
+      state.sortBy = sortBy;
     },
     saveGroup(state, { groupInfo }) {
-      const {group, groupIdx} =groupInfo
-      state.currBoard.groups[groupIdx] = group;
+      const { group, groupIdx } = groupInfo;
+      state.currBoard.groups.splice(groupIdx, 1, group);
+    },
+    saveGroups(state, { groupsInfo }) {
+      const { groups } = groupsInfo;
+      state.currBoard.groups = groups;
     },
     hover(state, { isHover }) {
-      state.isTaskDetailsHover = isHover
-    }
+      state.isTaskDetailsHover = isHover;
+    },
   },
   actions: {
     async loadBoards({ commit }, { currBoardIdx }) {
@@ -94,18 +100,10 @@ export const boardStore = {
         console.log(err);
       }
     },
-    // async cloneTask({ state, dispatch }, { task }) {
-    //   try {
-    //     await boardService.saveNewTask(task);
-    //     dispatch({ type: "loadBoards", currBoardIdx: state.currBoardIdx });
-    //   } catch (err) {
-    //     console.log(err);
-    //   }
-    // },
-    async removeGroup({ state, dispatch }, { groupId }) {
+    async removeGroup({ commit, state }, { groupId }) {
       try {
         await boardService.removeGroup(state.currBoardIdx, groupId);
-        dispatch({ type: "loadBoards", currBoardIdx: state.currBoardIdx });
+        // commit({ type: "removeGroup", currBoardIdx: state.currBoardIdx });
       } catch (err) {
         console.log(err);
       }
@@ -119,6 +117,27 @@ export const boardStore = {
         console.log(err);
       }
     },
+    async saveGroup({ commit, state }, { groupInfo }) {
+      try {
+        groupInfo.boardIdx = state.currBoardIdx;
+        const currGroup = await boardService.saveGroup(groupInfo);
+        commit({ type: "saveGroup", groupInfo });
+        return currGroup;
+      } catch (err) {
+        console.log(err);
+      }
+    },
+    // async saveGroups({ commit, state }, { groupsInfo }) {
+    //   try {
+    //     console.log("groups", groupsInfo);
+    //     groupsInfo.boardIdx = state.currBoardIdx;
+    //     const currGroups = await boardService.saveGroups(groupsInfo);
+    //     commit({ type: "saveGroups", groupsInfo });
+    //     return currGroups;
+    //   } catch (err) {
+    //     console.log(err);
+    //   }
+    // },
   },
   modules: {},
 };

@@ -5,9 +5,9 @@
       <board-header :board="currBoard" />
       <task-actions-nav @sortBy="sortBy" @addNewGroup="addNewGroup" />
       <board-filter />
-      <board-details
-        :board="currBoard"
+      <board-group
         @addTask="addTask"
+        :board="currBoard"
         @removeGroup="removeGroup"
         @addNewGroup="addNewGroup"
       />
@@ -20,14 +20,14 @@
 import boardFilter from "@/cmps/board-filter.vue";
 import boardHeader from "@/cmps/board-header.vue";
 import taskActionsNav from "@/cmps/task-actions-nav.vue";
-import boardDetails from "@/cmps/board/board-details.vue";
+import boardGroup from "@/cmps/group/board-group.vue";
 import popUpNav from "@/cmps/pop-up-nav.vue";
 
 export default {
   name: "workspace",
   components: {
     boardFilter,
-    boardDetails,
+    boardGroup,
     boardHeader,
     taskActionsNav,
     popUpNav,
@@ -39,7 +39,7 @@ export default {
       currBoardIdx: 0,
     };
   },
-  async created() {
+   created() {
     this.boards = this.$store.dispatch({
       type: "loadBoards",
       currBoardIdx: this.currBoardIdx,
