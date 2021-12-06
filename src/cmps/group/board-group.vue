@@ -59,7 +59,7 @@
           v-show="groupShow"
           :key="task.id"
           :task="task"
-          :style="{ 'color-marker': group.style.color}"
+          :style="{ 'color-marker': group.style.color }"
           :cmpsOrder="cmpsOrder"
           class="flex"
           @addTask="addTask"
@@ -110,7 +110,7 @@ export default {
       hover: false,
       cmpHeaders: null,
       color: null,
-      tasksList : null,
+      tasksList: null,
       dropPlaceholderOptions: {
         className: "drop-preview",
         animationDuration: "150",
@@ -131,7 +131,11 @@ export default {
     addTask(task) {
       if (task === "new") {
         if (!this.title) return;
-        this.$emit("addTask", { title: this.title, groupId: this.group.id });
+        this.$emit("addTask", {
+          title: this.title,
+          groupId: this.group.id,
+          groupIdx: this.groupIdx,
+        });
         this.title = null;
       } else {
         this.$emit("addTask", {
@@ -144,7 +148,8 @@ export default {
       this.color = color;
       console.log(this.color);
       this.$emit("changeColor", color);
-    },    removeGroup() {
+    },
+    removeGroup() {
       this.$emit("removeGroup", { groupId: this.group.id });
     },
     setEdit() {
@@ -174,9 +179,9 @@ export default {
   },
   computed: {
     currTasks() {
-      console.log('this.group.tasks',this.group.tasks);
+      // console.log('this.group.tasks',this.group.tasks);
       if (!this.taskList) {
-      this.taskList = this.group ? this.group.tasks : null;
+        this.taskList = this.group ? this.group.tasks : null;
       }
       return this.taskList;
     },
