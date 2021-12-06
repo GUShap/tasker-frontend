@@ -39,7 +39,6 @@ function save(board) {
 }
 
 async function saveTask(taskInfo) {
-  console.log(taskInfo)
   try {
     if (taskInfo.id) {
       console.log("update task");
@@ -180,12 +179,13 @@ function _loadToStorage(gBoards) {
 
 function getEmptyComment() {
   return {
+    id: utilService.makeId(),
     txt: "",
     createdAt: Date.now(),
     byMember: {
-      _id: null,
-      fullname: null,
-      imgUrl: "",
+      _id: "u101",
+      fullname: "Guy Shapira",
+      imgUrl: "guy-img.jpeg",
     },
   };
 }

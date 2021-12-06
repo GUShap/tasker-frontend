@@ -6,8 +6,8 @@ export const boardDb = {
     "Track your action items and improve for next sprint",
   createdBy: {
     _id: "u101",
-    fullname: "Abi Abambi",
-    imgUrl: "http://some-img",
+    fullname: "Guy Shapira",
+    imgUrl: "guy-img.jpeg",
   },
   style: {},
   labels: [
@@ -21,7 +21,7 @@ export const boardDb = {
     {
       _id: "u101",
       fullname: "Guy Shapira",
-      imgUrl: "https://www.google.com",
+      imgUrl: "guy-img.jpeg",
     },
   ],
   groups: [
@@ -193,7 +193,7 @@ export const boardDb = {
       createdAt: 154514,
       byMember: {
         _id: "u101",
-        fullname: "Abi Abambi",
+        fullname: "Guy Shapira",
         imgUrl: "guy-img.jpeg",
       },
       task: {
@@ -207,7 +207,7 @@ export const boardDb = {
       createdAt: 154514,
       byMember: {
         _id: "u101",
-        fullname: "Abi Abambi",
+        fullname: "Guy Shapira",
         imgUrl: "guy-img.jpeg",
       },
       task: {
@@ -221,7 +221,7 @@ export const boardDb = {
       createdAt: 154514,
       byMember: {
         _id: "u101",
-        fullname: "Abi Abambi",
+        fullname: "Guy Shapira",
         imgUrl: "guy-img.jpeg",
       },
       task: {

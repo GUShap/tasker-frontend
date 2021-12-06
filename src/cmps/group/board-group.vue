@@ -176,8 +176,8 @@ export default {
       if(!this.tasksList){
         this.tasksList =  this.group.tasks;
       }
-      console.log('this',this);
-        console.log('currTasks',this.tasksList.map(t => t.id) )
+      // console.log('this',this);
+      //   console.log('currTasks',this.tasksList.map(t => t.id) )
       return this.tasksList;
     },
     cmpsOrder() {
