@@ -35,7 +35,7 @@
         </div>
       </div>
 
-      <div
+      <div class="input-section"
         v-show="!isEditedMode || currEditedVal !== 'description'"
         @click="setEdit('description')"
         v-if="isShown"
@@ -53,7 +53,7 @@
     </header>
     <section class="board-btns">
       <div class="board-action-btns">
-        <button><span class="icon-main-table"></span><span class="icon-home"></span> Table</button>
+        <button><div><span class="icon-main-table"></span><span class="icon-home"></span></div>Table</button>
         <button><span class="icon-calender"></span>Calendar</button>
         <button><span class="icon-calender"></span>Chart</button>
         <button><span class="icon-kanban"></span>Kanban</button>

@@ -180,7 +180,10 @@ export const boardDb = {
           },
         },
       ],
-      style: {},
+      style: {
+        color: "#26de81",
+        bgColor: "#26de81",
+      },
     },
   ],
   activities: [

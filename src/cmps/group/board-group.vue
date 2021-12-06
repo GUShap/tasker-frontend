@@ -2,9 +2,11 @@
   <section class="group flex column align-center">
     <header class="group-header flex start align-center">
       <group-dropdown
+        :group="group"
         @removeGroup="removeGroup"
         @showGroup="showGroup"
         @setEdit="setEdit"
+        @changeColor="changeColor"
       />
       <section class="column-headers">
         <div @mouseover="hover = true" @mouseleave="hover = false">
@@ -21,6 +23,7 @@
             ref="title"
             type="text"
             v-model="group.title"
+            :style="{ color: group.style.color }"
             v-on:keyup.enter="updateInfo"
             @blur="updateInfo"
           />
@@ -50,8 +53,26 @@
       </Draggable>
     </Container>
 
+    <!-- <button @click="removeGroup">x</button> -->
+    <template v-for="task in currTasks">
+      <transition name="fade" :key="task.id">
+        <task-preview
+          v-show="groupShow"
+          :key="task.id"
+          :task="task"
+          :style="{ 'color-marker': group.style.color}"
+          :cmpsOrder="cmpsOrder"
+          class="flex"
+          @addTask="addTask"
+        />
+      </transition>
+    </template>
     <transition>
-      <section class="add-task color-marker" v-show="groupShow">
+      <section
+        class="add-task color-marker"
+        v-show="groupShow"
+        :style="{ background: group.style.color }"
+      >
         <input
           type="text"
           placeholder="+Add"
@@ -89,6 +110,7 @@ export default {
       isFocusOn: false,
       hover: false,
       cmpHeaders: null,
+      color: null,
       tasksList : null,
       dropPlaceholderOptions: {
         className: "drop-preview",
@@ -118,6 +140,11 @@ export default {
           groupId: this.group.id,
         });
       }
+    },
+    changeColor(color) {
+      this.color = color;
+      console.log(this.color);
+      this.$emit("changeColor", color);
     },
     removeGroup() {
       this.$emit("removeGroup", { groupId: this.group.id });

@@ -1,7 +1,10 @@
 <template>
   <section class="group-dropdown">
     <el-dropdown class="dropdown" trigger="click">
-      <i class="fa fa-caret-down"></i>
+      <i
+        class="fas fa-arrow-alt-circle-down"
+        :style="{ color: group.style.color }"
+      ></i>
       <el-dropdown-menu trigger="click" size="large" slot="dropdown">
         <el-dropdown-item @click.native="showGroup(true)">
           <i class="fas fa-compress-alt"></i>Collapse this group
@@ -14,13 +17,23 @@
           ><i class="fas fa-plus"></i>Add group</el-dropdown-item
         >
         <el-dropdown-item
-          ><i class="far fa-copy"></i>Duplicate group</el-dropdown-item>
+          ><i class="far fa-copy"></i>Duplicate group</el-dropdown-item
+        >
         <el-dropdown-item @click.native="setEdit"
           ><i class="fas fa-pen"></i>Rename group
         </el-dropdown-item>
-        <el-dropdown-item class="last-child"
-          ><i class="fas fa-arrows-alt-v"></i>Change group color
+        <el-dropdown-item class="last-child" @click="openColorModal"
+          ><i
+            class="fas fa-arrows-alt-v"
+            :style="{ color: group.style.color }"
+          ></i
+          >Change group color
         </el-dropdown-item>
+        <input
+          type="color"
+          @change="changeColor($event)"
+          v-model="group.style.color"
+        />
         <el-dropdown-item
           ><i class="fas fa-archive"></i>Archive
         </el-dropdown-item>
@@ -37,6 +50,12 @@
 <script>
 export default {
   name: "group-dropDown",
+  props: ["group"],
+  data() {
+    return {
+      isOpen: false,
+    };
+  },
   methods: {
     removeGroup() {
       this.$emit("removeGroup");
@@ -47,6 +66,14 @@ export default {
     setEdit() {
       console.log("hello");
       this.$emit("setEdit");
+    },
+    openColorModal() {
+      this.isOpen = true;
+    },
+    changeColor() {
+      // const color = ev.target.value;
+      // console.log(color);
+      this.$emit("changeColor");
     },
   },
 };
