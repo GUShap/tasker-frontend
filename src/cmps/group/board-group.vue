@@ -39,7 +39,7 @@
       group-name="1"
       @drop="onDrop('taskList', $event)"
     >
-      <Draggable v-for="(task, $index) in currTasks" :key="$index">
+      <Draggable v-for="(task, index) in currTasks" :key="index">
         <transition name="fade" :key="task.id">
           <task-preview
             v-show="groupShow"
@@ -144,8 +144,7 @@ export default {
       this.color = color;
       console.log(this.color);
       this.$emit("changeColor", color);
-    },
-    removeGroup() {
+    },    removeGroup() {
       this.$emit("removeGroup", { groupId: this.group.id });
     },
     setEdit() {
@@ -175,11 +174,10 @@ export default {
   },
   computed: {
     currTasks() {
+      console.log('this.group.tasks',this.group.tasks);
       if (!this.taskList) {
       this.taskList = this.group ? this.group.tasks : null;
       }
-      // console.log('this',this);
-      //   console.log('currTasks',this.tasksList.map(t => t.id) )
       return this.taskList;
     },
     cmpsOrder() {

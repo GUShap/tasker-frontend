@@ -1,5 +1,5 @@
 <template>
-  <section id="app" class="landing-page">
+  <section class="landing-page">
     <header class="home-header align-center">
       <section class="home-nav">
         <a class="logo-home">tasker.com</a>
