@@ -71,7 +71,7 @@ export default {
     },
     changeColor(ev) {
       const color = ev.target.value;
-      this.$emit("changeColor",color);
+      this.$emit("changeColor", color);
     },
   },
 };

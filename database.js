@@ -38,7 +38,7 @@ export const boardDb = {
             {
               id: "ZdPnm",
               txt: "also @yaronb please CR this",
-              createdAt: 1590999817436,
+              createdAt: 1638753114117,
               byMember: {
                 _id: "u101",
                 fullname: "Guy Shapira",
@@ -48,7 +48,7 @@ export const boardDb = {
             {
               id: "ZdPnm",
               txt: "also @yaronb please CR this",
-              createdAt: 1590999817436,
+              createdAt: 1620999817436,
               byMember: {
                 _id: "u101",
                 fullname: "Guy Shapira",

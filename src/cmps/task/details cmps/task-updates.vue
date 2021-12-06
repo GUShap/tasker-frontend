@@ -180,5 +180,12 @@ export default {
       this.isEditMode = !this.isEditMode;
     },
   },
+
+  computed: {
+    updateTime() {
+      const currTime = Date.now();
+let formatted
+    },
+  },
 };
 </script>

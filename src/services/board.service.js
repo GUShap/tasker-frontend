@@ -40,6 +40,7 @@ function save(board) {
 
 async function saveTask(taskInfo) {
   try {
+    console.log(taskInfo);
     if (taskInfo.id) {
       console.log("update task");
       const x = await getTaskOrigin(taskInfo.id)
@@ -195,6 +196,9 @@ async function getBoardIdx(boardId) {
     throw err;
   }
 }
+
+
+
 
 function _loadToStorage(gBoards) {
   storageService.store("gBoards", gBoards);

@@ -24,7 +24,6 @@ import statusPicker from "./status-picker.vue";
 import memberPicker from "./member-picker.vue";
 import timelinePicker from "./timeline-picker.vue";
 import taskDropdown from "../task-dropdown.vue";
-import { utilService } from "../../services/util.service.js";
 
 export default {
   name: "task-preview",
@@ -39,7 +38,9 @@ export default {
   data() {
     return {};
   },
-  created() {},
+  created() {
+    
+  },
   methods: {
     async removeTask() {
       try {

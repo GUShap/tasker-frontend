@@ -33,7 +33,7 @@
         </div>
       </section>
     </header>
-   
+
     <template v-for="task in currTasks">
       <transition name="fade" :key="task.id">
         <task-preview
@@ -49,10 +49,7 @@
       </transition>
     </template>
     <transition>
-      <section
-        class="add-task color-marker"
-        v-show="groupShow"
-      >
+      <section class="add-task color-marker" v-show="groupShow">
         <input
           type="text"
           placeholder="+Add"
@@ -112,20 +109,13 @@ export default {
     addTask(task) {
       if (task === "new") {
         if (!this.title) return;
-
-        const newTask = {
-          title : this.title,
-          }
-
-        this.$emit("addTask",  newTask );
-
-        this.title = null; //clear input
+        const newTask = { title:this.title}
+        this.$emit("addTask", newTask);
+        this.title = null;
       } else {
-        this.$emit("addTask", {
-          task,
-          groupId: this.group.id,
-        });
+        this.$emit("addTask", task);
       }
+    }
     },
     changeColor(color) {
       console.log(color);
@@ -161,7 +151,6 @@ export default {
       console.log("index", index);
       return this.taskList[index];
     },
-  },
   computed: {
     currTasks() {
       this.taskList = this.group ? this.group.tasks : null;
