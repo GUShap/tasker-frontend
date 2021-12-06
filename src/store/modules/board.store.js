@@ -9,7 +9,8 @@ export const boardStore = {
     sortBy: {
       val: '',
       order: ''
-    }
+    },
+    isTaskDetailsHover: false
   },
   getters: {
     currBoard(state) {
@@ -27,6 +28,9 @@ export const boardStore = {
         group.tasks.sort((task1, task2) => { task1.title.toLowerCase() > task2.title.toLowerCase() ? 1 : -1 })
       })
       return state.boards.tasks = filteredTasks
+    },
+    taskHover(state) {
+      return state.isTaskDetailsHover
     }
   },
   mutations: {
@@ -47,6 +51,9 @@ export const boardStore = {
       const {group, groupIdx} =groupInfo
       state.currBoard.groups[groupIdx] = group;
     },
+    hover(state, { isHover }) {
+      state.isTaskDetailsHover = isHover
+    }
   },
   actions: {
     async loadBoards({ commit }, { currBoardIdx }) {
@@ -59,7 +66,6 @@ export const boardStore = {
       }
     },
     async editTask({ state, dispatch, commit }, { task }) {
-      console.log(task)
       try {
         const currTask = await boardService.saveTask(task);
         if (task._id) {

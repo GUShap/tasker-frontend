@@ -35,17 +35,12 @@
         </div>
       </div>
 
-      <div
-        v-show="!isEditedMode || currEditedVal !== 'description'"
-        @click="setEdit('description')"
-        v-if="isShown"
-      >
-        {{ currBoard.description }}
-        <input
+      <div class="input-section" @click="setEdit('description')">
+        <textarea
           ref="description"
-          v-show="isEditedMode && currEditedVal === 'description'"
           type="text"
-          v-model="board.description"
+          v-model="currBoard.description"
+          :class="[isFocusOn ? 'border' : 'no-boder']"
           v-on:keyup.enter="updateInfo"
           @blur="updateInfo"
         />
@@ -53,7 +48,12 @@
     </header>
     <section class="board-btns">
       <div class="board-action-btns">
-        <button><span class="icon-main-table"></span><span class="icon-home"></span> Table</button>
+        <button>
+          <div>
+            <span class="icon-main-table"></span><span class="icon-home"></span>
+          </div>
+          Table
+        </button>
         <button><span class="icon-calender"></span>Calendar</button>
         <button><span class="icon-calender"></span>Chart</button>
         <button><span class="icon-kanban"></span>Kanban</button>
@@ -75,6 +75,7 @@ export default {
   data() {
     return {
       isShown: true,
+      isFocus: false,
       isStared: false,
       currEditedVal: "",
       isEditedMode: false,
@@ -83,6 +84,7 @@ export default {
   methods: {
     setEdit(val) {
       console.log(val);
+      this.isFocus = true
       this.isEditedMode = true;
       this.currEditedVal = val;
     },

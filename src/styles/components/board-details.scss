@@ -1,6 +1,5 @@
 .workspace-container {
     width: 100%;
-    padding-right: rem(20px);
     font-family: roboto;
     height: 100%;
     overflow: scroll;
@@ -24,6 +23,22 @@
             flex-wrap: wrap;
             font-family: roboto;
 
+            .border{
+                border: 1px solid lightcyan;
+            }
+            .no-boder{
+                border: none;
+            }
+
+            .input-section{
+                margin-left: 1.2rem;
+                color: #676879;
+            }
+
+            textarea{
+                min-width: 450px;
+            }
+
             a {
                 text-decoration: none;
                 padding: 10px;
@@ -44,15 +59,13 @@
             }
 
         }
-
-
         .board-info{
-            margin-left: 1rem;
+            margin-left: 1.2rem;
             display: flex;
             flex-direction: row;
             align-items: center;
             justify-content: center;
-            padding-top: 7px;
+            padding-top: 13px;
              gap: 2px;
 
             .fas.fa-share-alt{
@@ -66,7 +79,7 @@
             font-family: roboto;
         }
 
-        .board-container {
+           .board-container {
             display: flex;
             flex-direction: column;
             height: 100%;
@@ -74,6 +87,7 @@
             // overflow-x: scroll;
             max-width: 100%;
             font-family: roboto;
+            margin-left:1.5rem;
 
             // padding-right: 20px;
         }
