@@ -37,34 +37,29 @@ function save(board) {
   }
   return board;
 }
-saveTask({id: "t101"})
 
-async function saveTask(taskInfo) {
+async function saveTask(task) {
   try {
-    console.log(taskInfo);
-    if (taskInfo.id) {
+    if (task.id) {
       console.log("update task");
-      const x = await getTaskOrigin(taskInfo.id)
-      console.log('x',x);
     } else {
-      var currTask;
-      if (taskInfo.task) {
-        currTask = taskInfo.task;
-        currTask.id = utilService.makeId();
-      } else {
-        currTask = {
-          title: taskInfo.title,
-          id: utilService.makeId(),
-        };
-      }
-      const bIdx = await getBoardIdx(taskInfo.boardId);
-      const gIdx = await getGroupIdx(taskInfo.boardId, taskInfo.groupId);
-
-      const gBoards = query();
-      gBoards[bIdx].groups[gIdx].tasks.push(currTask);
-      _loadToStorage(gBoards);
+      task = {
+        title: task.title,
+        id: utilService.makeId()
+      };
     }
+    const taskOrigin = await getTaskOrigin(task.id)
+    console.log(taskOrigin.boardId);
+    const bIdx = await getBoardIdx(taskOrigin.boardId);
+    const gIdx = await getGroupIdx(taskOrigin.boardId, taskOrigin.groupId);
+
+console.log('bIdx:',bIdx,'gIdx:', gIdx);
+
+    const boards = query();
+    boards[bIdx].groups[gIdx].tasks.push(task);
+    _loadToStorage(boards);
     return;
+
   } catch (err) {
     console.log(err);
   }
@@ -155,7 +150,7 @@ async function getTaskOrigin(taskId) {
         });
       });
     });
-    return  taskInfo;
+    return taskInfo;
   } catch (err) {
     console.log("Error", err);
     throw err;

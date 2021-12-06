@@ -130,17 +130,11 @@ export default {
     addTask(task) {
       if (task === "new") {
         if (!this.title) return;
-        this.$emit("addTask", {
-          title: this.title,
-          groupId: this.group.id,
-          groupIdx: this.groupIdx,
-        });
+        const newTask = { title:this.title}
+        this.$emit("addTask", newTask);
         this.title = null;
       } else {
-        this.$emit("addTask", {
-          task,
-          groupId: this.group.id,
-        });
+        this.$emit("addTask", task);
       }
     },
     changeColor(color) {
