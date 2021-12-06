@@ -51,7 +51,6 @@ async function saveTask(taskInfo) {
         currTask = {
           title: taskInfo.title,
           id: utilService.makeId(),
-          members: [{username: null}]
         };
       }
       const bIdx = await getBoardIdx(taskInfo.boardId);

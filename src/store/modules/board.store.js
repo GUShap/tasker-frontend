@@ -47,6 +47,10 @@ export const boardStore = {
     setSort(state, { sortBy }) {
       state.sortBy = sortBy
     },
+    saveGroup(state, { groupInfo }) {
+      const {group, groupIdx} =groupInfo
+      state.currBoard.groups[groupIdx] = group;
+    },
     hover(state, { isHover }) {
       state.isTaskDetailsHover = isHover
     }

@@ -1,9 +1,10 @@
 <template>
   <section class="board-container">
-    <template v-for="group in currGroups">
+    <template v-for="(group, groupIdx) in currGroups">
       <board-group
         :group="group"
         :key="group.id"
+        :groupIdx="groupIdx"
         @addTask="addTask"
         @removeGroup="removeGroup"
       />

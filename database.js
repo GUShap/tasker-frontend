@@ -230,5 +230,5 @@ export const boardDb = {
       },
     },
   ],
-  cmpsOrder: ["title-picker", "status-picker", "member-picker"],
+  cmpsOrder: ["title-picker", "status-picker", "member-picker", "timeline-picker"],
 };

@@ -1,24 +1,27 @@
 <template>
-  <div  @click="editStatus('edit')" class="member-picker">
+  <div @click="editStatus('edit')" class="member-picker">
     <section v-if="!edit">
-      <div v-if="!members">x</div>
-       <avatar  
+      <section v-if="!members">
+        <avatar :size="25" username="i" />
+      </section>
+      <avatar
+        v-else
         v-for="member in members"
         :size="25"
         :username="member"
         :key="member._id"
-      ></avatar>
+      />
     </section>
     <ul v-if="edit" @blur="editStatus('edit')" class="status-modal">
-      <li v-for="member in members" :key="member._id" class="flex justify-center align-center">
+      <li
+        v-for="(member, idx) in members"
+        :key="idx"
+        class="flex justify-center align-center"
+      >
         <section>
-      <avatar
-        :size="25"
-        :username="member"
-        :key="member._id"
-      ></avatar>
-      {{member}}
-      </section>
+          <avatar :size="25" :username="member" :key="member._id"></avatar>
+          {{ member }}
+        </section>
       </li>
       <li @click.prevent.stop="editStatus"><button>Edit</button></li>
     </ul>
@@ -44,7 +47,7 @@ export default {
   },
   methods: {
     editStatus() {
-      console.log('label');
+      console.log("label");
       this.edit = !this.edit;
     },
   },
