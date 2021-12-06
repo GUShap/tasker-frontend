@@ -14,7 +14,7 @@
     </Container>
 
 
-    <Container
+    <!-- <Container
       drag-class="card-ghost"
       drop-class="card-ghost-drop"
       :drop-placeholder="dropPlaceholderOptions"
@@ -25,7 +25,7 @@
       <Draggable v-for="(item, idx) in listTwo" :key="idx">
         <div>{{ item }}</div>
       </Draggable>
-    </Container>
+    </Container> -->
   </div>
 </template>
 <script>
@@ -84,8 +84,8 @@ export default {
   },
   methods: {
     onDrop(collection, dropResult) {
-console.log('this',this);
       this[collection] = applyDrag(this[collection], dropResult);
+      
     },
     getChildPayload1(index) {
             console.log('getChildPayload1',index);
@@ -93,7 +93,6 @@ console.log('this',this);
       return this.listOne[index];
     },
     getChildPayload2(index) {
-                  console.log('getChildPayload2',index);
 
       return this.listTwo[index];
     },

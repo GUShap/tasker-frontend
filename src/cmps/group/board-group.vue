@@ -34,13 +34,12 @@
       :drop-placeholder="dropPlaceholderOptions"
       :get-child-payload="getChildPayload"
       group-name="1"
-      @drop="onDrop('tasksList' , $event)"
+      @drop="onDrop('taskList', $event)"
     >
       <Draggable v-for="(task, $index) in currTasks" :key="$index">
         <transition name="fade" :key="task.id">
           <task-preview
             v-show="groupShow"
-            
             :task="task"
             :cmpsOrder="cmpsOrder"
             class="flex"
@@ -81,7 +80,7 @@ export default {
     Draggable,
   },
 
-  props: ["group"],
+  props: ["group", "groupIdx"],
   data() {
     return {
       title: null,
@@ -89,7 +88,7 @@ export default {
       isFocusOn: false,
       hover: false,
       cmpHeaders: null,
-      tasksList : null,
+      taskList: null,
       dropPlaceholderOptions: {
         className: "drop-preview",
         animationDuration: "150",
@@ -135,23 +134,28 @@ export default {
       return val;
     },
     onDrop(collection, dropResult) {
-      console.log('collection',collection);
       this[collection] = applyDrag(this[collection], dropResult);
+      this.taskList.map((t) => t.id);
+      // const groupInfo = { group: this.tasksList, groupIdx: this.groupIdx };
+      // this.$store.commit({
+      //   type: "saveGroup",
+      //   groupInfo: groupInfo,
+      // });
     },
     getChildPayload(index) {
-      console.log('index',index);
-      return this.tasksList[index];
+      return this.taskList[index];
     },
   },
   computed: {
     currTasks() {
-      if(!this.group) return
-      if(!this.tasksList){
-        this.tasksList =  this.group.tasks;
+      if (!this.taskList) {
+      this.taskList = this.group ? this.group.tasks : null;
       }
-      console.log('this',this);
-        console.log('currTasks',this.tasksList.map(t => t.id) )
-      return this.tasksList;
+      console.log(
+        "currTasks",
+        this.taskList.map((t) => t.id)
+      );
+      return this.taskList;
     },
     cmpsOrder() {
       const cmps = this.$store.getters.currBoard.cmpsOrder;

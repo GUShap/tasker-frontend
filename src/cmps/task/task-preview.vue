@@ -19,12 +19,13 @@
 import titlePicker from "./title-picker.vue";
 import statusPicker from "./status-picker.vue";
 import memberPicker from "./member-picker.vue";
+import timelinePicker from "./timeline-picker.vue";
 import taskDropdown from "../task-dropdown.vue";
 import { utilService } from "../../services/util.service.js";
 
 export default {
   name: "task-preview",
-  components: { statusPicker, memberPicker, titlePicker, taskDropdown },
+  components: { statusPicker, memberPicker, titlePicker,timelinePicker, taskDropdown },
   props: ["task", "cmpsOrder"],
   data() {
     return {};
