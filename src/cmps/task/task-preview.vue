@@ -26,7 +26,7 @@ import { utilService } from "../../services/util.service.js";
 export default {
   name: "task-preview",
   components: { statusPicker, memberPicker, titlePicker,timelinePicker, taskDropdown },
-  props: ["task", "cmpsOrder"],
+  props: ["task", "cmpsOrder", "color"],
   data() {
     return {};
   },

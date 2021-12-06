@@ -69,10 +69,9 @@ export default {
     openColorModal() {
       this.isOpen = true;
     },
-    changeColor() {
-      // const color = ev.target.value;
-      // console.log(color);
-      this.$emit("changeColor");
+    changeColor(ev) {
+      const color = ev.target.value;
+      this.$emit("changeColor", color);
     },
   },
 };
