@@ -180,12 +180,13 @@ function _loadToStorage(gBoards) {
 
 function getEmptyComment() {
   return {
+    id: utilService.makeId(),
     txt: "",
     createdAt: Date.now(),
     byMember: {
-      _id: null,
-      fullname: null,
-      imgUrl: "",
+      _id: "u101",
+      fullname: "Guy Shapira",
+      imgUrl: "guy-img.jpeg",
     },
   };
 }

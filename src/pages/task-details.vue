@@ -1,5 +1,10 @@
 <template>
-  <section v-if="task" class="task-details">
+  <section
+    v-if="task"
+    class="task-details"
+    @mouseover.self="pageHover(true)"
+    @mouseleave="pageHover(false)"
+  >
     <i class="fa fa-times" @click="exitModal"></i>
     <div class="details-title flex">
       <input placeholder="title" v-model="task.title" />
@@ -39,50 +44,48 @@
           class="flex"
           :class="{ underline: component === 'task-updates' }"
           @click="component = 'task-updates'"
-          @mouseover="hover('updates')"
-          @mouseleave="hover(null)"
+          @mouseover="btnHover(true, 'updates')"
+          @mouseleave="btnHover(false, null)"
         >
           updates
           <btn-dropdown
             class="dropdown-btn"
-            v-if="isHover && hoveredBtn === 'updates'"
+            v-if="isBtnHover && hoveredBtn === 'updates'"
           />
         </button>
         <!-- <button
           class="flex"
           :class="{ underline: component === 'task-files' }"
           @click="component = 'task-files'"
-          @mouseover="hover('files')"
-          @mouseleave="hover(null)"
+          @mouseover="btnHover(true,'files')"
+          @mouseleave="btnHover(false, null)"
         >
-          files<btn-dropdown v-if="isHover && hoveredBtn === 'files'" />
+          files<btn-dropdown v-if="isBtnHover && hoveredBtn === 'files'" />
         </button> -->
         <button
           class="flex"
           :class="{ underline: component === 'activity-log' }"
           @click="component = 'activity-log'"
-          @mouseover="hover('log')"
-          @mouseleave="hover(null)"
+          @mouseover="btnHover(true, 'log')"
+          @mouseleave="btnHover(false, null)"
         >
-          activity log<btn-dropdown v-if="isHover && hoveredBtn === 'log'" />
+          activity log<btn-dropdown v-if="isBtnHover && hoveredBtn === 'log'" />
         </button>
       </div>
       <span>|</span><button class="add-btn">+ add view</button>
     </div>
     <hr />
     <template>
-      <component :is="component" :task="task"></component>
+      <component :is="component" :task="task" class="cmp-container"></component>
     </template>
   </section>
 </template>
 
 <script>
-
 import taskUpdates from "@/cmps/task/details cmps/task-updates.vue";
 import taskFiles from "@/cmps/task/details cmps/task-files.vue";
 import activityLog from "@/cmps/task/details cmps/activity-log.vue";
 import btnDropdown from "@/cmps/task/details cmps/btn-dropdown.vue";
-
 
 export default {
   name: "task-details",
@@ -96,18 +99,23 @@ export default {
     return {
       task: null,
       component: "task-updates",
-      isHover: false,
+      isBtnHover: false,
       hoveredBtn: null,
     };
   },
   methods: {
     exitModal() {
+      this.pageHover(false)
       this.$router.push("/board");
     },
 
-    hover(val) {
-      this.isHover = !this.isHover;
+    btnHover(isHovered, val) {
+      this.isBtnHover = isHovered;
       this.hoveredBtn = val;
+    },
+
+    pageHover(isHover) {
+      this.$store.commit({type:"hover", isHover})
     },
   },
 
@@ -118,7 +126,6 @@ export default {
         type: "getTaskById",
         taskId,
       });
-      console.log("this.task", this.task);
     } catch (err) {
       console.log("Error", err);
     }

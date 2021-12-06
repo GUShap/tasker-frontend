@@ -9,7 +9,7 @@
         border: 1px solid rgba(170, 88, 238, 0.698);
     }
 
-    form {
+    .comment-form {
         width: 100%;
         border-radius: 8px;
         border: 1px solid rgba(170, 88, 238, 0.698);
@@ -39,34 +39,64 @@
         }
     }
 
-    .actions-footer{
-        button{
-
-            color: #0073EA;
-        }
-
-    .emoji-picker {
-        position: absolute;
-        max-width: 300px;
-        height: 100px;
-        display: block;
-        background-color: white;
-        transform: translate(50%);
-        z-index: 10;
-
-        .emoji-search {
-            border: 1px solid;
-            border-radius: 5px;
-            position: sticky;
-        
-            input {
-                text-align: left;
-                border: none;
-                outline: none;
+    .actions-footer {
+        margin-top: 6px;
+        button {
+            color: #0073ea;
+            cursor: pointer;
+            & > * {
+                font-size: 14px;
+                color: #0073ea;
             }
         }
+
+        .emoji-picker {
+            position: absolute;
+            max-width: 300px;
+            display: block;
+            background-color: white;
+            transform: translate(50%);
+            z-index: 10;
+
+            .emoji-search {
+                border: 1px solid;
+                border-radius: 5px;
+                position: sticky;
+
+                input {
+                    text-align: left;
+                    border: none;
+                    outline: none;
+                }
+            }
+
+            .emoji-container {
+                max-height: 100px;
+            }
+        }
+
+        .text-edit {
+            margin-right: 42%;
+            button {
+                padding: 0;
+            }
+            & > * {
+                margin-right: 15px;
+            }
+        }
+
+        .save-btn {
+            background-color: #0073ea;
+            color: white;
+            height: 32px;
+            padding: 4px 8px;
+        }
     }
-}
+
+    a {
+        text-align: right;
+    }
+
     .update-card {
         border-radius: 8px;
         margin-top: 30px;
@@ -80,13 +110,16 @@
 
         .card-btn {
             float: right;
-        }
-        .card-btn > * {
-            display: inline-block;
-            margin: 0;
-            margin-left: 10px;
-        }
+            span {
+                font: 14px roboto;
+            }
 
+            & > * {
+                display: inline-block;
+                margin: 0;
+                margin-left: 10px;
+            }
+        }
         .dropdown {
             .fas.fa-sort-down {
                 transform: translateY(-20%);

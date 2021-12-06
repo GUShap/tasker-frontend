@@ -1,7 +1,8 @@
 <template>
-  <section :class="[isWorkspace ? 'flex' : '']">
+  <section :class="[isWorkspace ? 'flex' : '']" class="main-app">
     <main-nav v-if="!isLandingPage" />
     <router-view />
+    <div class="cover" v-if="isTaskDetailsHover"></div>
   </section>
 </template>
 
@@ -17,10 +18,10 @@ export default {
     return {
       isLandingPage: true,
       isWorkspace: false,
+      isTaskDetails: null,
     };
   },
   created() {
-    console.log(this.$route.name);
     if (this.$route.name !== "workspace") {
       this.isWorkspace = true;
     }
@@ -28,8 +29,16 @@ export default {
       this.isLandingPage = false;
     }
   },
-  methods: {},
-  computed: {},
+  methods: {
+    detailsHover(isHovered) {
+      this.isTaskDetailsHover = isHovered;
+    },
+  },
+  computed: {
+    isTaskDetailsHover() {
+      return this.$store.getters.taskHover;
+    },
+  },
   destroyed() {},
   watch: {
     $route: function (newVal, OldVal) {

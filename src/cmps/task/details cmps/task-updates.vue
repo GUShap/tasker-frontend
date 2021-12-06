@@ -1,64 +1,75 @@
 <template>
   <section class="task-updates flex">
-    <form v-if="isEditMode">
-      <div class="text-edit">
-        <i class="fas fa-paragraph"></i>
-        <i class="fas fa-bold"></i>
-        <i class="fas fa-italic"></i>
-        <i class="fas fa-underline"></i>
-        <i class="fas fa-strikethrough"></i>
-      </div>
-      <hr />
-      <div class="comment-input">
-        <input type="text" @blur="setEdit" v-model="input"/>
-      </div>
-      <div>
-        <!-- <textarea ></textarea> -->
-
-       
-      </div>
-    </form>
     <input
       v-if="!isEditMode"
       type="text"
       placeholder="Write an update..."
       @focus="setEdit"
     />
-<div class="actions-footer flex">
-  <button><span class="icon-clip"></span> add files</button>
-    <emoji-picker @emoji="insert" :search="search" >
-          <div 
-            slot="emoji-invoker"
-            slot-scope="{ events: { click: clickEvent } }"
-            @click.stop="clickEvent"
-          >
-            <button type="button"><span class="far fa-smile"></span> Emoji</button>
-          </div>
-          <div class="emoji-picker" slot="emoji-picker" slot-scope="{ emojis, insert,}">
-            <div>
-              <div class="emoji-search">
-                <input type="text" v-model="search" placeholder="search"/>
-                <i class="fas fa-search"></i>
-              </div>
+
+    <form v-if="isEditMode" @submit="saveComment" @blur="setEdit">
+      <div class="comment-form">
+        <div class="text-edit">
+          <i class="fas fa-paragraph"></i>
+          <i class="fas fa-bold"></i>
+          <i class="fas fa-italic"></i>
+          <i class="fas fa-underline"></i>
+          <i class="fas fa-strikethrough"></i>
+        </div>
+        <hr />
+        <div class="comment-input">
+          <input type="text" v-model="input"/>
+        </div>
+      </div>
+
+      <div class="actions-footer flex">
+        <div class="text-edit flex">
+          <button><span class="icon-clip"></span> add files</button>
+          <emoji-picker @emoji="insert" :search="search">
+            <div
+              slot="emoji-invoker"
+              slot-scope="{ events: { click: clickEvent } }"
+              @click.stop="clickEvent"
+            >
+              <button type="button">
+                <span class="far fa-smile"></span> Emoji
+              </button>
+            </div>
+            <div
+              class="emoji-picker"
+              slot="emoji-picker"
+              slot-scope="{ emojis, insert }"
+            >
               <div>
-                <div v-for="(emojiGroup, category) in emojis" :key="category">
-                  <h5>{{ category }}</h5>
-                  <div>
-                    <span
-                      v-for="(emoji, emojiName) in emojiGroup"
-                      :key="emojiName"
-                      @click="insert(emoji)"
-                      :title="emojiName"
-                      >{{ emoji }}</span
-                    >
+                <div class="emoji-search">
+                  <input type="text" v-model="search" placeholder="search" />
+                  <i class="fas fa-search"></i>
+                </div>
+                <div>
+                  <div v-for="(emojiGroup, category) in emojis" :key="category">
+                    <h5>{{ category }}</h5>
+                    <div>
+                      <span
+                        v-for="(emoji, emojiName) in emojiGroup"
+                        :key="emojiName"
+                        @click="insert(emoji)"
+                        :title="emojiName"
+                        >{{ emoji }}</span
+                      >
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-        </emoji-picker>
-</div>
-    <a href="#"><i class="far fa-envelope"></i>Write updates via email:</a>
+          </emoji-picker>
+          <button>@ mention</button>
+        </div>
+        <button class="save-btn" type="submit">Update</button>
+      </div>
+    </form>
+    <a href="#" v-if="!isEditMode"
+      ><i class="far fa-envelope"></i>Write updates via email:</a
+    >
     <ul>
       <li v-for="(comment, idx) in task.comments" :key="idx">
         <div class="update-card">
@@ -130,29 +141,42 @@
 </template>
 
 <script>
-import { EmojiPicker } from 'vue-emoji-picker'
-
+import { EmojiPicker } from "vue-emoji-picker";
+import { boardService } from "@/services/board.service.js";
 
 export default {
   name: "task-updates",
   props: ["task"],
-  components:{
-    EmojiPicker
+  components: {
+    EmojiPicker,
   },
   data() {
     return {
-      isEditMode: true,
+      isEditMode: false,
+      newComment: null,
       input: "",
       search: "",
     };
+  },
+  created() {
+    this.newComment = boardService.getEmptyComment();
   },
   methods: {
     insert(emoji) {
       this.input += emoji;
     },
-    saveComment() {},
+    async saveComment(ev) {
+      try {
+        this.newComment.txt = ev.target[0].value;
+        this.task.comments.push(this.newComment);
+        await this.$store.dispatch({ type: "editTask", task: this.task });
+        this.setEdit()
+      } catch (err) {
+        console.log("Error", err);
+      }
+    },
     setEdit() {
-      // this.isEditMode = !this.isEditMode;
+      this.isEditMode = !this.isEditMode;
     },
   },
 };
