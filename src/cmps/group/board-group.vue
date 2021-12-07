@@ -47,7 +47,7 @@
       :get-child-payload="getChildPayload"
       :drop-placeholder="dropPlaceholderOptions"
     >
-      <Draggable v-for="task in tasksList" :key="task.id">
+      <Draggable v-for="(task,taskIdx ) in tasksList" :key="taskIdx">
         <transition name="fade" :key="task.id">
           <task-preview
             v-show="groupShow"
@@ -57,6 +57,7 @@
           :markerColor="markerColor"
           :cmpsOrder="cmpsOrder"
           :groupIdx="groupIdx"
+          :members="board.members"
           class="flex"
           style="{'border-inline-left' : 1px solid red }"
           @addTask="addTask"
