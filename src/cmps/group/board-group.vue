@@ -47,19 +47,19 @@
       :get-child-payload="getChildPayload"
       :drop-placeholder="dropPlaceholderOptions"
     >
-      <Draggable v-for="(task,taskIdx ) in tasksList" :key="taskIdx">
+      <Draggable v-for="(task,taskIdx ) in tasksList" :key="task.id">
         <transition name="fade" :key="task.id">
           <task-preview
             v-show="groupShow"
-          :key="taskIdx"
-          :task="task"
-          :taskIdx="taskIdx"
-          :markerColor="markerColor"
-          :members="board.members"
-          :cmpsOrder="cmpsOrder"
-          :groupIdx="groupIdx"
-          class="flex"
-          @addTask="addTask"
+            :key="task.id"
+            :task="task"
+            :taskIdx="taskIdx"
+            :markerColor="markerColor"
+            :cmpsOrder="board.cmpsOrder"
+            :groupIdx="groupIdx"
+            :members="board.members"
+            class="flex"
+            @addTask="addTask"
           />
         </transition>
       </Draggable>
@@ -123,8 +123,7 @@ export default {
       },
     };
   },
-  created() {
-  },
+  created() {},
   methods: {
     showGroup(val = null) {
       if (val) {
@@ -158,7 +157,7 @@ export default {
     changeColor(color) {
       this.markerColor = color;
       this.groupColor = color;
-      this.$emit("editGroup", { group: this.group, groupIdx: this.groupIdx});
+      this.$emit("editGroup", { group: this.group, groupIdx: this.groupIdx });
     },
     showGroups(val) {
       this.$emit("showGroups", val);
@@ -199,12 +198,9 @@ export default {
       }
     },
     getChildPayload(index) {
-      console.log("index", index);
       return this.group.tasks[index];
     },
     onGroupDrop(dropResult) {
-      console.log("dropResult", dropResult);
-      console.log("this", this);
       this.currGroups = applyDrag(this.currGroups, dropResult);
       const groupsInfo = { groups: this.currGroups };
       this.$store.dispatch({

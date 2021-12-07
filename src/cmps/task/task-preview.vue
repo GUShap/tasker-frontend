@@ -43,7 +43,9 @@ export default {
   data() {
     return {};
   },
-  created() {},
+  created() {
+    
+  },
   methods: {
     async removeTask() {
       try {
