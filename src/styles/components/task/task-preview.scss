@@ -1,4 +1,6 @@
-.smooth-dnd-container{
+@import url("//unpkg.com/element-ui@2.15.7/lib/theme-chalk/index.css");
+
+.smooth-dnd-container {
   width: 100%;
 }
 
@@ -7,11 +9,9 @@
   margin-right: 2rem;
 }
 
-
-.smooth-dnd-container{
+.smooth-dnd-container {
   width: 100%;
 }
-
 
 .task-preview {
   width: 100%;
@@ -20,7 +20,6 @@
   box-shadow: 0 1px 0 0 #e7e7e7;
   background-color: #f5f6f8;
   border-right: 8px solid #e6e9ef;
-
 
   &:hover {
     background-color: #e7e7e7;
@@ -33,7 +32,7 @@
   }
   .title-picker {
     display: flex;
-    position:sticky;
+    position: sticky;
     height: 100%;
     justify-content: start;
     margin-left: 0.5rem;
@@ -58,7 +57,39 @@
     min-width: rem(200px);
     max-width: rem(400px);
     height: 100%;
-    
+    span {
+      position: absolute;
+      color:white;
+    }
+    .myProgress {
+      width: 80%;
+      height: 65%;
+      background-color: #ddd;
+      border-radius: 11px;
+      overflow: hidden;
+      background-color: #1c1e3b;
+
+      .myBar {
+        width: 50%;
+        height: 100%;
+        background-color: #04aa6d;
+        text-align: center;
+        line-height: 30px;
+        color: white;
+      }
+    }
+    // .timeline-modal {
+    //   position: absolute;
+    //   transform: translate(-100%, 40%);
+    //   padding: 1rem;
+    //   width: fit-content;
+    //   height: fit-content;
+    //   z-index: 100;
+    //   box-shadow: 1px 1px 5px 2px rgba(0, 0, 0, 0.26);
+    //   background-color: #f5f6f8;
+    //   @import url("//unpkg.com/element-ui@2.15.7/lib/theme-chalk/index.css");
+
+    // }
   }
   .member-picker {
     display: flex;
@@ -69,9 +100,9 @@
     height: 100%;
     section {
       display: flex;
-     &>div{
-       margin-inline:-.2rem;
-     }
+      & > div {
+        margin-inline: -0.2rem;
+      }
     }
   }
 }
@@ -89,3 +120,13 @@
   }
 }
 
+.timeline-modal {
+  position: absolute;
+  transform: translate(-74%, 30%);
+  padding: 1rem;
+  width: fit-content;
+  height: fit-content;
+  z-index: 100;
+  box-shadow: 1px 1px 5px 2px rgba(0, 0, 0, 0.26);
+  background-color: #f5f6f8;
+}

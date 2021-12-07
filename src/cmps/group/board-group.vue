@@ -1,3 +1,4 @@
+
 <template>
   <section class="group flex column align-center">
     <header class="group-header flex start align-center">
@@ -17,7 +18,9 @@
             :class="[
               groupShow ? 'fas fa-caret-square-up' : 'fas fa-caret-square-down',
             ]"
-          ></i>
+            style="padding-left: 10px; padding-right: 2px"
+          />
+          <i v-show="hover" class="group-drag-handle fas fa-grip-vertical" />
           <input
             class="input-group-name"
             :class="[isFocusOn ? 'border' : 'no-boder']"
@@ -35,19 +38,27 @@
       </section>
     </header>
 
-    <template v-for="task in currTasks">
-      <transition name="fade" :key="task.id">
-        <task-preview
-          v-show="groupShow"
-          :key="task.id"
-          :task="task"
-          :markerColor="markerColor"
-          :cmpsOrder="cmpsOrder"
-          class="flex"
-          @addTask="addTask"
-        />
-      </transition>
-    </template>
+    <Container
+      @drop="onTaskDrop(group.id, $event)"
+      lock-axis="y"
+      group-name="tasks"
+      :get-child-payload="getChildPayload"
+      :drop-placeholder="dropPlaceholderOptions"
+    >
+      <Draggable v-for="task in tasksList" :key="task.id">
+        <transition name="fade" :key="task.id">
+          <task-preview
+            v-show="groupShow"
+            :task="task"
+            :markerColor="markerColor"
+            :cmpsOrder="board.cmpsOrder"
+            class="flex"
+            @addTask="addTask"
+          />
+        </transition>
+      </Draggable>
+    </Container>
+
     <transition>
       <section
         class="add-task"
@@ -72,6 +83,12 @@
 
 
 <script>
+// :group="group"
+//   :key="group.id"
+//   :groupIdx="groupIdx"
+//   @addTask="addTask"
+//   @removeGroup="removeGroup"
+
 import taskPreview from "@/cmps/task/task-preview.vue";
 import groupDropdown from "@/cmps/group/group-dropdown.vue";
 import { Container, Draggable } from "vue-smooth-dnd";
@@ -86,16 +103,17 @@ export default {
     Draggable,
   },
 
-  props: ["group", "groupIdx"],
+  props: ["group", "board", "groupIdx"],
   data() {
     return {
+      currGroups: null,
+      tasksList: this.group.tasks,
       title: null,
       groupShow: true,
-      isFocusOn: false,
-      hover: false,
       cmpHeaders: null,
       markerColor: null,
-      tasksList: null,
+      isFocusOn: false,
+      hover: false,
       isSeen: false,
       dropPlaceholderOptions: {
         className: "drop-preview",
@@ -157,32 +175,70 @@ export default {
       if (val === "member-picker") return "Member";
       return val;
     },
-    onDrop(collection, dropResult) {
-      this[collection] = applyDrag(this[collection], dropResult);
 
-      this.taskList.map((t) => t.id);
-
-      const groupInfo = { group: this.tasksList, groupIdx: this.groupIdx };
-      this.$store.commit({
-        type: "saveGroup",
-        groupInfo: groupInfo,
-      });
+    // onTaskDrop(groupId, dropResult) {
+    //   if (dropResult.removedIndex !== null || dropResult.addedIndex !== null) {
+    //     this.tasksList = applyDrag( this.tasksList, dropResult);
+    //     console.log("tasksList", this.tasksList.map(t=>t.id));
+    //     return
+    //     const groupInfo = { group: currGroup, groupIdx };
+    //     this.$store.dispatch({
+    //       type: "saveGroup",
+    //       groupInfo: groupInfo,
+    //     });
+    //   }
+    // },
+    onTaskDrop(groupId, dropResult) {
+      if (dropResult.removedIndex !== null || dropResult.addedIndex !== null) {
+        const board = JSON.parse(JSON.stringify(this.board));
+        const group = board.groups.filter((g) => g.id === groupId)[0];
+        group.tasks = applyDrag(group.tasks, dropResult);
+        // group.tasks  = applyDrag(this.tasksList, dropResult);
+        board.groups.splice(this.groupIdx, 1, group);
+        // const groupInfo = { group: currGroup, groupIdx };
+        this.$store.dispatch({
+          type: "saveBoard",
+          board,
+        });
+      }
     },
     getChildPayload(index) {
-      console.log("index", index);
-      return this.taskList[index];
+      console.log('index',index);
+      return this.group.tasks[index];
     },
+    onGroupDrop(dropResult) {
+      console.log("dropResult", dropResult);
+      console.log("this", this);
+      this.currGroups = applyDrag(this.currGroups, dropResult);
+      const groupsInfo = { groups: this.currGroups };
+      this.$store.dispatch({
+        type: "saveGroups",
+        groupsInfo: groupsInfo,
+      });
+    },
+    // onDrop(dropResult) {
+    //   console.log("dropResult", dropResult);
+    //   this.tasksList = applyDrag(this.tasksList, dropResult);
+    //   const groupCopy = JSON.parse(JSON.stringify(this.group));
+    //   groupCopy.tasks = this.tasksList;
+    //   const groupInfo = { group: groupCopy, groupIdx: this.groupIdx };
+    //   this.$store.dispatch({
+    //     type: "saveGroup",
+    //     groupInfo: groupInfo,
+    //   });
+    // },
   },
   computed: {
-    currTasks() {
-      this.taskList = this.group ? this.group.tasks : null;
-      return this.taskList;
-    },
-    cmpsOrder() {
-      const cmps = this.$store.getters.currBoard.cmpsOrder;
-      this.cmpHeaders = cmps.slice(1);
-      return cmps;
-    },
+    // taskList() {
+    //   const taskList = this.group.tasks;
+    //   this.currGroups = currGroups;
+    //   return currGroups;
+    // },
+    // cmpsOrder() {
+    //   const cmps = this.board.cmpsOrder;
+    //   this.cmpHeaders = cmps.slice(1);
+    //   return cmps;
+    // },
     marker() {
       if (!this.markerColor) return `10px solid #579BFC`;
       return `10px solid ${this.markerColor}`;
@@ -190,6 +246,11 @@ export default {
     fontColor() {
       if (!this.markerColor) return "#579BFC";
       return this.markerColor;
+    },
+  },
+  watch: {
+    group: function (newGroup, oldGroup) {
+      this.tasksList = newGroup.tasks;
     },
   },
 };
