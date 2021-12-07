@@ -82,11 +82,11 @@ export default {
           "Nov",
           "Dec",
         ];
-        const currDate = new Date()
+        const currDate = new Date();
         const startMonth = monthNames[newVal[0].getMonth()];
-        const startDay = newVal[0]
+        const startDay = newVal[0];
         const endMonth = monthNames[newVal[1].getMonth()];
-        const endDay = newVal[1]
+        const endDay = newVal[1];
         const diffTime = Math.abs(endDay - startDay);
         const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 
@@ -95,18 +95,18 @@ export default {
         } else {
           this.txt = `${startMonth} ${startDay.getDate()} - ${endMonth} ${endDay.getDate()}`;
         }
-        this.hoverTxt = `${diffDays+1} Day`;
+        this.hoverTxt = `${diffDays + 1} Day`;
 
-        if(endDay<currDate){
-          this.percentage= "100%"
-        }else if(currDate<startDay){
-          this.percentage= "0%"
-        }else{
-          console.log(Math.abs(currDate - startDay));
-          console.log(diffTime);
-          this.percentage= `${(Math.abs(currDate - startDay)/(diffTime + 24*60*60*1000 ))*100}%`
+        if (endDay < currDate) {
+          this.percentage = "100%";
+        } else if (currDate < startDay) {
+          this.percentage = "0%";
+        } else {
+          this.percentage = `${
+            (Math.abs(currDate - startDay) / (diffTime + 24 * 60 * 60 * 1000)) *
+            100
+          }%`;
         }
-        console.log('label',this.percentage);
       }
     },
   },
