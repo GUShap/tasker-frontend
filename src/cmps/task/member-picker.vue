@@ -11,11 +11,11 @@
         :key="member._id"
       />
     </section>
-    <section v-if="isEditMode" @blur="editStatus" class="member-modal">
+    <section v-show="isEditMode" @blur="editStatus" class="member-modal">
       <section class="selected-members">
         <div v-for="member in selectedMembers" :key="member._id">
           <avatar
-            :size="25"
+            :size="22"
             :username="member.fullname"
             :src="require(`@/pics/${member.imgUrl}`)"
             :key="member._id"
@@ -36,7 +36,7 @@
         >
           <div>
             <avatar
-              :size="25"
+              :size="22"
               :username="member.fullname"
               :src="require(`@/pics/${member.imgUrl}`)"
               :key="member._id"
@@ -58,22 +58,20 @@ export default {
   data() {
     return {
       isEditMode: false,
-      selectedMembers: null,
+      selectedMembers: [],
     };
   },
   created() {
-    this.selectedMembers = this.info.members;
+    this.selectedMembers = this.info.members || [];
   },
   methods: {
     editStatus() {
       this.isEditMode = !this.isEditMode;
     },
     addMember(member) {
-      console.log("label", member);
       this.selectedMembers.push(member);
     },
     removeMember(member) {
-      console.log("label", member);
       const idx = this.selectedMembers.indexOf(member);
       this.selectedMembers.splice(idx, 1);
     },
@@ -83,8 +81,8 @@ export default {
       if (!this.selectedMembers) {
         return this.boardMembers;
       } else {
-        const selectedUser = this.selectedMembers.map(m=>m.fullname);
-        
+        const selectedUser = this.selectedMembers.map((m) => m.fullname);
+
         const membersList = this.boardMembers.filter((member) => {
           return !selectedUser.includes(member.fullname);
         });
