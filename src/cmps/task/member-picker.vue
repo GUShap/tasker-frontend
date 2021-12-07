@@ -82,7 +82,6 @@ export default {
         return this.boardMembers;
       } else {
         const selectedUser = this.selectedMembers.map((m) => m.fullname);
-
         const membersList = this.boardMembers.filter((member) => {
           return !selectedUser.includes(member.fullname);
         });

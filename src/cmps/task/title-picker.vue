@@ -29,6 +29,7 @@ export default {
     };
   },
   created() {
+    console.log('info',info);
   },
   methods: {
     openDetails() {

@@ -21,7 +21,7 @@ const BASE_URL = process.env.NODE_ENV !== "development"
 
 
 async function query(filterBy = null) {
-  console.log('filterBy', filterBy);
+  // console.log('filterBy', filterBy);
   try {
     return await httpService.get(BASE_URL, filterBy);
   } catch (err) {

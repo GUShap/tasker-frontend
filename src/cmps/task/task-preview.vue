@@ -1,30 +1,29 @@
 <template>
-  <section
-    class="task-container color-marker-after flex align-center"
-    style="
-       {
-        border: 1px solid red;
-      }
-    "
-  >
+  <section class="task-container color-marker-after flex align-center">
     <task-dropdown
       @removeTask="removeTask"
       @openTaskDetails="openTaskDetails"
-      @clone="clone"
-    />
+      @clone="clone"/>
     <section
       class="task-preview flex align-center"
       :style="{ 'border-left': marker }"
     >
       <template v-for="(cmpType, idx) in cmpsOrder">
-        <component :is="cmpType" :info="task" :boardMembers="members" @update="updateTask" :key="idx" :markerColor="markerColor"/>
-        <!-- <component :is="cmpType" :info="getCmpInfo(cmpType)" @updated="updateTask(cmpType, $event)" :key="idx"> -->
+        <component
+          :is="cmpType"
+          :info="task"
+          :boardMembers="members"
+          @update="updateTask"
+          :key="idx"
+          :markerColor="markerColor"
+        />
       </template>
     </section>
   </section>
 </template>
 
 <script>
+// <!-- <component :is="cmpType" :info="getCmpInfo(cmpType)" @updated="updateTask(cmpType, $event)" :key="idx"> -->
 import titlePicker from "./title-picker.vue";
 import statusPicker from "./status-picker.vue";
 import memberPicker from "./member-picker.vue";
