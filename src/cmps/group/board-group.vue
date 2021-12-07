@@ -47,18 +47,18 @@
       :get-child-payload="getChildPayload"
       :drop-placeholder="dropPlaceholderOptions"
     >
-      <Draggable v-for="task in tasksList" :key="task.id">
+      <Draggable v-for="(task,taskIdx) in tasksList" :key="task.id">
         <transition name="fade" :key="task.id">
           <task-preview
             v-show="groupShow"
-          :key="task.id"
+          :key="taskIdx"
           :task="task"
           :taskIdx="taskIdx"
           :markerColor="markerColor"
+          :members="board.members"
           :cmpsOrder="cmpsOrder"
           :groupIdx="groupIdx"
           class="flex"
-          style="{'border-inline-left' : 1px solid red }"
           @addTask="addTask"
           />
         </transition>
@@ -123,7 +123,8 @@ export default {
       },
     };
   },
-  created() {},
+  created() {
+  },
   methods: {
     showGroup(val = null) {
       if (val) {
