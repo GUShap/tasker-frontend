@@ -11,7 +11,7 @@
       <div class="myProgress">
         <div
           class="myBar"
-        :style="{ width: percentage, 'background-color': marker }"
+          v-bind:style="{ width: percentage, 'background-color': marker }"
         ></div>
       </div>
     </section>
