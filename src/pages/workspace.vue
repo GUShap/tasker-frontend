@@ -10,6 +10,7 @@
         :board="currBoard"
         @removeGroup="removeGroup"
         @addNewGroup="addNewGroup"
+        @editGroup="editGroup"
       />
     </section>
     <router-view></router-view>
@@ -46,17 +47,25 @@ export default {
     });
   },
   methods: {
-    async addTask(task) {
+    async addTask(taskInfo) {
       try {
-        await this.$store.dispatch({ type: "editTask", task });
-        console.log("New task add!");
+        await this.$store.dispatch({ type: "editTask", taskInfo });
+        // console.log("New task add!");
       } catch (err) {
         console.log("Error", err);
       }
     },
-    async removeGroup(groupId) {
+    async editGroup(groupInfo){
+ try {
+        await this.$store.dispatch({ type: "editGroup", groupInfo });
+        console.log("Group was edited!");
+      } catch (err) {
+        console.log("Error", err);
+      }
+    },
+    async removeGroup(groupInfo) {
       try {
-        await this.$store.dispatch({ type: "removeGroup", groupId });
+        await this.$store.dispatch({ type: "removeGroup", groupInfo });
         console.log("Group was deleted!");
       } catch (err) {
         console.log("Error", err);

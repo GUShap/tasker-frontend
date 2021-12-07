@@ -51,12 +51,15 @@
         <transition name="fade" :key="task.id">
           <task-preview
             v-show="groupShow"
-            :task="task"
-            :members="board.members"
-            :markerColor="markerColor"
-            :cmpsOrder="board.cmpsOrder"
-            class="flex"
-            @addTask="addTask"
+          :key="task.id"
+          :task="task"
+          :taskIdx="taskIdx"
+          :markerColor="markerColor"
+          :cmpsOrder="cmpsOrder"
+          :groupIdx="groupIdx"
+          class="flex"
+          style="{'border-inline-left' : 1px solid red }"
+          @addTask="addTask"
           />
         </transition>
       </Draggable>
@@ -135,14 +138,9 @@ export default {
     addTask(task) {
       if (task === "new") {
         if (!this.title) return;
-
-        const newTask = {
-          title: this.title,
-        };
-
-        this.$emit("addTask", newTask);
-
-        this.title = null; //clear input
+        const newTask = { title: this.title };
+        this.$emit("addTask", { task: newTask, groupIdx: this.groupIdx });
+        this.title = null;
       } else {
         this.$emit("addTask", {
           task,
@@ -159,12 +157,14 @@ export default {
     changeColor(color) {
       this.markerColor = color;
       this.groupColor = color;
+      this.$emit("editGroup", { group: this.group, groupIdx: this.groupIdx});
     },
     showGroups(val) {
       this.$emit("showGroups", val);
     },
     removeGroup() {
-      this.$emit("removeGroup", { groupId: this.group.id });
+      console.log("groupIdx", this.groupIdx);
+      this.$emit("removeGroup", { group: this.group, groupIdx: this.groupIdx });
     },
     addNewGroup() {
       this.$emit("addNewGroup");

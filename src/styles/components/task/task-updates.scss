@@ -2,6 +2,7 @@
     flex-direction: column;
     margin-top: 17px;
     padding: 0 30px;
+    overflow: scroll;
 
     input {
         padding: 10px;
@@ -52,26 +53,27 @@
 
         .emoji-picker {
             position: absolute;
-            max-width: 300px;
+            width: 250px;
+            height: 200px;
             display: block;
             background-color: white;
-            transform: translate(50%);
             z-index: 10;
+            margin-right: 100px;
+            overflow-y: scroll;
+            cursor: pointer;
+            & > * {
+                max-width: 250px;
+            }
 
             .emoji-search {
                 border: 1px solid;
                 border-radius: 5px;
-                position: sticky;
 
                 input {
                     text-align: left;
                     border: none;
                     outline: none;
                 }
-            }
-
-            .emoji-container {
-                max-height: 100px;
             }
         }
 

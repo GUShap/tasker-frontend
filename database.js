@@ -6,15 +6,15 @@ export const boardDb = {
   createdBy: {
     _id: "u101",
     fullname: "Guy Shapira",
-    imgUrl: "guy-img.jpeg",
+    imgUrl: "guy-img.jpeg"
   },
   style: {},
   labels: [
     {
       id: "l101",
       title: "Done",
-      color: "#61bd4f",
-    },
+      color: "#61bd4f"
+    }
   ],
   members: [
     {
@@ -48,26 +48,26 @@ export const boardDb = {
           description: "description",
           comments: [
             {
-              id: "ZdPnm",
-              txt: "also @yaronb please CR this",
+              id: "ZrePnm",
+              txt: "trelleeeleee",
               createdAt: 1638753114117,
               byMember: {
                 _id: "u101",
                 fullname: "Guy Shapira",
-                imgUrl: "guy-img.jpeg",
-              },
+                imgUrl: "guy-img.jpeg"
+              }
             },
             {
-              id: "ZdPnm",
+              id: "Z90Pnm",
               txt: "also @yaronb please CR this",
               createdAt: 1620999817436,
               byMember: {
                 _id: "u101",
                 fullname: "Guy Shapira",
-                imgUrl: "guy-img.jpeg",
+                imgUrl: "guy-img.jpeg"
               },
-            },
-          ],
+            }
+          ]
         },
         {
           id: "t102",
@@ -78,9 +78,9 @@ export const boardDb = {
               _id: "u101",
               username: "Guy",
               fullname: "Guy Shapira",
-              imgUrl: "guy-img.jpeg",
-            },
-          ],
+              imgUrl: "guy-img.jpeg"
+            }
+          ]
         },
         {
           id: "t103",
@@ -107,13 +107,13 @@ export const boardDb = {
         {
           id: "t201",
           title: "Replace logo",
-          labelId: "Stuck",
+          labelId: "Stuck"
         },
         {
           id: "t202",
           title: "Add Samples",
-          labelId: "Work",
-        },
+          labelId: "Work"
+        }
       ],
       style: {
         color: "#579bfc",
@@ -154,9 +154,9 @@ export const boardDb = {
               byMember: {
                 _id: "u101",
                 fullname: "Guy Shapira",
-                imgUrl: "guy-img.jpeg",
-              },
-            },
+                imgUrl: "guy-img.jpeg"
+              }
+            }
           ],
           checklists: [
             {
@@ -166,18 +166,18 @@ export const boardDb = {
                 {
                   id: "212jX",
                   title: "To Do 1",
-                  isDone: false,
-                },
-              ],
-            },
+                  isDone: false
+                }
+              ]
+            }
           ],
           members: [
             {
               _id: "u101",
               username: "Guy",
               fullname: "Guy Shapira",
-              imgUrl: "guy-img.jpeg",
-            },
+              imgUrl: "guy-img.jpeg"
+            }
           ],
           labelId: "Done",
           createdAt: 1590999730348,
@@ -186,7 +186,7 @@ export const boardDb = {
             _id: "u101",
             username: "Guy",
             fullname: "Guy Shapira",
-            imgUrl: "guy-img.jpeg",
+            imgUrl: "guy-img.jpeg"
           },
           style: {},
         },
@@ -230,9 +230,9 @@ export const boardDb = {
               byMember: {
                 _id: "u101",
                 fullname: "Guy Shapira",
-                imgUrl: "guy-img.jpeg",
-              },
-            },
+                imgUrl: "guy-img.jpeg"
+              }
+            }
           ],
           checklists: [
             {
@@ -242,18 +242,18 @@ export const boardDb = {
                 {
                   id: "212jX",
                   title: "To Do 1",
-                  isDone: false,
-                },
-              ],
-            },
+                  isDone: false
+                }
+              ]
+            }
           ],
           members: [
             {
               _id: "u101",
               username: "Guy",
               fullname: "Guy Shapira",
-              imgUrl: "guy-img.jpeg",
-            },
+              imgUrl: "guy-img.jpeg"
+            }
           ],
           labelId: "Done",
           createdAt: 1590999730348,
@@ -262,7 +262,7 @@ export const boardDb = {
             _id: "u101",
             username: "Guy",
             fullname: "Guy Shapira",
-            imgUrl: "guy-img.jpeg",
+            imgUrl: "guy-img.jpeg"
           },
           style: {},
         },
@@ -306,9 +306,9 @@ export const boardDb = {
               byMember: {
                 _id: "u101",
                 fullname: "Guy Shapira",
-                imgUrl: "guy-img.jpeg",
-              },
-            },
+                imgUrl: "guy-img.jpeg"
+              }
+            }
           ],
           checklists: [
             {
@@ -318,18 +318,18 @@ export const boardDb = {
                 {
                   id: "212jX",
                   title: "To Do 1",
-                  isDone: false,
-                },
-              ],
-            },
+                  isDone: false
+                }
+              ]
+            }
           ],
           members: [
             {
               _id: "u101",
               username: "Guy",
               fullname: "Guy Shapira",
-              imgUrl: "guy-img.jpeg",
-            },
+              imgUrl: "guy-img.jpeg"
+            }
           ],
           labelId: "Done",
           createdAt: 1590999730348,
@@ -338,7 +338,7 @@ export const boardDb = {
             _id: "u101",
             username: "Guy",
             fullname: "Guy Shapira",
-            imgUrl: "guy-img.jpeg",
+            imgUrl: "guy-img.jpeg"
           },
           style: {},
         },
@@ -356,12 +356,12 @@ export const boardDb = {
       byMember: {
         _id: "u101",
         fullname: "Guy Shapira",
-        imgUrl: "guy-img.jpeg",
+        imgUrl: "guy-img.jpeg"
       },
       task: {
         id: "t101",
-        title: "Replace Logo",
-      },
+        title: "Replace Logo"
+      }
     },
     {
       id: "a102",
@@ -370,12 +370,12 @@ export const boardDb = {
       byMember: {
         _id: "u101",
         fullname: "Guy Shapira",
-        imgUrl: "guy-img.jpeg",
+        imgUrl: "guy-img.jpeg"
       },
       task: {
         id: "t101",
-        title: "bipboop",
-      },
+        title: "bipboop"
+      }
     },
     {
       id: "a103",
@@ -384,13 +384,13 @@ export const boardDb = {
       byMember: {
         _id: "u101",
         fullname: "Guy Shapira",
-        imgUrl: "guy-img.jpeg",
+        imgUrl: "guy-img.jpeg"
       },
       task: {
         id: "t101",
-        title: "say Hi",
-      },
-    },
+        title: "say Hi"
+      }
+    }
   ],
   cmpsOrder: [
     "title-picker",

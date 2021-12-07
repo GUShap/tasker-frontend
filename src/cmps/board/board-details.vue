@@ -9,6 +9,7 @@
         @addTask="addTask"
         @showGroups="showGroups"
         @removeGroup="removeGroup"
+        @editGroup="editGroup"
         @addNewGroup="addNewGroup"
         v-show="groupsShow"
       />
@@ -35,13 +36,15 @@ export default {
   },
   created() {},
   methods: {
-    addTask(task) {
-      task.boardId = this.board._id;
-      this.$emit("addTask", task);
+    addTask(taskInfo) {
+      // taskInfo.boardId = this.board._id;
+      this.$emit("addTask", taskInfo);
     },
-    removeGroup(groupId) {
-      this.$emit("removeGroup", groupId);
-      console.log(groupId);
+    editGroup(groupInfo) {
+      this.$emit("editGroup", groupInfo);
+    },
+    removeGroup(groupInfo) {
+      this.$emit("removeGroup", groupInfo);
     },
     showGroups(val = null) {
       // if (val) {
@@ -62,8 +65,5 @@ export default {
     },
   },
   destroyed() {},
-  watch: {
-    $route: (newVal, oldVal) => {},
-  },
 };
 </script>
