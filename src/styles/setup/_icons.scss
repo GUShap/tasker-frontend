@@ -13,7 +13,7 @@
     @include to-icon("\f3aa");
 }
 
-.icon-circle{
+.icon-circle {
     font-family: monday;
     @include to-icon("\f2df");
 }
@@ -101,9 +101,14 @@
     @include to-icon("\f13b");
 }
 
-.icon-three-dots{
+.icon-three-dots {
     font-family: monday;
-    @include to-icon("\f311")
+    @include to-icon("\f311");
+}
+
+.icon-right-arrow {
+    font-family: monday;
+    @include to-icon("\f061");
 }
 
 // .icon-format{

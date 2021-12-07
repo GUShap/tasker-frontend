@@ -23,6 +23,16 @@ export const boardDb = {
       fullname: "Guy Shapira",
       imgUrl: "guy-img.jpeg",
     },
+    {
+      _id: "u102",
+      fullname: "Sundos Gutty",
+      imgUrl: "sundos-img.jpg",
+    },
+    {
+      _id: "u103",
+      fullname: "Ishay Nitzan",
+      imgUrl: "ishay-img.jpeg",
+    },
   ],
   groups: [
     {
