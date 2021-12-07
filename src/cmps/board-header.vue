@@ -28,6 +28,9 @@
         </div>
         <div class="more-actions flex">
           <a>Board members </a>
+          
+
+
           <div v-for="(member, idx) in currBoard.members" :key="idx">
             <a>{{ member.fullname }}</a>
           </div>
@@ -35,6 +38,22 @@
           <a class="btn-add-board"><span class="icon-plus"></span>Add Board</a>
         </div>
       </div>
+
+        <!-- <section v-if="!members">
+        <avatar :size="25" username="i" />
+      </section>
+      <avatar
+        v-else
+        v-for="member in members"
+        :size="25"
+        :username="member"
+        :key="member._id"
+      />
+    </section> -->
+        <!-- <section>
+          <avatar :size="25" :username="member" :key="member._id"></avatar>
+          {{ member }}
+        </section> -->
 
       <div class="input-section" @click="setEdit('description')">
         <textarea

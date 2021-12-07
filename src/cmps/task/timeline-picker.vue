@@ -3,7 +3,7 @@
     <section @click="editStatus" class="timeline-picker">
       <span>{{ txt }}</span>
       <div class="myProgress">
-        <div class="myBar" :style="{ width: percentage }"></div>
+        <div class="myBar" :style="{ width: percentage, 'backgroud-color': marker }"></div>
       </div>
     </section>
     <div v-if="edit" class="block timeline-modal">
@@ -22,9 +22,8 @@
 </template>
 
 <script>
-
 export default {
-  props: ["info"],
+  props: ["info", "markerColor"],
   data() {
     return {
       edit: false,
@@ -45,19 +44,22 @@ export default {
       const currentYear = date.getFullYear();
       const today = date.getDate();
       const currentMonth = date.getMonth() + 1;
-      return `${currentYear}-${currentMonth}-${today}`
+      return `${currentYear}-${currentMonth}-${today}`;
     },
   },
   computed: {
-  
+    marker() {
+      if (!this.markerColor) return `#579BFC`;
+      return `${this.markerColor}`;
+    },
   },
   destroyed() {},
   watch: {
-    value : function (newVal, oldVal) {
+    value: function (newVal, oldVal) {
       if (newVal !== oldVal) {
-        const form =newVal[0]
-        const to =newVal[1]
-         console.log(form.slice(0,4),to.slice(0,4));
+        const form = newVal[0];
+        const to = newVal[1];
+        console.log(form.slice(0, 4), to.slice(0, 4));
       }
     },
   },

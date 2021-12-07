@@ -9,6 +9,8 @@
         @setEdit="setEdit"
         @changeColor="changeColor"
         @showGroups="showGroups"
+        @duplicateGroup="duplicateGroup"
+        @addNewGroup="addNewGroup"
       />
       <section class="column-headers">
         <div @mouseover="hover = true" @mouseleave="hover = false">
@@ -153,15 +155,23 @@ export default {
         });
       }
     },
+    duplicateGroup() {
+      let group = this.group;
+      let groupCopy = { ...group };
+      delete groupCopy.id;
+      this.$emit("addNewGroup", groupCopy);
+    },
     changeColor(color) {
       this.markerColor = color;
     },
     showGroups(val) {
-      console.log(val);
       this.$emit("showGroups", val);
     },
     removeGroup() {
       this.$emit("removeGroup", { groupId: this.group.id });
+    },
+    addNewGroup() {
+      this.$emit("addNewGroup");
     },
     setEdit() {
       this.$refs.title.focus();
@@ -203,7 +213,7 @@ export default {
       }
     },
     getChildPayload(index) {
-      console.log('index',index);
+      console.log("index", index);
       return this.group.tasks[index];
     },
     onGroupDrop(dropResult) {
@@ -240,8 +250,8 @@ export default {
     //   return cmps;
     // },
     marker() {
-      if (!this.markerColor) return `10px solid #579BFC`;
-      return `10px solid ${this.markerColor}`;
+      if (!this.markerColor) return `8px solid #579BFC`;
+      return `8px solid ${this.markerColor}`;
     },
     fontColor() {
       if (!this.markerColor) return "#579BFC";

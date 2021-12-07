@@ -9,6 +9,7 @@
         @addTask="addTask"
         @showGroups="showGroups"
         @removeGroup="removeGroup"
+        @addNewGroup="addNewGroup"
         v-show="groupsShow"
       />
     </template>
@@ -50,10 +51,17 @@ export default {
       //   return tasks;
       // }
     },
+    addNewGroup(group) {
+      group.boardId = this.board._id;
+      this.$emit("addNewGroup", group);
+    },
   },
   computed: {
     currGroups() {
-      console.log('label',this.board.groups.map(g=>g.tasks.map(t=>t.id)));
+      console.log(
+        "label",
+        this.board.groups.map((g) => g.tasks.map((t) => t.id))
+      );
       return this.board.groups;
     },
   },

@@ -2,11 +2,7 @@
 <template>
   <section
     class="task-container color-marker-after flex align-center"
-    style="
-       {
-        border: 1px solid red;
-      }
-    "
+    style="{ border: 1px solid red;}"
   >
     <task-dropdown
       @removeTask="removeTask"
@@ -18,7 +14,7 @@
       :style="{ 'border-left': marker }"
     >
       <template v-for="(cmpType, idx) in cmpsOrder">
-        <component :is="cmpType" :info="task" :key="idx" />
+        <component :is="cmpType" :info="task" :key="idx" :markerColor="markerColor"/>
         <!-- <component :is="cmpType" :info="getCmpInfo(cmpType)" @updated="updateTask(cmpType, $event)" :key="idx"> -->
       </template>
     </section>
@@ -66,8 +62,8 @@ export default {
   },
   computed: {
     marker() {
-      if (!this.markerColor) return `10px solid #579BFC`;
-      return `10px solid ${this.markerColor}`;
+      if (!this.markerColor) return `8px solid #579BFC`;
+      return `8px solid ${this.markerColor}`;
     },
   },
   destroyed() {},

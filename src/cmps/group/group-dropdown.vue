@@ -10,10 +10,10 @@
           ><i class="fas fa-compress-alt"></i>Collapse all
           groups</el-dropdown-item
         >
-        <el-dropdown-item
+        <el-dropdown-item @click.native="addNewGroup"
           ><i class="fas fa-plus"></i>Add group</el-dropdown-item
         >
-        <el-dropdown-item
+        <el-dropdown-item @click.native="duplicateGroup"
           ><i class="far fa-copy"></i>Duplicate group</el-dropdown-item
         >
         <el-dropdown-item @click.native="setEdit"
@@ -83,6 +83,12 @@ export default {
       this.color = color;
       this.$emit("changeColor", color);
       this.isShown = !this.isShown;
+    },
+    addNewGroup() {
+      this.$emit("addNewGroup");
+    },
+      duplicateGroup() {
+      this.$emit("duplicateGroup");
     },
   },
 };
