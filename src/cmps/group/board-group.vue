@@ -47,7 +47,7 @@
       :get-child-payload="getChildPayload"
       :drop-placeholder="dropPlaceholderOptions"
     >
-      <Draggable v-for="(task,taskIdx) in tasksList" :key="task.id">
+      <Draggable v-for="(task,taskIdx ) in tasksList" :key="taskIdx">
         <transition name="fade" :key="task.id">
           <task-preview
             v-show="groupShow"

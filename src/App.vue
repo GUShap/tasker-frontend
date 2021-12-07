@@ -39,9 +39,7 @@ export default {
   destroyed() {},
   watch: {
     $route: function (newVal, OldVal) {
-      // console.log('newVal',newVal);
       const { name } = newVal;
-      // console.log('name',name);
       if (name !== "landing-page") {
         this.isLandingPage = false;
       }

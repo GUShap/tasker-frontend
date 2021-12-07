@@ -196,17 +196,21 @@ export const boardStore = {
         console.log(err);
       }
     },
-    async saveGroups({ commit, state }, { groupsInfo }) {
-      try {
-        console.log("groups", groupsInfo);
-        groupsInfo.boardIdx = state.currBoardIdx;
-        const currGroups = await boardService.saveGroups(groupsInfo);
-        commit({ type: "saveGroups", groupsInfo });
-        return currGroups;
-      } catch (err) {
-        console.log(err);
-      }
-    },
+    // async saveGroups({ commit, state }, { groupsInfo }) {
+    //   try {
+    //     console.log("groups", groupsInfo);
+    //     groupsInfo.boardIdx = state.currBoardIdx;
+    //     const currGroups = await boardService.saveGroups(groupsInfo);
+    //     commit({ type: "saveGroups", groupsInfo });
+    //     return currGroups;
+    //   } catch (err) {
+    //     console.log(err);
+    //   }
+    // },
+
+    async saveBoard(){
+
+    }
   },
   modules: {},
 };
