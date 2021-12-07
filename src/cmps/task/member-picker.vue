@@ -11,8 +11,8 @@
         :key="member._id"
       />
     </section>
-    <ul v-if="isEditMode" @blur="editStatus" class="status-modal">
-      <li
+    <el-select value v-if="isEditMode" @blur="editStatus" class="status-modal">
+      <el-option
         v-for="(member, idx) in membersList"
         :key="idx"
         class="flex justify-center align-center"
@@ -26,9 +26,9 @@
           ></avatar>
           <div>{{ member.fullname }}</div>
         </section>
-      </li>
+      </el-option>
       <li @click.prevent.stop="editStatus"><button>Edit</button></li>
-    </ul>
+    </el-select>
   </section>
 </template>
 
