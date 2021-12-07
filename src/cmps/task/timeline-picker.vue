@@ -1,9 +1,18 @@
 <template>
   <section class="timeline-picker">
-    <section @click="editStatus" class="timeline-picker">
-      <span>{{ txt }}</span>
+    <section
+      @click="editStatus"
+      @mouseover="hover = true"
+      @mouseleave="hover = false"
+      class="timeline-picker"
+    >
+      <span v-if="!hover">{{ txt }}</span>
+      <span v-else>{{ hoverTxt }}</span>
       <div class="myProgress">
-        <div class="myBar" :style="{ width: percentage, 'backgroud-color': marker }"></div>
+        <div
+          class="myBar"
+          :style="{ width: percentage, 'backgroud-color': marker }"
+        ></div>
       </div>
     </section>
     <div v-if="edit" class="block timeline-modal">
@@ -28,8 +37,10 @@ export default {
     return {
       edit: false,
       value: "",
-      txt: "Dec 3 - 4",
-      percentage: "10%",
+      txt: "-",
+      hoverTxt: "-",
+      hover: false,
+      percentage: "0%",
     };
   },
   created() {
@@ -57,9 +68,45 @@ export default {
   watch: {
     value: function (newVal, oldVal) {
       if (newVal !== oldVal) {
-        const form = newVal[0];
-        const to = newVal[1];
-        console.log(form.slice(0, 4), to.slice(0, 4));
+        const monthNames = [
+          "Jan",
+          "Feb",
+          "Mar",
+          "Apr",
+          "May",
+          "Jun",
+          "Jul",
+          "Aug",
+          "Sep",
+          "Oct",
+          "Nov",
+          "Dec",
+        ];
+        const currDate = new Date()
+        const startMonth = monthNames[newVal[0].getMonth()];
+        const startDay = newVal[0]
+        const endMonth = monthNames[newVal[1].getMonth()];
+        const endDay = newVal[1]
+        const diffTime = Math.abs(endDay - startDay);
+        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+        if (startMonth === endMonth) {
+          this.txt = `${startMonth} ${startDay.getDate()} - ${endDay.getDate()}`;
+        } else {
+          this.txt = `${startMonth} ${startDay.getDate()} - ${endMonth} ${endDay.getDate()}`;
+        }
+        this.hoverTxt = `${diffDays+1} Day`;
+
+        if(endDay<currDate){
+          this.percentage= "100%"
+        }else if(currDate<startDay){
+          this.percentage= "0%"
+        }else{
+          console.log(Math.abs(currDate - startDay));
+          console.log(diffTime);
+          this.percentage= `${(Math.abs(currDate - startDay)/(diffTime + 24*60*60*1000 ))*100}%`
+        }
+        console.log('label',this.percentage);
       }
     },
   },
