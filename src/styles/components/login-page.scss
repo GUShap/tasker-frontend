@@ -110,6 +110,34 @@
     }
 
 
+
+
+    .btn-signin-page{
+        height: 100%;
+        cursor: pointer;
+        outline: none;
+        // display: flex;
+        // justify-content: center;
+        // align-items: center;
+        line-height: 37px;
+        padding: 0px 30px;
+        border: none;
+        border-bottom: 2px solid #0d91ca;
+        background: #0fa2e2;
+        font-size: 18px;
+        border-radius: 15rem;
+        color: #fff;
+        margin-top: 10px;
+
+        .fas.fa-arrow-right {
+            color: white;
+            font-size: 18px;
+            margin-left: 10px;
+            font-weight: 400px;
+        }
+
+    }
+
 }
 
 @media (max-width: 650px) {

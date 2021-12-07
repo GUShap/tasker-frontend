@@ -10,6 +10,12 @@
           ><i class="fas fa-compress-alt"></i>Collapse all
           groups</el-dropdown-item
         >
+        <el-dropdown-item  @click.native="showGroup(false)"
+          ><i class="fas fa-expand-alt"></i>Open group</el-dropdown-item
+        >
+            <el-dropdown-item class="last-child" @click.native="showGroups(false)"
+          ><i class="fas fa-expand-alt"></i>Open all groups</el-dropdown-item
+        >
         <el-dropdown-item @click.native="addNewGroup"
           ><i class="fas fa-plus"></i>Add group</el-dropdown-item
         >

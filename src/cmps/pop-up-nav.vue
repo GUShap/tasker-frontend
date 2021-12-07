@@ -18,9 +18,9 @@
             <el-option value="board2">Board 2?</el-option>
           </el-select>
           <div class="search-btns">
-            <button><span class="icon-plus"></span>Add</button>
+            <button><span class="icon-plus"></span>Add new board</button>
             <button><span class="icon-filter"></span>Filter</button>
-            <button><span class="icon-search"></span>Search</button>
+            <button><span class="icon-search last-child"></span>Search</button>
           </div>
         </div>
         <div class="my-boards">
