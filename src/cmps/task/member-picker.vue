@@ -1,5 +1,5 @@
 <template>
-  <section @click="editStatus('edit')" class="member-picker">
+  <section @click="editStatus" class="member-picker">
     <section v-if="!edit">
       <section v-if="!members">
         <avatar :size="25" username="i" />
@@ -12,7 +12,7 @@
         :key="member._id"
       />
     </section>
-    <ul v-if="edit" @blur="editStatus('edit')" class="status-modal">
+    <ul v-if="edit" @blur="editStatus" class="status-modal">
       <li
         v-for="(member, idx) in members"
         :key="idx"
@@ -47,7 +47,6 @@ export default {
   },
   methods: {
     editStatus() {
-      console.log("label");
       this.edit = !this.edit;
     },
   },
