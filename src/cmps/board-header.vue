@@ -27,40 +27,27 @@
           ></a>
         </div>
         <div class="more-actions flex">
+          <section v-if="!currBoard.members">
+            <avatar :size="25" username="i" />
+          </section>
+          <avatar
+            v-else
+            v-for="(member, idx) in currBoard.members"
+            :size="25"
+            :username="member.fullname"
+            :key="idx"
+          />
           <a>Board members </a>
-          
-
-
-          <div v-for="(member, idx) in currBoard.members" :key="idx">
-            <a>{{ member.fullname }}</a>
-          </div>
           <a><span class="icon-activities"></span>Activities</a>
           <a class="btn-add-board"><span class="icon-plus"></span>Add Board</a>
         </div>
       </div>
 
-        <!-- <section v-if="!members">
-        <avatar :size="25" username="i" />
-      </section>
-      <avatar
-        v-else
-        v-for="member in members"
-        :size="25"
-        :username="member"
-        :key="member._id"
-      />
-    </section> -->
-        <!-- <section>
-          <avatar :size="25" :username="member" :key="member._id"></avatar>
-          {{ member }}
-        </section> -->
-
       <div class="input-section" @click="setEdit('description')">
-        <textarea
+        <input
           ref="description"
           type="text"
           v-model="currBoard.description"
-          :class="[isFocus ? 'border' : 'no-boder']"
           v-on:keyup.enter="updateInfo"
           @blur="updateInfo"
         />
@@ -104,7 +91,7 @@ export default {
   methods: {
     setEdit(val) {
       console.log(val);
-      this.isFocus = true
+      this.isFocus = true;
       this.isEditedMode = true;
       this.currEditedVal = val;
     },

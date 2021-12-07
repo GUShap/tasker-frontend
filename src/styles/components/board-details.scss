@@ -21,20 +21,24 @@
             flex-wrap: wrap;
             font-family: roboto;
 
-            .border{
-                border: 1px solid lightcyan;
-            }
+            // .border{
+            //     border: 1px solid lightcyan;
+            // }
             .no-boder{
                 border: none;
             }
+
 
             .input-section{
                 margin-left: 1.2rem;
                 color: #676879;
             }
 
-            textarea{
-                min-width: 450px;
+            input{
+                border: none;
+                min-width: 350px;
+                min-height: 20px;
+
             }
 
             a {

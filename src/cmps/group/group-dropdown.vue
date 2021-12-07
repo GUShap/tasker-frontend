@@ -23,9 +23,6 @@
           <span class="icon-circle" :style="{ color: color }"></span>
           Change group color
         </el-dropdown-item>
-        <el-dropdown-item
-          ><i class="fas fa-archive"></i>Archive
-        </el-dropdown-item>
         <el-dropdown-item @click.native="removeGroup"
           ><i class="fas fa-trash"></i>Delete
         </el-dropdown-item>
@@ -87,7 +84,7 @@ export default {
     addNewGroup() {
       this.$emit("addNewGroup");
     },
-      duplicateGroup() {
+    duplicateGroup() {
       this.$emit("duplicateGroup");
     },
   },
