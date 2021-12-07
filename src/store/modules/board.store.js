@@ -44,7 +44,6 @@ export const boardStore = {
       state.currBoardIdx = currBoardIdx;
     },
     saveBoard(state, { board }) {
-      console.log('label',board.groups.map(g=>g.tasks.map(t=>t.id)));
       state.currBoard = board;
     },
     updateBoard(state, { board }) {
@@ -79,11 +78,11 @@ export const boardStore = {
         console.log(err);
       }
     },
-    async saveBoard({ commit, state }, { board }) {
+    async saveBoard({ commit }, { board }) {
       try {
-        // console.log('board',board);
-        const currBoard = await boardService.saveBoard(board, state.currBoardIdx);
-        commit({ type: "saveBoard", board: currBoard });
+        console.log("board", board);
+        await remoteBoardService.save(board);
+        commit({ type: "saveBoard", board });
       } catch (err) {
         console.log(err);
       }
@@ -207,10 +206,6 @@ export const boardStore = {
     //     console.log(err);
     //   }
     // },
-
-    async saveBoard(){
-
-    }
   },
   modules: {},
 };

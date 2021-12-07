@@ -47,7 +47,7 @@
       :get-child-payload="getChildPayload"
       :drop-placeholder="dropPlaceholderOptions"
     >
-      <Draggable v-for="(task,taskIdx ) in tasksList" :key="task.id">
+      <Draggable v-for="(task, taskIdx) in tasksList" :key="task.id">
         <transition name="fade" :key="task.id">
           <task-preview
             v-show="groupShow"
@@ -183,7 +183,8 @@ export default {
       return val;
     },
 
-    onTaskDrop(groupId, dropResult) {
+   async onTaskDrop(groupId, dropResult) {
+     try{
       if (dropResult.removedIndex !== null || dropResult.addedIndex !== null) {
         const board = Object.assign({}, this.board);
         const group = board.groups.filter((g) => g.id === groupId)[0];
@@ -191,11 +192,14 @@ export default {
         const newGroup = Object.assign({}, group);
         newGroup.tasks = applyDrag(newGroup.tasks, dropResult);
         board.groups.splice(groupIdx, 1, newGroup);
-        this.$store.dispatch({
+       await this.$store.dispatch({
           type: "saveBoard",
-          board,
+          board: board,
         });
       }
+     }catch(err){
+       console.log('Error',err);
+     }
     },
     getChildPayload(index) {
       return this.group.tasks[index];
