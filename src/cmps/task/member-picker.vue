@@ -3,7 +3,7 @@
     <section v-if="!isEditMode">
       <section v-if="!info.members">-</section>
       <avatar
-        v-else
+            v-else
         v-for="member in selectedMembers"
         :size="25"
         :username="member.fullname"

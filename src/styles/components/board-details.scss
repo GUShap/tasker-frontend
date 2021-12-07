@@ -2,7 +2,7 @@
     width: 100%;
     height: 100%;
     font-family: roboto;
-    
+
     .workspace {
         display: flex;
         flex-direction: column;
@@ -24,21 +24,19 @@
             // .border{
             //     border: 1px solid lightcyan;
             // }
-            .no-boder{
+            .no-boder {
                 border: none;
             }
 
-
-            .input-section{
+            .input-section {
                 margin-left: 1.2rem;
                 color: #676879;
             }
 
-            input{
+            input {
                 border: none;
                 min-width: 350px;
                 min-height: 20px;
-
             }
 
             a {
@@ -46,30 +44,28 @@
                 padding: 10px;
                 cursor: pointer;
             }
-            
+
             .board-title {
                 font-weight: bolder;
                 font-size: 24px;
                 letter-spacing: -0.2px;
                 // line-height: 32px;
                 font-family: roboto;
-                
             }
             .main-title {
                 align-items: center;
                 font-family: roboto;
             }
-
         }
-        .board-info{
+        .board-info {
             margin-left: 1.2rem;
             display: flex;
             flex-direction: row;
             align-items: center;
             justify-content: center;
-             gap: 2px;
+            gap: 2px;
 
-            .fas.fa-share-alt{
+            .fas.fa-share-alt {
                 font-weight: 400px;
                 // padding-right: 10px;
             }
@@ -80,7 +76,7 @@
             font-family: roboto;
         }
 
-           .board-container {
+        .board-container {
             display: flex;
             flex-direction: column;
             height: 100%;
@@ -88,7 +84,7 @@
             overflow: scroll;
             max-width: 100%;
             font-family: roboto;
-            margin-left:1.5rem;
+            margin-left: 1.5rem;
 
             // padding-right: 20px;
         }
@@ -103,5 +99,28 @@
             justify-content: space-between;
             margin: 10px;
         }
+    }
+
+    .memeber-img {
+        background-attachment: fixed;
+        background-size: cover;
+    }
+    
+    .memeber-img:first-child{
+        margin-inline: -0.6rem;
+    }
+    
+    .memeber-img:last-child{
+        margin-inline: -0.6rem;
+        
+    }
+    
+    .member-avatars {
+        margin-right: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: row;
+        position: relative;
     }
 }

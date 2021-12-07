@@ -12,31 +12,6 @@
         <i class="fas fa-plus-circle"></i>
         <i class="fas fa-user-circle"></i>
       </div>
-      <span>|</span>
-      <el-dropdown trigger="click">
-        <i class="fas fa-ellipsis-h"></i>
-        <el-dropdown-menu trigger="click" size="large" slot="dropdown">
-          <el-dropdown-item @click.native="removeTask"
-            ><i class="fas fa-user-plus"></i>Manage
-            subscribers</el-dropdown-item
-          >
-          <el-dropdown-item @click.native="removeTask"
-            ><i class="far fa-envelope"></i>Email preferences</el-dropdown-item
-          >
-          <el-dropdown-item @click.native="removeTask"
-            ><i class="far fa-file-excel"></i>Export to Excel</el-dropdown-item
-          >
-          <el-dropdown-item @click.native="removeTask"
-            ><i class="fas fa-link"></i>Copy item link</el-dropdown-item
-          >
-          <el-dropdown-item @click.native="removeTask"
-            ><i class="fas fa-archive"></i>Archive</el-dropdown-item
-          >
-          <el-dropdown-item @click.native="removeTask"
-            ><i class="far fa-trash-alt"></i>Delete</el-dropdown-item
-          >
-        </el-dropdown-menu>
-      </el-dropdown>
     </div>
     <div class="log-menu flex">
       <div class="nav-btn flex">
@@ -72,7 +47,6 @@
           activity log<btn-dropdown v-if="isBtnHover && hoveredBtn === 'log'" />
         </button>
       </div>
-      <span>|</span><button class="add-btn">+ add view</button>
     </div>
     <hr />
     <template>
@@ -105,7 +79,7 @@ export default {
   },
   methods: {
     exitModal() {
-      this.pageHover(false)
+      this.pageHover(false);
       this.$router.push("/board");
     },
 
@@ -115,7 +89,7 @@ export default {
     },
 
     pageHover(isHover) {
-      this.$store.commit({type:"hover", isHover})
+      this.$store.commit({ type: "hover", isHover });
     },
   },
 
@@ -126,6 +100,7 @@ export default {
         type: "getTaskById",
         taskId,
       });
+        console.log(this.task)
     } catch (err) {
       console.log("Error", err);
     }

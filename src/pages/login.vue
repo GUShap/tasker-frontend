@@ -8,7 +8,7 @@
         <h1><span>Log</span>In</h1>
       </div>
       <div class="submit-section">
-        <form @submit.prevent="signup">
+        <form @submit.prevent="login">
           <div class="input">
             <div class="input-email">
               <div class="labels email-label">
@@ -41,6 +41,7 @@
         <div class="register">Or Sign-in here</div>
         <div class="line">___________<span>______________</span></div>
       </div>
+         <router-link class="btn-signin-page" to="/signin/">Sign in<i class="fas fa-arrow-right"></i></router-link>
     </div>
   </section>
 </template>
@@ -61,7 +62,7 @@ export default {
       // this.$router.push("/-app");
       //   try {
       //     await this.$store.dispatch({
-      //       type: "signup",
+      //       type: "login",
       //       user: this.user,
       //     });
       //     this.$router.push("/toy-app");

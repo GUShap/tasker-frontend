@@ -8,6 +8,7 @@ import taskDetails from '../pages/task-details.vue'
 import dashboard from '../pages/dashboard.vue'
 import user from '../pages/user.vue'
 import login from '../pages/login.vue'
+import signin from '../pages/signin.vue'
 
 
 import cards from '../pages/cards.vue'
@@ -58,6 +59,11 @@ const routes = [
     path: '/login',
     name: 'login',
     component: login
+  },
+  {
+    path: '/signin',
+    name: 'signin',
+    component: signin
   },
   {
     path: '/cards',

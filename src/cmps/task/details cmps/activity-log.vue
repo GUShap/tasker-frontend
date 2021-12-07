@@ -1,7 +1,7 @@
 <template>
   <div class="activity-log">
     <div class="actions flex">
-      <p>other activities</p>
+      <p>Other activities</p>
       <div>
           <button>integration activity</button>
           <button>automation activity</button>
