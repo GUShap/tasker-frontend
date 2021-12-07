@@ -178,6 +178,7 @@ export default {
     cmpHeader(val) {
       if (val === "status-picker") return "Status";
       if (val === "member-picker") return "Member";
+      if (val === "timeline-picker") return "Timeline";
       return val;
     },
 
