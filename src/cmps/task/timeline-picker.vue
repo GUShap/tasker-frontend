@@ -11,7 +11,7 @@
       <div class="myProgress">
         <div
           class="myBar"
-          :style="{ width: percentage, 'backgroud-color': marker }"
+          v-bind:style="{ width: percentage, 'backgroud-color': marker }"
         ></div>
       </div>
     </section>
@@ -61,6 +61,7 @@ export default {
   computed: {
     marker() {
       if (!this.markerColor) return `#579BFC`;
+      console.log(this.markerColor);
       return `${this.markerColor}`;
     },
   },
