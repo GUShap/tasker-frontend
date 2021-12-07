@@ -43,7 +43,8 @@ export default {
     return {};
   },
   created() {
-},
+    
+  },
   methods: {
     async removeTask() {
       try {
