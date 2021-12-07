@@ -59,7 +59,7 @@
     height: 100%;
     span {
       position: absolute;
-      color:white;
+      color: white;
     }
     .myProgress {
       width: 80%;
@@ -78,18 +78,6 @@
         color: white;
       }
     }
-    // .timeline-modal {
-    //   position: absolute;
-    //   transform: translate(-100%, 40%);
-    //   padding: 1rem;
-    //   width: fit-content;
-    //   height: fit-content;
-    //   z-index: 100;
-    //   box-shadow: 1px 1px 5px 2px rgba(0, 0, 0, 0.26);
-    //   background-color: #f5f6f8;
-    //   @import url("//unpkg.com/element-ui@2.15.7/lib/theme-chalk/index.css");
-
-    // }
   }
   .member-picker {
     display: flex;
@@ -109,7 +97,7 @@
 
 .status-modal {
   padding: 1rem;
-  background-color: #f5f6f8;
+  background-color: white;
   position: absolute;
   z-index: 100;
   box-shadow: 1px 1px 5px 2px rgba(0, 0, 0, 0.26);
@@ -117,6 +105,72 @@
     text-align: center;
     margin: 0.5rem;
     padding: 0.5rem 1.5rem;
+  }
+}
+.member-modal {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 200px;
+  transform: translate(-93%, 43%);
+  background-color: white;
+  padding: 1rem;
+  z-index: 100;
+  box-shadow: 1px 1px 5px 2px rgba(0, 0, 0, 0.26);
+
+  .selected-members {
+    display: flex;
+    flex-wrap: wrap;
+    & > * {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 1rem;
+      background-color: #cce5ff;
+      border-radius: 14px;
+      margin: 2px 0;
+      button {
+        width: 15px;
+        height: 15px;
+        background-color: rgba(255, 255, 255, 0);
+        border: none;
+        border-radius: 50%;
+        &:hover {
+          cursor: pointer;
+          background-color: white;
+        }
+      }
+    }
+  }
+  li {
+    width: 100%;
+    text-align: center;
+    margin: 0.5rem;
+    padding: 0.5rem 1.5rem;
+    &:hover {
+      cursor: pointer;
+      background-color: #007dff;
+    }
+  }
+
+  hr {
+    width: 100%;
+    border: none;
+    border-top: 1px solid #333;
+    color: #333;
+    overflow: visible;
+    text-align: center;
+    height: 5px;
+  }
+
+  hr:after {
+    background: white;
+    content: "People";
+    padding: 0 4px;
+    position: relative;
+    top: -8px;
   }
 }
 
