@@ -1,47 +1,36 @@
 <template>
   <section class="timeline-picker">
-    <section v-if="!edit" @click="editStatus()">
-      xxxx
-    </section>
-    <section v-else>
-      <div class="block">
-        <span class="demonstration">Start date time 12:00:00</span>
-        <el-date-picker
-          v-model="value1"
-          type="datetimerange"
-          start-placeholder="Start Date"
-          end-placeholder="End Date"
-          :default-time="['12:00:00']"
-        >
-        </el-date-picker>
-      </div>
-      <div class="block">
-        <span class="demonstration"
-          >Start date time 12:00:00, end date time 08:00:00</span
-        >
-        <el-date-picker
-          v-model="value2"
-          type="datetimerange"
-          align="right"
-          start-placeholder="Start Date"
-          end-placeholder="End Date"
-          :default-time="['12:00:00', '08:00:00']"
-        >
-        </el-date-picker>
+    <section @click="editStatus" class="timeline-picker">
+      <span>{{ txt }}</span>
+      <div class="myProgress">
+        <div class="myBar" :style="{ width: percentage }"></div>
       </div>
     </section>
+    <div v-if="edit" class="block timeline-modal">
+      <el-date-picker
+        v-model="value"
+        @blur="editStatus"
+        type="daterange"
+        align="right"
+        :start-placeholder="currDate()"
+        end-placeholder="End Date"
+        :default-value="Date.now()"
+      >
+      </el-date-picker>
+    </div>
   </section>
 </template>
 
 <script>
+
 export default {
   props: ["info"],
   data() {
     return {
-      members: null,
       edit: false,
-       value1: '',
-        value2: ''
+      value: "",
+      txt: "Dec 3 - 4",
+      percentage: "10%",
     };
   },
   created() {
@@ -49,13 +38,28 @@ export default {
   },
   methods: {
     editStatus() {
-      console.log('label');
       this.edit = !this.edit;
+    },
+    currDate() {
+      const date = new Date();
+      const currentYear = date.getFullYear();
+      const today = date.getDate();
+      const currentMonth = date.getMonth() + 1;
+      return `${currentYear}-${currentMonth}-${today}`
     },
   },
   computed: {
-    membersInfo() {},
+  
   },
   destroyed() {},
+  watch: {
+    value : function (newVal, oldVal) {
+      if (newVal !== oldVal) {
+        const form =newVal[0]
+        const to =newVal[1]
+         console.log(form.slice(0,4),to.slice(0,4));
+      }
+    },
+  },
 };
 </script>
