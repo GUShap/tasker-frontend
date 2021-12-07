@@ -1,6 +1,6 @@
 .group {
   margin-left: 1rem;
-  max-width: 96%;
+  max-width: 100%;
   font-family: roboto;
 
   .border {
@@ -14,22 +14,25 @@
   .add-task {
     display: flex;
     width: 100%;
-    margin-left: 3rem;
+    margin-left: 3.1rem;
+    border: 1px rgba(0, 0, 0, 0.089) solid;
     input {
       display: flex;
       border: none;
       height: rem(35px);
       cursor: pointer;
       width: calc(100% - 70px);
-      border: 1px rgba(0, 0, 0, 0.089) solid;
       // // font-family: roboto-light,helvetica,sans-serif;
       position: sticky;
       border-inline-end: none;
       // // .color-marker &::before {
       // //   opacity: .5
       // // }
-    }
 
+      &focus {
+        border: none;
+      }
+    }
     .input-group-name {
       position: absolute;
       left: 100px;

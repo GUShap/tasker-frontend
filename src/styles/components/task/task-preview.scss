@@ -41,7 +41,6 @@
     min-width: rem(400px);
     white-space: nowrap;
     text-overflow: ellipsis;
-    display: block;
   }
   .status-picker {
     display: flex;
@@ -73,7 +72,7 @@
       .myBar {
         width: 50%;
         height: 100%;
-        background-color: #04aa6d;
+        // background-color: #04aa6d;
         text-align: center;
         line-height: 30px;
         color: white;
