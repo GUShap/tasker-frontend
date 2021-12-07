@@ -29,14 +29,13 @@
             ref="title"
             type="text"
             v-model="group.title"
-            :style="{ color: fontColor }"
+            :style="{ color: groupColor }"
             v-on:keyup.enter="updateInfo"
             @blur="updateInfo"
           />
         </div>
         <div v-for="(cmp, idx) in cmpsOrder" :key="idx">
           {{ cmpHeader(cmp) }}
-          
         </div>
       </section>
     </header>
@@ -53,6 +52,7 @@
           <task-preview
             v-show="groupShow"
             :task="task"
+            :members="board.members"
             :markerColor="markerColor"
             :cmpsOrder="board.cmpsOrder"
             class="flex"
@@ -112,6 +112,7 @@ export default {
       isFocusOn: false,
       hover: false,
       isSeen: false,
+      groupColor: this.group.style.color,
       dropPlaceholderOptions: {
         className: "drop-preview",
         animationDuration: "150",
@@ -122,7 +123,6 @@ export default {
   created() {},
   methods: {
     showGroup(val = null) {
-      console.log("label", val);
       if (val) {
         this.groupShow = false;
       } else {
@@ -158,6 +158,7 @@ export default {
     },
     changeColor(color) {
       this.markerColor = color;
+      this.groupColor = color;
     },
     showGroups(val) {
       this.$emit("showGroups", val);
@@ -187,7 +188,7 @@ export default {
         const board = Object.assign({}, this.board);
         const group = board.groups.filter((g) => g.id === groupId)[0];
         const groupIdx = board.groups.indexOf(group);
-        const newGroup = Object.assign({}, group)
+        const newGroup = Object.assign({}, group);
         newGroup.tasks = applyDrag(newGroup.tasks, dropResult);
         board.groups.splice(groupIdx, 1, newGroup);
         this.$store.dispatch({
@@ -210,11 +211,10 @@ export default {
         groupsInfo: groupsInfo,
       });
     },
-   
   },
   computed: {
     cmpsOrder() {
-       return this.board.cmpsOrder.slice(1);
+      return this.board.cmpsOrder.slice(1);
     },
     marker() {
       if (!this.markerColor) return `8px solid #579BFC`;

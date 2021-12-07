@@ -1,26 +1,30 @@
 <template>
   <section @click="editStatus" class="member-picker">
-    <section v-if="!edit">
-      <section v-if="!members">
-        <avatar :size="25" username="i" />
-      </section>
+    <section v-if="!isEditMode">
+      <section v-if="!info.members">-</section>
       <avatar
         v-else
-        v-for="member in members"
+        v-for="member in selectedMembers"
         :size="25"
-        :username="member"
+        :username="member.fullname"
+        :src="require(`@/pics/${member.imgUrl}`)"
         :key="member._id"
       />
     </section>
-    <ul v-if="edit" @blur="editStatus" class="status-modal">
+    <ul v-if="isEditMode" @blur="editStatus" class="status-modal">
       <li
-        v-for="(member, idx) in members"
+        v-for="(member, idx) in membersList"
         :key="idx"
         class="flex justify-center align-center"
       >
-        <section>
-          <avatar :size="25" :username="member" :key="member._id"></avatar>
-          {{ member }}
+        <section class="flex">
+          <avatar
+            :size="25"
+            :username="member.fullname"
+            :src="require(`@/pics/${member.imgUrl}`)"
+            :key="member._id"
+          ></avatar>
+          <div>{{ member.fullname }}</div>
         </section>
       </li>
       <li @click.prevent.stop="editStatus"><button>Edit</button></li>
@@ -33,28 +37,38 @@ import Avatar from "vue-avatar";
 
 export default {
   components: { Avatar },
-  props: ["info"],
+  props: ["info", "boardMembers"],
   data() {
     return {
-      members: null,
-      edit: false,
+      isEditMode: false,
     };
   },
-  created() {
-    this.members = this.info.members
-      ? this.info.members.map((member) => member.username)
-      : null;
-  },
+  created() {},
   methods: {
     editStatus() {
-      this.edit = !this.edit;
+      this.isEditMode = !this.isEditMode;
     },
   },
   computed: {
-    membersInfo() {
-      this.members = this.info.members
-        ? this.info.members.map((member) => member.username)
-        : null;
+    selectedMembers() {
+      if (this.info.members) {
+        return this.info.members;
+      } else {
+        return null;
+      }
+    },
+    membersList() {
+      if (!this.info.members) {
+        return this.boardMembers;
+      } else {
+        console.log("this.selectedMembers", this.selectedMembers);
+        console.log("this.selectedMembers", this.boardMembers);
+        return this.boardMembers.filter((member) => {
+          console.log("label", !this.selectedMembers.includes(member));
+          console.log("member", member);
+          return !this.selectedMembers.includes(member);
+        });
+      }
     },
   },
   destroyed() {},

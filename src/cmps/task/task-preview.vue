@@ -14,7 +14,7 @@
       :style="{ 'border-left': marker }"
     >
       <template v-for="(cmpType, idx) in cmpsOrder">
-        <component :is="cmpType" :info="task" @update="updateTask" :key="idx" :markerColor="markerColor"/>
+        <component :is="cmpType" :info="task" :boardMembers="members" @update="updateTask" :key="idx" :markerColor="markerColor"/>
         <!-- <component :is="cmpType" :info="getCmpInfo(cmpType)" @updated="updateTask(cmpType, $event)" :key="idx"> -->
       </template>
     </section>
@@ -37,7 +37,7 @@ export default {
     timelinePicker,
     taskDropdown,
   },
-  props: ["task", "cmpsOrder", "markerColor"],
+  props: ["task", "cmpsOrder", "markerColor","members"],
   data() {
     return {};
   },

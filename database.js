@@ -2,8 +2,7 @@ export const boardDb = {
   _id: "b101",
   title: "Sprint 4",
   createdAt: 1589983468418,
-  description:
-    "Track your action items and improve for next sprint",
+  description: "Track your action items and improve for next sprint",
   createdBy: {
     _id: "u101",
     fullname: "Guy Shapira",
@@ -20,16 +19,19 @@ export const boardDb = {
   members: [
     {
       _id: "u101",
+      username: "Guy",
       fullname: "Guy Shapira",
       imgUrl: "guy-img.jpeg",
     },
     {
       _id: "u102",
+      username: "Sundos",
       fullname: "Sundos Gutty",
       imgUrl: "sundos-img.jpg",
     },
     {
       _id: "u103",
+      username: "Ishay",
       fullname: "Ishay Nitzan",
       imgUrl: "ishay-img.jpeg",
     },
@@ -89,13 +91,14 @@ export const boardDb = {
               _id: "u101",
               username: "Ishay",
               fullname: "Ishay Nitzan",
-              imgUrl:
-                "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg",
+              imgUrl: "ishay-img.jpeg",
             },
           ],
         },
       ],
-      style: {},
+      style: {
+        color: "#579bfc",
+      },
     },
     {
       id: "g102",
@@ -112,7 +115,9 @@ export const boardDb = {
           labelId: "Work",
         },
       ],
-      style: {},
+      style: {
+        color: "#579bfc",
+      },
     },
     {
       id: "g103",
@@ -124,18 +129,16 @@ export const boardDb = {
           labelId: "Done",
           members: [
             {
-              _id: "u101",
+              _id: "u102",
               username: "Sundos",
               fullname: "Sundos Gutty",
-              imgUrl:
-                "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg",
+              imgUrl: "sundos-img.jpg",
             },
             {
-              _id: "u101",
+              _id: "u103",
               username: "Ishay",
               fullname: "Ishay Nitzan",
-              imgUrl:
-                "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg",
+              imgUrl:"ishay-img.jpeg"
             },
           ],
         },
@@ -185,14 +188,11 @@ export const boardDb = {
             fullname: "Guy Shapira",
             imgUrl: "guy-img.jpeg",
           },
-          style: {
-            bgColor: "#26de81",
-          },
+          style: {},
         },
       ],
       style: {
-        color: "#26de81",
-        bgColor: "#26de81",
+        color: "#579bfc",
       },
     },
     {
@@ -205,18 +205,16 @@ export const boardDb = {
           labelId: "Done",
           members: [
             {
-              _id: "u101",
+              _id: "u102",
               username: "Sundos",
               fullname: "Sundos Gutty",
-              imgUrl:
-                "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg",
+              imgUrl:"sundos-img.jpg"
             },
             {
-              _id: "u101",
+              _id: "u103",
               username: "Ishay",
               fullname: "Ishay Nitzan",
-              imgUrl:
-                "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg",
+              imgUrl:"ishay-img.jpeg"
             },
           ],
         },
@@ -266,14 +264,11 @@ export const boardDb = {
             fullname: "Guy Shapira",
             imgUrl: "guy-img.jpeg",
           },
-          style: {
-            bgColor: "#26de81",
-          },
+          style: {},
         },
       ],
       style: {
-        color: "#26de81",
-        bgColor: "#26de81",
+        color: "#579bfc",
       },
     },
     {
@@ -286,18 +281,16 @@ export const boardDb = {
           labelId: "Done",
           members: [
             {
-              _id: "u101",
+              _id: "u102",
               username: "Sundos",
               fullname: "Sundos Gutty",
-              imgUrl:
-                "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg",
+              imgUrl:"sundos-img.jpg"
             },
             {
-              _id: "u101",
+              _id: "u103",
               username: "Ishay",
               fullname: "Ishay Nitzan",
-              imgUrl:
-                "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg",
+              imgUrl:"ishay-img.jpeg"
             },
           ],
         },
@@ -347,14 +340,11 @@ export const boardDb = {
             fullname: "Guy Shapira",
             imgUrl: "guy-img.jpeg",
           },
-          style: {
-            bgColor: "#26de81",
-          },
+          style: {},
         },
       ],
       style: {
-        color: "#26de81",
-        bgColor: "#26de81",
+        color: "#579bfc",
       },
     },
   ],
@@ -402,5 +392,10 @@ export const boardDb = {
       },
     },
   ],
-  cmpsOrder: ["title-picker", "status-picker", "member-picker","timeline-picker"],
+  cmpsOrder: [
+    "title-picker",
+    "status-picker",
+    "member-picker",
+    "timeline-picker",
+  ],
 };

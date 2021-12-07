@@ -58,10 +58,6 @@ export default {
   },
   computed: {
     currGroups() {
-      console.log(
-        "label",
-        this.board.groups.map((g) => g.tasks.map((t) => t.id))
-      );
       return this.board.groups;
     },
   },
