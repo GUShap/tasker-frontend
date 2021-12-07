@@ -14,7 +14,7 @@
       :style="{ 'border-left': marker }"
     >
       <template v-for="(cmpType, idx) in cmpsOrder">
-        <component :is="cmpType" :info="task" :key="idx" :markerColor="markerColor"/>
+        <component :is="cmpType" :info="task" @update="updateTask" :key="idx" :markerColor="markerColor"/>
         <!-- <component :is="cmpType" :info="getCmpInfo(cmpType)" @updated="updateTask(cmpType, $event)" :key="idx"> -->
       </template>
     </section>
@@ -59,6 +59,9 @@ export default {
       delete taskCopy.id;
       this.$emit("addTask", taskCopy);
     },
+    updateTask(task){
+      console.log('task',task);
+    }
   },
   computed: {
     marker() {

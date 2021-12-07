@@ -34,14 +34,14 @@
   .title-picker {
     display: flex;
     position: sticky;
-    height: 100%;
     justify-content: start;
+    align-items: center;
+    height: 100%;
     margin-left: 0.5rem;
     min-width: rem(400px);
     white-space: nowrap;
     text-overflow: ellipsis;
     display: block;
-    // z-index: 100;
   }
   .status-picker {
     display: flex;

@@ -34,8 +34,9 @@
             @blur="updateInfo"
           />
         </div>
-        <div v-for="(cmp, idx) in cmpHeaders" :key="idx">
+        <div v-for="(cmp, idx) in cmpsOrder" :key="idx">
           {{ cmpHeader(cmp) }}
+          
         </div>
       </section>
     </header>
@@ -43,7 +44,7 @@
     <Container
       @drop="onTaskDrop(group.id, $event)"
       lock-axis="y"
-      group-name="tasks"
+      group-name="col"
       :get-child-payload="getChildPayload"
       :drop-placeholder="dropPlaceholderOptions"
     >
@@ -85,12 +86,6 @@
 
 
 <script>
-// :group="group"
-//   :key="group.id"
-//   :groupIdx="groupIdx"
-//   @addTask="addTask"
-//   @removeGroup="removeGroup"
-
 import taskPreview from "@/cmps/task/task-preview.vue";
 import groupDropdown from "@/cmps/group/group-dropdown.vue";
 import { Container, Draggable } from "vue-smooth-dnd";
@@ -186,26 +181,14 @@ export default {
       return val;
     },
 
-    // onTaskDrop(groupId, dropResult) {
-    //   if (dropResult.removedIndex !== null || dropResult.addedIndex !== null) {
-    //     this.tasksList = applyDrag( this.tasksList, dropResult);
-    //     console.log("tasksList", this.tasksList.map(t=>t.id));
-    //     return
-    //     const groupInfo = { group: currGroup, groupIdx };
-    //     this.$store.dispatch({
-    //       type: "saveGroup",
-    //       groupInfo: groupInfo,
-    //     });
-    //   }
-    // },
     onTaskDrop(groupId, dropResult) {
       if (dropResult.removedIndex !== null || dropResult.addedIndex !== null) {
-        const board = JSON.parse(JSON.stringify(this.board));
+        const board = Object.assign({}, this.board);
         const group = board.groups.filter((g) => g.id === groupId)[0];
-        group.tasks = applyDrag(group.tasks, dropResult);
-        // group.tasks  = applyDrag(this.tasksList, dropResult);
-        board.groups.splice(this.groupIdx, 1, group);
-        // const groupInfo = { group: currGroup, groupIdx };
+        const groupIdx = board.groups.indexOf(group);
+        const newGroup = Object.assign({}, group)
+        newGroup.tasks = applyDrag(newGroup.tasks, dropResult);
+        board.groups.splice(groupIdx, 1, newGroup);
         this.$store.dispatch({
           type: "saveBoard",
           board,
@@ -226,29 +209,12 @@ export default {
         groupsInfo: groupsInfo,
       });
     },
-    // onDrop(dropResult) {
-    //   console.log("dropResult", dropResult);
-    //   this.tasksList = applyDrag(this.tasksList, dropResult);
-    //   const groupCopy = JSON.parse(JSON.stringify(this.group));
-    //   groupCopy.tasks = this.tasksList;
-    //   const groupInfo = { group: groupCopy, groupIdx: this.groupIdx };
-    //   this.$store.dispatch({
-    //     type: "saveGroup",
-    //     groupInfo: groupInfo,
-    //   });
-    // },
+   
   },
   computed: {
-    // taskList() {
-    //   const taskList = this.group.tasks;
-    //   this.currGroups = currGroups;
-    //   return currGroups;
-    // },
-    // cmpsOrder() {
-    //   const cmps = this.board.cmpsOrder;
-    //   this.cmpHeaders = cmps.slice(1);
-    //   return cmps;
-    // },
+    cmpsOrder() {
+       return this.board.cmpsOrder.slice(1);
+    },
     marker() {
       if (!this.markerColor) return `8px solid #579BFC`;
       return `8px solid ${this.markerColor}`;
