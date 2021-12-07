@@ -56,7 +56,7 @@
           :taskIdx="taskIdx"
           :markerColor="markerColor"
           :members="board.members"
-          :cmpsOrder="cmpsOrder"
+          :cmpsOrder="board.cmpsOrder"
           :groupIdx="groupIdx"
           class="flex"
           @addTask="addTask"

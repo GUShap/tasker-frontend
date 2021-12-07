@@ -28,9 +28,7 @@ export default {
       title: this.info.title,
     };
   },
-  created() {
-    console.log('info',info);
-  },
+  created() {},
   methods: {
     openDetails() {
       if(this.isEditMode) return

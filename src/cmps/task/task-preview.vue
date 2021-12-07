@@ -23,7 +23,6 @@
 </template>
 
 <script>
-// <!-- <component :is="cmpType" :info="getCmpInfo(cmpType)" @updated="updateTask(cmpType, $event)" :key="idx"> -->
 import titlePicker from "./title-picker.vue";
 import statusPicker from "./status-picker.vue";
 import memberPicker from "./member-picker.vue";
@@ -43,7 +42,8 @@ export default {
   data() {
     return {};
   },
-  created() {},
+  created() {
+},
   methods: {
     async removeTask() {
       try {
