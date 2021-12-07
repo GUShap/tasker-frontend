@@ -3,6 +3,7 @@ import App from './App.vue'
 import router from './router/index.js'
 import store from './store/store.js'
 import ElementUI from 'element-ui';
+import locale from 'element-ui/lib/locale/lang/en'
 import "./styles/styles.scss"
 
 //ICON
@@ -21,7 +22,7 @@ Vue.component('font-awesome-icon', FontAwesomeIcon)
 //=====
 Vue.use(InlineSvgPlugin);
 Vue.config.productionTip = false
-Vue.use(ElementUI)
+Vue.use(ElementUI , {locale})
 Vue.config.productionTip = false
 
 new Vue({

@@ -5,6 +5,7 @@ export const boardService = {
   query,
   save,
   saveTask,
+  saveBoard,
   remove,
   getById,
   getTaskById,
@@ -13,6 +14,8 @@ export const boardService = {
   getBoardIdx,
   removeGroup,
   addNewGroup,
+  saveGroup,
+  saveGroups,
   getEmptyComment,
   getEmptyActivity,
 };
@@ -45,21 +48,31 @@ async function saveTask(task) {
     } else {
       task = {
         title: task.title,
-        id: utilService.makeId()
+        id: utilService.makeId(),
       };
     }
-    const taskOrigin = await getTaskOrigin(task.id)
+    const taskOrigin = await getTaskOrigin(task.id);
     console.log(taskOrigin.boardId);
     const bIdx = await getBoardIdx(taskOrigin.boardId);
     const gIdx = await getGroupIdx(taskOrigin.boardId, taskOrigin.groupId);
 
-console.log('bIdx:',bIdx,'gIdx:', gIdx);
+    console.log("bIdx:", bIdx, "gIdx:", gIdx);
 
     const boards = query();
     boards[bIdx].groups[gIdx].tasks.push(task);
-    _loadToStorage(boards);
+    _saveToStorage(boards);
     return;
+  } catch (err) {
+    console.log(err);
+  }
+}
 
+async function saveBoard(board,boardIdx ) {
+  try {
+    const gBoards = query();
+    gBoards.splice(boardIdx,1,board)
+    _saveToStorage(gBoards);
+    return gBoards[boardIdx];
   } catch (err) {
     console.log(err);
   }
@@ -70,7 +83,32 @@ async function removeGroup(boardIdx, { groupId }) {
     const gBoards = query();
     const idx = await getGroupIdx(gBoards[boardIdx]._id, groupId);
     gBoards[boardIdx].groups.splice(idx, 1);
-    _loadToStorage(gBoards);
+    _saveToStorage(gBoards);
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+
+async function saveGroup(groupInfo) {
+  try {
+    console.log('groupInfo',groupInfo);
+    const gBoards = query();
+    const { group, groupIdx, boardIdx  } = groupInfo;
+    gBoards[boardIdx].groups.splice(groupIdx, 1, group);
+    _saveToStorage(gBoards);
+    return gBoards[boardIdx].groups[groupIdx]
+  } catch (err) {
+    console.log(err);
+  }
+}
+async function saveGroups(groupsInfo) {
+  try {
+    console.log('groupsInfo',groupsInfo);
+    const gBoards = query();
+    const { groups, boardIdx } = groupsInfo;
+    gBoards[boardIdx].groups = groups;
+    _saveToStorage(gBoards);
   } catch (err) {
     console.log(err);
   }
@@ -85,7 +123,7 @@ async function addNewGroup(boardIdx) {
       tasks: [],
     };
     gBoards[boardIdx].groups.unshift(currGroup);
-    _loadToStorage(gBoards);
+    _saveToStorage(gBoards);
   } catch (err) {
     console.log(err);
   }
@@ -103,7 +141,7 @@ async function remove(taskId) {
         }
       });
     });
-    _loadToStorage(gBoards);
+    _saveToStorage(gBoards);
   } catch (err) {
     console.log("Error", err);
     throw err;
@@ -190,10 +228,7 @@ async function getBoardIdx(boardId) {
   }
 }
 
-
-
-
-function _loadToStorage(gBoards) {
+function _saveToStorage(gBoards) {
   storageService.store("gBoards", gBoards);
 }
 

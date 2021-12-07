@@ -6,13 +6,10 @@
         <el-dropdown-item @click.native="openTaskDetails">
           <i class="fas fa-expand-alt"></i> Open Details
         </el-dropdown-item>
-        <el-dropdown-item @click.native="clone" class="last-child"
+        <el-dropdown-item @click.native="clone" 
           ><i class="far fa-copy"></i>Duplicate</el-dropdown-item>
-        <el-dropdown-item 
+        <el-dropdown-item  class="last-child"
           ><i class="fas fa-plus"></i>Create new item below
-        </el-dropdown-item>
-        <el-dropdown-item class="last-child"
-          ><i class="fas fa-archive"></i>Archive
         </el-dropdown-item>
         <el-dropdown-item @click.native="removeTask"
           ><i class="fas fa-trash"></i>Delete

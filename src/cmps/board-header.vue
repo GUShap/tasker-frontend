@@ -27,8 +27,20 @@
           ></a>
         </div>
         <div class="more-actions flex">
-          <div v-for="(member, idx) in currBoard.members" :key="idx">
-            <a>Board members {{ member.fullname }}</a>
+          <a>Board members </a>
+          <div class="member-avatars">
+          <section v-if="!currBoard.members">
+            <avatar :size="25" username="i" />
+          </section>
+          <avatar
+            class="memeber-img"
+            v-else
+            v-for="(member, idx) in currBoard.members"
+            :size="25"
+            :username="member.fullname"
+            :src="require(`@/pics/${member.imgUrl}`)"
+            :key="idx"
+          />
           </div>
           <a><span class="icon-activities"></span>Activities</a>
           <a class="btn-add-board"><span class="icon-plus"></span>Add Board</a>
@@ -36,11 +48,10 @@
       </div>
 
       <div class="input-section" @click="setEdit('description')">
-        <textarea
+        <input
           ref="description"
           type="text"
           v-model="currBoard.description"
-          :class="[isFocus ? 'border' : 'no-boder']"
           v-on:keyup.enter="updateInfo"
           @blur="updateInfo"
         />
@@ -59,7 +70,6 @@
         <button><span class="icon-kanban"></span>Kanban</button>
       </div>
       <div class="share">
-        <button>Automate</button>
       </div>
     </section>
   </section>
@@ -84,7 +94,7 @@ export default {
   methods: {
     setEdit(val) {
       console.log(val);
-      this.isFocus = true
+      this.isFocus = true;
       this.isEditedMode = true;
       this.currEditedVal = val;
     },

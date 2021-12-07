@@ -10,15 +10,25 @@
     <form v-if="isEditMode" @submit.prevent="saveComment" @blur="setEdit">
       <div class="comment-form">
         <div class="text-edit">
-          <i class="fas fa-paragraph"></i>
-          <i class="fas fa-bold"></i>
-          <i class="fas fa-italic"></i>
-          <i class="fas fa-underline"></i>
-          <i class="fas fa-strikethrough"></i>
+          <i class="fas fa-bold" @click.prevent="changeStyle('bold')"></i>
+          <i class="fas fa-italic" @click.prevent="changeStyle('italic')"></i>
+          <i
+            class="fas fa-underline"
+            @click.prevent="changeStyle('underline')"
+          ></i>
+          <i
+            class="fas fa-strikethrough"
+            @click.prevent="changeStyle('strikethrough')"
+          ></i>
         </div>
         <hr />
         <div class="comment-input">
-          <input type="text" v-model="input" ref="input" />
+          <input
+            type="text"
+            v-model="input"
+            ref="input"
+            :style="{ changeStyle }"
+          />
         </div>
       </div>
 
@@ -75,7 +85,9 @@
         <div class="update-card">
           <div class="top">
             <div class="card-btn">
-              <i class="far fa-clock"><span>19h</span></i>
+              <i class="far fa-clock"
+                ><span>{{ comment.createdAt }}</span></i
+              >
               <i class="far fa-bell"></i>
               <el-dropdown class="dropdown" trigger="click">
                 <i class="fas fa-sort-down"></i>
@@ -90,23 +102,8 @@
                     top</el-dropdown-item
                   >
                   <el-dropdown-item @click.native="removeTask"
-                    ><i class="fas fa-link"></i>Copy link to
-                    update</el-dropdown-item
-                  >
-                  <el-dropdown-item @click.native="removeTask"
                     ><i class="fas fa-pencil-alt"></i>Edit
                     update</el-dropdown-item
-                  >
-                  <el-dropdown-item @click.native="removeTask"
-                    ><i class="far fa-trash-alt"></i>Delete update for
-                    everyone</el-dropdown-item
-                  >
-                  <el-dropdown-item @click.native="removeTask" disabled
-                    ><i class="far fa-envelope"></i>Share
-                    update</el-dropdown-item
-                  >
-                  <el-dropdown-item @click.native="removeTask"
-                    ><i class="far fa-bookmark"></i>Bookmark</el-dropdown-item
                   >
                 </el-dropdown-menu>
               </el-dropdown>
@@ -128,10 +125,10 @@
           </div>
           <div class="action-btn flex">
             <div>
-              <button><i class="far fa-thumbs-up"></i> like</button>
+              <button><i class="far fa-thumbs-up"></i>like</button>
             </div>
             <div>
-              <button><i class="fas fa-reply"></i> reply</button>
+              <button><i class="fas fa-reply"></i>reply</button>
             </div>
           </div>
         </div>
@@ -156,6 +153,7 @@ export default {
       newComment: null,
       input: "",
       search: "",
+      style: null,
     };
   },
   created() {
@@ -179,13 +177,30 @@ export default {
     setEdit() {
       this.isEditMode = !this.isEditMode;
     },
+    changeStyle(style) {
+      if (style === "bold")
+        return (this.newComment.style = "font-weight: bold; ");
+      if (style === "italic")
+        return (this.newComment.style = "font-style: italic; ");
+      if (style === "underline")
+        return (this.newComment.style = "border: 1px solid blue; ");
+    },
+    focusInput() {
+      console.log(this.$refs.input);
+    },
   },
 
   computed: {
     updateTime() {
       const currTime = Date.now();
-let formatted
+      let formatted;
     },
+    // formattedTime(){
+    //   const time =
+    // }
+  },
+  mounted() {
+    this.focusInput();
   },
 };
 </script>

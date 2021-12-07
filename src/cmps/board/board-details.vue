@@ -1,13 +1,17 @@
 <template>
-  <section class="board-container">
+  <section class="board-container" v-if="board">
     <template v-for="(group, groupIdx) in currGroups">
       <board-group
         :group="group"
         :key="group.id"
+        :board="board"
         :groupIdx="groupIdx"
         @addTask="addTask"
+        @showGroups="showGroups"
         @removeGroup="removeGroup"
         @editGroup="editGroup"
+        @addNewGroup="addNewGroup"
+        v-show="groupsShow"
       />
     </template>
   </section>
@@ -27,6 +31,7 @@ export default {
     return {
       groups: null,
       openModal: false,
+      groupsShow: true,
     };
   },
   created() {},
@@ -41,11 +46,22 @@ export default {
     removeGroup(groupInfo) {
       this.$emit("removeGroup", groupInfo);
     },
+    showGroups(val = null) {
+      // if (val) {
+      //   const tasks = this.groups.map((group) => {
+      //     return group.tasks;
+      //   });
+      //   return tasks;
+      // }
+    },
+    addNewGroup(group) {
+      group.boardId = this.board._id;
+      this.$emit("addNewGroup", group);
+    },
   },
   computed: {
     currGroups() {
-      this.groups = this.board ? this.board.groups : null;
-      return this.groups;
+      return this.board.groups;
     },
   },
   destroyed() {},

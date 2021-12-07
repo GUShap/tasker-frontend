@@ -1,111 +1,121 @@
-.icon-filter{
+.icon-filter {
     font-family: monday;
     @include to-icon("\f333");
 }
-.icon-person{
+.icon-person {
     font-family: monday;
     @include to-icon("\f1c7");
 }
 
-.icon-search{
+.icon-search {
     font-family: monday;
     color: white;
-    @include to-icon("\f3aa")
+    @include to-icon("\f3aa");
 }
 
-
-.icon-activities{
+.icon-circle {
     font-family: monday;
-    @include to-icon("\f468")
+    @include to-icon("\f2df");
 }
 
-
-.icon-two-stars{
+.icon-activities {
     font-family: monday;
-    @include to-icon("\f28d")
+    @include to-icon("\f468");
 }
 
-
-.icon-main-table{
+.icon-two-stars {
     font-family: monday;
-    @include to-icon("\f420")
+    @include to-icon("\f28d");
 }
 
-.icon-home{
+.icon-main-table {
     font-family: monday;
-    @include to-icon("\f471")
+    @include to-icon("\f420");
 }
 
-
-.icon-arrow-down{
+.icon-home {
     font-family: monday;
-    @include to-icon("\f106")
+    @include to-icon("\f471");
 }
 
-.icon-sort-up-down{
+.icon-arrow-down {
     font-family: monday;
-    @include to-icon("\f3d4")
+    @include to-icon("\f106");
 }
 
-.icon-workspace{
+.icon-sort-up-down {
     font-family: monday;
-    color: white;
-    @include to-icon("\f105")
+    @include to-icon("\f3d4");
 }
 
-
-.icon-add-user{
+.icon-workspace {
     font-family: monday;
     color: white;
-    @include to-icon("\f3fb")
+    @include to-icon("\f105");
 }
 
-
-.icon-star{
+.icon-add-user {
     font-family: monday;
-    @include to-icon("\f3dc")
+    color: white;
+    @include to-icon("\f3fb");
 }
 
-.icon-star-yellow{
+.icon-star {
     font-family: monday;
-    color: #FFCB00;
-    @include to-icon("\f3db")
-
+    @include to-icon("\f3dc");
 }
 
-.icon-info{
+.icon-star-yellow {
     font-family: monday;
-    @include to-icon("\f345")
+    color: #ffcb00;
+    @include to-icon("\f3db");
 }
 
-.icon-plus{
+.icon-info {
     font-family: monday;
-    @include to-icon("\f47b")
+    @include to-icon("\f345");
 }
 
-.icon-calender{
+.icon-plus {
     font-family: monday;
-    @include to-icon("\f385")
+    @include to-icon("\f47b");
 }
 
-
-.icon-kanban{
-    font-family:monday;
-    @include to-icon("\f359")
+.icon-calender {
+    font-family: monday;
+    @include to-icon("\f385");
 }
 
+.icon-kanban {
+    font-family: monday;
+    @include to-icon("\f359");
+}
 
-
-.icon-members{
+.icon-members {
     font-family: monday;
     @include to-icon("\f226");
 }
 
-.icon-clip{
+.icon-clip {
     font-family: monday;
     @include to-icon("\f13b");
 }
 
+.icon-three-dots {
+    font-family: monday;
+    @include to-icon("\f311");
+}
+
+.icon-right-arrow {
+    font-family: monday;
+    @include to-icon("\f061");
+}
+
+
+.icon-bubble{
+    font-family: monday;
+    @include to-icon("\f075")
+}
 
 // .icon-format{
 //     font-family: monday;
@@ -136,5 +146,3 @@
 //     font-family: monday;
 //     @include to-icon("\e901");
 // }
-
-

@@ -1,30 +1,51 @@
 <template>
-  <section @click="editStatus('edit')" class="member-picker">
-    <section v-if="!edit">
-      <section v-if="!members">
-        <avatar :size="25" username="i" />
-      </section>
+  <section @click="editStatus" class="member-picker">
+    <section>
+      <section v-if="!selectedMembers">-</section>
       <avatar
-        v-else
-        v-for="member in members"
+            v-else
+        v-for="member in selectedMembers"
         :size="25"
-        :username="member"
+        :username="member.fullname"
+        :src="require(`@/pics/${member.imgUrl}`)"
         :key="member._id"
       />
     </section>
-    <ul v-if="edit" @blur="editStatus('edit')" class="status-modal">
-      <li
-        v-for="(member, idx) in members"
-        :key="idx"
-        class="flex justify-center align-center"
-      >
-        <section>
-          <avatar :size="25" :username="member" :key="member._id"></avatar>
-          {{ member }}
-        </section>
-      </li>
-      <li @click.prevent.stop="editStatus"><button>Edit</button></li>
-    </ul>
+    <section v-show="isEditMode" @blur="editStatus" class="member-modal">
+      <section class="selected-members">
+        <div v-for="member in selectedMembers" :key="member._id">
+          <avatar
+            :size="22"
+            :username="member.fullname"
+            :src="require(`@/pics/${member.imgUrl}`)"
+            :key="member._id"
+          ></avatar>
+          {{ member.fullname }}
+          <button @click.prevent.stop="removeMember(member)">x</button>
+        </div>
+      </section>
+      <br />
+      <hr />
+      <ul>
+        <li
+          v-for="(member, idx) in membersList"
+          :key="idx"
+          :value="member"
+          @click.prevent.stop="addMember(member)"
+          class="flex justify-center align-center"
+        >
+          <div>
+            <avatar
+              :size="22"
+              :username="member.fullname"
+              :src="require(`@/pics/${member.imgUrl}`)"
+              :key="member._id"
+            ></avatar>
+          </div>
+          <div>{{ member.fullname }}</div>
+        </li>
+      </ul>
+    </section>
   </section>
 </template>
 
@@ -33,29 +54,40 @@ import Avatar from "vue-avatar";
 
 export default {
   components: { Avatar },
-  props: ["info"],
+  props: ["info", "boardMembers"],
   data() {
     return {
-      members: null,
-      edit: false,
+      isEditMode: false,
+      selectedMembers: [],
     };
   },
   created() {
-    this.members = this.info.members
-      ? this.info.members.map((member) => member.username)
-      : null;
+    this.selectedMembers = this.info.members || [];
   },
   methods: {
     editStatus() {
-      console.log("label");
-      this.edit = !this.edit;
+      this.isEditMode = !this.isEditMode;
+    },
+    addMember(member) {
+      this.selectedMembers.push(member);
+    },
+    removeMember(member) {
+      const idx = this.selectedMembers.indexOf(member);
+      this.selectedMembers.splice(idx, 1);
     },
   },
   computed: {
-    membersInfo() {
-      this.members = this.info.members
-        ? this.info.members.map((member) => member.username)
-        : null;
+    membersList() {
+      if (!this.selectedMembers) {
+        return this.boardMembers;
+      } else {
+        const selectedUser = this.selectedMembers.map((m) => m.fullname);
+
+        const membersList = this.boardMembers.filter((member) => {
+          return !selectedUser.includes(member.fullname);
+        });
+        return membersList;
+      }
     },
   },
   destroyed() {},

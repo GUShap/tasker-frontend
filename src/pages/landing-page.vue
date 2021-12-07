@@ -2,7 +2,10 @@
   <section class="landing-page">
     <header class="home-header align-center">
       <section class="home-nav">
-        <a class="logo-home">tasker.com</a>
+          <div class="logo-home">tasker.com</div>
+          <!-- <div id="toggle" class="action-btn" @click="toggleMenu">
+            <span class="fa fa-bars"></span>
+          </div> -->
         <div class="extra-info">
           <router-link to="/"
             >Product<i class="fas fa-chevron-down"></i
@@ -43,18 +46,20 @@
         </div>
         <span><i class="fas fa-dot-circle"></i>200+ workflows</span>
       </div>
+      <el-input value="Enter your work email"></el-input>
       <router-link class="get-started-in" to="/home">
         Get Started<i class="fas fa-chevron-right"></i
       ></router-link>
       <img class="main-img" :src="require(`@/pics/picture1.jpeg`)" />
       <section class="more-info first-p">
-        <img :src="require(`@/pics/picture2.png`)" />
+        <img class="full-board-img" :src="require(`@/pics/picture2.png`)" />
         <div class="txt">
           <h3>Manage everything in one workspace</h3>
           <p>
             Planning, tracking and delivering your team's best work has never
             been easier
           </p>
+          <img class="small-board-img" :src="require(`@/pics/picture2.png`)" />
         </div>
       </section>
       <section class="more-info">
@@ -66,8 +71,14 @@
       </section>
       <section class="more-info">
         <div class="imgs">
-          <img class="phone-pic" :src="require(`@/pics/picture6.jpg`)" />
-          <img class="phone-pic" :src="require(`@/pics/picture7.jpg`)" />
+          <img
+            class="phone-pic full-board-img"
+            :src="require(`@/pics/picture6.jpg`)"
+          />
+          <img
+            class="phone-pic full-board-img"
+            :src="require(`@/pics/picture7.jpg`)"
+          />
         </div>
         <div class="txt">
           <h3>Setup in minutes</h3>
@@ -75,11 +86,20 @@
             Get started fast with hundreds of visual and cutomizable templated -
             or creat your own even from your phone
           </p>
+          <img
+            class="phone-pic small-board-img"
+            :src="require(`@/pics/picture6.jpg`)"
+          />
+          <img
+            class="phone-pic small-board-img"
+            :src="require(`@/pics/picture7.jpg`)"
+          />
         </div>
       </section>
       <section class="trial">
         <h3>Try Tasker for your team</h3>
         <h5>14-day free trial | No credit card needed</h5>
+        <el-input value="Enter your work email"></el-input>
         <router-link to="/home"
           >Get Started<i class="fas fa-chevron-right"></i
         ></router-link>
@@ -97,7 +117,6 @@
           <a>Investor relations</a>
         </div>
         <div class="general">
-          <a>Contact us</a>
           <a><i class="fas fa-universal-access"></i>Accessibility statement</a>
           <a
             ><i class="fas fa-globe"></i>Contact us<i
@@ -122,5 +141,11 @@
 </template>
 
 <script>
-export default {};
+export default {
+  methods: {
+    toggleMenu() {
+      document.body.classList.toggle("menu-open");
+    },
+  },
+};
 </script>

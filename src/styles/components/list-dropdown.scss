@@ -16,10 +16,11 @@
   border-radius: 15px;
   cursor: pointer;
   width: 240px;
-  top: 30px;
+  top: 27px;
   gap: 10px;
-  margin-left: 14rem;
+  margin-left: 5rem;
   left: -105px;
+
 
   .el-dropdown-menu__item {
     position: relative;
@@ -65,4 +66,81 @@
   color: black;
 }
 
+.color-container {
+  width: 135px;
+  z-index: 6;
+  background: #fff;
+  position: absolute;
+  box-shadow: 0 8px 16px 0 rgb(0 0 0 / 32%);
+  border-radius: 6px;
+  cursor: pointer;
 
+  .color {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: inline-block;
+    margin: 3px;
+  }
+
+  .darkGreen {
+    background-color: #037f4c;
+  }
+
+  .green {
+    background-color: #00c875;
+  }
+
+  .yellowGreen {
+    background-color: #9cd326;
+  }
+
+  .beige {
+    background-color: #cab641;
+  }
+
+  .yellow {
+    background-color: #ffcb00;
+  }
+  .darkPurple {
+    background-color: #784bd1;
+  }
+  .purple {
+    background-color: #a25ddc;
+  }
+  .turquoise {
+    background-color: #0086be;
+  }
+
+  .blue {
+    background-color: #579bfc;
+  }
+
+  .lightBlue {
+    background-color: #6cf;
+  }
+
+  .darkRed {
+    background-color: #bb3354;
+  }
+
+  .red {
+    background-color: #e2445c;
+  }
+
+  .darkOrange {
+    background-color: #ff642e;
+  }
+
+  .orange {
+    background-color: #fdab3d;
+  }
+
+  .brown {
+    background-color: #7f5347;
+  }
+}
+
+.icon-circle {
+  padding-right: 15px;
+}
