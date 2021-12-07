@@ -11,22 +11,35 @@
         <form @submit.prevent="signup">
           <div class="input">
             <div class="input-email">
-              <label class="label" for="email">Email</label>
-              <el-input class="email" v-model="user.email" type="email" />
+              <div class="labels email-label">
+                <label class="label" for="email">Email</label>
+              </div>
+              <div class="email-container">
+                <el-input class="email" v-model="user.email" type="email" />
+              </div>
             </div>
             <div class="input-password">
-              <label  class="label" for="password">Password</label>
-              <el-input
-                class="password"
-                v-model="user.password"
-                type="password"
-              />
+              <div class="labels">
+                <label class="label" for="password">Password</label>
+              </div>
+              <div>
+                <el-input
+                  class="password"
+                  v-model="user.password"
+                  type="password"
+                />
+              </div>
             </div>
-            <router-link class="btn-login" to="/home"
+            <router-link class="btn-login-page" to="/home"
               >Log in<i class="fas fa-arrow-right"></i
             ></router-link>
           </div>
         </form>
+      </div>
+      <div class="sign-in">
+        <div class="line">___________<span>______________</span></div>
+        <div class="register">Or Sign-in here</div>
+        <div class="line">___________<span>______________</span></div>
       </div>
     </div>
   </section>

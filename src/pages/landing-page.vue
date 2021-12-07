@@ -2,11 +2,11 @@
   <section class="landing-page">
     <header class="home-header align-center">
       <section class="home-nav">
-        <a class="logo-home">tasker.com</a>
+          <div class="logo-home">tasker.com</div>
+          <!-- <div id="toggle" class="action-btn" @click="toggleMenu">
+            <span class="fa fa-bars"></span>
+          </div> -->
         <div class="extra-info">
-          <i class="btn-menu" @click="toggleMenu"
-            ><span class="fa fa-bars"></span
-          ></i>
           <router-link to="/"
             >Product<i class="fas fa-chevron-down"></i
           ></router-link>
