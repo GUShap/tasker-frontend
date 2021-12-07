@@ -1,15 +1,11 @@
 <template>
   <section
     class="task-container color-marker-after flex align-center"
-<<<<<<< HEAD
     style="
        {
         border: 1px solid red;
       }
     "
-=======
-    style="{ border: 1px solid red;}"
->>>>>>> 29f5a5a198a6d4a49302f3e6c3db1a2c63f072df
   >
     <task-dropdown
       @removeTask="removeTask"
@@ -21,18 +17,8 @@
       :style="{ 'border-left': marker }"
     >
       <template v-for="(cmpType, idx) in cmpsOrder">
-<<<<<<< HEAD
-        <component
-          :is="cmpType"
-          :info="task"
-          @update="updateTask"
-          :key="idx"
-          :markerColor="markerColor"
-        />
-=======
         <component :is="cmpType" :info="task" :boardMembers="members" @update="updateTask" :key="idx" :markerColor="markerColor"/>
         <!-- <component :is="cmpType" :info="getCmpInfo(cmpType)" @updated="updateTask(cmpType, $event)" :key="idx"> -->
->>>>>>> 29f5a5a198a6d4a49302f3e6c3db1a2c63f072df
       </template>
     </section>
   </section>
@@ -54,11 +40,7 @@ export default {
     timelinePicker,
     taskDropdown,
   },
-<<<<<<< HEAD
   props: ["task", "taskIdx", "groupIdx", "cmpsOrder", "markerColor"],
-=======
-  props: ["task", "cmpsOrder", "markerColor","members"],
->>>>>>> 29f5a5a198a6d4a49302f3e6c3db1a2c63f072df
   data() {
     return {};
   },
@@ -87,7 +69,6 @@ export default {
       delete taskCopy.id;
       this.$emit("addTask", taskCopy);
     },
-<<<<<<< HEAD
     updateTask() {
       this.$store.dispatch({
         type: "editTask",
@@ -98,11 +79,6 @@ export default {
         },
       });
     },
-=======
-    updateTask(task){
-      console.log('task',task);
-    }
->>>>>>> 29f5a5a198a6d4a49302f3e6c3db1a2c63f072df
   },
   computed: {
     marker() {
