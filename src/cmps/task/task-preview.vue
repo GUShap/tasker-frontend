@@ -40,7 +40,7 @@ export default {
     timelinePicker,
     taskDropdown,
   },
-  props: ["task", "taskIdx", "groupIdx", "cmpsOrder", "markerColor"],
+  props: ["task", "taskIdx", "groupIdx", "cmpsOrder", "markerColor", "members"],
   data() {
     return {};
   },
