@@ -34,14 +34,16 @@
       </section>
     </header>
 
-    <template v-for="task in currTasks">
-      <transition name="fade" :key="task.id">
+    <template v-for="(task, taskIdx) in currTasks">
+      <transition name="fade" :key="taskIdx">
         <task-preview
           v-show="groupShow"
           :key="task.id"
           :task="task"
+          :taskIdx="taskIdx"
           :markerColor="markerColor"
           :cmpsOrder="cmpsOrder"
+          :groupIdx="groupIdx"
           class="flex"
           style="{'border-inline-left' : 1px solid red }"
           @addTask="addTask"
@@ -88,7 +90,7 @@ export default {
       hover: false,
       cmpHeaders: null,
       markerColor: null,
-      tasksList : null,
+      tasksList: null,
       dropPlaceholderOptions: {
         className: "drop-preview",
         animationDuration: "150",
@@ -109,20 +111,21 @@ export default {
     addTask(task) {
       if (task === "new") {
         if (!this.title) return;
-        const newTask = { title:this.title}
-        this.$emit("addTask", newTask);
+        const newTask = { title: this.title };
+        this.$emit("addTask", { task: newTask, groupIdx: this.groupIdx });
         this.title = null;
       } else {
         this.$emit("addTask", task);
       }
-    }
     },
     changeColor(color) {
-      console.log(color);
       this.markerColor = color;
+      this.groupColor = color;
+      this.$emit("editGroup", { group: this.group, groupIdx: this.groupIdx});
     },
     removeGroup() {
-      this.$emit("removeGroup", { groupId: this.group.id });
+      console.log("groupIdx", this.groupIdx);
+      this.$emit("removeGroup", { group: this.group, groupIdx: this.groupIdx });
     },
     setEdit() {
       this.$refs.title.focus();
@@ -151,6 +154,7 @@ export default {
       console.log("index", index);
       return this.taskList[index];
     },
+  },
   computed: {
     currTasks() {
       this.taskList = this.group ? this.group.tasks : null;
@@ -161,11 +165,11 @@ export default {
       this.cmpHeaders = cmps.slice(1);
       return cmps;
     },
-     marker(){
-       if(!this.markerColor) this.markerColor ="red"
-       console.log(`1px solid ${this.markerColor}`);
-      return `1px solid ${this.markerColor}`
-    }
+    marker() {
+      if (!this.markerColor) this.markerColor = "red";
+      console.log(`1px solid ${this.markerColor}`);
+      return `1px solid ${this.markerColor}`;
+    },
   },
 };
 </script>

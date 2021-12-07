@@ -1,18 +1,29 @@
-
 <template>
   <section
     class="task-container color-marker-after flex align-center"
-    style="{border : 1px solid red }"
+    style="
+       {
+        border: 1px solid red;
+      }
+    "
   >
     <task-dropdown
       @removeTask="removeTask"
       @openTaskDetails="openTaskDetails"
       @clone="clone"
     />
-    <section class="task-preview flex align-center">
+    <section
+      class="task-preview flex align-center"
+      :style="{ 'border-left': marker }"
+    >
       <template v-for="(cmpType, idx) in cmpsOrder">
-        <component :is="cmpType" :info="task" :key="idx" />
-        <!-- <component :is="cmpType" :info="getCmpInfo(cmpType)" @updated="updateTask(cmpType, $event)" :key="idx"> -->
+        <component
+          :is="cmpType"
+          :info="task"
+          @update="updateTask"
+          :key="idx"
+          :markerColor="markerColor"
+        />
       </template>
     </section>
   </section>
@@ -34,17 +45,22 @@ export default {
     timelinePicker,
     taskDropdown,
   },
-  props: ["task", "cmpsOrder"],
+  props: ["task", "taskIdx", "groupIdx", "cmpsOrder", "markerColor"],
   data() {
     return {};
   },
-  created() {
-    
-  },
+  created() {},
   methods: {
     async removeTask() {
       try {
-        this.$store.dispatch({ type: "removeTask", taskId: this.task.id });
+        this.$store.dispatch({
+          type: "removeTask",
+          taskInfo: {
+            task: this.task,
+            taskIdx: this.taskIdx,
+            groupIdx: this.groupIdx,
+          },
+        });
       } catch (err) {
         console.log("Error", err);
       }
@@ -58,8 +74,23 @@ export default {
       delete taskCopy.id;
       this.$emit("addTask", taskCopy);
     },
+    updateTask() {
+      this.$store.dispatch({
+        type: "editTask",
+        taskInfo: {
+          task: this.task,
+          groupIdx: this.groupIdx,
+          taskIdx: this.taskIdx,
+        },
+      });
+    },
   },
-  computed: {},
+  computed: {
+    marker() {
+      if (!this.markerColor) return `8px solid #579BFC`;
+      return `8px solid ${this.markerColor}`;
+    },
+  },
   destroyed() {},
 };
 </script>

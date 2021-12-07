@@ -7,6 +7,7 @@
         :groupIdx="groupIdx"
         @addTask="addTask"
         @removeGroup="removeGroup"
+        @editGroup="editGroup"
       />
     </template>
   </section>
@@ -30,13 +31,15 @@ export default {
   },
   created() {},
   methods: {
-    addTask(task) {
-      task.boardId = this.board._id;
-      this.$emit("addTask", task);
+    addTask(taskInfo) {
+      // taskInfo.boardId = this.board._id;
+      this.$emit("addTask", taskInfo);
     },
-    removeGroup(groupId) {
-      this.$emit("removeGroup", groupId);
-      console.log(groupId);
+    editGroup(groupInfo) {
+      this.$emit("editGroup", groupInfo);
+    },
+    removeGroup(groupInfo) {
+      this.$emit("removeGroup", groupInfo);
     },
   },
   computed: {
@@ -46,9 +49,5 @@ export default {
     },
   },
   destroyed() {},
-
-  watch: {
-    $route: (newVal, oldVal) => {},
-  },
 };
 </script>

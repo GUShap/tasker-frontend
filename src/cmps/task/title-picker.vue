@@ -5,14 +5,15 @@
     class="title-picker flex grow-2"
     @click.prevent.stop="openDetails"
   >
-    <span v-if="!edit">{{ title }}</span>
+    <span v-if="!isEditMode">{{ title }}</span>
     <input
-      v-on:keyup.enter="editTitle"
-      @blur="{edit = false}"
+      v-on:keyup.enter="editMode"
+      @blur="{isEditMode = false}"
       v-else
-      v-model="title"
+      v-model="title" 
+      @change="update"
     />
-    <button v-if="hover && !edit" @click.stop.prevent="editTitle" class="btn-edit">Edit</button>
+    <button v-if="hover && !isEditMode"  @click.stop.prevent="editMode" class="btn-edit">Edit</button>
   </section>
 </template>
 
@@ -23,7 +24,7 @@ export default {
   data() {
     return {
       hover: false,
-      edit: false,
+      isEditMode: false,
       title: this.info.title,
     };
   },
@@ -31,14 +32,17 @@ export default {
   },
   methods: {
     openDetails() {
-      if(this.edit) return
+      if(this.isEditMode) return
       this.$router.push(`/board/task/${this.info.id}`);
     },
-    editTitle() {
-      this.edit = !this.edit;
+    editMode(val) {
+      this.isEditMode = !this.isEditMode;
     },
+    update(){
+      this.info.title = this.title
+      this.$emit('update', this.info)
+    }
   },
-  computed: {},
-  destroyed() {},
+ 
 };
 </script>

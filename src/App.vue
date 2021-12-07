@@ -21,7 +21,7 @@ export default {
     };
   },
   created() {
-    console.log('$rout',this.$route.name);
+    // console.log('$rout',this.$route.name);
       if (this.$route.name === "landing-page") {
         this.isLandingPage = true;
       }

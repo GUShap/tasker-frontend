@@ -1,7 +1,7 @@
 <template>
   <section>
     <section class="task-action-btn">
-      <button @click="addNewGroup" class="btn-new-task">New Board</button>
+      <button @click="addNewGroup" class="btn-new-task">New Group</button>
       <button><span class="icon-search"></span>Search</button>
       <button>
         <span class="icon-filter"></span>Filter<span

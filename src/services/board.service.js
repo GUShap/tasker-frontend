@@ -140,17 +140,14 @@ async function getTaskOrigin(taskId) {
     var taskInfo = {
       taskId,
     };
-
     gBoards.forEach((board) => {
       taskInfo.boardId = board._id;
       board.groups.forEach((group) => {
-        taskInfo.groupId = group.id;
-        group.tasks.forEach((task) => {
-          task.id === taskId;
-        });
+        
       });
     });
     return taskInfo;
+    
   } catch (err) {
     console.log("Error", err);
     throw err;
