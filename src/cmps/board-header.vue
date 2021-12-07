@@ -27,6 +27,7 @@
           ></a>
         </div>
         <div class="more-actions flex">
+          <a>Board members </a>
           <section v-if="!currBoard.members">
             <avatar :size="25" username="i" />
           </section>
@@ -34,10 +35,10 @@
             v-else
             v-for="(member, idx) in currBoard.members"
             :size="25"
+        
             :username="member.fullname"
             :key="idx"
           />
-          <a>Board members </a>
           <a><span class="icon-activities"></span>Activities</a>
           <a class="btn-add-board"><span class="icon-plus"></span>Add Board</a>
         </div>

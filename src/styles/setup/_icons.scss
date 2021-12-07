@@ -111,6 +111,12 @@
     @include to-icon("\f061");
 }
 
+
+.icon-bubble{
+    font-family: monday;
+    @include to-icon("\f075")
+}
+
 // .icon-format{
 //     font-family: monday;
 //     @include to-icon("\f105");
