@@ -21,10 +21,10 @@ export default {
     };
   },
   created() {
-    console.log('$rout',this.$route.name);
-      if (this.$route.name === "landing-page") {
-        this.isLandingPage = true;
-      }
+    console.log("$rout", this.$route.name);
+    if (this.$route.name === "landing-page" || this.$route.name === "login") {
+      this.isLandingPage = true;
+    }
   },
   methods: {
     detailsHover(isHovered) {
@@ -38,7 +38,7 @@ export default {
   },
   destroyed() {},
   watch: {
-    '$route': function (newVal, OldVal) {
+    $route: function (newVal, OldVal) {
       // console.log('newVal',newVal);
       const { name } = newVal;
       // console.log('name',name);
