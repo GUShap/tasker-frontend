@@ -6,9 +6,9 @@ import { userService } from '../../services/user.service.js'
 
 export const userStore = {
     state: {
-        loggedinUser: userService.getLoggedinUser(),
+        loggedinUser: null,
         users: [],
-        watchedUser: null
+        watchedUser: null,
     },
     getters: {
         users({ users }) { return users },
@@ -19,7 +19,8 @@ export const userStore = {
     },
     mutations: {
         setLoggedinUser(state, { user }) {
-            state.loggedinUser = (user) ? { ...user } : null;
+            state.loggedinUser = JSON.parse(JSON.stringify(user))
+            userService.setLoggedinUser(user);
         },
         setWatchedUser(state, { user }) {
             state.watchedUser = user;
@@ -30,6 +31,7 @@ export const userStore = {
     },
     actions: {
         async login({ commit }, { userCred }) {
+            console.log(userCred)
             try {
                 const user = await userService.login(userCred);
                 commit({ type: 'setLoggedinUser', user })
@@ -65,7 +67,7 @@ export const userStore = {
             } catch (err) {
                 console.log('userStore: Error in loadUsers', err)
                 throw err
-            }
+            } ''
         },
         async loadAndWatchUser({ commit }, { userId }) {
             try {
@@ -95,3 +97,5 @@ export const userStore = {
         },
     }
 }
+
+
