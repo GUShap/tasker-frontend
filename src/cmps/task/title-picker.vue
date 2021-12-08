@@ -46,7 +46,7 @@ export default {
   methods: {
     openDetails() {
       if (this.isEditMode) return;
-      this.$router.push(`/board/task/${this.info.taskId}`);
+      this.$router.push(`/board/task/${this.info.taskId}`).catch(()=>{});
     },
     editMode(val) {
       this.isEditMode = !this.isEditMode;

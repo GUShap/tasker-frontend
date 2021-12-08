@@ -166,6 +166,7 @@ export default {
     async saveComment() {
       try {
         this.newComment.txt = this.$refs.input.value;
+        console.log(this.newComment.txt);
         if (!this.task.comments) this.task.comments = [];
         this.task.comments.push(this.newComment);
         await this.$store.dispatch({ type: "editTask", task: this.task });
@@ -186,18 +187,19 @@ export default {
         return (this.newComment.style = "border: 1px solid blue; ");
     },
     focusInput() {
-      console.log(this.$refs.input);
+      // console.log(this.$refs.input);
     },
   },
 
   computed: {
     updateTime() {
       const currTime = Date.now();
-      let formatted;
+      const timeToFormat = currTime - this.comment.createdAt;
+      const diffHours = timeToFormat / (1000 * 3600);
+      let timeToDisplay;
+
+      // switch()
     },
-    // formattedTime(){
-    //   const time =
-    // }
   },
   mounted() {
     this.focusInput();
