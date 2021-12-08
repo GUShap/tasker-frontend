@@ -58,7 +58,7 @@ async function save(board) {
   }
 }
 
-function getBoardCopy(boardId) {
+function _getBoardCopy(boardId) {
   const board = todoService.getById(boardId);
   return JSON.parse(JSON.stringify(board));
 }

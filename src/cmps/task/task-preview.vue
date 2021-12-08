@@ -8,12 +8,13 @@
       class="task-preview flex align-center"
       :style="{ 'border-left': marker }"
     >
+
       <template v-for="(cmpType, idx) in cmpsOrder">
         <component
           :is="cmpType"
-          :info="task"
+          :info="getCmpInfo(cmpType)"
           :boardMembers="members"
-          @update="updateTask"
+          @updated="updateTask(cmpType, $event)"
           :key="idx"
           :markerColor="markerColor"
         />
@@ -68,6 +69,19 @@ export default {
       let taskCopy = { ...task };
       delete taskCopy.id;
       this.$emit("addTask", taskCopy);
+    },
+    getCmpInfo(cmpType){
+      const currTask = this.task;
+      switch(cmpType){
+        case ("title-picker"):
+        return {taskId : currTask.id , title : currTask.title}
+        case ("member-picker"):
+        return
+        case ("status-picker"):
+        return
+        case ("timeline-picker"):
+        return
+      }
     },
     updateTask() {
       this.$store.dispatch({

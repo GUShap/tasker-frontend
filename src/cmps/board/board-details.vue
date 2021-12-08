@@ -1,6 +1,13 @@
 <template>
   <section class="board-container" v-if="board">
-    <template v-for="(group, groupIdx) in currGroups">
+     <Container
+      orientation="vertical"
+      lock-axis="y"
+      @drop="onColumnDrop($event)"
+      drag-handle-selector=".group-drag-handle"
+      :drop-placeholder="dropPlaceholderOptions"
+    >
+      <Draggable v-for="(group, groupIdx) in currGroups" :key="group.id" style="{overflow : visible}">
       <board-group
         :group="group"
         :user="loggedinUser"
@@ -14,7 +21,8 @@
         @addNewGroup="addNewGroup"
         v-show="groupsShow"
       />
-    </template>
+     </Draggable>
+    </Container>
   </section>
 </template>
 

@@ -4,14 +4,16 @@
   width: 100%;
 }
 
+.smooth-dnd-container.vertical {
+  > .smooth-dnd-draggable-wrapper {
+    overflow: visible;
+  }
+}
+
 .task-container {
   width: 100%;
   margin-right: 2rem;
   margin-left: 0.5rem;
-}
-
-.smooth-dnd-container {
-  width: 100%;
 }
 
 .task-preview {
@@ -50,12 +52,12 @@
     min-width: rem(200px);
     max-width: rem(400px);
     height: 100%;
-    img{
+    img {
       position: absolute;
       height: 100%;
       width: 100%;
-      mix-blend-mode:multiply;
-      background-image: url('~@/assets/gif/done-gif.gif');
+      mix-blend-mode: multiply;
+      background-image: url("~@/assets/gif/done-gif.gif");
       background-size: 100%;
     }
   }
@@ -106,9 +108,9 @@
 
 .status-modal {
   position: absolute;
-  transform: translate(0%,42%);
+  transform: translate(0%, 42%);
   z-index: 100;
-  padding: .5rem;
+  padding: 0.5rem;
   background-color: white;
   box-shadow: 1px 1px 5px 2px rgba(0, 0, 0, 0.26);
   li {

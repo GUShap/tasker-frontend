@@ -123,7 +123,6 @@ export const boardStore = {
         boardCopy.groups[groupIdx].tasks.splice(taskIdx, 1);
 
         const updatedBoard = await remoteBoardService.save(boardCopy);
-        console.log("updatedBoard id:", updatedBoard._id);
         commit({ type: "updateBoard", board: updatedBoard });
       } catch (err) {
         console.log(err);
@@ -206,17 +205,7 @@ export const boardStore = {
         console.log(err);
       }
     },
-    // async saveGroups({ commit, state }, { groupsInfo }) {
-    //   try {
-    //     console.log("groups", groupsInfo);
-    //     groupsInfo.boardIdx = state.currBoardIdx;
-    //     const currGroups = await boardService.saveGroups(groupsInfo);
-    //     commit({ type: "saveGroups", groupsInfo });
-    //     return currGroups;
-    //   } catch (err) {
-    //     console.log(err);
-    //   }
-    // },
+    
   },
   modules: {},
 };
