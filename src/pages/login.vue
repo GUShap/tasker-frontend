@@ -15,12 +15,7 @@
                 <label class="label" for="email">Email</label>
               </div>
               <div class="email-container">
-                <el-input
-                  class="email"
-                  v-model="userCreds.email"
-                  type="email"
-                  required
-                />
+                <input class="email" v-model="userCreds.email" type="email" />
               </div>
             </div>
             <div class="input-password">
@@ -28,17 +23,17 @@
                 <label class="label" for="password">Password</label>
               </div>
               <div>
-                <el-input
+                <input
                   class="password"
                   v-model="userCreds.password"
                   type="password"
-                  required
                 />
               </div>
             </div>
-            <router-link class="btn-login-page" to="/home"
+            <input class="btn-login-page" type="submit" />
+            <!-- <router-link class="btn-login-page" to="/home"
               >Log in<i class="fas fa-arrow-right"></i
-            ></router-link>
+            ></router-link> -->
           </div>
         </form>
       </div>
@@ -58,17 +53,16 @@
       </div>
       <div class="submit-section">
         <form @submit.prevent="signup">
-          <div class="input">
+                    <div class="input">
             <div class="input-fullname">
               <div class="labels fullname-label">
-                <label class="label" for="fullname">Full name</label>
+                <label class="label" for="fullname">Fullname</label>
               </div>
               <div class="fullname-container">
-                <el-input
+                <input
                   class="fullname"
                   v-model="userCreds.fullname"
                   type="txt"
-                  required
                 />
               </div>
             </div>
@@ -77,12 +71,7 @@
                 <label class="label" for="email">Email</label>
               </div>
               <div class="email-container">
-                <el-input
-                  class="email"
-                  v-model="userCreds.email"
-                  type="email"
-                  required
-                />
+                <input class="email" v-model="userCreds.email" type="email" />
               </div>
             </div>
             <div class="input-password">
@@ -90,17 +79,17 @@
                 <label class="label" for="password">Password</label>
               </div>
               <div>
-                <el-input
+                <input
                   class="password"
                   v-model="userCreds.password"
                   type="password"
-                  required
                 />
               </div>
             </div>
-            <router-link class="btn-login-page" to="/home"
+            <input class="btn-login-page" type="submit" />
+            <!-- <router-link class="btn-login-page" to="/home"
               >Sign in<i class="fas fa-arrow-right"></i
-            ></router-link>
+            ></router-link> -->
           </div>
         </form>
       </div>
@@ -116,35 +105,37 @@ export default {
       loginPage: true,
       userCreds: {
         fullname: "",
-        email: "",
         password: "",
+        email: "",
       },
     };
   },
-  computed: {},
+  created() {
+    console.log("hello");
+  },
   methods: {
     signinPage() {
       this.loginPage = false;
     },
-     signup() {
-      console.log(this.userCreds);
-      // try {
-      //   await this.$store.dispatch({
-      //     type: "signup",
-      //     userCreds: this.userCreds,
-      //   });
-      //   this.clearInput();
-      // } catch (err) {
-      //   console.log(err);
-      //   throw err;
-      // }
-    },
-    async login() {
+    async signup() {
       console.log(this.userCreds);
       try {
         await this.$store.dispatch({
+          type: "signup",
+          user: this.userCreds,
+        });
+        this.clearInput();
+      } catch (err) {
+        console.log(err);
+        throw err;
+      }
+    },
+    async login() {
+      console.log("this.userCreds");
+      try {
+        await this.$store.dispatch({
           type: "login",
-          userCreds: this.userCreds,
+          user: this.userCreds,
         });
         console.log(this.userCreds);
         this.clearInput();
@@ -156,7 +147,7 @@ export default {
     clearInput() {
       console.log(this.userCreds);
       this.userCreds = { fullname: "", email: "", password: "" };
-      // this.$router.push(`/home/`);
+      this.$router.push(`/home/`);
     },
   },
 };
