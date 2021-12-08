@@ -188,18 +188,9 @@ export const boardStore = {
       }
     },
 
-    // async cloneTask({ state, dispatch }, { task }) {
-    //   try {
-    //     await boardService.saveNewTask(task);
-    //     dispatch({ type: "loadBoards", currBoardIdx: state.currBoardIdx });
-    //   } catch (err) {
-    //     console.log(err);
-    //   }
-    // },
-
     async getTaskById({ state }, { taskId }) {
       try {
-        const currTask = await boardService.getTaskById(taskId);
+        const currTask = await remoteBoardService.getTaskById(taskId);
         return currTask;
       } catch (err) {
         console.log(err);
