@@ -196,9 +196,10 @@ export default {
       const currTime = Date.now();
       const timeToFormat = currTime - this.comment.createdAt;
       const diffHours = timeToFormat / (1000 * 3600);
-      let timeToDisplay;
-
-      // switch()
+      if (diffHours < 0.5) return "Just Now";
+      if (diffHours < 24) return `h${diffHours}`;
+      if (diffHours > 24) return `d${Math.floor(diffHours)}`;
+      if (diffHours > 24) return `d${Math.floor(diffHours)}`;
     },
   },
   mounted() {
