@@ -2,7 +2,8 @@
 export const utilService = {
     makeId,
     getRandomInt,
-    makeLorem
+    makeLorem,
+    getEmptyBoard
 }
 
 function makeId(length = 5) {
@@ -29,3 +30,52 @@ function makeLorem(size = 20) {
     }
     return txt;
 }
+
+function getEmptyBoard() {
+      return {
+        title: 'New Board',
+        createdAt: Date.now(),
+        createdBy: null,
+        groups: [
+          {
+            id: utilService.makeId(),
+            title: 'Group Title',
+            tasks: [
+              {
+                id: utilService.makeId(),
+                title: 'Item 1'
+              },
+              {
+                id: utilService.makeId(),
+                title: 'Item 2'
+              },
+              {
+                id: utilService.makeId(),
+                title: 'Item 3'
+              },
+            ],
+            style: {
+              color: "#579bfc"
+            }
+          },
+          {
+            id: utilService.makeId(),
+            title: 'Group Title',
+            tasks: [
+              {
+                id: utilService.makeId(),
+                title: 'Item 4'
+              },
+              {
+                id: utilService.makeId(),
+                title: 'Item 5'
+              }
+            ],
+            style: {
+              color: "#579bfc"
+            }
+          }
+        ],
+        members:[]
+      }
+  }

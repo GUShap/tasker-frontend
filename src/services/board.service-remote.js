@@ -11,7 +11,6 @@ export const remoteBoardService = {
   save,
   getById,
   getEmptyGroup,
-  getEmptyBoard,
   getColors,
   getTaskById
 }
@@ -82,58 +81,7 @@ function _getBoardCopy(boardId) {
   return JSON.parse(JSON.stringify(board));
 }
 
-async function getEmptyBoard() {
-  try {
-    return {
-      title: 'New Board',
-      createdAt: Date.now(),
-      createdBy: null,
-      groups: [
-        {
-          id: utilService.makeId(),
-          title: 'Group Title',
-          tasks: [
-            {
-              id: utilService.makeId(),
-              title: 'Item 1'
-            },
-            {
-              id: utilService.makeId(),
-              title: 'Item 2'
-            },
-            {
-              id: utilService.makeId(),
-              title: 'Item 3'
-            },
-          ],
-          style: {
-            color: "#579bfc"
-          }
-        },
-        {
-          id: utilService.makeId(),
-          title: 'Group Title',
-          tasks: [
-            {
-              id: utilService.makeId(),
-              title: 'Item 4'
-            },
-            {
-              id: utilService.makeId(),
-              title: 'Item 5'
-            }
-          ],
-          style: {
-            color: "#579bfc"
-          }
-        }
-      ]
-    }
 
-  } catch (err) {
-    console.log(err);
-  }
-}
 
 async function getEmptyGroup() {
   try {
