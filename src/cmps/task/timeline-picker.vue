@@ -41,10 +41,11 @@ export default {
       hoverTxt: "-",
       hover: false,
       percentage: "0%",
+      activity : null
     };
   },
   created() {
-    this.value = this.info.timeline || '' ;
+    this.value = this.info.timeline || "";
   },
   methods: {
     editStatus() {
@@ -56,6 +57,13 @@ export default {
       const today = date.getDate();
       const currentMonth = date.getMonth() + 1;
       return `${currentYear}-${currentMonth}-${today}`;
+    },
+    update() {
+      const updateInfo = {
+        timeline: this.value,
+        activity: this.activity,
+      };
+      this.$emit("updated", updateInfo);
     },
   },
   computed: {
@@ -108,6 +116,10 @@ export default {
           }%`;
         }
       }
+      this.activity = {
+        type: "timeline",
+        newVal: `${startMonth} ${startDay.getDate()} - ${endMonth} ${endDay.getDate()}`,
+      };
     },
   },
 };

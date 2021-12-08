@@ -3,20 +3,18 @@
     <task-dropdown
       @removeTask="removeTask"
       @openTaskDetails="openTaskDetails"
-      @duplicateTask="duplicateTask"/>
+      @duplicateTask="duplicateTask"
+    />
     <section
       class="task-preview flex align-center"
       :style="{ 'border-left': marker }"
     >
-
       <template v-for="(cmpType, idx) in cmpsOrder">
         <component
           :is="cmpType"
           :info="getCmpInfo(cmpType)"
-          :boardMembers="boardMembers"
           @updated="updateTask(cmpType, $event)"
           :key="idx"
-          :markerColor="markerColor"
         />
       </template>
     </section>
@@ -40,13 +38,18 @@ export default {
     timelinePicker,
     taskDropdown,
   },
-  props: ["task", "taskIdx", "groupIdx", "cmpsOrder", "markerColor", "boardMembers"],
+  props: [
+    "task",
+    "taskIdx",
+    "groupIdx",
+    "cmpsOrder",
+    "markerColor",
+    "boardMembers",
+  ],
   data() {
     return {};
   },
-  created() {
-    
-  },
+  created() {},
   methods: {
     async removeTask() {
       try {
@@ -66,40 +69,58 @@ export default {
       this.$router.push(`/board/task/${this.task.id}`);
     },
     duplicateTask() {
-      
-      let taskCopy = JSON.parse(JSON.stringify(this.task))
-      taskCopy.id=utilService.makeId();
-      taskCopy.isCopy = true
-       this.$store.dispatch({
+      let taskCopy = JSON.parse(JSON.stringify(this.task));
+      taskCopy.id = utilService.makeId();
+      taskCopy.isCopy = true;
+      this.$store.dispatch({
         type: "editTask",
         taskInfo: {
           task: taskCopy,
           groupIdx: this.groupIdx,
           taskIdx: this.taskIdx,
         },
-      })
+      });
     },
-    getCmpInfo(cmpType){
+    getCmpInfo(cmpType) {
       const currTask = this.task;
-      switch(cmpType){
-        case ("title-picker"):
-        return {taskId : currTask.id , title : currTask.title}
-        case ("member-picker"):
-        return {members : currTask.members , boardMembers : this.boardMembers}
-        case ("status-picker"):
-        return {labelId : currTask.labelId }
-        case ("timeline-picker"):
-        return {timeline : currTask.timeline, markerColor : this.markerColor }
+      switch (cmpType) {
+        case "title-picker":
+          return { taskId: currTask.id, title: currTask.title };
+        case "member-picker":
+          return { members: currTask.members, boardMembers: this.boardMembers };
+        case "status-picker":
+          return { labelId: currTask.labelId };
+        case "timeline-picker":
+          return { timeline: currTask.timeline, markerColor: this.markerColor };
       }
     },
-    updateTask() {
+    updateTask(cmpType, ev) {
+      console.log('ev',ev);
+      return
+      const currTask = this.task;
+      switch (cmpType) {
+        case "title-picker":
+          this.task.
+          break
+        case "member-picker":
+          this.task.
+          break
+        case "status-picker":
+          this.task.
+          break
+        case "timeline-picker":
+          this.task.
+          break
+      }
+      const taskInfo = {
+        task: this.task,
+        groupIdx: this.groupIdx,
+        taskIdx: this.taskIdx,
+      };
+
       this.$store.dispatch({
         type: "editTask",
-        taskInfo: {
-          task: this.task,
-          groupIdx: this.groupIdx,
-          taskIdx: this.taskIdx,
-        },
+        taskInfo,
       });
     },
   },

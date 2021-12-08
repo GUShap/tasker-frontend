@@ -211,6 +211,7 @@ export default {
           const newTasks = Object.assign({}, newGroup.tasks);
           newGroup.tasks = applyDrag(newGroup.tasks, dropResult);
           board.groups.splice(groupIdx, 1, newGroup);
+          console.log('board-group');
           await this.$store.dispatch({
             type: "saveBoard",
             board: board,
