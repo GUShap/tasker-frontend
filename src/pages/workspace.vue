@@ -1,11 +1,16 @@
 <template>
   <section class="workspace-container flex">
-    <pop-up-nav class="pop-up-nav" :board="currBoard"></pop-up-nav>
+    <pop-up-nav
+      class="pop-up-nav"
+      :board="currBoard"
+      :user="loggedinUser"
+    ></pop-up-nav>
     <section class="workspace">
-      <board-header :board="currBoard" />
+      <board-header :board="currBoard" :user="loggedinUser" />
       <task-actions-nav @sortBy="sortBy" @addNewGroup="addNewGroup" />
       <board-filter />
       <board-details
+        :user="loggedinUser"
         @addTask="addTask"
         :board="currBoard"
         @removeGroup="removeGroup"
@@ -22,7 +27,7 @@ import boardFilter from "@/cmps/board-filter.vue";
 import boardHeader from "@/cmps/board-header.vue";
 import taskActionsNav from "@/cmps/task-actions-nav.vue";
 import popUpNav from "@/cmps/pop-up-nav.vue";
-import BoardDetails from '@/cmps/board/board-details.vue';
+import BoardDetails from "@/cmps/board/board-details.vue";
 
 export default {
   name: "workspace",
@@ -40,7 +45,7 @@ export default {
       currBoardIdx: 0,
     };
   },
-   created() {
+  created() {
     this.boards = this.$store.dispatch({
       type: "loadBoards",
       currBoardIdx: this.currBoardIdx,
@@ -50,13 +55,13 @@ export default {
     async addTask(taskInfo) {
       try {
         await this.$store.dispatch({ type: "editTask", taskInfo });
-        // console.log("New task add!");
+        await this.$store.dispatch({ type: "updateUserLog", taskInfo });
       } catch (err) {
         console.log("Error", err);
       }
     },
-    async editGroup(groupInfo){
- try {
+    async editGroup(groupInfo) {
+      try {
         await this.$store.dispatch({ type: "editGroup", groupInfo });
         console.log("Group was edited!");
       } catch (err) {
@@ -88,6 +93,10 @@ export default {
     currBoard() {
       return this.$store.getters.currBoard;
       // return this.$store.getters.sortedBoard;
+    },
+    loggedinUser() {
+      const user = this.$store.getters.loggedinUser;
+      return user;
     },
   },
   destroyed() {},

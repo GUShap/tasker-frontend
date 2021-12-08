@@ -29,18 +29,18 @@
         <div class="more-actions flex">
           <a>Board members </a>
           <div class="member-avatars">
-          <section v-if="!currBoard.members">
-            <avatar :size="25" username="i" />
-          </section>
-          <avatar
-            class="memeber-img"
-            v-else
-            v-for="(member, idx) in currBoard.members"
-            :size="25"
-            :username="member.fullname"
-            :src="require(`@/pics/${member.imgUrl}`)"
-            :key="idx"
-          />
+            <section v-if="!currBoard.members">
+              <avatar :size="25" username="i" />
+            </section>
+            <avatar
+              class="memeber-img"
+              v-else
+              v-for="(member, idx) in currBoard.members"
+              :size="25"
+              :username="member.fullname"
+              :src="require(`@/pics/${member.imgUrl}`)"
+              :key="idx"
+            />
           </div>
           <a><span class="icon-activities"></span>Activities</a>
           <a class="btn-add-board"><span class="icon-plus"></span>Add Board</a>
@@ -69,8 +69,7 @@
         <button><span class="icon-calender"></span>Chart</button>
         <button><span class="icon-kanban"></span>Kanban</button>
       </div>
-      <div class="share">
-      </div>
+      <div class="share"></div>
     </section>
   </section>
 </template>
@@ -81,7 +80,7 @@ import Avatar from "vue-avatar";
 export default {
   components: { Avatar },
   name: "board-header",
-  props: ["board"],
+  props: ["board", "user"],
   data() {
     return {
       isShown: true,
@@ -90,6 +89,9 @@ export default {
       currEditedVal: "",
       isEditedMode: false,
     };
+  },
+  created() {
+    console.log(this.user);
   },
   methods: {
     setEdit(val) {
@@ -113,6 +115,9 @@ export default {
   computed: {
     currBoard() {
       return this.board ? this.board : null;
+    },
+    currUser() {
+      return this.user ? this.user : null;
     },
   },
 };
