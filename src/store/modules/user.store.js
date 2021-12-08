@@ -8,46 +8,39 @@ export const userStore = {
     state: {
         loggedinUser: null,
         users: [],
-        watchedUser: null,
-    },
+      },
     getters: {
         users({ users }) { return users },
         loggedinUser(state) {
-            return state.loggedinUser
-        },
-        watchedUser({ watchedUser }) { return watchedUser }
+            return state.loggedinUser},
     },
+
     mutations: {
         setLoggedinUser(state, { user }) {
             state.loggedinUser = JSON.parse(JSON.stringify(user))
-            userService.setLoggedinUser(user);
+            userService.getLoggedinUser(user);
         },
-        setWatchedUser(state, { user }) {
-            state.watchedUser = user;
-        },
+   
         setUsers(state, { users }) {
             state.users = users;
         },
     },
     actions: {
-        async login({ commit }, {userCred}) {
-            console.log({userCred})
+        async login({ commit }, {user}) {
             try {
-                const user = await userService.login(userCred);
-                commit({ type: 'setLoggedinUser', user })
-                return user;
+                const loggedinUser = await userService.login(user);
+                commit({ type: 'setLoggedinUser', loggedinUser })
+                return loggedinUser;
             } catch (err) {
                 console.log('userStore: Error in login', err)
                 throw err
             }
         },
-        async signup({ commit }, {userCred}) {
-            console.log(userCred)
-
+        async signup({ commit }, {user}) {
             try {
-                const user = await userService.signup(userCred)
-                commit({ type: 'setLoggedinUser', user })
-                return user;
+                const loggedinUser = await userService.signup(user)
+                commit({ type: 'setLoggedinUser', loggedinUser })
+                return loggedinUser;
             } catch (err) {
                 console.log('userStore: Error in signup', err)
                 throw err

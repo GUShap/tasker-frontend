@@ -51,7 +51,6 @@
 
 <script>
 import Avatar from "vue-avatar";
-import { debug } from 'webpack';
 
 export default {
   components: { Avatar },

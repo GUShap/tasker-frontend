@@ -53,7 +53,7 @@
       </div>
       <div class="submit-section">
         <form @submit.prevent="signup">
-          <div class="input">
+                    <div class="input">
             <div class="input-fullname">
               <div class="labels fullname-label">
                 <label class="label" for="fullname">Fullname</label>
@@ -105,8 +105,8 @@ export default {
       loginPage: true,
       userCreds: {
         fullname: "",
-        email: "",
         password: "",
+        email: "",
       },
     };
   },
@@ -122,7 +122,7 @@ export default {
       try {
         await this.$store.dispatch({
           type: "signup",
-          userCreds: this.userCreds,
+          user: this.userCreds,
         });
         this.clearInput();
       } catch (err) {
@@ -135,7 +135,7 @@ export default {
       try {
         await this.$store.dispatch({
           type: "login",
-          userCreds: this.userCreds,
+          user: this.userCreds,
         });
         console.log(this.userCreds);
         this.clearInput();
@@ -147,7 +147,7 @@ export default {
     clearInput() {
       console.log(this.userCreds);
       this.userCreds = { fullname: "", email: "", password: "" };
-      // this.$router.push(`/home/`);
+      this.$router.push(`/home/`);
     },
   },
 };

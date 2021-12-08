@@ -35,11 +35,10 @@
     "@vue/cli-plugin-router": "~4.5.0",
     "@vue/cli-plugin-vuex": "~4.5.0",
     "@vue/cli-service": "~4.5.0",
-    "node-sass": "^5.0.0",
     "sass": "^1.43.4",
     "sass-loader": "^8.0.2",
     "vue-template-compiler": "^2.6.11",
-    "webpack": "^4.0.0"
+    "webpack": "^4.46.0"
   },
   "browserslist": [
     "> 1%",
