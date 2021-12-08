@@ -51,7 +51,6 @@
 
 <script>
 import Avatar from "vue-avatar";
-import { debug } from 'webpack';
 
 export default {
   components: { Avatar },
@@ -71,13 +70,9 @@ export default {
       this.isEditMode = !this.isEditMode;
     },
     addMember(member) {
-      // var selectedMembers = this.selectedMembers;
-      // console.log("selectedMembers", selectedMembers);
-      // if (!selectedMembers) selectedMembers = [];
-      // const members = selectedMembers.push(member);
-      // console.log('members',members);
-      // this.selectedMembers = members
-      // console.log('this.selectedMembers',this.selectedMembers);
+      if (!this.selectedMembers) this.selectedMembers = [];
+      // const idx = this.selectedMembers.length;
+      this.selectedMembers.push(member);
     },
     removeMember(member) {
       const idx = this.selectedMembers.indexOf(member);
@@ -85,7 +80,7 @@ export default {
     },
     update() {
       const updateInfo = {
-        member: this.selectedMembers,
+        members: this.selectedMembers,
         activity: this.activity,
       };
       this.$emit("updated", updateInfo);
@@ -106,10 +101,8 @@ export default {
   },
   watch: {
     selectedMembers: function (newVal, oldVal) {
-      if (newVal !== oldVal) {
-        this.activity = { type: "member", newVal, oldVal };
+        this.activity = { type: "members", newVal, oldVal };
         this.update();
-      }
     },
   },
 };

@@ -89,7 +89,6 @@ export const boardStore = {
     // },
     async saveBoard({ commit, state }, { board }) {
       // optimistic
-      console.log("state", state.currBoard);
       const currBoard = JSON.parse(JSON.stringify(state.currBoard));
       try {
         commit({ type: "saveBoard", board });
@@ -102,9 +101,8 @@ export const boardStore = {
 
     async editTask({ state, dispatch, commit }, { taskInfo }) {
       // const currUser = JSON.parse(JSON.stringify(commit.getters.loggedinUser));
-     try {
-        console.log('taskInfo', taskInfo);
-        const { task, taskIdx, groupIdx } = taskInfo;
+      try {
+        const { task, taskIdx, groupIdx, activity } = taskInfo;
         const boardCopy = JSON.parse(JSON.stringify(state.currBoard));
         if (task.id) {
           if (task.isCopy)
@@ -114,13 +112,26 @@ export const boardStore = {
           task.id = utilService.makeId();
           boardCopy.groups[groupIdx].tasks.push(task);
         }
+
+        const activityLog = {
+          id: utilService.makeId(),
+          type: activity ? activity.type : null,
+          newVal: activity ? activity.newVal : null,
+          oldVal: activity ? activity.oldVal : null,
+          createdAt: Date.now(),
+          byMember: state.loggedinUser,
+          task: {
+            id: task.id,
+            title: task.title,
+          },
+        };
+
         const updatedBoard = await remoteBoardService.save(boardCopy);
         commit({ type: "updateBoard", board: updatedBoard });
       } catch (err) {
         console.log(err);
       }
     },
-
 
     // storeSaveTask(context, { taskId, task }) {
     //   const currUser = JSON.parse(JSON.stringify(context.getters.loggedinUser));
@@ -201,10 +212,10 @@ export const boardStore = {
       }
     },
 
-    async addNewBoard({ state, dispatch, commit,rootGetters },{board}) {
+    async addNewBoard({ state, dispatch, commit, rootGetters }, { board }) {
       try {
-        board.createdBy = rootGetters.loggedinUser
-       const savedBoard = await remoteBoardService.save(board)
+        board.createdBy = rootGetters.loggedinUser;
+        const savedBoard = await remoteBoardService.save(board);
         // state.boards.push(board)
       } catch (err) {
         console.log(err);
