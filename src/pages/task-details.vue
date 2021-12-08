@@ -71,11 +71,28 @@ export default {
   },
   data() {
     return {
+      task: null,
       component: "task-updates",
       isBtnHover: false,
       hoveredBtn: null,
     };
   },
+
+  async created() {
+    try {
+      const { taskId } = this.$route.params;
+      if (this.task && this.task.id === taskId) return;
+      const task = await this.$store.dispatch({
+        type: "getTaskById",
+        taskId,
+      });
+      this.task = task;
+    } catch (err) {
+      console.log(err);
+    }
+  },
+
+  destroyed() {},
   methods: {
     exitModal() {
       this.pageHover(false);
@@ -90,18 +107,21 @@ export default {
     pageHover(isHover) {
       this.$store.commit({ type: "hover", isHover });
     },
+    setTask(task) {
+      this.task = task;
+    },
   },
 
-  computed: {
-    async task() {
+  watch: {
+    $route: async function (newVal) {
       try {
-        const { taskId } = this.$route.params;
-      const task = await this.$store.dispatch({
-        type: "getTaskById",
-        taskId,
-      })
-      console.log(task);
-      return task
+        const { taskId } = newVal.params;
+        const task = await this.$store.dispatch({
+          type: "getTaskById",
+          taskId,
+        });
+
+        this.setTask(task);
       } catch (err) {
         console.log(err);
       }
