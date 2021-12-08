@@ -43,6 +43,7 @@ export default {
     return {
       boards: null,
       currBoardIdx: 0,
+      user: 0,
     };
   },
   created() {
@@ -50,11 +51,13 @@ export default {
       type: "loadBoards",
       currBoardIdx: this.currBoardIdx,
     });
+    this.users = this.$store.dispatch({
+      type: "loadUsers",});
   },
   methods: {
     async addTask(taskInfo) {
       try {
-        console.log('workspace',taskInfo);
+        console.log("workspace", taskInfo);
         await this.$store.dispatch({ type: "editTask", taskInfo });
         await this.$store.dispatch({ type: "updateUserLog", taskInfo });
       } catch (err) {
@@ -96,8 +99,9 @@ export default {
       // return this.$store.getters.sortedBoard;
     },
     loggedinUser() {
-      const user = this.$store.getters.loggedinUser;
-      return user;
+      this.user = this.$store.getters.loggedinUser;
+      console.log(this.user)
+      return this.user;
     },
   },
   destroyed() {},

@@ -15,12 +15,12 @@ export const userService = {
 }
 
 // Debug technique
-window.userService = userService
+// window.userService = userService
 
 
-function getUsers() {
-    // return storageService.query('user')
-    return httpService.get(`user`)
+async function getUsers() {
+    const users = await httpService.get(`user`)
+    return users
 }
 
 async function getById(userId) {
@@ -40,7 +40,7 @@ async function update(user) {
 }
 
 async function login(userCred) {
-
+    console.log(userCred)
     const user = await httpService.post('auth/login', userCred)
     socketService.emit('set-user-socket', user._id);
     if (user) return _saveLocalUser(user)
@@ -62,30 +62,12 @@ function _saveLocalUser(user) {
 }
 
 function getLoggedinUser() {
-    const user = { _id: 100, fullname: 'Sundos Gutty', email: 'sundos@gmail.com', password: '1234', avtivityLog:[] }
-    return user
-    // return JSON.parse(sessionStorage.getItem(STORAGE_KEY_LOGGEDIN_USER) || 'null')
+    // const user = {"fullname": 'Sundos Gutty'," email": 'sundos@gmail.com', "password": '1234', "avtivityLog":[] }
+    // return user
+    return JSON.parse(sessionStorage.getItem(STORAGE_KEY_LOGGEDIN_USER) || 'null')
 }
 
 
 
-// This IIFE functions for Dev purposes 
-// It allows testing of real time updates (such as sockets) by listening to storage events
-(async () => {
-    var user = getLoggedinUser()
-    // Dev Helper: Listens to when localStorage changes in OTHER browser
 
-    // Here we are listening to changes for the watched user (comming from other browsers)
-    window.addEventListener('storage', async () => {
-        if (!gWatchedUser) return;
-        const freshUsers = await storageService.query('user')
-        const watchedUser = freshUsers.find(u => u._id === gWatchedUser._id)
-        if (!watchedUser) return;
-        if (gWatchedUser.score !== watchedUser.score) {
-            console.log('Watched user score changed - localStorage updated from another browser')
-            socketService.emit(SOCKET_EVENT_USER_UPDATED, watchedUser)
-        }
-        gWatchedUser = watchedUser
-    })
-})();
 

@@ -140,7 +140,7 @@ export default {
       }
     },
     async login() {
-      console.log(this.userCreds)
+      console.log(this.userCreds);
       try {
         await this.$store.dispatch({
           type: "login",
@@ -154,9 +154,9 @@ export default {
       }
     },
     clearInput() {
+      console.log(this.userCreds);
       this.userCreds = { fullname: "", email: "", password: "" };
-      this.$emit("login-signup", true);
-      this.$router.push(`/home/`);
+      // this.$router.push(`/home/`);
     },
   },
 };

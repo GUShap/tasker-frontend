@@ -25,6 +25,7 @@ export default {
     if (this.$route.name === "landing-page" || this.$route.name === "login") {
       this.isLandingPage = true;
     }
+  
   },
   methods: {
     detailsHover(isHovered) {
