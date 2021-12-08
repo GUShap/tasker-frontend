@@ -115,7 +115,7 @@ export default {
         taskIdx: this.taskIdx,
         activity: ev.activity,
       };
-      console.log('taskInfo',taskInfo.task.timeline);
+      // console.log('taskInfo',taskInfo.task.timeline);
       this.$store.dispatch({
         type: "editTask",
         taskInfo,

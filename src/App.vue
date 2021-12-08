@@ -21,7 +21,7 @@ export default {
     };
   },
   created() {
-    console.log("$rout", this.$route.name);
+    this.$store.commit({type:'setLoggedinUser'})
     if (this.$route.name === "landing-page" || this.$route.name === "login") {
       this.isLandingPage = true;
     }
@@ -38,6 +38,7 @@ export default {
     },
     loggedinUser() {
       const user = this.$store.getters.loggedinUser;
+      console.log(user);
       return user;
     },
   },

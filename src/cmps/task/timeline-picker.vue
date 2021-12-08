@@ -79,7 +79,7 @@ export default {
   watch: {
     timeline: function (newVal, oldVal) {
       if (newVal === "") return;
-      console.log("newVal", newVal);
+      // console.log("newVal", newVal);
       const prevTxt = this.txt;
       const monthNames = [
         "Jan",
@@ -98,7 +98,7 @@ export default {
 
       if (typeof newVal[0] === "string") {
         newVal = newVal.map((time) => Date.now(time));
-        console.log('newVal',newVal);
+        // console.log('newVal',newVal);
       }
       const currDate = new Date();
       const startMonth = monthNames[ new Date(newVal[0]).getMonth()];
