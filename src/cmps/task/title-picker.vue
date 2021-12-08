@@ -14,9 +14,9 @@
           isEditMode = false;
         }
       "
+      @change="onchange"
       v-else
       v-model="currTitle"
-      @change="update"
     />
     <button
       v-if="hover && !isEditMode"
@@ -37,7 +37,9 @@ export default {
       hover: false,
       isEditMode: false,
       currTitle: this.info.title,
-      activity : null
+      prevTitle : this.info.title,
+      activity: null,
+      debounce: null,
     };
   },
   created() {},
@@ -49,18 +51,29 @@ export default {
     editMode(val) {
       this.isEditMode = !this.isEditMode;
     },
+    onchange() {
+      clearTimeout(this.debounce);
+      this.prevTitle = this.currTitle;
+      this.debounce = setTimeout(() => {
+        this
+        this.update();
+      }, 800);
+    },
     update() {
+      this.prevTitle = this.currTitle;
       const updateInfo = {
         title: this.currTitle,
-        activity : this.activity
+        activity: this.activity,
       };
       this.$emit("updated", updateInfo);
     },
   },
-  watch : {
-    title : function(newVal, oldVal){
-      this.activity = { type:"title",newVal ,oldVal }
-    }
-  }
+  watch: {
+    currTitle: function (newVal, oldVal) {
+      if (newVal !== oldVal) {
+        this.activity = { type: "title", newVal, oldVal : this.prevTitle };
+      }
+    },
+  },
 };
 </script>

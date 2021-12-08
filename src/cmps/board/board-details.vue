@@ -1,28 +1,36 @@
 <template>
   <section class="board-container" v-if="board">
-     <Container
+    <Container
       orientation="vertical"
       lock-axis="y"
       @drop="onColumnDrop($event)"
       drag-handle-selector=".group-drag-handle"
       :drop-placeholder="dropPlaceholderOptions"
     >
-      <Draggable v-for="(group, groupIdx) in currGroups" :key="group.id" style="{overflow : visible}" >
-      <board-group
-        v-if="group"
-        :group="group"
-        :user="loggedinUser"
+      <Draggable
+        v-for="(group, groupIdx) in currGroups"
         :key="group.id"
-        :board="board"
-        :groupIdx="groupIdx"
-        @addTask="addTask"
-        @showGroups="showGroups"
-        @removeGroup="removeGroup"
-        @editGroup="editGroup"
-        @addNewGroup="addNewGroup"
-        v-show="groupsShow"
-      />
-     </Draggable>
+        style="
+           {
+            overflow: visible;
+          }
+        "
+      >
+        <board-group
+          v-if="group"
+          :group="group"
+          :user="loggedinUser"
+          :key="group.id"
+          :board="board"
+          :groupIdx="groupIdx"
+          @addTask="addTask"
+          @showGroups="showGroups"
+          @removeGroup="removeGroup"
+          @editGroup="editGroup"
+          @addNewGroup="addNewGroup"
+          v-show="groupsShow"
+        />
+      </Draggable>
     </Container>
   </section>
 </template>
@@ -82,6 +90,7 @@ export default {
       try {
         const currBoard = Object.assign({}, this.board);
         currBoard.groups = applyDrag(currBoard.groups, dropResult);
+        console.log("board-details");
         await this.$store.dispatch({
           type: "saveBoard",
           board: currBoard,

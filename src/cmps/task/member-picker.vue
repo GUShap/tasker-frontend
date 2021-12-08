@@ -51,10 +51,11 @@
 
 <script>
 import Avatar from "vue-avatar";
+import { debug } from 'webpack';
 
 export default {
   components: { Avatar },
-  props: ["info", "boardMembers"],
+  props: ["info"],
   data() {
     return {
       isEditMode: false,
@@ -70,27 +71,33 @@ export default {
       this.isEditMode = !this.isEditMode;
     },
     addMember(member) {
-      this.selectedMembers.push(member);
+      // var selectedMembers = this.selectedMembers;
+      // console.log("selectedMembers", selectedMembers);
+      // if (!selectedMembers) selectedMembers = [];
+      // const members = selectedMembers.push(member);
+      // console.log('members',members);
+      // this.selectedMembers = members
+      // console.log('this.selectedMembers',this.selectedMembers);
     },
     removeMember(member) {
       const idx = this.selectedMembers.indexOf(member);
       this.selectedMembers.splice(idx, 1);
     },
     update() {
-      const taskUpdateInfo = {
+      const updateInfo = {
         member: this.selectedMembers,
         activity: this.activity,
       };
-      this.$emit("updated", taskUpdateInfo);
+      this.$emit("updated", updateInfo);
     },
   },
   computed: {
     membersList() {
       if (!this.selectedMembers) {
-        return this.boardMembers;
+        return this.info.boardMembers;
       } else {
         const selectedMembersId = this.selectedMembers.map((m) => m._id);
-        const membersList = this.boardMembers.filter((member) => {
+        const membersList = this.info.boardMembers.filter((member) => {
           return !selectedMembersId.includes(member._id);
         });
         return membersList;
@@ -99,7 +106,10 @@ export default {
   },
   watch: {
     selectedMembers: function (newVal, oldVal) {
-      this.activity = { type: "member", newVal, oldVal };
+      if (newVal !== oldVal) {
+        this.activity = { type: "member", newVal, oldVal };
+        this.update();
+      }
     },
   },
 };

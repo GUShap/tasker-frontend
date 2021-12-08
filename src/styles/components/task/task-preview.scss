@@ -111,6 +111,7 @@
   transform: translate(0%, 42%);
   z-index: 100;
   padding: 0.5rem;
+  border-radius: rem(8px);
   background-color: white;
   box-shadow: 1px 1px 5px 2px rgba(0, 0, 0, 0.26);
   li {
@@ -126,7 +127,7 @@
   align-items: center;
   width: rem(264px);
   height: rem(182px);
-  border-radius: rem(15px);
+  border-radius: rem(8px);
   transform: translate(-88%, 40%);
   background-color: white;
   padding: rem(8px) rem(12px) rem(12px) rem(12px);
@@ -145,7 +146,7 @@
       height: rem(26px);
       width: 50%;
       background-color: #cce5ff;
-      border-radius: rem(14px);
+      border-radius: rem(8px);
       margin: 1px 0;
       white-space: nowrap;
       text-overflow: ellipsis;
