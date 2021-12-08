@@ -11,7 +11,7 @@
 <script>
 export default {
   components: {},
-  props: [],
+  props: ["user"],
   data() {
     return {};
   },

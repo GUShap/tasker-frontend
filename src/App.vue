@@ -22,7 +22,7 @@ export default {
   },
   created() {
     this.$store.commit({type:'setLoggedinUser'})
-    if (this.$route.name === "landing-page" || this.$route.name === "login") {
+    if (this.$route.name === "landing-page" || this.$route.name === "login" ) {
       this.isLandingPage = true;
     }
   
@@ -46,7 +46,7 @@ export default {
   watch: {
     $route: function (newVal, OldVal) {
       const { name } = newVal;
-      if (name !== "landing-page") {
+      if (name !== "landing-page" || name !== "login") {
         this.isLandingPage = false;
       }
     },
