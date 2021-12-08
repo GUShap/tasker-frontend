@@ -38,7 +38,7 @@
 <script>
 import boardGroup from "@/cmps/group/board-group.vue";
 import { Container, Draggable } from "vue-smooth-dnd";
-import { applyDrag } from "../../pages/card-helper.js";
+import { applyDrag } from "../../services/dnd.util.js";
 export default {
   name: "main-board",
   components: {

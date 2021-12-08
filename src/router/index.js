@@ -9,7 +9,6 @@ import dashboard from '../pages/dashboard.vue'
 import user from '../pages/user.vue'
 import login from '../pages/login.vue'
 
-import cards from '../pages/cards.vue'
 
 
 
@@ -58,11 +57,7 @@ const routes = [
     name: 'login',
     component: login
   },
-  {
-    path: '/cards',
-    name: 'cards',
-    component: cards
-  },
+  
 
 ]
 

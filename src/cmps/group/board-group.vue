@@ -106,7 +106,7 @@
 import taskPreview from "@/cmps/task/task-preview.vue";
 import groupDropdown from "@/cmps/group/group-dropdown.vue";
 import { Container, Draggable } from "vue-smooth-dnd";
-import { applyDrag } from "@/pages/card-helper.js";
+import { applyDrag } from "../../services/dnd.util.js";
 import { utilService } from "@/services/util.service.js";
 
 export default {

@@ -73,10 +73,12 @@ export default {
       if (!this.selectedMembers) this.selectedMembers = [];
       // const idx = this.selectedMembers.length;
       this.selectedMembers.push(member);
+      this.update();
     },
     removeMember(member) {
       const idx = this.selectedMembers.indexOf(member);
       this.selectedMembers.splice(idx, 1);
+      this.update();
     },
     update() {
       const updateInfo = {
@@ -101,8 +103,7 @@ export default {
   },
   watch: {
     selectedMembers: function (newVal, oldVal) {
-        this.activity = { type: "members", newVal, oldVal };
-        this.update();
+      this.activity = { type: "members", newVal, oldVal };
     },
   },
 };

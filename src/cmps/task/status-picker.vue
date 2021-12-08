@@ -66,10 +66,8 @@ export default {
   },
   watch: {
     status: function (newVal, oldVal) {
-      if (newVal !== oldVal) {
-        this.activity = { type: "status", newVal, oldVal };
-        this.update();
-      }
+      this.activity = { type: "status", newVal, oldVal };
+      this.update();
     },
   },
 };

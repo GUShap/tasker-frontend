@@ -15,10 +15,11 @@
         ></div>
       </div>
     </section>
-    <div v-if="edit" class="block timeline-modal">
+    <div v-if="isEditMode" class="block timeline-modal">
       <el-date-picker
         v-model="timeline"
         @blur="editStatus"
+        @change="update"
         type="daterange"
         align="right"
         :start-placeholder="currDate()"
@@ -35,8 +36,8 @@ export default {
   props: ["info", "markerColor"],
   data() {
     return {
-      edit: false,
-      timeline: '',
+      isEditMode: false,
+      timeline: "",
       txt: "-",
       hoverTxt: "-",
       hover: false,
@@ -45,14 +46,13 @@ export default {
     };
   },
   created() {
-    if(this.info.timeline){
-      
-      this.timeline=this.info.timeline.map(t=>Date(Date.now(t)));
+    if (this.info.timeline) {
+      this.timeline = this.info.timeline.map((t) => new Date(t));
     }
   },
   methods: {
     editStatus() {
-      this.edit = !this.edit;
+      this.isEditMode = !this.isEditMode;
     },
     currDate() {
       const date = new Date();
@@ -77,9 +77,8 @@ export default {
   },
   destroyed() {},
   watch: {
-    timeline: function (newVal, oldVal) {
+    timeline: function (newVal) {
       if (newVal === "") return;
-      console.log("newVal", newVal);
       const prevTxt = this.txt;
       const monthNames = [
         "Jan",
@@ -96,12 +95,8 @@ export default {
         "Dec",
       ];
 
-      if (typeof newVal[0] === "string") {
-        newVal = newVal.map((time) => Date.now(time));
-        console.log('newVal',newVal);
-      }
       const currDate = new Date();
-      const startMonth = monthNames[ new Date(newVal[0]).getMonth()];
+      const startMonth = monthNames[new Date(newVal[0]).getMonth()];
       const startDay = new Date(newVal[0]);
       const endMonth = monthNames[new Date(newVal[1]).getMonth()];
       const endDay = new Date(newVal[1]);
@@ -131,7 +126,6 @@ export default {
         newVal: `${startMonth} ${startDay.getDate()} - ${endMonth} ${endDay.getDate()}`,
         oldVal: prevTxt,
       };
-      this.update();
     },
   },
 };
