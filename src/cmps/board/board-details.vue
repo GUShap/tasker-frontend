@@ -1,6 +1,13 @@
 <template>
   <section class="board-container" v-if="board">
-    <template v-for="(group, groupIdx) in currGroups">
+     <Container
+      orientation="vertical"
+      lock-axis="y"
+      @drop="onColumnDrop($event)"
+      drag-handle-selector=".group-drag-handle"
+      :drop-placeholder="dropPlaceholderOptions"
+    >
+      <Draggable v-for="(group, groupIdx) in currGroups" :key="group.id" style="{overflow : visible}">
       <board-group
         :group="group"
         :user="loggedinUser"
@@ -14,17 +21,21 @@
         @addNewGroup="addNewGroup"
         v-show="groupsShow"
       />
-    </template>
+     </Draggable>
+    </Container>
   </section>
 </template>
 
 <script>
 import boardGroup from "@/cmps/group/board-group.vue";
-
+import { Container, Draggable } from "vue-smooth-dnd";
+import { applyDrag } from "../../pages/card-helper.js";
 export default {
   name: "main-board",
   components: {
     boardGroup,
+    Container,
+    Draggable,
   },
   props: ["board", "user"],
 
@@ -33,12 +44,19 @@ export default {
       groups: null,
       openModal: false,
       groupsShow: true,
+      dropPlaceholderOptions: {
+        className: "drop-preview",
+        animationDuration: "150",
+        showOnTop: false,
+      },
     };
   },
   created() {},
   methods: {
     addTask(taskInfo) {
       // taskInfo.boardId = this.board._id;
+      console.log("board-d", taskInfo);
+
       this.$emit("addTask", taskInfo);
     },
     editGroup(groupInfo) {
@@ -58,6 +76,18 @@ export default {
     addNewGroup(groupInfo) {
       // group.boardId = this.board._id;
       this.$emit("addNewGroup", groupInfo);
+    },
+    async onColumnDrop(dropResult) {
+      try {
+        const currBoard = Object.assign({}, this.board);
+        currBoard.groups = applyDrag(currBoard.groups, dropResult);
+        await this.$store.dispatch({
+          type: "saveBoard",
+          board: currBoard,
+        });
+      } catch (err) {
+        console.log("Error", err);
+      }
     },
   },
   computed: {

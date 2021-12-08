@@ -1,5 +1,6 @@
 <template>
-  <section v-if="info"
+  <section
+    v-if="info"
     @mouseover="hover = true"
     @mouseleave="hover = false"
     class="title-picker flex grow-2"
@@ -14,7 +15,7 @@
         }
       "
       v-else
-      v-model="title"
+      v-model="currTitle"
       @change="update"
     />
     <button
@@ -35,22 +36,23 @@ export default {
     return {
       hover: false,
       isEditMode: false,
-      title: this.info.title,
+      currTitle: this.info.title,
     };
   },
-  created() {
-  },
+  created() {},
   methods: {
     openDetails() {
       if (this.isEditMode) return;
-      this.$router.push(`/board/task/${this.info.id}`);
+      this.$router.push(`/board/task/${this.info.taskId}`);
     },
     editMode(val) {
       this.isEditMode = !this.isEditMode;
     },
     update() {
-      this.info.title = this.title;
-      this.$emit("update", this.info);
+      const taskUpdateInfo = {
+        title: this.currTitle,
+      };
+      this.$emit("updated", taskUpdateInfo);
     },
   },
 };

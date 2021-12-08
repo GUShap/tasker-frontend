@@ -1,4 +1,10 @@
-.tag {
+$done-color : #30c875;
+$work-color : #fbab3e;
+$stuck-color : #e2445c;
+$empty-color : rgb(167, 167, 167);
+
+
+.empty {
   $prime-color: rgb(167, 167, 167);
   @include task-status($prime-color, darken($prime-color, 30%));
 }
@@ -15,4 +21,18 @@
 .stuck {
   $prime-color: #e2445c;
   @include task-status($prime-color, darken($prime-color, 30%));
+}
+.empty-bg {
+  background-color: $empty-color;
+}
+
+.done-bg {
+  background-color: $done-color;
+}
+
+.work-bg {
+  background-color: $work-color;
+}
+.stuck-bg {
+  background-color: $stuck-color;
 }

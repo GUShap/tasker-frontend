@@ -78,10 +78,18 @@ export const boardStore = {
         console.log(err);
       }
     },
-    async saveBoard({ commit, state }, { board }) { // optimistic
-      // const currBoard = state.currBoard;
+    // async saveBoard({ commit }, { board }) {
+    //   try {
+    //     console.log("board", board);
+    //     await remoteBoardService.save(board);
+    //     commit({ type: "saveBoard", board });
+    //   } catch (err) {
+    //     console.log(err);
+    //   }
+    // },
+    async saveBoard({ commit,state }, { board }) { // optimistic
+      const currBoard = state.currBoard;
       try {
-        commit({ type: "updateBoard", board })
         commit({ type: "saveBoard", board });
         await remoteBoardService.save(board);
       } catch (err) {
@@ -93,6 +101,7 @@ export const boardStore = {
 
     async editTask({ state, dispatch, commit }, { taskInfo }) {
       try {
+        console.log('taskInfo',taskInfo);
         const { task, taskIdx, groupIdx } = taskInfo;
         const boardCopy = JSON.parse(JSON.stringify(state.currBoard));
         if (task.id) {
@@ -117,7 +126,6 @@ export const boardStore = {
         boardCopy.groups[groupIdx].tasks.splice(taskIdx, 1);
 
         const updatedBoard = await remoteBoardService.save(boardCopy);
-        console.log("updatedBoard id:", updatedBoard._id);
         commit({ type: "updateBoard", board: updatedBoard });
       } catch (err) {
         console.log(err);
@@ -206,7 +214,8 @@ export const boardStore = {
       } catch (err) {
         console.log(err);
       }
-    }
+    },
+    
   },
   modules: {},
 };

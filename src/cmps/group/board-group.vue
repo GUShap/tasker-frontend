@@ -39,6 +39,18 @@
         </div>
       </section>
     </header>
+    <!-- 
+ <Container
+          lock-axis="x"
+          group-name="col"
+          :drop-placeholder="dropPlaceholderOptions"
+        >
+          <Draggable v-for="(cmp, idx) in cmpsOrder" :key="idx">
+            <div>
+              {{ cmpHeader(cmp) }}
+            </div>
+          </Draggable>
+        </Container> -->
 
     <Container
       @drop="onTaskDrop(group.id, $event)"
@@ -47,24 +59,25 @@
       :get-child-payload="getChildPayload"
       :drop-placeholder="dropPlaceholderOptions"
     >
-      <Draggable v-for="(task, taskIdx) in tasksList" :key="task.id">
+      <Draggable v-for="(task, taskIdx) in tasksList" :key="task.id" style="{overflow : visible}">
         <transition name="fade" :key="task.id">
           <task-preview
             v-show="groupShow"
             :key="task.id"
             :task="task"
             :taskIdx="taskIdx"
-            :user="loggedinUser"
-            :markerColor="group.style.color"
+            @addTask="addTask"
             :cmpsOrder="board.cmpsOrder"
             :groupIdx="groupIdx"
             :members="board.members"
+            :markerColor="group.style.color"
+            :user="loggedinUser"
             class="flex"
-            @addTask="addTask"
           />
         </transition>
       </Draggable>
     </Container>
+    <!-- @addTask="addTask(groupIdx, taskIdx, $event)"  -->
 
     <transition>
       <section
@@ -139,6 +152,7 @@ export default {
       if (task === "new") {
         if (!this.title) return;
         const newTask = { title: this.title };
+        console.log("board-g", newTask);
         this.$emit("addTask", { task: newTask, groupIdx: this.groupIdx });
         this.title = null;
       } else {
@@ -189,9 +203,12 @@ export default {
           dropResult.addedIndex !== null
         ) {
           const board = Object.assign({}, this.board);
+          // const board = JSON.parse(JSON.stringify(this.board));
           const group = board.groups.filter((g) => g.id === groupId)[0];
           const groupIdx = board.groups.indexOf(group);
           const newGroup = Object.assign({}, group);
+          // const newGroup = JSON.parse(JSON.stringify(group));
+          const newTasks = Object.assign({}, newGroup.tasks);
           newGroup.tasks = applyDrag(newGroup.tasks, dropResult);
           board.groups.splice(groupIdx, 1, newGroup);
           await this.$store.dispatch({

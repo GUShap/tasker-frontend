@@ -54,6 +54,7 @@ export default {
   methods: {
     async addTask(taskInfo) {
       try {
+        console.log('workspace',taskInfo);
         await this.$store.dispatch({ type: "editTask", taskInfo });
         await this.$store.dispatch({ type: "updateUserLog", taskInfo });
       } catch (err) {
