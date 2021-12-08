@@ -87,7 +87,7 @@ export const boardStore = {
     //     console.log(err);
     //   }
     // },
-    async saveBoard({ commit,state }, { board }) { // optimistic
+    async saveBoard({ commit, state }, { board }) { // optimistic
       const currBoard = state.currBoard;
       try {
         commit({ type: "saveBoard", board });
@@ -98,8 +98,9 @@ export const boardStore = {
       }
     },
     async editTask({ state, dispatch, commit }, { taskInfo }) {
-      try {
-        console.log('taskInfo',taskInfo);
+      // const currUser = JSON.parse(JSON.stringify(commit.getters.loggedinUser));
+     try {
+        console.log('taskInfo', taskInfo);
         const { task, taskIdx, groupIdx } = taskInfo;
         const boardCopy = JSON.parse(JSON.stringify(state.currBoard));
         if (task.id) {
@@ -108,7 +109,6 @@ export const boardStore = {
           task.id = utilService.makeId();
           boardCopy.groups[groupIdx].tasks.push(task);
         }
-
         const updatedBoard = await remoteBoardService.save(boardCopy);
         commit({ type: "updateBoard", board: updatedBoard });
       } catch (err) {
@@ -116,7 +116,28 @@ export const boardStore = {
       }
     },
 
+
+    // storeSaveTask(context, { taskId, task }) {
+    //   const currUser = JSON.parse(JSON.stringify(context.getters.loggedinUser));
+    //   const activity = {
+    //     "id": makeId(),
+    //     "txt": "Changed Color",
+    //     "createdAt": Date.now(),
+    //     "byMember": currUser,
+    //     "task": task
+    //   }
+    //   try {
+    //     // const board = await boardService.saveTask(boardId, groupId, task, activity)
+    //     // commit(board)
+    //     // await context.dispatch({ type: 'addTask', activity});
+    //   } catch (err) {
+    //     console.log(err)
+    //   }
+    // },
+
     async removeTask({ state, dispatch, commit }, { taskInfo }) {
+      // const currUser = JSON.parse(JSON.stringify(commit.getters.loggedinUser));
+      // delete currUser.activities;
       try {
         const { task, taskIdx, groupIdx } = taskInfo;
         const boardCopy = JSON.parse(JSON.stringify(state.currBoard));
