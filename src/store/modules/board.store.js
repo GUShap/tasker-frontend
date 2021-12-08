@@ -133,6 +133,7 @@ export const boardStore = {
     async editGroup({ state, dispatch, commit }, { groupInfo }) {
       try {
         const { group, groupIdx } = groupInfo;
+        console.log(group);
         const boardCopy = JSON.parse(JSON.stringify(state.currBoard));
         boardCopy.groups.splice(groupIdx, 1, group);
 
@@ -147,8 +148,7 @@ export const boardStore = {
       try {
         const newGroup = await remoteBoardService.getEmptyGroup();
         const boardCopy = JSON.parse(JSON.stringify(state.currBoard));
-        boardCopy.groups.push(newGroup);
-        console.log(newGroup);
+        boardCopy.groups.unshift(newGroup);
 
         const updatedBoard = await remoteBoardService.save(boardCopy);
         commit({ type: "updateBoard", board: updatedBoard });

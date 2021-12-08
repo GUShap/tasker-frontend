@@ -35,7 +35,7 @@
 
 <script>
 export default {
-  props: ["board"],
+  props: ["board", "user"],
   data() {
     return {
       isShown: false,
@@ -49,6 +49,9 @@ export default {
   computed: {
     currBoard() {
       return this.board ? this.board : null;
+    },
+    currUser() {
+      return this.user ? this.user : null;
     },
   },
 };

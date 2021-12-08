@@ -29,7 +29,7 @@
             ref="title"
             type="text"
             v-model="group.title"
-            :style="{ color: groupColor }"
+            :style="{ color: group.style.color }"
             v-on:keyup.enter="updateInfo"
             @blur="updateInfo"
           />
@@ -66,7 +66,8 @@
             :key="task.id"
             :task="task"
             :taskIdx="taskIdx"
-            :markerColor="markerColor"
+            :user="loggedinUser"
+            :markerColor="group.style.color"
             :cmpsOrder="board.cmpsOrder"
             :groupIdx="groupIdx"
             :members="board.members"
@@ -116,7 +117,7 @@ export default {
     Draggable,
   },
 
-  props: ["group", "board", "groupIdx"],
+  props: ["group", "board", "groupIdx", "user"],
   data() {
     return {
       currGroups: null,
@@ -124,11 +125,9 @@ export default {
       title: null,
       groupShow: true,
       cmpHeaders: null,
-      markerColor: null,
       isFocusOn: false,
       hover: false,
       isSeen: false,
-      groupColor: this.group.style.color,
       dropPlaceholderOptions: {
         className: "drop-preview",
         animationDuration: "150",
@@ -169,8 +168,8 @@ export default {
       this.$emit("addNewGroup", groupCopy);
     },
     changeColor(color) {
-      this.markerColor = color;
-      this.groupColor = color;
+      console.log(color);
+      this.group.style.color = color;
       this.$emit("editGroup", { group: this.group, groupIdx: this.groupIdx });
     },
     showGroups(val) {
@@ -236,12 +235,11 @@ export default {
       return this.board.cmpsOrder.slice(1);
     },
     marker() {
-      if (!this.markerColor) return `8px solid #579BFC`;
-      return `8px solid ${this.markerColor}`;
+      return `8px solid ${this.group.style.color}`;
     },
-    fontColor() {
-      if (!this.markerColor) return "#579BFC";
-      return this.markerColor;
+    loggedinUser() {
+      const user = this.$store.getters.loggedinUser;
+      return user;
     },
   },
   watch: {

@@ -1,6 +1,6 @@
 <template>
   <section :class="[isLandingPage ? '' : 'flex']" class="main-app">
-    <main-nav v-if="!isLandingPage" />
+    <main-nav v-if="!isLandingPage" :user="loggedinUser" />
     <router-view />
     <div class="cover" v-if="isTaskDetailsHover"></div>
   </section>
@@ -34,6 +34,10 @@ export default {
   computed: {
     isTaskDetailsHover() {
       return this.$store.getters.taskHover;
+    },
+    loggedinUser() {
+      const user = this.$store.getters.loggedinUser;
+      return user;
     },
   },
   destroyed() {},

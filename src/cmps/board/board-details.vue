@@ -1,26 +1,20 @@
 <template>
   <section class="board-container" v-if="board">
-    <Container
-      orientation="vertical"
-      lock-axis="y"
-      @drop="onColumnDrop($event)"
-      drag-handle-selector=".group-drag-handle"
-      :drop-placeholder="dropPlaceholderOptions"
-    >
-      <Draggable v-for="(group, groupIdx) in currGroups" :key="group.id">
-        <board-group
-          :group="group"
-          :board="board"
-          :groupIdx="groupIdx"
-          @addTask="addTask"
-          @showGroups="showGroups"
-          @removeGroup="removeGroup"
-          @editGroup="editGroup"
-          @addNewGroup="addNewGroup"
-          v-show="groupsShow"
-        />
-      </Draggable>
-    </Container>
+    <template v-for="(group, groupIdx) in currGroups">
+      <board-group
+        :group="group"
+        :user="loggedinUser"
+        :key="group.id"
+        :board="board"
+        :groupIdx="groupIdx"
+        @addTask="addTask"
+        @showGroups="showGroups"
+        @removeGroup="removeGroup"
+        @editGroup="editGroup"
+        @addNewGroup="addNewGroup"
+        v-show="groupsShow"
+      />
+    </template>
   </section>
 </template>
 
@@ -35,7 +29,7 @@ export default {
     Container,
     Draggable,
   },
-  props: ["board"],
+  props: ["board", "user"],
 
   data() {
     return {
@@ -91,6 +85,10 @@ export default {
   computed: {
     currGroups() {
       return this.board.groups;
+    },
+    loggedinUser() {
+      const user = this.$store.getters.loggedinUser;
+      return user;
     },
   },
   destroyed() {},
