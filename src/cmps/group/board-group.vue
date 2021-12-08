@@ -55,6 +55,7 @@
             :key="task.id"
             :task="task"
             :taskIdx="taskIdx"
+            :user="loggedinUser"
             :markerColor="group.style.color"
             :cmpsOrder="board.cmpsOrder"
             :groupIdx="groupIdx"
@@ -104,7 +105,7 @@ export default {
     Draggable,
   },
 
-  props: ["group", "board", "groupIdx"],
+  props: ["group", "board", "groupIdx", "user"],
   data() {
     return {
       currGroups: null,
@@ -182,23 +183,26 @@ export default {
       return val;
     },
 
-   async onTaskDrop(groupId, dropResult) {
-     try{
-      if (dropResult.removedIndex !== null || dropResult.addedIndex !== null) {
-        const board = Object.assign({}, this.board);
-        const group = board.groups.filter((g) => g.id === groupId)[0];
-        const groupIdx = board.groups.indexOf(group);
-        const newGroup = Object.assign({}, group);
-        newGroup.tasks = applyDrag(newGroup.tasks, dropResult);
-        board.groups.splice(groupIdx, 1, newGroup);
-       await this.$store.dispatch({
-          type: "saveBoard",
-          board: board,
-        });
+    async onTaskDrop(groupId, dropResult) {
+      try {
+        if (
+          dropResult.removedIndex !== null ||
+          dropResult.addedIndex !== null
+        ) {
+          const board = Object.assign({}, this.board);
+          const group = board.groups.filter((g) => g.id === groupId)[0];
+          const groupIdx = board.groups.indexOf(group);
+          const newGroup = Object.assign({}, group);
+          newGroup.tasks = applyDrag(newGroup.tasks, dropResult);
+          board.groups.splice(groupIdx, 1, newGroup);
+          await this.$store.dispatch({
+            type: "saveBoard",
+            board: board,
+          });
+        }
+      } catch (err) {
+        console.log("Error", err);
       }
-     }catch(err){
-       console.log('Error',err);
-     }
     },
     getChildPayload(index) {
       return this.group.tasks[index];
@@ -218,6 +222,10 @@ export default {
     },
     marker() {
       return `8px solid ${this.group.style.color}`;
+    },
+    loggedinUser() {
+      const user = this.$store.getters.loggedinUser;
+      return user;
     },
   },
   watch: {

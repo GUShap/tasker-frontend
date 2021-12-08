@@ -22,7 +22,8 @@
       </div>
     </nav>
     <div class="side-msg">
-      <span class="icon-two-stars">See plans</span>
+      <span class="icon-two-stars" v-if="user">Hello {{ user.fullname }}</span>
+      <span class="icon-two-stars" v-else>Hello Guest</span>
     </div>
 
     <nav class="user-nav">
@@ -39,7 +40,7 @@
 <script>
 export default {
   components: {},
-  props: [],
+  props: ["user"],
   data() {
     return {};
   },

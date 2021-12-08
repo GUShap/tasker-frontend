@@ -3,6 +3,7 @@
     <template v-for="(group, groupIdx) in currGroups">
       <board-group
         :group="group"
+        :user="loggedinUser"
         :key="group.id"
         :board="board"
         :groupIdx="groupIdx"
@@ -25,7 +26,7 @@ export default {
   components: {
     boardGroup,
   },
-  props: ["board"],
+  props: ["board", "user"],
 
   data() {
     return {
@@ -62,6 +63,10 @@ export default {
   computed: {
     currGroups() {
       return this.board.groups;
+    },
+    loggedinUser() {
+      const user = this.$store.getters.loggedinUser;
+      return user;
     },
   },
   destroyed() {},
