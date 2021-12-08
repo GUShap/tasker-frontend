@@ -78,20 +78,25 @@ export const boardStore = {
         console.log(err);
       }
     },
-    async saveBoard({ commit }, { board }) {
+    async saveBoard({ commit, state }, { board }) { // optimistic
+      // const currBoard = state.currBoard;
       try {
-        console.log("board", board);
-        await remoteBoardService.save(board);
+        commit({ type: "updateBoard", board })
         commit({ type: "saveBoard", board });
+        await remoteBoardService.save(board);
       } catch (err) {
         console.log(err);
+        commit({ type: "saveBoard", board: currBoard });
       }
+
     },
+
     async editTask({ state, dispatch, commit }, { taskInfo }) {
       try {
         const { task, taskIdx, groupIdx } = taskInfo;
         const boardCopy = JSON.parse(JSON.stringify(state.currBoard));
         if (task.id) {
+          if (task.isCopy) boardCopy.groups[groupIdx].tasks.splice(taskIdx, 0, task);
           boardCopy.groups[groupIdx].tasks.splice(taskIdx, 1, task);
         } else {
           task.id = utilService.makeId();
@@ -107,7 +112,7 @@ export const boardStore = {
 
     async removeTask({ state, dispatch, commit }, { taskInfo }) {
       try {
-        const { task, taskIdx, groupIdx } = taskInfo;
+        const { taskIdx, groupIdx } = taskInfo;
         const boardCopy = JSON.parse(JSON.stringify(state.currBoard));
         boardCopy.groups[groupIdx].tasks.splice(taskIdx, 1);
 
@@ -133,11 +138,18 @@ export const boardStore = {
       }
     },
 
-    async addNewGroup({ state, dispatch, commit }) {
+    async addNewGroup({ state, dispatch, commit }, { groupInfo }) {
       try {
-        const newGroup = await remoteBoardService.getEmptyGroup();
         const boardCopy = JSON.parse(JSON.stringify(state.currBoard));
-        boardCopy.groups.unshift(newGroup);
+
+        if (groupInfo) {
+          const { group, groupIdx } = groupInfo
+          boardCopy.groups.splice(groupIdx, 0, group)
+        } else {
+          const newGroup = await remoteBoardService.getEmptyGroup();
+          boardCopy.groups.unshift(newGroup);
+        }
+
 
         const updatedBoard = await remoteBoardService.save(boardCopy);
         commit({ type: "updateBoard", board: updatedBoard });
@@ -194,18 +206,7 @@ export const boardStore = {
       } catch (err) {
         console.log(err);
       }
-    },
-    // async saveGroups({ commit, state }, { groupsInfo }) {
-    //   try {
-    //     console.log("groups", groupsInfo);
-    //     groupsInfo.boardIdx = state.currBoardIdx;
-    //     const currGroups = await boardService.saveGroups(groupsInfo);
-    //     commit({ type: "saveGroups", groupsInfo });
-    //     return currGroups;
-    //   } catch (err) {
-    //     console.log(err);
-    //   }
-    // },
+    }
   },
   modules: {},
 };

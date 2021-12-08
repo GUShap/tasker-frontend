@@ -3,7 +3,7 @@
     <task-dropdown
       @removeTask="removeTask"
       @openTaskDetails="openTaskDetails"
-      @clone="clone"/>
+      @duplicateTask="duplicateTask"/>
     <section
       class="task-preview flex align-center"
       :style="{ 'border-left': marker }"
@@ -28,6 +28,7 @@ import statusPicker from "./status-picker.vue";
 import memberPicker from "./member-picker.vue";
 import timelinePicker from "./timeline-picker.vue";
 import taskDropdown from "../task-dropdown.vue";
+import { utilService } from "@/services/util.service.js";
 
 export default {
   name: "task-preview",
@@ -63,11 +64,19 @@ export default {
     openTaskDetails() {
       this.$router.push(`/board/task/${this.task.id}`);
     },
-    clone() {
-      let task = this.task;
-      let taskCopy = { ...task };
-      delete taskCopy.id;
-      this.$emit("addTask", taskCopy);
+    duplicateTask() {
+      
+      let taskCopy = JSON.parse(JSON.stringify(this.task))
+      taskCopy.id=utilService.makeId();
+      taskCopy.isCopy = true
+       this.$store.dispatch({
+        type: "editTask",
+        taskInfo: {
+          task: taskCopy,
+          groupIdx: this.groupIdx,
+          taskIdx: this.taskIdx,
+        },
+      })
     },
     updateTask() {
       this.$store.dispatch({

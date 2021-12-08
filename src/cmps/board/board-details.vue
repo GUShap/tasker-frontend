@@ -55,9 +55,9 @@ export default {
       //   return tasks;
       // }
     },
-    addNewGroup(group) {
-      group.boardId = this.board._id;
-      this.$emit("addNewGroup", group);
+    addNewGroup(groupInfo) {
+      // group.boardId = this.board._id;
+      this.$emit("addNewGroup", groupInfo);
     },
   },
   computed: {

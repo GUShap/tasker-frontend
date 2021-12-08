@@ -11,7 +11,6 @@
         @showGroups="showGroups"
         @duplicateGroup="duplicateGroup"
         @addNewGroup="addNewGroup"
-        
       />
       <section class="column-headers">
         <div @mouseover="hover = true" @mouseleave="hover = false">
@@ -94,7 +93,8 @@
 import taskPreview from "@/cmps/task/task-preview.vue";
 import groupDropdown from "@/cmps/group/group-dropdown.vue";
 import { Container, Draggable } from "vue-smooth-dnd";
-import { applyDrag } from "../../pages/card-helper.js";
+import { applyDrag } from "@/pages/card-helper.js";
+import { utilService } from "@/services/util.service.js";
 
 export default {
   name: "board-group",
@@ -149,10 +149,9 @@ export default {
       }
     },
     duplicateGroup() {
-      let group = this.group;
-      let groupCopy = { ...group };
-      delete groupCopy.id;
-      this.$emit("addNewGroup", groupCopy);
+      let groupCopy = JSON.parse(JSON.stringify(this.group));
+      groupCopy.id = utilService.makeId();
+      this.$emit("addNewGroup", { group: groupCopy, groupIdx: this.groupIdx });
     },
     changeColor(color) {
       console.log(color);
@@ -167,7 +166,7 @@ export default {
       this.$emit("removeGroup", { group: this.group, groupIdx: this.groupIdx });
     },
     addNewGroup() {
-      this.$emit("addNewGroup");
+      this.$emit("addNewGroup",{});
     },
     setEdit() {
       this.$refs.title.focus();
