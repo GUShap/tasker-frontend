@@ -100,7 +100,6 @@ export default {
     },
     loggedinUser() {
       this.user = this.$store.getters.loggedinUser;
-      console.log(this.user)
       return this.user;
     },
   },

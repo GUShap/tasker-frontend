@@ -17,7 +17,7 @@
     </section>
     <div v-if="edit" class="block timeline-modal">
       <el-date-picker
-        v-model="value"
+        v-model="timeline"
         @blur="editStatus"
         type="daterange"
         align="right"
@@ -36,16 +36,19 @@ export default {
   data() {
     return {
       edit: false,
-      value: "",
+      timeline: '',
       txt: "-",
       hoverTxt: "-",
       hover: false,
       percentage: "0%",
-      activity : null
+      activity: null,
     };
   },
   created() {
-    this.value = this.info.timeline || "";
+    if(this.info.timeline){
+      
+      this.timeline=this.info.timeline.map(t=>Date(Date.now(t)));
+    }
   },
   methods: {
     editStatus() {
@@ -60,7 +63,7 @@ export default {
     },
     update() {
       const updateInfo = {
-        timeline: this.value,
+        timeline: this.timeline,
         activity: this.activity,
       };
       this.$emit("updated", updateInfo);
@@ -74,52 +77,61 @@ export default {
   },
   destroyed() {},
   watch: {
-    value: function (newVal, oldVal) {
-      if (newVal !== oldVal) {
-        const monthNames = [
-          "Jan",
-          "Feb",
-          "Mar",
-          "Apr",
-          "May",
-          "Jun",
-          "Jul",
-          "Aug",
-          "Sep",
-          "Oct",
-          "Nov",
-          "Dec",
-        ];
-        const currDate = new Date();
-        const startMonth = monthNames[newVal[0].getMonth()];
-        const startDay = newVal[0];
-        const endMonth = monthNames[newVal[1].getMonth()];
-        const endDay = newVal[1];
-        const diffTime = Math.abs(endDay - startDay);
-        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    timeline: function (newVal, oldVal) {
+      if (newVal === "") return;
+      console.log("newVal", newVal);
+      const prevTxt = this.txt;
+      const monthNames = [
+        "Jan",
+        "Feb",
+        "Mar",
+        "Apr",
+        "May",
+        "Jun",
+        "Jul",
+        "Aug",
+        "Sep",
+        "Oct",
+        "Nov",
+        "Dec",
+      ];
 
-        if (startMonth === endMonth) {
-          this.txt = `${startMonth} ${startDay.getDate()} - ${endDay.getDate()}`;
-        } else {
-          this.txt = `${startMonth} ${startDay.getDate()} - ${endMonth} ${endDay.getDate()}`;
-        }
-        this.hoverTxt = `${diffDays + 1} Day`;
-
-        if (endDay < currDate) {
-          this.percentage = "100%";
-        } else if (currDate < startDay) {
-          this.percentage = "0%";
-        } else {
-          this.percentage = `${
-            (Math.abs(currDate - startDay) / (diffTime + 24 * 60 * 60 * 1000)) *
-            100
-          }%`;
-        }
+      if (typeof newVal[0] === "string") {
+        newVal = newVal.map((time) => Date.now(time));
+        console.log('newVal',newVal);
       }
+      const currDate = new Date();
+      const startMonth = monthNames[ new Date(newVal[0]).getMonth()];
+      const startDay = new Date(newVal[0]);
+      const endMonth = monthNames[new Date(newVal[1]).getMonth()];
+      const endDay = new Date(newVal[1]);
+      const diffTime = Math.abs(endDay - startDay);
+      const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+      if (startMonth === endMonth) {
+        this.txt = `${startMonth} ${startDay.getDate()} - ${endDay.getDate()}`;
+      } else {
+        this.txt = `${startMonth} ${startDay.getDate()} - ${endMonth} ${endDay.getDate()}`;
+      }
+      this.hoverTxt = `${diffDays + 1} Day`;
+
+      if (endDay < currDate) {
+        this.percentage = "100%";
+      } else if (currDate < startDay) {
+        this.percentage = "0%";
+      } else {
+        this.percentage = `${
+          (Math.abs(currDate - startDay) / (diffTime + 24 * 60 * 60 * 1000)) *
+          100
+        }%`;
+      }
+
       this.activity = {
         type: "timeline",
         newVal: `${startMonth} ${startDay.getDate()} - ${endMonth} ${endDay.getDate()}`,
+        oldVal: prevTxt,
       };
+      this.update();
     },
   },
 };

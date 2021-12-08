@@ -95,29 +95,27 @@ export default {
       }
     },
     updateTask(cmpType, ev) {
-      console.log('ev',ev);
-      return
-      const currTask = this.task;
       switch (cmpType) {
         case "title-picker":
-          this.task.
-          break
+          this.task.title = ev.title;
+          break;
         case "member-picker":
-          this.task.
-          break
+          this.task.members = ev.members;
+          break;
         case "status-picker":
-          this.task.
-          break
+          this.task.status = ev.status;
+          break;
         case "timeline-picker":
-          this.task.
-          break
+          this.task.timeline = ev.timeline;
+          break;
       }
       const taskInfo = {
         task: this.task,
         groupIdx: this.groupIdx,
         taskIdx: this.taskIdx,
+        activity: ev.activity,
       };
-
+      console.log('taskInfo',taskInfo.task.timeline);
       this.$store.dispatch({
         type: "editTask",
         taskInfo,

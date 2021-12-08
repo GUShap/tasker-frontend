@@ -12,7 +12,6 @@ export const userService = {
     getById,
     remove,
     update,
-    setLoggedinUser
 }
 
 // Debug technique
@@ -66,10 +65,10 @@ function getLoggedinUser() {
     return JSON.parse(sessionStorage.getItem('loggedinUser') || 'null');
 }
 
-function setLoggedinUser(user) {
-    sessionStorage.setItem('loggedinUser', JSON.stringify(user));
-    return user;
-}
+// function setLoggedinUser(user) {
+//     sessionStorage.setItem('loggedinUser', JSON.stringify(user));
+//     return user;
+// }
 
 
 
