@@ -47,6 +47,7 @@ export default {
     };
   },
   created() {
+    this.$store.commit({type:'setLoggedinUser'})
     this.boards = this.$store.dispatch({
       type: "loadBoards",
       currBoardIdx: this.currBoardIdx,

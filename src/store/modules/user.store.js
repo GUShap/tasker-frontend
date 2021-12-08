@@ -17,10 +17,9 @@ export const userStore = {
     },
 
     mutations: {
-        setLoggedinUser(state, { user }) {
-            console.log(user)
-            state.loggedinUser = JSON.parse(JSON.stringify(user))
-            userService.getLoggedinUser(user);
+        setLoggedinUser(state) {
+            state.loggedinUser =  userService.getLoggedinUser()
+            // userService.getLoggedinUser(user);
         },
         setUsers(state, { users }) {
             state.users = users;
@@ -80,8 +79,8 @@ export const userStore = {
             }
         },
         async updateUserLog({ commit }, { user }, { taskInfo }) {
-            console.log(user)
-            console.log(taskInfo)
+            // console.log(user)
+            // console.log(taskInfo)
             try {
                 user = await userService.update(user);
                 commit({ type: 'setUser', user })
