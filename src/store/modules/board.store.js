@@ -96,13 +96,16 @@ export const boardStore = {
         console.log(err);
         commit({ type: "saveBoard", board: currBoard });
       }
+
     },
+
     async editTask({ state, dispatch, commit }, { taskInfo }) {
       try {
         console.log('taskInfo',taskInfo);
         const { task, taskIdx, groupIdx } = taskInfo;
         const boardCopy = JSON.parse(JSON.stringify(state.currBoard));
         if (task.id) {
+          if (task.isCopy) boardCopy.groups[groupIdx].tasks.splice(taskIdx, 0, task);
           boardCopy.groups[groupIdx].tasks.splice(taskIdx, 1, task);
         } else {
           task.id = utilService.makeId();
@@ -118,7 +121,7 @@ export const boardStore = {
 
     async removeTask({ state, dispatch, commit }, { taskInfo }) {
       try {
-        const { task, taskIdx, groupIdx } = taskInfo;
+        const { taskIdx, groupIdx } = taskInfo;
         const boardCopy = JSON.parse(JSON.stringify(state.currBoard));
         boardCopy.groups[groupIdx].tasks.splice(taskIdx, 1);
 
@@ -143,11 +146,18 @@ export const boardStore = {
       }
     },
 
-    async addNewGroup({ state, dispatch, commit }) {
+    async addNewGroup({ state, dispatch, commit }, { groupInfo }) {
       try {
-        const newGroup = await remoteBoardService.getEmptyGroup();
         const boardCopy = JSON.parse(JSON.stringify(state.currBoard));
-        boardCopy.groups.unshift(newGroup);
+
+        if (groupInfo) {
+          const { group, groupIdx } = groupInfo
+          boardCopy.groups.splice(groupIdx, 0, group)
+        } else {
+          const newGroup = await remoteBoardService.getEmptyGroup();
+          boardCopy.groups.unshift(newGroup);
+        }
+
 
         const updatedBoard = await remoteBoardService.save(boardCopy);
         commit({ type: "updateBoard", board: updatedBoard });
@@ -178,18 +188,9 @@ export const boardStore = {
       }
     },
 
-    // async cloneTask({ state, dispatch }, { task }) {
-    //   try {
-    //     await boardService.saveNewTask(task);
-    //     dispatch({ type: "loadBoards", currBoardIdx: state.currBoardIdx });
-    //   } catch (err) {
-    //     console.log(err);
-    //   }
-    // },
-
     async getTaskById({ state }, { taskId }) {
       try {
-        const currTask = await boardService.getTaskById(taskId);
+        const currTask = await remoteBoardService.getTaskById(taskId);
         return currTask;
       } catch (err) {
         console.log(err);
