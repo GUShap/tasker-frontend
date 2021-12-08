@@ -8,25 +8,26 @@ export const userStore = {
     state: {
         loggedinUser: null,
         users: [],
-      },
+    },
     getters: {
         users({ users }) { return users },
         loggedinUser(state) {
-            return state.loggedinUser},
+            return state.loggedinUser
+        },
     },
 
     mutations: {
         setLoggedinUser(state, { user }) {
+            console.log(user)
             state.loggedinUser = JSON.parse(JSON.stringify(user))
             userService.getLoggedinUser(user);
         },
-   
         setUsers(state, { users }) {
             state.users = users;
         },
     },
     actions: {
-        async login({ commit }, {user}) {
+        async login({ commit }, { user }) {
             try {
                 const loggedinUser = await userService.login(user);
                 commit({ type: 'setLoggedinUser', loggedinUser })
@@ -36,7 +37,7 @@ export const userStore = {
                 throw err
             }
         },
-        async signup({ commit }, {user}) {
+        async signup({ commit }, { user }) {
             try {
                 const loggedinUser = await userService.signup(user)
                 commit({ type: 'setLoggedinUser', loggedinUser })
