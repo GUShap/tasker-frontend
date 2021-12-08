@@ -11,7 +11,8 @@ export const remoteBoardService = {
   save,
   getById,
   getEmptyGroup,
-  getEmptyBoard
+  getEmptyBoard,
+  getColors
 }
 
 const BASE_URL = process.env.NODE_ENV !== "development"
@@ -65,9 +66,9 @@ function getBoardCopy(boardId) {
 async function getEmptyBoard() {
   try {
     return {
-      title:'New Board',
-      createdAt:Date.now(),
-      createdBy:null,
+      title: 'New Board',
+      createdAt: Date.now(),
+      createdBy: null,
       groups: [
         {
           id: utilService.makeId(),
@@ -128,4 +129,70 @@ async function getEmptyGroup() {
   } catch (err) {
     console.log(err);
   }
+}
+
+function getColors() {
+  return [
+    {
+      name: 'darkGreen',
+      hexCode: '#037f4'
+    },
+    {
+      name: 'green',
+      hexCode: '#00c875'
+    },
+
+    {
+      name: 'yellowGreen',
+      hexCode: '#9cd326'
+    },
+    {
+      name: 'beige',
+      hexCode: '#cab641'
+    },
+    {
+      name: 'yellow',
+      hexCode: '#ffcb00'
+    },
+    {
+      name: 'darkPurple',
+      hexCode: '#784bd1'
+    },
+    {
+      name: 'purple',
+      hexCode: '#a25ddc'
+    },
+    {
+      name: 'turquoise',
+      hexCode: '#0086BE'
+    },
+    {
+      name: 'blue',
+      hexCode: '#579bfc'
+    },
+    {
+      name: 'lightBlue',
+      hexCode: '#66ccff'
+    },
+    {
+      name: 'darkRed',
+      hexCode: '#bb3354'
+    },
+    {
+      name: 'red',
+      hexCode: '#e2445c'
+    },
+    {
+      name: 'darkOrange',
+      hexCode: '#ff642e'
+    },
+    {
+      name: 'orange',
+      hexCode: '#fdab3d'
+    },
+    {
+      name: 'brown',
+      hexCode: '#7f5347'
+    }
+  ]
 }

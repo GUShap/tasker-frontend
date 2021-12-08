@@ -61,7 +61,6 @@ export default {
   computed: {
     marker() {
       if (!this.markerColor) return `#579BFC`;
-      console.log(this.markerColor);
       return `${this.markerColor}`;
     },
   },
