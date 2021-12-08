@@ -3,7 +3,7 @@
     <section>
       <section v-if="!selectedMembers">-</section>
       <avatar
-            v-else
+        v-else
         v-for="member in selectedMembers"
         :size="25"
         :username="member.fullname"
@@ -58,11 +58,12 @@ export default {
   data() {
     return {
       isEditMode: false,
-      selectedMembers: [],
+      selectedMembers: null,
+      activity: null,
     };
   },
   created() {
-    this.selectedMembers = this.info.members || [];
+    this.selectedMembers = this.info.members || null;
   },
   methods: {
     editStatus() {
@@ -74,6 +75,13 @@ export default {
     removeMember(member) {
       const idx = this.selectedMembers.indexOf(member);
       this.selectedMembers.splice(idx, 1);
+    },
+    update() {
+      const taskUpdateInfo = {
+        member: this.selectedMembers,
+        activity: this.activity,
+      };
+      this.$emit("updated", taskUpdateInfo);
     },
   },
   computed: {
@@ -89,6 +97,10 @@ export default {
       }
     },
   },
-  destroyed() {},
+  watch: {
+    selectedMembers: function (newVal, oldVal) {
+      this.activity = { type: "member", newVal, oldVal };
+    },
+  },
 };
 </script>

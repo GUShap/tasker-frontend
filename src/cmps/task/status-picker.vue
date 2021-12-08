@@ -31,6 +31,7 @@ export default {
       showDoneGif: false,
       status: this.info.labelId ? this.info.labelId : null,
       statusStyle: this.info.labelId ? this.info.labelId.toLowerCase() : null,
+      activity : null
     };
   },
   created() {
@@ -50,12 +51,23 @@ export default {
       }
       this.isEditMode = !this.isEditMode;
     },
+     update() {
+      const taskUpdateInfo = {
+        status: this.status,
+        activity : this.activity
+      };
+      this.$emit("updated", taskUpdateInfo);
+    },
   },
   computed: {
     statusInfo() {
       this.status = this.info.labelId ? this.info.labelId : null;
     },
   },
-  destroyed() {},
+  watch : {
+    status : function(newVal, oldVal){
+      this.activity = { type : "status",newVal ,oldVal }
+    }
+  }
 };
 </script>

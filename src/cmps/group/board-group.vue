@@ -69,7 +69,7 @@
             @addTask="addTask"
             :cmpsOrder="board.cmpsOrder"
             :groupIdx="groupIdx"
-            :members="board.members"
+            :boardMembers="board.members"
             :markerColor="group.style.color"
             :user="loggedinUser"
             class="flex"

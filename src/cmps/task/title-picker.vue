@@ -6,7 +6,7 @@
     class="title-picker flex grow-2"
     @click.prevent.stop="openDetails"
   >
-    <span v-if="!isEditMode">{{ title }}</span>
+    <span v-if="!isEditMode">{{ currTitle }}</span>
     <input
       v-on:keyup.enter="editMode"
       @blur="
@@ -37,6 +37,7 @@ export default {
       hover: false,
       isEditMode: false,
       currTitle: this.info.title,
+      activity : null
     };
   },
   created() {},
@@ -49,11 +50,17 @@ export default {
       this.isEditMode = !this.isEditMode;
     },
     update() {
-      const taskUpdateInfo = {
+      const updateInfo = {
         title: this.currTitle,
+        activity : this.activity
       };
-      this.$emit("updated", taskUpdateInfo);
+      this.$emit("updated", updateInfo);
     },
   },
+  watch : {
+    title : function(newVal, oldVal){
+      this.activity = { type:"title",newVal ,oldVal }
+    }
+  }
 };
 </script>

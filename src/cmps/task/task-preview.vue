@@ -13,7 +13,7 @@
         <component
           :is="cmpType"
           :info="getCmpInfo(cmpType)"
-          :boardMembers="members"
+          :boardMembers="boardMembers"
           @updated="updateTask(cmpType, $event)"
           :key="idx"
           :markerColor="markerColor"
@@ -39,7 +39,7 @@ export default {
     timelinePicker,
     taskDropdown,
   },
-  props: ["task", "taskIdx", "groupIdx", "cmpsOrder", "markerColor", "members"],
+  props: ["task", "taskIdx", "groupIdx", "cmpsOrder", "markerColor", "boardMembers"],
   data() {
     return {};
   },
@@ -76,11 +76,11 @@ export default {
         case ("title-picker"):
         return {taskId : currTask.id , title : currTask.title}
         case ("member-picker"):
-        return
+        return {members : currTask.members , boardMembers : this.boardMembers}
         case ("status-picker"):
-        return
+        return {labelId : currTask.labelId }
         case ("timeline-picker"):
-        return
+        return {timeline : currTask.timeline, markerColor : this.markerColor }
       }
     },
     updateTask() {
