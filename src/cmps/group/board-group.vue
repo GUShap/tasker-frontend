@@ -11,6 +11,7 @@
         @showGroups="showGroups"
         @duplicateGroup="duplicateGroup"
         @addNewGroup="addNewGroup"
+        
       />
       <section class="column-headers">
         <div @mouseover="hover = true" @mouseleave="hover = false">
