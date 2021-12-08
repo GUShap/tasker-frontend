@@ -1,6 +1,6 @@
 import { httpService } from './http.service'
 import { socketService, SOCKET_EVENT_USER_UPDATED } from './socket.service'
-const STORAGE_KEY_LOGGEDIN_USER = 'loggedinUser'
+// const STORAGE_KEY_LOGGEDIN_USER = 'loggedinUser'
 var gWatchedUser = null;
 
 export const userService = {
@@ -12,6 +12,7 @@ export const userService = {
     getById,
     remove,
     update,
+    setLoggedinUser
 }
 
 // Debug technique
@@ -50,23 +51,25 @@ async function signup(userCred) {
     return _saveLocalUser(user)
 }
 async function logout() {
-    sessionStorage.removeItem(STORAGE_KEY_LOGGEDIN_USER)
+    sessionStorage.removeItem('loggedinUser')
     socketService.emit('unset-user-socket');
     return await httpService.post('auth/logout')
 }
 
 
 function _saveLocalUser(user) {
-    sessionStorage.setItem(STORAGE_KEY_LOGGEDIN_USER, JSON.stringify(user))
+    sessionStorage.setItem('loggedinUser', JSON.stringify(user))
     return user
 }
 
 function getLoggedinUser() {
-    // const user = {"fullname": 'Sundos Gutty'," email": 'sundos@gmail.com', "password": '1234', "avtivityLog":[] }
-    // return user
-    return JSON.parse(sessionStorage.getItem(STORAGE_KEY_LOGGEDIN_USER) || 'null')
+    return JSON.parse(sessionStorage.getItem('loggedinUser') || 'null');
 }
 
+function setLoggedinUser(user) {
+    sessionStorage.setItem('loggedinUser', JSON.stringify(user));
+    return user;
+}
 
 
 

@@ -20,7 +20,7 @@ export const userStore = {
     mutations: {
         setLoggedinUser(state, { user }) {
             state.loggedinUser = JSON.parse(JSON.stringify(user))
-            userService.getLoggedinUser(user);
+            userService.setLoggedinUser(user);
         },
         setWatchedUser(state, { user }) {
             state.watchedUser = user;
@@ -30,8 +30,8 @@ export const userStore = {
         },
     },
     actions: {
-        async login({ commit }, { userCred }) {
-            console.log(userCred)
+        async login({ commit }, {userCred}) {
+            console.log({userCred})
             try {
                 const user = await userService.login(userCred);
                 commit({ type: 'setLoggedinUser', user })
@@ -41,7 +41,9 @@ export const userStore = {
                 throw err
             }
         },
-        async signup({ commit }, { userCred }) {
+        async signup({ commit }, {userCred}) {
+            console.log(userCred)
+
             try {
                 const user = await userService.signup(userCred)
                 commit({ type: 'setLoggedinUser', user })
