@@ -20,7 +20,7 @@ export const userStore = {
     mutations: {
         setLoggedinUser(state, { user }) {
             state.loggedinUser = JSON.parse(JSON.stringify(user))
-            userService.setLoggedinUser(user);
+            userService.getLoggedinUser(user);
         },
         setWatchedUser(state, { user }) {
             state.watchedUser = user;
