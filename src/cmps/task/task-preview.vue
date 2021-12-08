@@ -3,17 +3,18 @@
     <task-dropdown
       @removeTask="removeTask"
       @openTaskDetails="openTaskDetails"
-      @clone="clone"/>
+      @duplicateTask="duplicateTask"/>
     <section
       class="task-preview flex align-center"
       :style="{ 'border-left': marker }"
     >
+
       <template v-for="(cmpType, idx) in cmpsOrder">
         <component
           :is="cmpType"
-          :info="task"
-          :boardMembers="members"
-          @update="updateTask"
+          :info="getCmpInfo(cmpType)"
+          :boardMembers="boardMembers"
+          @updated="updateTask(cmpType, $event)"
           :key="idx"
           :markerColor="markerColor"
         />
@@ -28,6 +29,7 @@ import statusPicker from "./status-picker.vue";
 import memberPicker from "./member-picker.vue";
 import timelinePicker from "./timeline-picker.vue";
 import taskDropdown from "../task-dropdown.vue";
+import { utilService } from "@/services/util.service.js";
 
 export default {
   name: "task-preview",
@@ -38,7 +40,7 @@ export default {
     timelinePicker,
     taskDropdown,
   },
-  props: ["task", "taskIdx", "groupIdx", "cmpsOrder", "markerColor", "members"],
+  props: ["task", "taskIdx", "groupIdx", "cmpsOrder", "markerColor", "boardMembers"],
   data() {
     return {};
   },
@@ -63,11 +65,32 @@ export default {
     openTaskDetails() {
       this.$router.push(`/board/task/${this.task.id}`);
     },
-    clone() {
-      let task = this.task;
-      let taskCopy = { ...task };
-      delete taskCopy.id;
-      this.$emit("addTask", taskCopy);
+    duplicateTask() {
+      
+      let taskCopy = JSON.parse(JSON.stringify(this.task))
+      taskCopy.id=utilService.makeId();
+      taskCopy.isCopy = true
+       this.$store.dispatch({
+        type: "editTask",
+        taskInfo: {
+          task: taskCopy,
+          groupIdx: this.groupIdx,
+          taskIdx: this.taskIdx,
+        },
+      })
+    },
+    getCmpInfo(cmpType){
+      const currTask = this.task;
+      switch(cmpType){
+        case ("title-picker"):
+        return {taskId : currTask.id , title : currTask.title}
+        case ("member-picker"):
+        return {members : currTask.members , boardMembers : this.boardMembers}
+        case ("status-picker"):
+        return {labelId : currTask.labelId }
+        case ("timeline-picker"):
+        return {timeline : currTask.timeline, markerColor : this.markerColor }
+      }
     },
     updateTask() {
       this.$store.dispatch({

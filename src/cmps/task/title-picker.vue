@@ -1,11 +1,12 @@
 <template>
-  <section v-if="info"
+  <section
+    v-if="info"
     @mouseover="hover = true"
     @mouseleave="hover = false"
     class="title-picker flex grow-2"
     @click.prevent.stop="openDetails"
   >
-    <span v-if="!isEditMode">{{ title }}</span>
+    <span v-if="!isEditMode">{{ currTitle }}</span>
     <input
       v-on:keyup.enter="editMode"
       @blur="
@@ -14,7 +15,7 @@
         }
       "
       v-else
-      v-model="title"
+      v-model="currTitle"
       @change="update"
     />
     <button
@@ -35,23 +36,31 @@ export default {
     return {
       hover: false,
       isEditMode: false,
-      title: this.info.title,
+      currTitle: this.info.title,
+      activity : null
     };
   },
-  created() {
-  },
+  created() {},
   methods: {
     openDetails() {
       if (this.isEditMode) return;
-      this.$router.push(`/board/task/${this.info.id}`);
+      this.$router.push(`/board/task/${this.info.taskId}`);
     },
     editMode(val) {
       this.isEditMode = !this.isEditMode;
     },
     update() {
-      this.info.title = this.title;
-      this.$emit("update", this.info);
+      const updateInfo = {
+        title: this.currTitle,
+        activity : this.activity
+      };
+      this.$emit("updated", updateInfo);
     },
   },
+  watch : {
+    title : function(newVal, oldVal){
+      this.activity = { type:"title",newVal ,oldVal }
+    }
+  }
 };
 </script>

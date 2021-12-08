@@ -71,7 +71,6 @@ export default {
   },
   data() {
     return {
-      task: null,
       component: "task-updates",
       isBtnHover: false,
       hoveredBtn: null,
@@ -93,17 +92,20 @@ export default {
     },
   },
 
-  async created() {
-    try {
-      const { taskId } = this.$route.params;
-      this.task = await this.$store.dispatch({
+  computed: {
+    async task() {
+      try {
+        const { taskId } = this.$route.params;
+      const task = await this.$store.dispatch({
         type: "getTaskById",
         taskId,
-      });
-        console.log(this.task)
-    } catch (err) {
-      console.log("Error", err);
-    }
+      })
+      console.log(task);
+      return task
+      } catch (err) {
+        console.log(err);
+      }
+    },
   },
 };
 </script>

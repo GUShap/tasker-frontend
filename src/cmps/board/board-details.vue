@@ -1,7 +1,15 @@
 <template>
   <section class="board-container" v-if="board">
-    <template v-for="(group, groupIdx) in currGroups">
+     <Container
+      orientation="vertical"
+      lock-axis="y"
+      @drop="onColumnDrop($event)"
+      drag-handle-selector=".group-drag-handle"
+      :drop-placeholder="dropPlaceholderOptions"
+    >
+      <Draggable v-for="(group, groupIdx) in currGroups" :key="group.id" style="{overflow : visible}" >
       <board-group
+        v-if="group"
         :group="group"
         :user="loggedinUser"
         :key="group.id"
@@ -14,7 +22,8 @@
         @addNewGroup="addNewGroup"
         v-show="groupsShow"
       />
-    </template>
+     </Draggable>
+    </Container>
   </section>
 </template>
 
@@ -65,9 +74,9 @@ export default {
       //   return tasks;
       // }
     },
-    addNewGroup(group) {
-      group.boardId = this.board._id;
-      this.$emit("addNewGroup", group);
+    addNewGroup(groupInfo) {
+      // group.boardId = this.board._id;
+      this.$emit("addNewGroup", groupInfo);
     },
     async onColumnDrop(dropResult) {
       try {

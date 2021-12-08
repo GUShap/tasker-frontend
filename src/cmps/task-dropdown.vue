@@ -6,7 +6,7 @@
         <el-dropdown-item @click.native="openTaskDetails">
           <i class="fas fa-expand-alt"></i> Open Details
         </el-dropdown-item>
-        <el-dropdown-item @click.native="clone" 
+        <el-dropdown-item @click.native="duplicateTask" 
           ><i class="far fa-copy"></i>Duplicate</el-dropdown-item>
         <el-dropdown-item  class="last-child"
           ><i class="fas fa-plus"></i>Create new item below
@@ -35,8 +35,8 @@ export default {
     openTaskDetails() {
       this.$emit("openTaskDetails");
     },
-    clone() {
-      this.$emit("clone");
+    duplicateTask() {
+      this.$emit("duplicateTask");
     },
   },
 };

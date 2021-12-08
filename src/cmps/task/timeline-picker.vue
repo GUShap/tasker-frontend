@@ -44,7 +44,7 @@ export default {
     };
   },
   created() {
-    this.members = this.info.timeline;
+    this.value = this.info.timeline || '' ;
   },
   methods: {
     editStatus() {

@@ -12,7 +12,8 @@ export const remoteBoardService = {
   getById,
   getEmptyGroup,
   getEmptyBoard,
-  getColors
+  getColors,
+  getTaskById
 }
 
 const BASE_URL = process.env.NODE_ENV !== "development"
@@ -58,7 +59,25 @@ async function save(board) {
   }
 }
 
-function getBoardCopy(boardId) {
+async function getTaskById(taskId) {
+  try {
+    const boards = await query();
+    var currTask;
+    boards.forEach((board) => {
+      board.groups.forEach((group) => {
+        group.tasks.forEach((task) => {
+          if (task.id === taskId) currTask = task;
+        });
+      });
+    });
+    return currTask;
+  } catch (err) {
+    console.log("Error", err);
+    throw err;
+  }
+}
+
+function _getBoardCopy(boardId) {
   const board = todoService.getById(boardId);
   return JSON.parse(JSON.stringify(board));
 }
@@ -130,6 +149,8 @@ async function getEmptyGroup() {
     console.log(err);
   }
 }
+
+
 
 function getColors() {
   return [

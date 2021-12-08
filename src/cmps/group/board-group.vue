@@ -11,7 +11,6 @@
         @showGroups="showGroups"
         @duplicateGroup="duplicateGroup"
         @addNewGroup="addNewGroup"
-        
       />
       <section class="column-headers">
         <div @mouseover="hover = true" @mouseleave="hover = false">
@@ -40,7 +39,7 @@
         </div>
       </section>
     </header>
-<!-- 
+    <!-- 
  <Container
           lock-axis="x"
           group-name="col"
@@ -60,25 +59,25 @@
       :get-child-payload="getChildPayload"
       :drop-placeholder="dropPlaceholderOptions"
     >
-      <Draggable v-for="(task, taskIdx) in tasksList" :key="task.id">
+      <Draggable v-for="(task, taskIdx) in tasksList" :key="task.id" style="{overflow : visible}">
         <transition name="fade" :key="task.id">
           <task-preview
             v-show="groupShow"
             :key="task.id"
             :task="task"
             :taskIdx="taskIdx"
-            :user="loggedinUser"
-            :markerColor="group.style.color"
+            @addTask="addTask"
             :cmpsOrder="board.cmpsOrder"
             :groupIdx="groupIdx"
-            :members="board.members"
+            :boardMembers="board.members"
+            :markerColor="group.style.color"
+            :user="loggedinUser"
             class="flex"
-            @addTask="addTask" 
           />
         </transition>
       </Draggable>
     </Container>
-            <!-- @addTask="addTask(groupIdx, taskIdx, $event)"  -->
+    <!-- @addTask="addTask(groupIdx, taskIdx, $event)"  -->
 
     <transition>
       <section
@@ -107,7 +106,8 @@
 import taskPreview from "@/cmps/task/task-preview.vue";
 import groupDropdown from "@/cmps/group/group-dropdown.vue";
 import { Container, Draggable } from "vue-smooth-dnd";
-import { applyDrag } from "../../pages/card-helper.js";
+import { applyDrag } from "@/pages/card-helper.js";
+import { utilService } from "@/services/util.service.js";
 
 export default {
   name: "board-group",
@@ -163,10 +163,9 @@ export default {
       }
     },
     duplicateGroup() {
-      let group = this.group;
-      let groupCopy = { ...group };
-      delete groupCopy.id;
-      this.$emit("addNewGroup", groupCopy);
+      let groupCopy = JSON.parse(JSON.stringify(this.group));
+      groupCopy.id = utilService.makeId();
+      this.$emit("addNewGroup", { group: groupCopy, groupIdx: this.groupIdx });
     },
     changeColor(color) {
       console.log(color);
@@ -181,7 +180,7 @@ export default {
       this.$emit("removeGroup", { group: this.group, groupIdx: this.groupIdx });
     },
     addNewGroup() {
-      this.$emit("addNewGroup");
+      this.$emit("addNewGroup",{});
     },
     setEdit() {
       this.$refs.title.focus();
@@ -204,10 +203,12 @@ export default {
           dropResult.addedIndex !== null
         ) {
           const board = Object.assign({}, this.board);
+          // const board = JSON.parse(JSON.stringify(this.board));
           const group = board.groups.filter((g) => g.id === groupId)[0];
           const groupIdx = board.groups.indexOf(group);
-          // const newGroup = Object.assign({}, group);
-          const newGroup = JSON.parse(JSON.stringify(group));
+          const newGroup = Object.assign({}, group);
+          // const newGroup = JSON.parse(JSON.stringify(group));
+          const newTasks = Object.assign({}, newGroup.tasks);
           newGroup.tasks = applyDrag(newGroup.tasks, dropResult);
           board.groups.splice(groupIdx, 1, newGroup);
           await this.$store.dispatch({
