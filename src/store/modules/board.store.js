@@ -200,10 +200,11 @@ export const boardStore = {
       }
     },
 
-    async addNewBoard({ state, dispatch, commit }) {
+    async addNewBoard({ state, dispatch, commit,rootGetters },{board}) {
       try {
-        // take to component and only save board with backend
-        // const newBoard = remoteBoardService.getEmptyBoard()
+        board.createdBy = rootGetters.loggedinUser
+       const savedBoard = await remoteBoardService.save(board)
+        // state.boards.push(board)
       } catch (err) {
         console.log(err);
       }

@@ -18,7 +18,9 @@
             <el-option value="board2">Board 2?</el-option>
           </el-select>
           <div class="search-btns">
-            <button><span class="icon-plus"></span>Add new board</button>
+            <button @click="toggleModal">
+              <span class="icon-plus"></span>Add new board
+            </button>
             <button><span class="icon-filter"></span>Filter</button>
             <button><span class="icon-search last-child"></span>Search</button>
           </div>
@@ -28,23 +30,46 @@
         </div>
       </div>
     </transition>
+    <create-board v-if="isEditBoard" @addNewBoard="addNewBoard" @toggleModal="toggleModal"/>
   </section>
 </template>
 
 
 
 <script>
+import { utilService } from "@/services/util.service.js";
+import createBoard from "./create-board.vue";
+
 export default {
+  name: "pop-up-nav",
   props: ["board", "user"],
+  components: {
+    createBoard,
+  },
   data() {
     return {
       isShown: false,
+      isEditBoard: false,
     };
   },
   methods: {
     toggleNav() {
       this.isShown = !this.isShown;
     },
+    toggleModal() {
+      this.isEditBoard = !this.isEditBoard;
+
+    },
+
+    addNewBoard(board) {
+      if (board) this.$store.dispatch({ type: "addNewBoard", board });
+    },
+    // createBoard(){
+    //   const newBoard = utilService.getEmptyBoard()
+    //   newBoard.createdBy=this.currUser
+    //   this.$store.dispatch({type:"addNewBoard"})
+
+    // }
   },
   computed: {
     currBoard() {
