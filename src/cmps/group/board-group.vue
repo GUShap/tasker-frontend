@@ -39,6 +39,18 @@
         </div>
       </section>
     </header>
+<!-- 
+ <Container
+          lock-axis="x"
+          group-name="col"
+          :drop-placeholder="dropPlaceholderOptions"
+        >
+          <Draggable v-for="(cmp, idx) in cmpsOrder" :key="idx">
+            <div>
+              {{ cmpHeader(cmp) }}
+            </div>
+          </Draggable>
+        </Container> -->
 
     <Container
       @drop="onTaskDrop(group.id, $event)"
@@ -59,11 +71,12 @@
             :groupIdx="groupIdx"
             :members="board.members"
             class="flex"
-            @addTask="addTask"
+            @addTask="addTask" 
           />
         </transition>
       </Draggable>
     </Container>
+            <!-- @addTask="addTask(groupIdx, taskIdx, $event)"  -->
 
     <transition>
       <section
@@ -139,6 +152,7 @@ export default {
       if (task === "new") {
         if (!this.title) return;
         const newTask = { title: this.title };
+        console.log("board-g", newTask);
         this.$emit("addTask", { task: newTask, groupIdx: this.groupIdx });
         this.title = null;
       } else {
@@ -183,23 +197,27 @@ export default {
       return val;
     },
 
-   async onTaskDrop(groupId, dropResult) {
-     try{
-      if (dropResult.removedIndex !== null || dropResult.addedIndex !== null) {
-        const board = Object.assign({}, this.board);
-        const group = board.groups.filter((g) => g.id === groupId)[0];
-        const groupIdx = board.groups.indexOf(group);
-        const newGroup = Object.assign({}, group);
-        newGroup.tasks = applyDrag(newGroup.tasks, dropResult);
-        board.groups.splice(groupIdx, 1, newGroup);
-       await this.$store.dispatch({
-          type: "saveBoard",
-          board: board,
-        });
+    async onTaskDrop(groupId, dropResult) {
+      try {
+        if (
+          dropResult.removedIndex !== null ||
+          dropResult.addedIndex !== null
+        ) {
+          const board = Object.assign({}, this.board);
+          const group = board.groups.filter((g) => g.id === groupId)[0];
+          const groupIdx = board.groups.indexOf(group);
+          // const newGroup = Object.assign({}, group);
+          const newGroup = JSON.parse(JSON.stringify(group));
+          newGroup.tasks = applyDrag(newGroup.tasks, dropResult);
+          board.groups.splice(groupIdx, 1, newGroup);
+          await this.$store.dispatch({
+            type: "saveBoard",
+            board: board,
+          });
+        }
+      } catch (err) {
+        console.log("Error", err);
       }
-     }catch(err){
-       console.log('Error',err);
-     }
     },
     getChildPayload(index) {
       return this.group.tasks[index];

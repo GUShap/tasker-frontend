@@ -78,17 +78,28 @@ export const boardStore = {
         console.log(err);
       }
     },
-    async saveBoard({ commit }, { board }) {
+    // async saveBoard({ commit }, { board }) {
+    //   try {
+    //     console.log("board", board);
+    //     await remoteBoardService.save(board);
+    //     commit({ type: "saveBoard", board });
+    //   } catch (err) {
+    //     console.log(err);
+    //   }
+    // },
+    async saveBoard({ commit,state }, { board }) { // optimistic
+      const currBoard = state.currBoard;
       try {
-        console.log("board", board);
-        await remoteBoardService.save(board);
         commit({ type: "saveBoard", board });
+        await remoteBoardService.save(board);
       } catch (err) {
         console.log(err);
+        commit({ type: "saveBoard", board: currBoard });
       }
     },
     async editTask({ state, dispatch, commit }, { taskInfo }) {
       try {
+        console.log('taskInfo',taskInfo);
         const { task, taskIdx, groupIdx } = taskInfo;
         const boardCopy = JSON.parse(JSON.stringify(state.currBoard));
         if (task.id) {

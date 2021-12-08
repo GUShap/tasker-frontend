@@ -81,9 +81,9 @@ export default {
       if (!this.selectedMembers) {
         return this.boardMembers;
       } else {
-        const selectedUser = this.selectedMembers.map((m) => m.fullname);
+        const selectedMembersId = this.selectedMembers.map((m) => m._id);
         const membersList = this.boardMembers.filter((member) => {
-          return !selectedUser.includes(member.fullname);
+          return !selectedMembersId.includes(member._id);
         });
         return membersList;
       }

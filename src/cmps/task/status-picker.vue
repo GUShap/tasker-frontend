@@ -2,18 +2,20 @@
   <section class="status-picker">
     <div
       @click="editStatus('edit')"
-      v-if="!edit"
-      class="status-picker tag"
+      v-if="!isEditMode"
+      class="status-picker empty"
       :class="statusStyle"
       placeholder=""
     >
       {{ status }}
+      <img v-if="showDoneGif" />
     </div>
-    <ul v-if="edit" @blur="editStatus('edit')" class="status-modal">
-      <li @click="editStatus('Done')" class="tag done">Done</li>
-      <li @click="editStatus('Work')" class="tag work">Working on it</li>
-      <li @click="editStatus('Stuck')" class="tag stuck">Stuck</li>
-      <li @click="editStatus"><button>Edit</button></li>
+    <ul v-if="isEditMode" @blur="editStatus('edit')" class="status-modal">
+      <li @click="editStatus('Done')" class="done-bg">Done</li>
+      <li @click="editStatus('Work')" class="work-bg">Working on it</li>
+      <li @click="editStatus('Stuck')" class="stuck-bg">Stuck</li>
+      <li @click="editStatus('Empty')" class="empty-bg">Empty</li>
+      <!-- <li @click="editStatus"><button>Edit</button></li> -->
     </ul>
   </section>
 </template>
@@ -25,7 +27,8 @@ export default {
   props: ["info"],
   data() {
     return {
-      edit: false,
+      isEditMode: false,
+      showDoneGif: false,
       status: this.info.labelId ? this.info.labelId : null,
       statusStyle: this.info.labelId ? this.info.labelId.toLowerCase() : null,
     };
@@ -39,7 +42,13 @@ export default {
         this.status = status;
         this.statusStyle = status.toLowerCase();
       }
-      this.edit = !this.edit;
+      if (status === "Done") {
+        this.showDoneGif = true;
+        setTimeout(() => {
+          this.showDoneGif = false;
+        }, 3000);
+      }
+      this.isEditMode = !this.isEditMode;
     },
   },
   computed: {

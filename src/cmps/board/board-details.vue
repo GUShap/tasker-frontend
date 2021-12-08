@@ -1,29 +1,39 @@
 <template>
   <section class="board-container" v-if="board">
-    <template v-for="(group, groupIdx) in currGroups">
-      <board-group
-        :group="group"
-        :key="group.id"
-        :board="board"
-        :groupIdx="groupIdx"
-        @addTask="addTask"
-        @showGroups="showGroups"
-        @removeGroup="removeGroup"
-        @editGroup="editGroup"
-        @addNewGroup="addNewGroup"
-        v-show="groupsShow"
-      />
-    </template>
+    <Container
+      orientation="vertical"
+      lock-axis="y"
+      @drop="onColumnDrop($event)"
+      drag-handle-selector=".group-drag-handle"
+      :drop-placeholder="dropPlaceholderOptions"
+    >
+      <Draggable v-for="(group, groupIdx) in currGroups" :key="group.id">
+        <board-group
+          :group="group"
+          :board="board"
+          :groupIdx="groupIdx"
+          @addTask="addTask"
+          @showGroups="showGroups"
+          @removeGroup="removeGroup"
+          @editGroup="editGroup"
+          @addNewGroup="addNewGroup"
+          v-show="groupsShow"
+        />
+      </Draggable>
+    </Container>
   </section>
 </template>
 
 <script>
 import boardGroup from "@/cmps/group/board-group.vue";
-
+import { Container, Draggable } from "vue-smooth-dnd";
+import { applyDrag } from "../../pages/card-helper.js";
 export default {
   name: "main-board",
   components: {
     boardGroup,
+    Container,
+    Draggable,
   },
   props: ["board"],
 
@@ -32,12 +42,19 @@ export default {
       groups: null,
       openModal: false,
       groupsShow: true,
+      dropPlaceholderOptions: {
+        className: "drop-preview",
+        animationDuration: "150",
+        showOnTop: false,
+      },
     };
   },
   created() {},
   methods: {
     addTask(taskInfo) {
       // taskInfo.boardId = this.board._id;
+      console.log("board-d", taskInfo);
+
       this.$emit("addTask", taskInfo);
     },
     editGroup(groupInfo) {
@@ -57,6 +74,18 @@ export default {
     addNewGroup(group) {
       group.boardId = this.board._id;
       this.$emit("addNewGroup", group);
+    },
+    async onColumnDrop(dropResult) {
+      try {
+        const currBoard = Object.assign({}, this.board);
+        currBoard.groups = applyDrag(currBoard.groups, dropResult);
+        await this.$store.dispatch({
+          type: "saveBoard",
+          board: currBoard,
+        });
+      } catch (err) {
+        console.log("Error", err);
+      }
     },
   },
   computed: {
