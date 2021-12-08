@@ -95,6 +95,7 @@ export default {
       }
     },
     updateTask(cmpType, ev) {
+      console.log('ev',ev);
       switch (cmpType) {
         case "title-picker":
           this.task.title = ev.title;
@@ -115,7 +116,6 @@ export default {
         taskIdx: this.taskIdx,
         activity: ev.activity,
       };
-      // console.log('taskInfo',taskInfo.task.timeline);
       this.$store.dispatch({
         type: "editTask",
         taskInfo,

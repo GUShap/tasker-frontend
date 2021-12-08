@@ -6,7 +6,7 @@
       :user="loggedinUser"
     ></pop-up-nav>
     <section class="workspace">
-      <board-header :board="currBoard" :user="loggedinUser" />
+      <board-header :board="currBoard" :user="loggedinUser" :allBoards="allBoards"/>
       <task-actions-nav @sortBy="sortBy" @addNewGroup="addNewGroup" />
       <board-filter />
       <board-details
@@ -102,6 +102,9 @@ export default {
       this.user = this.$store.getters.loggedinUser;
       return this.user;
     },
+    allBoards(){
+      this.$store.getters.allBoards
+    }
   },
   destroyed() {},
 };

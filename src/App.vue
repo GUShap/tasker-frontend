@@ -38,7 +38,6 @@ export default {
     },
     loggedinUser() {
       const user = this.$store.getters.loggedinUser;
-      console.log(user);
       return user;
     },
   },

@@ -27,6 +27,10 @@
         </div>
         <div class="my-boards">
           <button>My Boards</button>
+          <ul v-if="allBoards">
+            <li v-for="(board,idx) in allBoards" :key="idx" ></li>
+          <button>{{board.title}}</button>
+          </ul>
         </div>
       </div>
     </transition>
@@ -42,7 +46,7 @@ import createBoard from "./create-board.vue";
 
 export default {
   name: "pop-up-nav",
-  props: ["board", "user"],
+  props: ["board", "user","allBoards"],
   components: {
     createBoard,
   },
