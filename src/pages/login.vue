@@ -126,18 +126,18 @@ export default {
     signinPage() {
       this.loginPage = false;
     },
-    async signup() {
-      try {
-        await this.$store.dispatch({
-          type: "signup",
-          userCreds: this.userCreds,
-        });
-        console.log(this.userCreds);
-        this.clearInput();
-      } catch (err) {
-        console.log(err);
-        throw err;
-      }
+     signup() {
+      console.log(this.userCreds);
+      // try {
+      //   await this.$store.dispatch({
+      //     type: "signup",
+      //     userCreds: this.userCreds,
+      //   });
+      //   this.clearInput();
+      // } catch (err) {
+      //   console.log(err);
+      //   throw err;
+      // }
     },
     async login() {
       console.log(this.userCreds);
