@@ -60,7 +60,6 @@ export default {
       try {
         console.log("workspace", taskInfo);
         await this.$store.dispatch({ type: "editTask", taskInfo });
-        await this.$store.dispatch({ type: "updateUserLog", taskInfo });
       } catch (err) {
         console.log("Error", err);
       }

@@ -35,9 +35,9 @@ export default {
     openTaskDetails() {
       this.$emit("openTaskDetails");
     },
-    duplicateTask() {
-      this.$emit("duplicateTask");
-    },
+    // duplicateTask() {
+    //   this.$emit("duplicateTask");
+    // },
   },
 };
 </script>

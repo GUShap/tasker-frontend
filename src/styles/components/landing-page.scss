@@ -17,9 +17,17 @@
         width: 160px;
     }
 
+    .logo-img{
+        max-width: 2rem;
+        box-shadow: none;
+        top: 0;
+
+    }
+
     .home-nav {
         display: flex;
         flex-wrap: nowrap;
+        align-items: center;
     }
     .extra-info {
         display: flex;
@@ -226,6 +234,7 @@
 
         .logo-home {
             margin-right: 16px;
+            font-size: 14px;
         }
 
         .trial {
