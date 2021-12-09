@@ -28,6 +28,7 @@ import titlePicker from "./title-picker.vue";
 import statusPicker from "./status-picker.vue";
 import memberPicker from "./member-picker.vue";
 import timelinePicker from "./timeline-picker.vue";
+import priorityPicker from "./priority-picker.vue";
 import taskDropdown from "../task-dropdown.vue";
 import { utilService } from "@/services/util.service.js";
 
@@ -39,6 +40,7 @@ export default {
     memberPicker,
     titlePicker,
     timelinePicker,
+    priorityPicker,
     taskDropdown,
   },
   props: [
@@ -98,6 +100,8 @@ export default {
           return { status: currTask.status };
         case "timeline-picker":
           return { timeline: currTask.timeline, markerColor: this.markerColor };
+        case "priority-picker":
+          return { priority: currTask.priority};
       }
     },
     updateTask(cmpType, ev) {
@@ -114,6 +118,9 @@ export default {
           break;
         case "timeline-picker":
           this.task.timeline = ev.timeline;
+          break;
+        case "priority-picker":
+          this.task.priority = ev.priority;
           break;
       }
       const taskInfo = {

@@ -11,18 +11,34 @@ $title-color : rgb(255, 255, 255);
 }
 
 .done {
-  $prime-color: #30c875;
+  $prime-color: $done-color;
   @include task-status($prime-color, darken($prime-color, 30%));
   color : $title-color;
 }
 
 .work {
-  $prime-color: #fbab3e;
+  $prime-color: $work-color;
   @include task-status($prime-color, darken($prime-color, 30%));
   color : $title-color;
 }
 .stuck {
-  $prime-color: #e2445c;
+  $prime-color: $stuck-color;
+  @include task-status($prime-color, darken($prime-color, 30%));
+  color : $title-color;
+}
+.high {
+  $prime-color: #ad3f55;
+  @include task-status($prime-color, darken($prime-color, 30%));
+  color : $title-color;
+}
+
+.medium {
+  $prime-color: #f2ad53;
+  @include task-status($prime-color, darken($prime-color, 30%));
+  color : $title-color;
+}
+.low {
+  $prime-color: #f7cb46;
   @include task-status($prime-color, darken($prime-color, 30%));
   color : $title-color;
 }
@@ -42,5 +58,18 @@ $title-color : rgb(255, 255, 255);
 }
 .stuck-bg {
   background-color: $stuck-color;
+  color : $title-color;
+}
+.high-bg {
+  background-color: #ad3f55;
+  color : $title-color;
+}
+
+.medium-bg {
+  background-color: #f2ad53;
+  color : $title-color;
+}
+.low-bg {
+  background-color: #f7cb46;
   color : $title-color;
 }

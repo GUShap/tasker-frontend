@@ -4,17 +4,16 @@
       @click="editStatus('edit')"
       v-if="!isEditMode"
       class="status-picker empty"
-      :class="statusStyle"
+      :class="priorityStyle"
       placeholder=""
     >
-      {{ status }}
+      {{ priority }}
       <img v-if="showDoneGif" />
     </div>
     <ul v-if="isEditMode" @blur="editStatus('edit')" class="status-modal">
-      <li @click="editStatus('Done')" class="done-bg">Done</li>
-      <li @click="editStatus('Work')" class="work-bg">Working on it</li>
-      <li @click="editStatus('Stuck')" class="stuck-bg">Stuck</li>
-      <li @click="editStatus('Empty')" class="empty-bg">Empty</li>
+      <li @click="editStatus('High')" class="high-bg">High</li>
+      <li @click="editStatus('Medium')" class="medium-bg">Medium</li>
+      <li @click="editStatus('Low')" class="low-bg">Low</li>
       <!-- <li @click="editStatus"><button>Edit</button></li> -->
     </ul>
   </section>
@@ -29,31 +28,25 @@ export default {
     return {
       isEditMode: false,
       showDoneGif: false,
-      status: this.info.status,
-      statusStyle: null,
+      priority: this.info.priority,
+      priorityStyle: null,
       activity: null,
     };
   },
   created() {
-    this.statusStyle = this.info.status ? this.info.status.toLowerCase() : null;
+    this.priorityStyle = this.info.priority ? this.info.priority.toLowerCase() : null;
   },
   methods: {
-    editStatus(status) {
-      if (status !== "edit") {
-        this.status = status;
-        this.statusStyle = status.toLowerCase();
-      }
-      if (status === "Done") {
-        this.showDoneGif = true;
-        setTimeout(() => {
-          this.showDoneGif = false;
-        }, 3000);
+    editStatus(priority) {
+      if (priority !== "edit") {
+        this.priority = priority;
+        this.priorityStyle = priority.toLowerCase();
       }
       this.isEditMode = !this.isEditMode;
     },
     update() {
       const updateInfo = {
-        status: this.status,
+        priority: this.priority,
         activity: this.activity,
       };
       this.$emit("updated", updateInfo);
@@ -63,7 +56,7 @@ export default {
   },
   watch: {
     status: function (newVal, oldVal) {
-      this.activity = { type: "status", newVal, oldVal };
+      this.activity = { type: "priority", newVal, oldVal };
       this.update();
     },
   },
