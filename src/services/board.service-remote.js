@@ -12,7 +12,8 @@ export const remoteBoardService = {
   getById,
   getEmptyGroup,
   getColors,
-  getTaskById
+  getTaskById,
+  getTaskIdx
 }
 
 const BASE_URL = process.env.NODE_ENV !== "development"
@@ -75,6 +76,45 @@ async function getTaskById(taskId) {
     throw err;
   }
 }
+
+async function getTaskIdx(task) {
+  try {
+    const boards = await query();
+    var idx = null;
+    boards.forEach(board => {
+      board.groups.forEach(group => {
+        var acc = 0
+        group.tasks.forEach((t) => {
+          acc++
+          if (t.id === task.id) {
+            idx = acc
+            return
+          }
+          acc=0
+        }, 0)
+      })
+    })
+    console.log(idx);
+
+  } catch (err) {
+    console.log(err);
+  }
+
+}
+
+// async function getTaskIdx(boardId, groupId, taskId) {
+//   try {
+//     const boardIdx = await getBoardIdx(boardId);
+//     const groupIdx = await getGroupIdx(boardId, groupId);
+//     const taskIdx = gBoards[boardIdx].groups[groupIdx].tasks.findIndex(
+//       (task) => task.id === taskId
+//     );
+//     return taskIdx;
+//   } catch (err) {
+//     console.log("Error", err);
+//     throw err;
+//   }
+// }
 
 function _getBoardCopy(boardId) {
   const board = todoService.getById(boardId);

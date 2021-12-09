@@ -50,12 +50,13 @@
     </div>
     <hr />
     <template>
-      <component :is="component" :task="task" class="cmp-container"></component>
+      <component :is="component" :task="task" class="cmp-container" @editTask="editTask"></component>
     </template>
   </section>
 </template>
 
 <script>
+import {remoteBoardService} from "@/services/board.service-remote.js"
 import taskUpdates from "@/cmps/task/details cmps/task-updates.vue";
 import taskFiles from "@/cmps/task/details cmps/task-files.vue";
 import activityLog from "@/cmps/task/details cmps/activity-log.vue";
@@ -110,6 +111,9 @@ export default {
     setTask(task) {
       this.task = task;
     },
+    editTask(task){
+remoteBoardService.getTaskIdx(task)
+    }
   },
 
   watch: {
