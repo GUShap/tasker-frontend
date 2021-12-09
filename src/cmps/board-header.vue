@@ -35,14 +35,18 @@
             <avatar
               class="memeber-img"
               v-else
-              v-for="(user, idx) in allUsers"
+              v-for="(user, idx) in board.members"
               :size="25"
               :username="user.fullname"
-              :src="require(`@/pics/${user.imgUrl}`)"
+              :src="user.imgUrl ? require(`@/pics/${user.imgUrl}`) : null"
               :key="idx"
             />
           </div>
-          <a><span class="icon-invite"></span>Invite /<span> {{invitedMembers}}</span></a>
+          <a
+            ><span class="icon-invite"></span>Invite /<span>
+              {{ invitedMembers }}</span
+            ></a
+          >
           <a><span class="icon-activities"></span>Activities</a>
           <a class="btn-add-board"><span class="icon-plus"></span>Add Board</a>
         </div>
@@ -89,8 +93,8 @@ export default {
       isStared: false,
       currEditedVal: "",
       isEditedMode: false,
-      invitedMembers: 5
-    };
+      invitedMembers: this.board ? this.board.members ? this.board.member.length : null : null
+    }
   },
   created() {
     console.log('allUsers',this.allUsers);
