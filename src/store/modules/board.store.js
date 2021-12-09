@@ -31,9 +31,9 @@ export const boardStore = {
         sortedBoard.groups.forEach((group) => {
           group.tasks.sort((task1, task2) => {
             if (sortByCopy.order === 'ascending') {
-              return task1.title.toLowerCase() > task2.title.toLowerCase() ? 1 : -1;
+              return task1.title.toLowerCase() >= task2.title.toLowerCase() ? 1 : -1;
             } else {
-              return task2.title.toLowerCase() > task1.title.toLowerCase() ? 1 : -1;
+              return task2.title.toLowerCase() >= task1.title.toLowerCase() ? 1 : -1;
             }
           });
         });
@@ -114,8 +114,7 @@ export const boardStore = {
         const { task, taskIdx, groupIdx, activity } = taskInfo;
         const boardCopy = JSON.parse(JSON.stringify(state.currBoard));
         if (task.id) {
-          if (task.isCopy)
-            boardCopy.groups[groupIdx].tasks.splice(taskIdx, 0, task);
+          if (task.isCopy){ boardCopy.groups[groupIdx].tasks.splice(taskIdx, 0, task)};
           boardCopy.groups[groupIdx].tasks.splice(taskIdx, 1, task);
         } else {
           task.id = utilService.makeId();

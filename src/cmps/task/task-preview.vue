@@ -131,7 +131,7 @@ export default {
   computed: {
     marker() {
       if (!this.markerColor) return `8px solid #579BFC`;
-      console.log(this.markerColor)
+      // console.log(this.markerColor)
       return `8px solid ${this.markerColor}`;
     },
   },
