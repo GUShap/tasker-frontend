@@ -12,6 +12,7 @@ export const remoteBoardService = {
   getEmptyGroup,
   getColors,
   getTaskById,
+  getTaskRouteIdx
 };
 
 const BASE_URL = process.env.NODE_ENV !== "development" ? "board" : "board";
