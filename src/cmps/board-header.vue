@@ -42,11 +42,10 @@
               :key="idx"
             />
           </div>
-          <a
-            ><span class="icon-invite"></span>Invite /<span>
-              {{ invitedMembers }}</span
-            ></a
-          >
+          <a @click="isInviteMode = true"
+            ><span class="icon-invite"></span>Invite
+          </a>
+          <member-picker v-if="isInviteMode" :info="getCmpInfo()" />
           <a><span class="icon-activities"></span>Activities</a>
           <a class="btn-add-board"><span class="icon-plus"></span>Add Board</a>
         </div>
@@ -82,22 +81,29 @@
 
 <script>
 import Avatar from "vue-avatar";
+import memberPicker from "./task/member-picker.vue";
+
 export default {
-  components: { Avatar },
+  components: { Avatar, memberPicker },
   name: "board-header",
-  props: ["board", "user","allUsers"],
+  props: ["board", "user", "allUsers"],
   data() {
     return {
       isShown: true,
       isFocus: false,
       isStared: false,
+      isInviteMode: false,
       currEditedVal: "",
       isEditedMode: false,
-      invitedMembers: this.board ? this.board.members ? this.board.member.length : null : null
-    }
+      invitedMembers: this.board
+        ? this.board.members
+          ? this.board.member.length
+          : null
+        : null,
+    };
   },
   created() {
-    console.log('allUsers',this.allUsers);
+    console.log("allUsers", this.allUsers);
   },
   methods: {
     setEdit(val) {
@@ -117,6 +123,10 @@ export default {
       this.isStared = !this.isStared;
       console.log("added");
     },
+    getCmpInfo() {
+      console.log(this.board.members);
+      return { members: this.board.members, boardMembers: this.allUsers };
+    },
   },
   computed: {
     currBoard() {
@@ -125,7 +135,6 @@ export default {
     currUser() {
       return this.user ? this.user : null;
     },
-    
   },
 };
 </script>

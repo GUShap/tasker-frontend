@@ -26,7 +26,6 @@
           <input
             class="input-group-name"
             :class="[isFocusOn ? 'border' : 'no-boder']"
-            ref="title"
             type="text"
             v-model="groupTitle"
             @change="updateGroup"
@@ -194,23 +193,20 @@ export default {
       this.$emit("addNewGroup", {});
     },
     setEdit() {
-      this.$refs.title.focus();
       this.isFocusOn = true;
     },
     // updateInfo() {
-    //   },
+      //   },
     async updateGroup() {
       try {
-        // console.log("updateGroup", this.groupTitle);
+        this.isFocusOn = false;
         const currGroup = this.group;
         currGroup.title = this.groupTitle;
-        // console.log('title',currGroup.title);
         const groupInfo = { group: currGroup, groupIdx: this.groupIdx };
         await this.$store.dispatch({
           type: "saveGroup",
           groupInfo,
         });
-          this.isFocusOn = false;
       } catch (err) {
         console.log(err);
       }
