@@ -48,7 +48,7 @@
         <span><i class="fas fa-dot-circle"></i>200+ workflows</span>
       </div>
       <el-input value="Enter your work email"></el-input>
-      <router-link class="get-started-in" to="/home">
+      <router-link class="get-started-in" to="/board">
         Get Started<i class="fas fa-chevron-right"></i
       ></router-link>
       <img class="main-img" :src="require(`@/pics/picture1.jpeg`)" />
