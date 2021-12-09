@@ -1,6 +1,7 @@
 import { boardService } from "@/services/board.service.js";
 import { remoteBoardService } from "@/services/board.service-remote.js";
 import { utilService } from "@/services/util.service.js";
+import { socketService } from "@/services/socket.service.js";
 
 export const boardStore = {
   state: {
@@ -117,6 +118,7 @@ export const boardStore = {
       try {
         commit({ type: "saveBoard", board: newBoard });
         await remoteBoardService.save(newBoard);
+        socketService.emit('update board', newBoard)
       } catch (err) {
         console.log(err);
         commit({ type: "saveBoard", board: currBoard });
