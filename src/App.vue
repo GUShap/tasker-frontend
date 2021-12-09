@@ -26,7 +26,6 @@ export default {
     if (name === "landing-page" ||name === "login") {
         this.hideNav = true;
       }
-      console.log('created this.hideNav',this.hideNav);
   },
   methods: {
     detailsHover(isHovered) {
@@ -52,8 +51,6 @@ export default {
       }else{
         this.hideNav = false;
       }
-     console.log('this.hideNav',this.hideNav);
-
     },
   },
 };

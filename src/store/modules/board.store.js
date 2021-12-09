@@ -26,9 +26,9 @@ export const boardStore = {
       return JSON.parse(JSON.stringify(state.boards));
     },
     currBoard(state) {
-      var sortedBoard = JSON.parse(JSON.stringify(state.currBoard));
-      const sortByCopy = JSON.parse(JSON.stringify(state.sortBy));
-      if (sortByCopy.val === "name") {
+      const sortedBoard = JSON.parse(JSON.stringify(state.currBoard));
+      const sortByCopy = JSON.parse(JSON.stringify(state.sortBy))
+      if (sortByCopy.val === 'name') {
         sortedBoard.groups.forEach((group) => {
           group.tasks.sort((task1, task2) => {
             if (sortByCopy.order === "ascending") {
@@ -65,11 +65,23 @@ export const boardStore = {
       if (sortByCopy.val === "timeline") {
         sortedBoard.groups.forEach((group) => {
           group.tasks.sort((task1, task2) => {
-            if (!task1.timeline) return task1.timeline;
-            if (sortByCopy.order === "ascending") {
-              return task1.timeline[1] - task2.timeline[1];
+            if (!task1.timeline) return
+            if (sortByCopy.order === 'ascending') {
+              return new Date(task1.timeline[1]) - new Date(task2.timeline[1])
             } else {
-              return task2.timeline[1] - task1.timeline[1];
+              return new Date(task2.timeline[1]) - new Date(task1.timeline[1])
+            }
+          });
+        });
+      }
+      if (sortByCopy.val === 'priority') {
+        console.log('priority')
+        sortedBoard.groups.forEach((group) => {
+          group.tasks.sort((task1, task2) => {
+            if (sortByCopy.order === 'ascending') {
+              return task1.priority >= task2.priority ? 1 : -1;
+            } else {
+              return task2.priority >= task1.priority ? 1 : -1;
             }
           });
         });
@@ -140,8 +152,8 @@ export const boardStore = {
       const newBoard = JSON.parse(JSON.stringify(board));
       try {
         commit({ type: "saveBoard", board: newBoard });
+        socketService.emit('board from store', newBoard)
         await remoteBoardService.save(newBoard);
-        socketService.emit("update board", newBoard);
       } catch (err) {
         console.log(err);
         console.log("Error saveBoard");
@@ -153,8 +165,10 @@ export const boardStore = {
       // const currUser = JSON.parse(JSON.stringify(commit.getters.loggedinUser));
       try {
         if (taskInfo.detailsUpdate) taskInfo = getOrigin(taskInfo.task);
+
         const { task, taskIdx, groupIdx, activity } = taskInfo;
         const boardCopy = JSON.parse(JSON.stringify(state.currBoard));
+
         if (task.id) {
           if (task.isCopy) {
             boardCopy.groups[groupIdx].tasks.splice(taskIdx, 0, task);

@@ -122,6 +122,11 @@
     @include to-icon("\f3fb")
 }
 
+.icon-crown{
+    font-family: monday;
+    @include to-icon("\f266")
+}
+
 // .icon-format{
 //     font-family: monday;
 //     @include to-icon("\f105");
