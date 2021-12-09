@@ -12,10 +12,10 @@
           <div class="input">
             <div class="input-email">
               <div class="labels email-label">
-                <label class="label" for="email">Email</label>
+                <label class="label" for="fullname">Full Name</label>
               </div>
               <div class="email-container">
-                <input class="email" v-model="userCreds.email" type="email" />
+                <input id="fullname" class="email" v-model="userCreds.fullname" type="text" />
               </div>
             </div>
             <div class="input-password">
@@ -24,6 +24,7 @@
               </div>
               <div>
                 <input
+                id="password"
                   class="password"
                   v-model="userCreds.password"
                   type="password"
@@ -147,7 +148,7 @@ export default {
     clearInput() {
       console.log(this.userCreds);
       this.userCreds = { fullname: "", email: "", password: "" };
-      this.$router.push(`/home/`);
+      this.$router.push(`home`);
     },
   },
 };
