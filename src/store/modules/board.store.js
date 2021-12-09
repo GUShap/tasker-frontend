@@ -19,7 +19,7 @@ export const boardStore = {
     currBoard(state) {
       return JSON.parse(JSON.stringify(state.currBoard));
     },
-    currBoardIdx(state){
+    currBoardIdx(state) {
       return state.currBoardIdx
     },
     allBoards(state) {
@@ -35,6 +35,22 @@ export const boardStore = {
               return task1.title.toLowerCase() >= task2.title.toLowerCase() ? 1 : -1;
             } else {
               return task2.title.toLowerCase() >= task1.title.toLowerCase() ? 1 : -1;
+            }
+          });
+        });
+      }
+      if (sortByCopy.val === 'person') {
+        sortedBoard.members.sort((member1, member2) => {
+          return member1.username.toLowerCase() >= member2.username.toLowerCase() ? 1 : -1;
+        });
+      }
+      if (sortByCopy.val === 'status') {
+        sortedBoard.groups.forEach((group) => {
+          group.tasks.sort((task1, task2) => {
+            if (sortByCopy.order === 'ascending') {
+              return task1.labelId.toLowerCase() >= task2.labelId.toLowerCase() ? 1 : -1;
+            } else {
+              return task2.labelId.toLowerCase() >= task1.labelId.toLowerCase() ? 1 : -1;
             }
           });
         });
@@ -224,8 +240,8 @@ export const boardStore = {
     async saveGroup({ commit, state }, { groupInfo }) {
       try {
         console.log("groupInfo", groupInfo);
-        const {group, groupIdx} =groupInfo
-        const currBoard = JSON.parse(JSON.stringify(state.currBoard)) ;
+        const { group, groupIdx } = groupInfo
+        const currBoard = JSON.parse(JSON.stringify(state.currBoard));
         currBoard.groups.splice(groupIdx, 1, group);
 
         const currGroup = await remoteBoardService.save(currBoard);

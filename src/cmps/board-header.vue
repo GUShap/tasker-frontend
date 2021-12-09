@@ -42,6 +42,7 @@
               :key="idx"
             />
           </div>
+          <a><span class="icon-invite"></span>Invite /<span> {{invitedMembers}}</span></a>
           <a><span class="icon-activities"></span>Activities</a>
           <a class="btn-add-board"><span class="icon-plus"></span>Add Board</a>
         </div>
@@ -88,6 +89,7 @@ export default {
       isStared: false,
       currEditedVal: "",
       isEditedMode: false,
+      invitedMembers: 5
     };
   },
   created() {
