@@ -137,6 +137,7 @@ export default {
       groupTitle: this.group.title,
       cmpHeaders: null,
       isFocusOn: false,
+      markerColor: null,
       hover: false,
       isSeen: false,
       dropPlaceholderOptions: {
@@ -179,6 +180,7 @@ export default {
     },
     changeColor(color) {
       console.log(color);
+      this.markerColor = color
       this.group.style.color = color;
       this.$emit("editGroup", { group: this.group, groupIdx: this.groupIdx });
     },
