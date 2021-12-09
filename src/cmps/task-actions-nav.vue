@@ -8,6 +8,10 @@
           class="icon-arrow-down"
         ></span>
       </button>
+      <div v-if="isFilterBy" class="filter-menu">
+        <div>Quick filters</div>
+        <div></div>
+        </div>
       <button @click="showModal">
         <span class="icon-sort-up-down"></span>Sort
       </button>
@@ -15,8 +19,8 @@
     <section class="pop-up-modal">
       <div class="menu-modal sort-menu" v-if="isShown">
         <div class="sort-header">
-          <div>Sort by</div>
-          <div><button>Save to this view</button></div>
+          <div class="sort-heading">Sort by</div>
+          <div><i class="fas fa-times" @click="closeModal"></i></div>
         </div>
         <div class="sort-content">
           <div>
@@ -24,6 +28,7 @@
               v-model="sortBy.val"
               sortBy.val-key="value"
               placeholder="Select"
+              class="sortVal"
             >
               <el-option value="name" @click.native="sortVal('name')"
                 ><i class="fas fa-text-height"></i>Name</el-option
@@ -37,7 +42,11 @@
               <el-option value="timeline" @click.native="sortVal('timeline')"
                 ><i class="fas fa-stream"></i>Timeline</el-option
               >
+                <el-option value="priority" @click.native="sortVal('priority')"
+                ><i class="fas fa-exclamation"></i>Priority</el-option
+              >
             </el-select>
+            
           </div>
           <div>
             <el-select
@@ -57,7 +66,6 @@
               >
             </el-select>
           </div>
-          <div><i class="fas fa-times" @click="closeModal"></i></div>
         </div>
       </div>
     </section>
@@ -72,6 +80,7 @@ export default {
   data() {
     return {
       isShown: false,
+      isFilterBy: false,
       sortBy: {
         val: null,
         order: "ascending",
@@ -86,12 +95,14 @@ export default {
       this.$emit("addNewGroup");
     },
     sortVal(value) {
-      this.sortBy.val = value;
-      this.$emit("sortBy", this.sortBy);
+      const newSort = { ...this.sortBy };
+      newSort.val = value;
+      this.$emit("sortBy", newSort);
     },
     sortOrder(value) {
-      this.sortBy.order = value;
-      this.$emit("sortBy", this.sortBy);
+      const newSort = { ...this.sortBy };
+      newSort.order = value;
+      this.$emit("sortBy", newSort);
     },
     closeModal() {
       this.isShown = !this.isShown;

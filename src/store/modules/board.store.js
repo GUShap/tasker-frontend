@@ -25,7 +25,6 @@ export const boardStore = {
       return JSON.parse(JSON.stringify(state.boards));
     },
     currBoard(state) {
-
       const sortedBoard = JSON.parse(JSON.stringify(state.currBoard));
       const sortByCopy = JSON.parse(JSON.stringify(state.sortBy))
       if (sortByCopy.val === 'name') {
@@ -58,11 +57,23 @@ export const boardStore = {
       if (sortByCopy.val === 'timeline') {
         sortedBoard.groups.forEach((group) => {
           group.tasks.sort((task1, task2) => {
-            if (!task1.timeline) return task1.timeline
+            if (!task1.timeline) return
             if (sortByCopy.order === 'ascending') {
-              return task1.timeline[1] - task2.timeline[1]
+              return new Date(task1.timeline[1]) - new Date(task2.timeline[1])
             } else {
-              return task2.timeline[1] - task1.timeline[1]
+              return new Date(task2.timeline[1]) - new Date(task1.timeline[1])
+            }
+          });
+        });
+      }
+      if (sortByCopy.val === 'priority') {
+        console.log('priority')
+        sortedBoard.groups.forEach((group) => {
+          group.tasks.sort((task1, task2) => {
+            if (sortByCopy.order === 'ascending') {
+              return task1.priority >= task2.priority ? 1 : -1;
+            } else {
+              return task2.priority >= task1.priority ? 1 : -1;
             }
           });
         });
