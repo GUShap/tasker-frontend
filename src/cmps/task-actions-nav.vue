@@ -90,6 +90,7 @@ export default {
       this.$emit("sortBy", this.sortBy);
     },
     sortOrder(value) {
+      console.log(value)
       this.sortBy.order = value;
       this.$emit("sortBy", this.sortBy);
     },

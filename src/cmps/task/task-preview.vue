@@ -4,6 +4,7 @@
       @removeTask="removeTask"
       @openTaskDetails="openTaskDetails"
       @duplicateTask="duplicateTask"
+      @sortBy="sortBy"
     />
     <section
       class="task-preview flex align-center"
@@ -15,6 +16,7 @@
           :info="getCmpInfo(cmpType)"
           @updated="updateTask(cmpType, $event)"
           :key="idx"
+          :markerColor="markerColor"
         />
       </template>
     </section>
@@ -31,6 +33,7 @@ import { utilService } from "@/services/util.service.js";
 
 export default {
   name: "task-preview",
+  props:["markerColor"],
   components: {
     statusPicker,
     memberPicker,
@@ -65,6 +68,9 @@ export default {
         console.log("Error", err);
       }
     },
+    sortBy(sortBy) {
+      this.$emit("sortBy", sortBy);
+    },
     openTaskDetails() {
       this.$router.push(`/board/task/${this.task.id}`);
     },
@@ -95,7 +101,7 @@ export default {
       }
     },
     updateTask(cmpType, ev) {
-      console.log('ev',ev);
+      console.log("ev", ev);
       switch (cmpType) {
         case "title-picker":
           this.task.title = ev.title;
@@ -125,6 +131,7 @@ export default {
   computed: {
     marker() {
       if (!this.markerColor) return `8px solid #579BFC`;
+      console.log(this.markerColor)
       return `8px solid ${this.markerColor}`;
     },
   },
