@@ -7,7 +7,7 @@
   >
     <i class="fa fa-times" @click="exitModal"></i>
     <div class="details-title flex">
-      <input placeholder="title" v-model="task.title" />
+      <input placeholder="title" v-model="task.title"  @change="update"/>
       <div class="users">
         <i class="fas fa-plus-circle"></i>
         <i class="fas fa-user-circle"></i>
@@ -102,6 +102,10 @@ export default {
     btnHover(isHovered, val) {
       this.isBtnHover = isHovered;
       this.hoveredBtn = val;
+    },
+    update() {
+      this.task
+     this.$store.dispatch({type: "",task : this.task })
     },
 
     pageHover(isHover) {

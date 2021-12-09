@@ -103,6 +103,8 @@ export const boardStore = {
     async editTask({ state, dispatch, commit }, { taskInfo }) {
       // const currUser = JSON.parse(JSON.stringify(commit.getters.loggedinUser));
       try {
+
+        if(taskInfo.detailsUpdate) taskInfo = getOrigin(taskInfo.task)
         const { task, taskIdx, groupIdx, activity } = taskInfo;
         const boardCopy = JSON.parse(JSON.stringify(state.currBoard));
         if (task.id) {
@@ -244,3 +246,5 @@ export const boardStore = {
   },
   modules: {},
 };
+
+

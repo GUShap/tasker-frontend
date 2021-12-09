@@ -27,7 +27,7 @@
         </div>
         <div class="my-boards">
           <button>My Boards</button>
-          <ul v-if="allBoards">
+          <ul >
             <li v-for="(board,idx) in allBoards" :key="idx" ></li>
           <button>{{board.title}}</button>
           </ul>
