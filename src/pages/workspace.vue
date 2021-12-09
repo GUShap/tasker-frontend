@@ -13,7 +13,7 @@
         :allBoards="boards"
         :allUsers="allUsers"
       />
-      <task-actions-nav @sortBy="sortBy" @addNewGroup="addNewGroup" />
+      <task-actions-nav @sortBy="sortBy"  @filterBy="filterBy" @addNewGroup="addNewGroup" />
       <board-filter />
       <board-details
         v-if="currBoard"
@@ -109,6 +109,9 @@ export default {
     sortBy(sortBy) {
       this.$store.commit({ type: "setSort", sortBy });
       // this.$store.dispatch({ type: "loadBoards" });
+    },
+    filterBy(filterBy) {
+      this.$store.commit({ type: "setFilter", filterBy });
     },
   },
   computed: {

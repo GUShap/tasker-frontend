@@ -2,7 +2,19 @@
   <section>
     <section class="task-action-btn">
       <button @click="addNewGroup" class="btn-new-task">New Group</button>
-      <button><span class="icon-search"></span>Search</button>
+      <button v-if="!isSearch" @click="isSearchMode">
+        <label class="icon-search" form="search"></label>Search
+      </button>
+      <input
+        @blur="isSearchMode"
+        id="search"
+        ref="search"
+        @change="filterBy('searchKey')"
+        v-show="isSearch"
+        type="text"
+        placeholder="Search"
+        v-model="searchKey"
+      />
       <button>
         <span class="icon-filter"></span>Filter<span
           class="icon-arrow-down"
@@ -71,6 +83,8 @@ export default {
   name: "task-actions",
   data() {
     return {
+      isSearch: false,
+      searchKey: "",
       isShown: false,
       sortBy: {
         val: null,
@@ -95,6 +109,12 @@ export default {
     },
     closeModal() {
       this.isShown = !this.isShown;
+    },
+    isSearchMode() {
+      this.isSearch = !this.isSearch;
+    },
+    filterBy(filter) {
+      this.$emit("filterBy", { filter: filter, val: this.searchKey });
     },
   },
 };

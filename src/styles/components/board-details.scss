@@ -1,126 +1,125 @@
 .workspace-container {
-    width: 100%;
-    height: 100%;
+  height: 100%;
+  font-family: roboto;
+  flex: 1;
+
+  .workspace {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    font-size: rem(20px);
     font-family: roboto;
+    width: 100%;
 
-    .workspace {
-        display: flex;
-        flex-direction: column;
-        flex: 1;
-        overflow: hidden;
-        font-size: rem(20px);
+    .board-header {
+      display: flex;
+      width: 95%;
+      justify-content: space-between;
+      align-items: center;
+      padding-left: 20px;
+      font-size: 20px;
+      flex-wrap: wrap;
+      font-family: roboto;
+
+      // .border{
+      //     border: 1px solid lightcyan;
+      // }
+      .no-boder {
+        border: none;
+      }
+
+      .input-section {
+        margin-left: 1.2rem;
+        color: #676879;
+      }
+
+      input {
+        border: none;
+        min-width: 350px;
+        min-height: 20px;
+      }
+
+      a {
+        text-decoration: none;
+        padding: 10px;
+        cursor: pointer;
+      }
+
+      .board-title {
+        font-weight: bolder;
+        font-size: 24px;
+        letter-spacing: -0.2px;
+        // line-height: 32px;
         font-family: roboto;
-
-        .board-header {
-            display: flex;
-            width: 95%;
-            justify-content: space-between;
-            align-items: center;
-            padding-left: 20px;
-            font-size: 20px;
-            flex-wrap: wrap;
-            font-family: roboto;
-
-            // .border{
-            //     border: 1px solid lightcyan;
-            // }
-            .no-boder {
-                border: none;
-            }
-
-            .input-section {
-                margin-left: 1.2rem;
-                color: #676879;
-            }
-
-            input {
-                border: none;
-                min-width: 350px;
-                min-height: 20px;
-            }
-
-            a {
-                text-decoration: none;
-                padding: 10px;
-                cursor: pointer;
-            }
-
-            .board-title {
-                font-weight: bolder;
-                font-size: 24px;
-                letter-spacing: -0.2px;
-                // line-height: 32px;
-                font-family: roboto;
-            }
-            .main-title {
-                align-items: center;
-                font-family: roboto;
-            }
-        }
-        .board-info {
-            margin-left: 1.2rem;
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            justify-content: center;
-            gap: 2px;
-
-            .fas.fa-share-alt {
-                font-weight: 400px;
-                // padding-right: 10px;
-            }
-        }
-        .add-board-btn {
-            border: none;
-            background-color: inherit;
-            font-family: roboto;
-        }
-
-        .board-container {
-            display: flex;
-            flex-direction: column;
-            height: 100%;
-            flex: 1;
-            overflow: scroll;
-            max-width: 100%;
-            font-family: roboto;
-            margin-left: 1.5rem;
-
-            // padding-right: 20px;
-        }
-        .main-title {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            width: 100%;
-        }
-        .more-actions {
-            align-items: center;
-            justify-content: space-between;
-            margin: 10px;
-        }
-    }
-
-    .member-img {
-        background-attachment: fixed;
-        background-size: cover;
-    }
-    
-    &:first-child{
-        margin-inline: -0.6rem;
-    }
-    
-    &:last-child{
-        margin-inline: -0.6rem;
-        
-    }
-    
-    .member-avatars {
-        margin-right: 10px;
-        display: flex;
-        justify-content: center;
+      }
+      .main-title {
         align-items: center;
-        flex-direction: row;
-        position: relative;
+        font-family: roboto;
+      }
     }
+    .board-info {
+      margin-left: 1.2rem;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      gap: 2px;
+
+      .fas.fa-share-alt {
+        font-weight: 400px;
+        // padding-right: 10px;
+      }
+    }
+    .add-board-btn {
+      border: none;
+      background-color: inherit;
+      font-family: roboto;
+    }
+
+    .board-container {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      flex: 1;
+      overflow: scroll;
+      max-width: 100%;
+      font-family: roboto;
+      margin-left: 1.5rem;
+
+      // padding-right: 20px;
+    }
+    .main-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+    }
+    .more-actions {
+      align-items: center;
+      justify-content: space-between;
+      margin: 10px;
+    }
+  }
+
+  .member-img {
+    background-attachment: fixed;
+    background-size: cover;
+
+    &:first-child {
+      margin-inline: -0.6rem;
+    }
+
+    &:last-child {
+      margin-inline: -0.6rem;
+    }
+  }
+
+  .member-avatars {
+    margin-right: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    position: relative;
+  }
 }

@@ -12,7 +12,8 @@ export const remoteBoardService = {
   getEmptyGroup,
   getColors,
   getTaskById,
-  getTaskRouteIdx
+  getTaskRouteIdx,
+  filterBy,
 };
 
 const BASE_URL = process.env.NODE_ENV !== "development" ? "board" : "board";
@@ -89,7 +90,12 @@ async function getTaskRouteIdx(task, boardIdx) {
         groupIdx = idx;
       }
     });
-    return { task, taskIdx, groupIdx, activity : {type : 'title',newVal:task.title} };
+    return {
+      task,
+      taskIdx,
+      groupIdx,
+      activity: { type: "title", newVal: task.title },
+    };
   } catch (err) {
     console.log("Error", err);
     throw err;
@@ -99,6 +105,19 @@ async function getTaskRouteIdx(task, boardIdx) {
 function _getBoardCopy(boardId) {
   const board = todoService.getById(boardId);
   return JSON.parse(JSON.stringify(board));
+}
+
+function filterBy(board, filterBy) {
+  if (filterBy.filter === "searchKey") {
+ board.groups = board.groups.map(group =>{
+   group.tasks.filter(task=>{
+     
+   })
+   return group
+ })
+    return board
+  }
+  return board;
 }
 
 async function getEmptyGroup() {

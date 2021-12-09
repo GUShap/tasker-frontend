@@ -12,6 +12,7 @@ export const boardStore = {
       val: "",
       order: "",
     },
+    filterBy: null,
     isTaskDetailsHover: false,
   },
   getters: {
@@ -19,35 +20,41 @@ export const boardStore = {
       return JSON.parse(JSON.stringify(state.currBoard));
     },
     currBoardIdx(state) {
-      return state.currBoardIdx
+      return state.currBoardIdx;
     },
     allBoards(state) {
       return JSON.parse(JSON.stringify(state.boards));
     },
     currBoard(state) {
-
-      const sortedBoard = JSON.parse(JSON.stringify(state.currBoard));
-      const sortByCopy = JSON.parse(JSON.stringify(state.sortBy))
-      if (sortByCopy.val === 'name') {
+      var sortedBoard = JSON.parse(JSON.stringify(state.currBoard));
+      const sortByCopy = JSON.parse(JSON.stringify(state.sortBy));
+      if (sortByCopy.val === "name") {
         sortedBoard.groups.forEach((group) => {
           group.tasks.sort((task1, task2) => {
-            if (sortByCopy.order === 'ascending') {
-              return task1.title.toLowerCase() >= task2.title.toLowerCase() ? 1 : -1;
+            if (sortByCopy.order === "ascending") {
+              return task1.title.toLowerCase() >= task2.title.toLowerCase()
+                ? 1
+                : -1;
             } else {
-              return task2.title.toLowerCase() >= task1.title.toLowerCase() ? 1 : -1;
+              return task2.title.toLowerCase() >= task1.title.toLowerCase()
+                ? 1
+                : -1;
             }
           });
         });
       }
-      if (sortByCopy.val === 'person') {
+      if (sortByCopy.val === "person") {
         sortedBoard.members.sort((member1, member2) => {
-          return member1.username.toLowerCase() >= member2.username.toLowerCase() ? 1 : -1;
+          return member1.username.toLowerCase() >=
+            member2.username.toLowerCase()
+            ? 1
+            : -1;
         });
       }
-      if (sortByCopy.val === 'status') {
+      if (sortByCopy.val === "status") {
         sortedBoard.groups.forEach((group) => {
           group.tasks.sort((task1, task2) => {
-            if (sortByCopy.order === 'ascending') {
+            if (sortByCopy.order === "ascending") {
               return task1.status >= task2.status ? 1 : -1;
             } else {
               return task2.status >= task1.status ? 1 : -1;
@@ -55,17 +62,20 @@ export const boardStore = {
           });
         });
       }
-      if (sortByCopy.val === 'timeline') {
+      if (sortByCopy.val === "timeline") {
         sortedBoard.groups.forEach((group) => {
           group.tasks.sort((task1, task2) => {
-            if (!task1.timeline) return task1.timeline
-            if (sortByCopy.order === 'ascending') {
-              return task1.timeline[1] - task2.timeline[1]
+            if (!task1.timeline) return task1.timeline;
+            if (sortByCopy.order === "ascending") {
+              return task1.timeline[1] - task2.timeline[1];
             } else {
-              return task2.timeline[1] - task1.timeline[1]
+              return task2.timeline[1] - task1.timeline[1];
             }
           });
         });
+      }
+      if (state.filterBy) {
+        sortedBoard = remoteBoardService.filterBy(sortedBoard, state.filterBy);
       }
       return sortedBoard;
     },
@@ -96,6 +106,9 @@ export const boardStore = {
 
     setSort(state, { sortBy }) {
       state.sortBy = sortBy;
+    },
+    setFilter(state, { filterBy }) {
+      state.filterBy = filterBy;
     },
     hover(state, { isHover }) {
       state.isTaskDetailsHover = isHover;
@@ -128,10 +141,10 @@ export const boardStore = {
       try {
         commit({ type: "saveBoard", board: newBoard });
         await remoteBoardService.save(newBoard);
-        socketService.emit('update board', newBoard)
+        socketService.emit("update board", newBoard);
       } catch (err) {
         console.log(err);
-        console.log('Error saveBoard');
+        console.log("Error saveBoard");
         commit({ type: "saveBoard", board: currBoard });
       }
     },
@@ -143,7 +156,9 @@ export const boardStore = {
         const { task, taskIdx, groupIdx, activity } = taskInfo;
         const boardCopy = JSON.parse(JSON.stringify(state.currBoard));
         if (task.id) {
-          if (task.isCopy) { boardCopy.groups[groupIdx].tasks.splice(taskIdx, 0, task) };
+          if (task.isCopy) {
+            boardCopy.groups[groupIdx].tasks.splice(taskIdx, 0, task);
+          }
           boardCopy.groups[groupIdx].tasks.splice(taskIdx, 1, task);
         } else {
           task.id = utilService.makeId();
@@ -177,7 +192,7 @@ export const boardStore = {
         const boardCopy = JSON.parse(JSON.stringify(state.currBoard));
         boardCopy.groups[groupIdx].tasks.splice(taskIdx, 1);
 
-        dispatch({ type: "saveBoard", board: boardCopy })
+        dispatch({ type: "saveBoard", board: boardCopy });
       } catch (err) {
         console.log(err);
       }
@@ -189,7 +204,7 @@ export const boardStore = {
         const boardCopy = JSON.parse(JSON.stringify(state.currBoard));
         boardCopy.groups.splice(groupIdx, 1, group);
 
-        dispatch({ type: "saveBoard", board: boardCopy })
+        dispatch({ type: "saveBoard", board: boardCopy });
       } catch (err) {
         console.log(err);
       }
@@ -207,7 +222,7 @@ export const boardStore = {
           boardCopy.groups.unshift(newGroup);
         }
 
-        dispatch({ type: "saveBoard", board: boardCopy })
+        dispatch({ type: "saveBoard", board: boardCopy });
       } catch (err) {
         console.log(err);
       }
@@ -219,7 +234,7 @@ export const boardStore = {
         const boardCopy = JSON.parse(JSON.stringify(state.currBoard));
         boardCopy.groups.splice(groupIdx, 1);
 
-        dispatch({ type: "saveBoard", board: boardCopy })
+        dispatch({ type: "saveBoard", board: boardCopy });
       } catch (err) {
         console.log(err);
       }
@@ -229,7 +244,6 @@ export const boardStore = {
       try {
         board.createdBy = rootGetters.loggedinUser;
         const savedBoard = await remoteBoardService.save(board);
-
       } catch (err) {
         console.log(err);
       }
@@ -245,11 +259,11 @@ export const boardStore = {
     },
     async saveGroup({ state, dispatch, commit }, { groupInfo }) {
       try {
-        const { group, groupIdx } = groupInfo
+        const { group, groupIdx } = groupInfo;
         const boardCopy = JSON.parse(JSON.stringify(state.currBoard));
         boardCopy.groups.splice(groupIdx, 1, group);
 
-        dispatch({ type: "saveBoard", board: boardCopy })
+        dispatch({ type: "saveBoard", board: boardCopy });
       } catch (err) {
         console.log(err);
       }

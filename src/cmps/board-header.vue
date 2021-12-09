@@ -45,16 +45,17 @@
           <a @click="isInviteMode = true"
             ><span class="icon-invite"></span>Invite
           </a>
-          <ul v-if="isInviteMode" >
+          <ul v-if="isInviteMode">
             <li v-for="currUser in allUsers" :key="currUser._id">
-               <avatar
-              class="memebr-img"
-              :size="25"
-              :username="currUser.fullname"
-            />
-              {{currUser.fullname}}
+              <avatar
+                class="memebr-img"
+                :size="25"
+                :username="currUser.fullname"
+                :src="user.imgUrl ? require(`@/pics/${user.imgUrl}`) : null"
+              />
+              {{ currUser.fullname }}
             </li>
-            </ul>
+          </ul>
           <a><span class="icon-activities"></span>Activities</a>
           <a class="btn-add-board"><span class="icon-plus"></span>Add Board</a>
         </div>

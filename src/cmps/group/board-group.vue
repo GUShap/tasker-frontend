@@ -161,7 +161,6 @@ export default {
       if (task === "new") {
         if (!this.title) return;
         const newTask = { title: this.title };
-        console.log("board-g", newTask);
         this.$emit("addTask", { task: newTask, groupIdx: this.groupIdx });
         this.title = null;
       } else {

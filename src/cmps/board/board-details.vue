@@ -74,8 +74,6 @@ export default {
 
     addTask(taskInfo) {
       // taskInfo.boardId = this.board._id;
-      console.log("board-d", taskInfo);
-
       this.$emit("addTask", taskInfo);
     },
     editGroup(groupInfo) {
