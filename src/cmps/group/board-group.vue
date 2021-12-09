@@ -146,8 +146,7 @@ export default {
       },
     };
   },
-  created() {
-  },
+  created() {},
   methods: {
     showGroup(val = null) {
       if (val) {
@@ -180,7 +179,7 @@ export default {
     },
     changeColor(color) {
       console.log(color);
-      this.markerColor = color
+      this.markerColor = color;
       this.group.style.color = color;
       this.$emit("editGroup", { group: this.group, groupIdx: this.groupIdx });
     },
@@ -211,15 +210,21 @@ export default {
           type: "saveGroup",
           groupInfo,
         });
-          this.isFocusOn = false;
+        this.isFocusOn = false;
       } catch (err) {
         console.log(err);
       }
     },
     cmpHeader(val) {
-      if (val === "status-picker") return "Status";
-      if (val === "member-picker") return "Member";
-      if (val === "timeline-picker") return "Timeline";
+      if (val === "status-picker") {
+        return "Status";
+      } else if (val === "member-picker") {
+        return "Member";
+      } else if (val === "timeline-picker") {
+        return "Timeline";
+      } else if (val === "priority-picker") {
+        return "Priority";
+      }
       return val;
     },
 
