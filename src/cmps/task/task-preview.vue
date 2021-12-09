@@ -101,6 +101,7 @@ export default {
       }
     },
     updateTask(cmpType, ev) {
+      console.log(ev)
       switch (cmpType) {
         case "title-picker":
           this.task.title = ev.title;
