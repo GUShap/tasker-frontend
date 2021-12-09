@@ -43,17 +43,17 @@ export const boardStore = {
           return member1.username.toLowerCase() >= member2.username.toLowerCase() ? 1 : -1;
         });
       }
-      if (sortByCopy.val === 'status') {
-        sortedBoard.groups.forEach((group) => {
-          group.tasks.sort((task1, task2) => {
-            if (sortByCopy.order === 'ascending') {
-              return task1.labelId.toLowerCase() >= task2.labelId.toLowerCase() ? 1 : -1;
-            } else {
-              return task2.labelId.toLowerCase() >= task1.labelId.toLowerCase() ? 1 : -1;
-            }
-          });
-        });
-      }
+      // if (sortByCopy.val === 'status') {
+      //   sortedBoard.groups.forEach((group) => {
+      //     group.tasks.sort((task1, task2) => {
+      //       if (sortByCopy.order === 'ascending') {
+      //         return task1.labelId.toLowerCase() >= task2.labelId.toLowerCase() ? 1 : -1;
+      //       } else {
+      //         return task2.labelId.toLowerCase() >= task1.labelId.toLowerCase() ? 1 : -1;
+      //       }
+      //     });
+      //   });
+      // }
       return sortedBoard;
     },
     taskHover(state) {
@@ -124,6 +124,7 @@ export const boardStore = {
     async editTask({ state, dispatch, commit }, { taskInfo }) {
       // const currUser = JSON.parse(JSON.stringify(commit.getters.loggedinUser));
       try {
+        console.log('taskInfo',taskInfo);
         if (taskInfo.detailsUpdate) taskInfo = getOrigin(taskInfo.task);
         const { task, taskIdx, groupIdx, activity } = taskInfo;
         const boardCopy = JSON.parse(JSON.stringify(state.currBoard));

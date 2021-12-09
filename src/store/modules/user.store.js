@@ -10,7 +10,7 @@ export const userStore = {
         users: [],
     },
     getters: {
-        users({ users }) { return users },
+        getUsers({ users }) { return users },
         loggedinUser(state) {
             return state.loggedinUser
         },

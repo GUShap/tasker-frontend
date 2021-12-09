@@ -29,16 +29,16 @@
         <div class="more-actions flex">
           <a>Board members </a>
           <div class="member-avatars">
-            <section v-if="!currBoard.members">
+            <section v-if="!allUsers">
               <avatar :size="25" username="i" />
             </section>
             <avatar
               class="memeber-img"
               v-else
-              v-for="(member, idx) in currBoard.members"
+              v-for="(user, idx) in allUsers"
               :size="25"
-              :username="member.fullname"
-              :src="require(`@/pics/${member.imgUrl}`)"
+              :username="user.fullname"
+              :src="require(`@/pics/${user.imgUrl}`)"
               :key="idx"
             />
           </div>
@@ -81,7 +81,7 @@ import Avatar from "vue-avatar";
 export default {
   components: { Avatar },
   name: "board-header",
-  props: ["board", "user"],
+  props: ["board", "user","allUsers"],
   data() {
     return {
       isShown: true,
@@ -93,6 +93,7 @@ export default {
     };
   },
   created() {
+    console.log('allUsers',this.allUsers);
   },
   methods: {
     setEdit(val) {
@@ -120,6 +121,7 @@ export default {
     currUser() {
       return this.user ? this.user : null;
     },
+    
   },
 };
 </script>
