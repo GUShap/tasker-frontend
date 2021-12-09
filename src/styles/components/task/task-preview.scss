@@ -52,6 +52,8 @@
     min-width: rem(200px);
     max-width: rem(400px);
     height: 100%;
+    border-right: 0.1rem solid #ffffffa1;
+
     img {
       position: absolute;
       height: 100%;
@@ -94,6 +96,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    border-right: 0.1rem solid white;
     min-width: rem(200px);
     max-width: rem(400px);
     height: 100%;
