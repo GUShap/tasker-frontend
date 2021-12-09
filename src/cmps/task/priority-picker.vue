@@ -34,7 +34,6 @@ export default {
     };
   },
   created() {
-    console.log('info',this.info);
     this.priorityStyle = this.info.priority ? this.info.priority.toLowerCase() : null;
   },
   methods: {
