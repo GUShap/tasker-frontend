@@ -95,7 +95,7 @@ export default {
         case "member-picker":
           return { members: currTask.members, boardMembers: this.boardMembers };
         case "status-picker":
-          return { labelId: currTask.labelId };
+          return { status: currTask.status };
         case "timeline-picker":
           return { timeline: currTask.timeline, markerColor: this.markerColor };
       }

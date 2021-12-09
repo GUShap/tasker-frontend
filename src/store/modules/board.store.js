@@ -131,6 +131,7 @@ export const boardStore = {
         socketService.emit('update board', newBoard)
       } catch (err) {
         console.log(err);
+        console.log('Error saveBoard');
         commit({ type: "saveBoard", board: currBoard });
       }
     },
@@ -138,7 +139,6 @@ export const boardStore = {
     async editTask({ state, dispatch, commit }, { taskInfo }) {
       // const currUser = JSON.parse(JSON.stringify(commit.getters.loggedinUser));
       try {
-        console.log('taskInfo', taskInfo);
         if (taskInfo.detailsUpdate) taskInfo = getOrigin(taskInfo.task);
         const { task, taskIdx, groupIdx, activity } = taskInfo;
         const boardCopy = JSON.parse(JSON.stringify(state.currBoard));
