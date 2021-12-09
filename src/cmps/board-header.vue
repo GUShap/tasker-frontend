@@ -42,11 +42,10 @@
               :key="idx"
             />
           </div>
-          <a
-            ><span class="icon-invite"></span>Invite /<span>
-              {{ invitedMembers }}</span
-            ></a
-          >
+          <a @click="isInviteMode = true"
+            ><span class="icon-invite"></span>Invite
+          </a>
+          <member-picker v-if="isInviteMode" :info="getCmpInfo()" />
           <a><span class="icon-activities"></span>Activities</a>
           <a class="btn-add-board"><span class="icon-plus"></span>Add Board</a>
         </div>
@@ -82,8 +81,10 @@
 
 <script>
 import Avatar from "vue-avatar";
+import memberPicker from "./task/member-picker.vue";
+
 export default {
-  components: { Avatar },
+  components: { Avatar, memberPicker },
   name: "board-header",
   props: ["board", "user", "allUsers"],
   data() {
@@ -91,6 +92,7 @@ export default {
       isShown: true,
       isFocus: false,
       isStared: false,
+      isInviteMode: false,
       currEditedVal: "",
       isEditedMode: false,
       invitedMembers: this.invitedMem,
@@ -116,6 +118,10 @@ export default {
     stared() {
       this.isStared = !this.isStared;
       console.log("added");
+    },
+    getCmpInfo() {
+      console.log(this.board.members);
+      return { members: this.board.members, boardMembers: this.allUsers };
     },
   },
   computed: {
