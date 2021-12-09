@@ -99,12 +99,13 @@ export default {
 
   methods: {
     updateBoard(board) {
+      
       this.$store.commit({ type: "saveBoard", board });
     },
 
     async addTask(taskInfo) {
       try {
-        console.log("workspace", taskInfo);
+        // console.log("workspace", taskInfo);
         await this.$store.dispatch({ type: "editTask", taskInfo });
       } catch (err) {
         console.log("Error", err);

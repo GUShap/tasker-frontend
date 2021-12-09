@@ -127,8 +127,8 @@ export const boardStore = {
       const newBoard = JSON.parse(JSON.stringify(board));
       try {
         commit({ type: "saveBoard", board: newBoard });
+        socketService.emit('board from store', newBoard)
         await remoteBoardService.save(newBoard);
-        socketService.emit('update board', newBoard)
       } catch (err) {
         console.log(err);
         console.log('Error saveBoard');
@@ -140,8 +140,10 @@ export const boardStore = {
       // const currUser = JSON.parse(JSON.stringify(commit.getters.loggedinUser));
       try {
         if (taskInfo.detailsUpdate) taskInfo = getOrigin(taskInfo.task);
+
         const { task, taskIdx, groupIdx, activity } = taskInfo;
         const boardCopy = JSON.parse(JSON.stringify(state.currBoard));
+
         if (task.id) {
           if (task.isCopy) { boardCopy.groups[groupIdx].tasks.splice(taskIdx, 0, task) };
           boardCopy.groups[groupIdx].tasks.splice(taskIdx, 1, task);

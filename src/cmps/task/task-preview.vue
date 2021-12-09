@@ -12,9 +12,9 @@
     >
       <template v-for="(cmpType, idx) in cmpsOrder">
         <component
+          @updated="updateTask(cmpType, $event)"
           :is="cmpType"
           :info="getCmpInfo(cmpType)"
-          @updated="updateTask(cmpType, $event)"
           :key="idx"
           :markerColor="markerColor"
         />
@@ -106,7 +106,7 @@ export default {
       }
     },
     updateTask(cmpType, ev) {
-      console.log(ev)
+      // console.log(ev)
       switch (cmpType) {
         case "title-picker":
           this.task.title = ev.title;
@@ -124,6 +124,8 @@ export default {
           this.task.priority = ev.priority;
           break;
       }
+      // console.log(ev.activity);
+
       const taskInfo = {
         task: this.task,
         groupIdx: this.groupIdx,
