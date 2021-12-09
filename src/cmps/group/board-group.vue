@@ -28,7 +28,8 @@
             :class="[isFocusOn ? 'border' : 'no-boder']"
             ref="title"
             type="text"
-            v-model="group.title"
+            v-model="groupTitle"
+            @change="updateGroup"
             :style="{ color: group.style.color }"
             v-on:keyup.enter="updateInfo"
             @blur="updateInfo"
@@ -59,7 +60,15 @@
       :get-child-payload="getChildPayload"
       :drop-placeholder="dropPlaceholderOptions"
     >
-      <Draggable v-for="(task, taskIdx) in tasksList" :key="task.id" style="{overflow : visible}">
+      <Draggable
+        v-for="(task, taskIdx) in tasksList"
+        :key="task.id"
+        style="
+           {
+            overflow: visible;
+          }
+        "
+      >
         <transition name="fade" :key="task.id">
           <task-preview
             v-show="groupShow"
@@ -125,6 +134,7 @@ export default {
       tasksList: this.group.tasks,
       title: null,
       groupShow: true,
+      groupTitle: this.group.title,
       cmpHeaders: null,
       isFocusOn: false,
       markerColor: null,
@@ -182,7 +192,7 @@ export default {
       this.$emit("removeGroup", { group: this.group, groupIdx: this.groupIdx });
     },
     addNewGroup() {
-      this.$emit("addNewGroup",{});
+      this.$emit("addNewGroup", {});
     },
     setEdit() {
       this.$refs.title.focus();
@@ -190,6 +200,20 @@ export default {
     },
     updateInfo() {
       this.isFocusOn = false;
+    },
+    async updateGroup() {
+      try {
+        console.log("updateGroup", this.groupTitle);
+        const currGroup = this.group;
+        currGroup.title = this.groupTitle;
+        const groupInfo = { group: currGroup, groupIdx: this.groupIdx };
+        await this.$store.dispatch({
+          type: "saveGroup",
+          groupInfo,
+        });
+      } catch (err) {
+        console.log(err);
+      }
     },
     cmpHeader(val) {
       if (val === "status-picker") return "Status";
@@ -213,7 +237,7 @@ export default {
           const newTasks = Object.assign({}, newGroup.tasks);
           newGroup.tasks = applyDrag(newGroup.tasks, dropResult);
           board.groups.splice(groupIdx, 1, newGroup);
-          console.log('board-group');
+          console.log("board-group");
           await this.$store.dispatch({
             type: "saveBoard",
             board: board,

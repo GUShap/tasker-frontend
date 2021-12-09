@@ -2,37 +2,45 @@ $done-color : #30c875;
 $work-color : #fbab3e;
 $stuck-color : #e2445c;
 $empty-color : rgb(167, 167, 167);
-
+$title-color : rgb(255, 255, 255);
 
 .empty {
   $prime-color: rgb(167, 167, 167);
   @include task-status($prime-color, darken($prime-color, 30%));
+  color : $title-color;
 }
 
 .done {
   $prime-color: #30c875;
   @include task-status($prime-color, darken($prime-color, 30%));
+  color : $title-color;
 }
 
 .work {
   $prime-color: #fbab3e;
   @include task-status($prime-color, darken($prime-color, 30%));
+  color : $title-color;
 }
 .stuck {
   $prime-color: #e2445c;
   @include task-status($prime-color, darken($prime-color, 30%));
+  color : $title-color;
 }
 .empty-bg {
   background-color: $empty-color;
+  color : $title-color;
 }
 
 .done-bg {
   background-color: $done-color;
+  color : $title-color;
 }
 
 .work-bg {
   background-color: $work-color;
+  color : $title-color;
 }
 .stuck-bg {
   background-color: $stuck-color;
+  color : $title-color;
 }

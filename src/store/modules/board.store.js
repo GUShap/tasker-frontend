@@ -15,9 +15,12 @@ export const boardStore = {
     isTaskDetailsHover: false,
   },
   getters: {
-    // currBoard(state) {
-    //   return JSON.parse(JSON.stringify(state.currBoard));
-    // },
+    currBoard(state) {
+      return JSON.parse(JSON.stringify(state.currBoard));
+    },
+    currBoardIdx(state){
+      return state.currBoardIdx
+    },
     allBoards(state) {
       return JSON.parse(JSON.stringify(state.boards));
     },
@@ -107,8 +110,7 @@ export const boardStore = {
     async editTask({ state, dispatch, commit }, { taskInfo }) {
       // const currUser = JSON.parse(JSON.stringify(commit.getters.loggedinUser));
       try {
-
-        if(taskInfo.detailsUpdate) taskInfo = getOrigin(taskInfo.task)
+        if (taskInfo.detailsUpdate) taskInfo = getOrigin(taskInfo.task);
         const { task, taskIdx, groupIdx, activity } = taskInfo;
         const boardCopy = JSON.parse(JSON.stringify(state.currBoard));
         if (task.id) {
@@ -158,7 +160,6 @@ export const boardStore = {
     async editGroup({ state, dispatch, commit }, { groupInfo }) {
       try {
         const { group, groupIdx } = groupInfo;
-        console.log(group);
         const boardCopy = JSON.parse(JSON.stringify(state.currBoard));
         boardCopy.groups.splice(groupIdx, 1, group);
 
@@ -221,8 +222,12 @@ export const boardStore = {
     },
     async saveGroup({ commit, state }, { groupInfo }) {
       try {
-        groupInfo.boardIdx = state.currBoardIdx;
-        const currGroup = await boardService.saveGroup(groupInfo);
+        console.log("groupInfo", groupInfo);
+        const {group, groupIdx} =groupInfo
+        const currBoard = JSON.parse(JSON.stringify(state.currBoard)) ;
+        currBoard.groups.splice(groupIdx, 1, group);
+
+        const currGroup = await remoteBoardService.save(currBoard);
         commit({ type: "saveGroup", groupInfo });
         return currGroup;
       } catch (err) {
@@ -232,5 +237,3 @@ export const boardStore = {
   },
   modules: {},
 };
-
-

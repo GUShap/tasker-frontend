@@ -7,7 +7,7 @@
   >
     <i class="fa fa-times" @click="exitModal"></i>
     <div class="details-title flex">
-      <input placeholder="title" v-model="task.title"  @change="update"/>
+      <input placeholder="title" v-model="task.title" @change="update" />
       <div class="users">
         <i class="fas fa-plus-circle"></i>
         <i class="fas fa-user-circle"></i>
@@ -50,13 +50,18 @@
     </div>
     <hr />
     <template>
-      <component :is="component" :task="task" class="cmp-container" @editTask="editTask"></component>
+      <component
+        :is="component"
+        :task="task"
+        class="cmp-container"
+        @editTask="editTask"
+      ></component>
     </template>
   </section>
 </template>
 
 <script>
-import {remoteBoardService} from "@/services/board.service-remote.js"
+import { remoteBoardService } from "@/services/board.service-remote.js";
 import taskUpdates from "@/cmps/task/details cmps/task-updates.vue";
 import taskFiles from "@/cmps/task/details cmps/task-files.vue";
 import activityLog from "@/cmps/task/details cmps/activity-log.vue";
@@ -105,8 +110,8 @@ export default {
       this.hoveredBtn = val;
     },
     update() {
-      this.task
-     this.$store.dispatch({type: "",task : this.task })
+      this.task;
+      this.$store.dispatch({ type: "", task: this.task });
     },
 
     pageHover(isHover) {
@@ -115,9 +120,18 @@ export default {
     setTask(task) {
       this.task = task;
     },
-    editTask(task){
-remoteBoardService.getTaskIdx(task)
-    }
+    async editTask(task) {
+      try {
+        const boardIdx = this.$store.getters.currBoardIdx;
+        const taskInfo = await remoteBoardService.getTaskRouteIdx(
+          task,
+          boardIdx
+        );
+        this.$store.dispatch({ type: "editTask", taskInfo });
+      } catch (err) {
+        console.log(err);
+      }
+    },
   },
 
   watch: {

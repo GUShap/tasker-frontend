@@ -98,8 +98,8 @@ async function saveGroup(groupInfo) {
     const gBoards = query();
     const { group, groupIdx, boardIdx } = groupInfo;
     gBoards[boardIdx].groups.splice(groupIdx, 1, group);
-    _saveToStorage(gBoards);
-    return gBoards[boardIdx].groups[groupIdx];
+    
+     gBoards[boardIdx].groups[groupIdx];
   } catch (err) {
     console.log(err);
   }
