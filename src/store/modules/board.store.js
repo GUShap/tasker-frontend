@@ -28,9 +28,9 @@ export const boardStore = {
         sortedBoard.groups.forEach((group) => {
           group.tasks.sort((task1, task2) => {
             if (sortByCopy.order === 'ascending') {
-              return task1.title.toLowerCase() > task2.title.toLowerCase() ? 1 : -1;
+              return task1.title.toLowerCase() >= task2.title.toLowerCase() ? 1 : -1;
             } else {
-              return task2.title.toLowerCase() > task1.title.toLowerCase() ? 1 : -1;
+              return task2.title.toLowerCase() >= task1.title.toLowerCase() ? 1 : -1;
             }
           });
         });
