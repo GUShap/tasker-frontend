@@ -87,7 +87,7 @@ export default {
       return this.user ? this.user : null;
     },
     boards(){
-      console.log(this.allBoards);
+      // console.log(this.allBoards);
       return this.allBoards
     }
   },

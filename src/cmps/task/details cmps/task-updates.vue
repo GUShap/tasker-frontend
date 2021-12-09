@@ -86,7 +86,8 @@
           <div class="top">
             <div class="card-btn">
               <i class="far fa-clock"
-                ><time-stamp :time="comment.createdAt"/></i>
+                ><time-stamp :time="comment.createdAt"
+              /></i>
               <i class="far fa-bell"></i>
               <el-dropdown class="dropdown" trigger="click">
                 <i class="fas fa-sort-down"></i>
@@ -127,8 +128,16 @@
               <button><i class="far fa-thumbs-up"></i>like</button>
             </div>
             <div>
-              <button><i class="fas fa-reply"></i>reply</button>
+              <button @click="replyMode">
+                <i class="fas fa-reply"></i>reply
+              </button>
             </div>
+            <input
+              type="text"
+              v-if="isReplyMode"
+              ref="reply"
+              @change="addReply"
+            />
           </div>
         </div>
       </li>
@@ -139,23 +148,23 @@
 <script>
 import { EmojiPicker } from "vue-emoji-picker";
 import { boardService } from "@/services/board.service.js";
-import timeStamp from "./time-stamp.vue"
+import timeStamp from "./time-stamp.vue";
 
 export default {
   name: "task-updates",
   props: ["task"],
   components: {
     EmojiPicker,
-    timeStamp
+    timeStamp,
   },
   data() {
     return {
       isEditMode: false,
+      isReplyMode: false,
       newComment: null,
       input: "",
       search: "",
       style: null,
-
     };
   },
   created() {
@@ -166,11 +175,11 @@ export default {
       this.input += emoji;
     },
     saveComment() {
-        this.newComment.txt = this.$refs.input.value;
-        if (!this.task.comments) this.task.comments = [];
-        this.task.comments.push(this.newComment);
-        this.$emit("editTask", this.task);
-        this.setEdit();
+      this.newComment.txt = this.$refs.input.value;
+      if (!this.task.comments) this.task.comments = [];
+      this.task.comments.push(this.newComment);
+      this.$emit("editTask", this.task);
+      this.setEdit();
     },
     setEdit() {
       this.isEditMode = !this.isEditMode;
@@ -185,6 +194,13 @@ export default {
     },
     focusInput() {
       // console.log(this.$refs.input);
+    },
+    replyMode() {
+      this.isReplyMode = !this.isReplyMode;
+    },
+    addReply() {
+      if (!this.comment.replies) this.comment.replies=[]
+      
     },
   },
 
