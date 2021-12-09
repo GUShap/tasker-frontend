@@ -34,7 +34,6 @@ export default {
   },
   computed: {
     isTaskDetailsHover() {
-      console.log(this.$store.getters.taskHover);
       return this.$store.getters.taskHover;
     },
     loggedinUser() {
@@ -52,8 +51,6 @@ export default {
       }else{
         this.hideNav = false;
       }
-     console.log('this.hideNav',this.hideNav);
-
     },
   },
 };
