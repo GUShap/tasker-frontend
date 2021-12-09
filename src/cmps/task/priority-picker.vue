@@ -55,7 +55,7 @@ export default {
   computed: {
   },
   watch: {
-    status: function (newVal, oldVal) {
+    priority: function (newVal, oldVal) {
       this.activity = { type: "priority", newVal, oldVal };
       this.update();
     },

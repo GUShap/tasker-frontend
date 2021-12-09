@@ -63,7 +63,6 @@ export default {
     };
   },
   created() {
-    console.log(this.info);
     this.selectedMembers = this.info.members || null;
   },
   methods: {

@@ -3,7 +3,7 @@
     v-if="info"
     @mouseover="hover = true"
     @mouseleave="hover = false"
-    class="title-picker flex grow-2"
+    class="title-picker flex"
     @click.prevent.stop="openDetails"
   >
     <span v-if="!isEditMode">{{ currTitle }}</span>

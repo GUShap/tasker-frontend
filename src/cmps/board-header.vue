@@ -33,7 +33,7 @@
               <avatar :size="25" username="i" />
             </section>
             <avatar
-              class="memeber-img"
+              class="member-img"
               v-else
               v-for="(user, idx) in board.members"
               :size="25"
@@ -42,10 +42,8 @@
               :key="idx"
             />
           </div>
-          <a @click="isInviteMode = true"
-            ><span class="icon-invite"></span>Invite
-          </a>
-          <member-picker v-if="isInviteMode" :info="getCmpInfo()" />
+          <a @click="setInviteMode"><span class="icon-invite"></span>Invite </a>
+
           <a><span class="icon-activities"></span>Activities</a>
           <a class="btn-add-board"><span class="icon-plus"></span>Add Board</a>
         </div>
@@ -81,10 +79,9 @@
 
 <script>
 import Avatar from "vue-avatar";
-import memberPicker from "./task/member-picker.vue";
 
 export default {
-  components: { Avatar, memberPicker },
+  components: { Avatar },
   name: "board-header",
   props: ["board", "user", "allUsers"],
   data() {
@@ -92,15 +89,12 @@ export default {
       isShown: true,
       isFocus: false,
       isStared: false,
-      isInviteMode: false,
       currEditedVal: "",
       isEditedMode: false,
       invitedMembers: this.invitedMem,
     };
   },
-  created() {
-    console.log("allUsers", this.allUsers);
-  },
+  created() {},
   methods: {
     setEdit(val) {
       console.log(val);
@@ -119,9 +113,8 @@ export default {
       this.isStared = !this.isStared;
       console.log("added");
     },
-    getCmpInfo() {
-      console.log(this.board.members);
-      return { members: this.board.members, boardMembers: this.allUsers };
+    setInviteMode() {
+      this.$emit("screenCover", true);
     },
   },
   computed: {

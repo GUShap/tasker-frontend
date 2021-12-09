@@ -56,6 +56,67 @@
                 align-items: center;
                 font-family: roboto;
             }
+
+            .invite-container {
+                position: fixed;
+                background-color: white;
+                transform: translate(-50%, 50%);
+                z-index: 50;
+                height: 500px;
+                width: 600px;
+                border-radius: 10px;
+                margin-top: 20%;
+
+                .invite-list {
+                    padding: 20px 30px;
+                    // width: 100%;
+                    span {
+                        font: 24px roboto;
+                    }
+                    p {
+                        padding-top: 5px;
+                        font-size: 14px;
+                    }
+                    input {
+                        border: 1px solid rgba(0, 0, 0, 0.274);
+                        border-radius: 3px;
+                        padding: 10px;
+                        margin: 20px 0;
+                        width: 100%;
+                        outline: none;
+                    }
+
+                    li {
+                        padding: 15px;
+                        width: 100%;
+                        align-items: center;
+                        
+                        
+                        
+                        .user {
+                            align-items: center;
+                            gap: 10px;
+                            width: 85%;
+
+                            .memebr-img {
+                                border: 1px solid rgb(126, 126, 114);
+                            }
+
+                            span {
+                                font-size: 15px;
+                                font-weight: bold;
+                            }
+                        }
+
+                        .list-btn {
+                            &>*{
+                                font-size: 14px;
+                                padding-left: 20px;
+                            }
+                        }
+                    }
+                }
+            }
         }
         .board-info {
             margin-left: 1.2rem;
@@ -101,20 +162,19 @@
         }
     }
 
-    .memeber-img {
+    .member-img {
         background-attachment: fixed;
         background-size: cover;
     }
-    
-    .memeber-img:first-child{
+
+    &:first-child {
         margin-inline: -0.6rem;
     }
-    
-    .memeber-img:last-child{
+
+    &:last-child {
         margin-inline: -0.6rem;
-        
     }
-    
+
     .member-avatars {
         margin-right: 10px;
         display: flex;
