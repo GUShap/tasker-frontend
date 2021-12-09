@@ -110,11 +110,13 @@ export const boardStore = {
     async editTask({ state, dispatch, commit }, { taskInfo }) {
       // const currUser = JSON.parse(JSON.stringify(commit.getters.loggedinUser));
       try {
+        console.log('taskInfo',taskInfo);
         if (taskInfo.detailsUpdate) taskInfo = getOrigin(taskInfo.task);
         const { task, taskIdx, groupIdx, activity } = taskInfo;
         const boardCopy = JSON.parse(JSON.stringify(state.currBoard));
         if (task.id) {
           if (task.isCopy){ boardCopy.groups[groupIdx].tasks.splice(taskIdx, 0, task)};
+          console.log('task',task);
           boardCopy.groups[groupIdx].tasks.splice(taskIdx, 1, task);
         } else {
           task.id = utilService.makeId();

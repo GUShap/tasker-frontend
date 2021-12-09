@@ -11,6 +11,7 @@
         :board="currBoard"
         :user="loggedinUser"
         :allBoards="boards"
+        :allUsers="allUsers"
       />
       <task-actions-nav @sortBy="sortBy" @addNewGroup="addNewGroup" />
       <board-filter />
@@ -114,7 +115,10 @@ export default {
       return this.user;
     },
     allBoards() {
-      this.$store.getters.allBoards;
+     return this.$store.getters.allBoards;
+    },
+    allUsers() {
+      return this.$store.getters.getUsers;
     },
   },
   destroyed() {},
