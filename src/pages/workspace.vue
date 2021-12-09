@@ -3,16 +3,21 @@
     <pop-up-nav
       class="pop-up-nav"
       :board="currBoard"
+      :allBoards="boards"
       :user="loggedinUser"
     ></pop-up-nav>
     <section class="workspace">
-      <board-header :board="currBoard" :user="loggedinUser" :allBoards="allBoards"/>
+      <board-header
+        :board="currBoard"
+        :user="loggedinUser"
+        :allBoards="boards"
+      />
       <task-actions-nav @sortBy="sortBy" @addNewGroup="addNewGroup" />
       <board-filter />
       <board-details
         :user="loggedinUser"
-        @addTask="addTask"
         :board="currBoard"
+        @addTask="addTask"
         @removeGroup="removeGroup"
         @addNewGroup="addNewGroup"
         @editGroup="editGroup"
@@ -46,15 +51,21 @@ export default {
       user: 0,
     };
   },
-  created() {
-    this.$store.commit({type:'setLoggedinUser'})
-    this.boards = this.$store.dispatch({
-      type: "loadBoards",
-      currBoardIdx: this.currBoardIdx,
-    });
-    this.users = this.$store.dispatch({
-      type: "loadUsers",});
+  async created() {
+    try {
+      this.$store.commit({ type: "setLoggedinUser" });
+      this.boards = await this.$store.dispatch({
+        type: "loadBoards",
+        currBoardIdx: this.currBoardIdx,
+      });
+      this.users = await this.$store.dispatch({
+        type: "loadUsers",
+      });
+    } catch (err) {
+      console.log(err);
+    }
   },
+
   methods: {
     async addTask(taskInfo) {
       try {
@@ -102,9 +113,9 @@ export default {
       this.user = this.$store.getters.loggedinUser;
       return this.user;
     },
-    allBoards(){
-      this.$store.getters.allBoards
-    }
+    allBoards() {
+      this.$store.getters.allBoards;
+    },
   },
   destroyed() {},
 };
