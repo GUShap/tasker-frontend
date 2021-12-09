@@ -2,7 +2,6 @@ import { boardDb } from "../../database.js";
 import { storageService } from "./storage.service";
 import { utilService } from "./util.service";
 
-
 export const boardService = {
   query,
   save,
@@ -21,6 +20,8 @@ export const boardService = {
   getEmptyComment,
   getEmptyActivity,
 };
+
+const gBoards = [boardDb];
 
 function query() {
   const boards = storageService.load("gBoards");
@@ -69,10 +70,10 @@ async function saveTask(task) {
   }
 }
 
-async function saveBoard(board,boardIdx ) {
+async function saveBoard(board, boardIdx) {
   try {
     const gBoards = query();
-    gBoards.splice(boardIdx,1,board)
+    gBoards.splice(boardIdx, 1, board);
     _saveToStorage(gBoards);
     return gBoards[boardIdx];
   } catch (err) {
@@ -91,22 +92,21 @@ async function removeGroup(boardIdx, { groupId }) {
   }
 }
 
-
 async function saveGroup(groupInfo) {
   try {
-    console.log('groupInfo',groupInfo);
+    console.log("groupInfo", groupInfo);
     const gBoards = query();
-    const { group, groupIdx, boardIdx  } = groupInfo;
+    const { group, groupIdx, boardIdx } = groupInfo;
     gBoards[boardIdx].groups.splice(groupIdx, 1, group);
     _saveToStorage(gBoards);
-    return gBoards[boardIdx].groups[groupIdx]
+    return gBoards[boardIdx].groups[groupIdx];
   } catch (err) {
     console.log(err);
   }
 }
 async function saveGroups(groupsInfo) {
   try {
-    console.log('groupsInfo',groupsInfo);
+    console.log("groupsInfo", groupsInfo);
     const gBoards = query();
     const { groups, boardIdx } = groupsInfo;
     gBoards[boardIdx].groups = groups;
@@ -182,12 +182,9 @@ async function getTaskOrigin(taskId) {
     };
     gBoards.forEach((board) => {
       taskInfo.boardId = board._id;
-      board.groups.forEach((group) => {
-        
-      });
+      board.groups.forEach((group) => {});
     });
     return taskInfo;
-    
   } catch (err) {
     console.log("Error", err);
     throw err;
@@ -219,6 +216,7 @@ async function getGroupIdx(boardId, groupId) {
     throw err;
   }
 }
+
 
 async function getBoardIdx(boardId) {
   try {

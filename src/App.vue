@@ -1,6 +1,6 @@
 <template>
-  <section :class="[isLandingPage ? '' : 'flex']" class="main-app">
-    <main-nav v-if="!isLandingPage" :user="loggedinUser" />
+  <section :class="[hideNav ? '' : 'flex']" class="main-app">
+    <main-nav v-if="!hideNav" :user="loggedinUser" />
     <router-view />
     <div class="cover" v-if="isTaskDetailsHover"></div>
   </section>
@@ -16,16 +16,17 @@ export default {
   props: [],
   data() {
     return {
-      isLandingPage: null,
+      hideNav: true,
       isTaskDetails: null,
     };
   },
   created() {
     this.$store.commit({type:'setLoggedinUser'})
-    if (this.$route.name === "landing-page" || this.$route.name === "login" ) {
-      this.isLandingPage = true;
-    }
-  
+    const {name} = this.$route.params
+    if (name === "landing-page" ||name === "login") {
+        this.hideNav = true;
+      }
+      console.log('created this.hideNav',this.hideNav);
   },
   methods: {
     detailsHover(isHovered) {
@@ -45,9 +46,14 @@ export default {
   watch: {
     $route: function (newVal, OldVal) {
       const { name } = newVal;
-      if (name !== "landing-page" || name !== "login") {
-        this.isLandingPage = false;
+      console.log('name',name);
+      if (name === "landing-page" ||name === "login") {
+        this.hideNav = true;
+      }else{
+        this.hideNav = false;
       }
+     console.log('this.hideNav',this.hideNav);
+
     },
   },
 };

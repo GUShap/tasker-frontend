@@ -31,6 +31,8 @@ function makeLorem(size = 20) {
     return txt;
 }
 
+
+
 function getEmptyBoard() {
       return {
         title: 'New Board',

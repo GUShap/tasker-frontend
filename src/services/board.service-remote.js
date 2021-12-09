@@ -2,8 +2,7 @@ import { httpService } from "./http.service";
 import { utilService } from "./util.service";
 import { storageService } from "./storage.service";
 
-const KEY = "gBoards"
-
+const KEY = "gBoards";
 
 export const remoteBoardService = {
   query,
@@ -12,14 +11,11 @@ export const remoteBoardService = {
   getById,
   getEmptyGroup,
   getColors,
-  getTaskById
-}
+  getTaskById,
+  getTaskRouteIdx
+};
 
-const BASE_URL = process.env.NODE_ENV !== "development"
-  ? "board"
-  : "board";
-
-
+const BASE_URL = process.env.NODE_ENV !== "development" ? "board" : "board";
 
 async function query(filterBy = null) {
   // console.log('filterBy', filterBy);
@@ -30,7 +26,6 @@ async function query(filterBy = null) {
   }
 }
 
-
 async function getById(id) {
   try {
     return await httpService.get(BASE_URL + `/${id}`);
@@ -38,7 +33,6 @@ async function getById(id) {
     console.log("error:", err);
   }
 }
-
 
 async function remove(id) {
   try {
@@ -76,12 +70,38 @@ async function getTaskById(taskId) {
   }
 }
 
+async function getTaskRouteIdx(task, boardIdx) {
+  try {
+    const boards = await query();
+
+    var groupIdx = null;
+    var taskIdx = null;
+    console.log("gBoards", gBoards);
+    const groups = gBoards[boardIdx].groups;
+    groups.forEach((g, idx) => {
+      if (
+        g.tasks.some((t, idx) => {
+          if (t.id === taskId) {
+            taskIdx = idx;
+            return true;
+          }
+        })
+      ) {
+        groupIdx = idx;
+      }
+    });
+
+    return { task, taskIdx, groupIdx, activity : {type : title} };
+  } catch (err) {
+    console.log("Error", err);
+    throw err;
+  }
+}
+
 function _getBoardCopy(boardId) {
   const board = todoService.getById(boardId);
   return JSON.parse(JSON.stringify(board));
 }
-
-
 
 async function getEmptyGroup() {
   try {
@@ -90,78 +110,76 @@ async function getEmptyGroup() {
       id: utilService.makeId(),
       tasks: [],
       style: {
-        color: "#579bfc"
-      }
-    }
+        color: "#579bfc",
+      },
+    };
   } catch (err) {
     console.log(err);
   }
 }
 
-
-
 function getColors() {
   return [
     {
-      name: 'darkGreen',
-      hexCode: '#037f4'
+      name: "darkGreen",
+      hexCode: "#037f4",
     },
     {
-      name: 'green',
-      hexCode: '#00c875'
+      name: "green",
+      hexCode: "#00c875",
     },
 
     {
-      name: 'yellowGreen',
-      hexCode: '#9cd326'
+      name: "yellowGreen",
+      hexCode: "#9cd326",
     },
     {
-      name: 'beige',
-      hexCode: '#cab641'
+      name: "beige",
+      hexCode: "#cab641",
     },
     {
-      name: 'yellow',
-      hexCode: '#ffcb00'
+      name: "yellow",
+      hexCode: "#ffcb00",
     },
     {
-      name: 'darkPurple',
-      hexCode: '#784bd1'
+      name: "darkPurple",
+      hexCode: "#784bd1",
     },
     {
-      name: 'purple',
-      hexCode: '#a25ddc'
+      name: "purple",
+      hexCode: "#a25ddc",
     },
     {
-      name: 'turquoise',
-      hexCode: '#0086BE'
+      name: "turquoise",
+      hexCode: "#0086BE",
     },
     {
-      name: 'blue',
-      hexCode: '#579bfc'
+      name: "blue",
+      hexCode: "#579bfc",
     },
     {
-      name: 'lightBlue',
-      hexCode: '#66ccff'
+      name: "lightBlue",
+      hexCode: "#66ccff",
     },
     {
-      name: 'darkRed',
-      hexCode: '#bb3354'
+      name: "darkRed",
+      hexCode: "#bb3354",
     },
     {
-      name: 'red',
-      hexCode: '#e2445c'
+      name: "red",
+      hexCode: "#e2445c",
     },
     {
-      name: 'darkOrange',
-      hexCode: '#ff642e'
+      name: "darkOrange",
+      hexCode: "#ff642e",
     },
     {
-      name: 'orange',
-      hexCode: '#fdab3d'
+      name: "orange",
+      hexCode: "#fdab3d",
     },
     {
-      name: 'brown',
-      hexCode: '#7f5347'
-    }
-  ]
+      name: "brown",
+      hexCode: "#7f5347",
+    },
+  ];
 }

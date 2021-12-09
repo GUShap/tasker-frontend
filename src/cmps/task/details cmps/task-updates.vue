@@ -86,8 +86,7 @@
           <div class="top">
             <div class="card-btn">
               <i class="far fa-clock"
-                ><span>{{ comment.createdAt }}</span></i
-              >
+                ><time-stamp :time="comment.createdAt"/></i>
               <i class="far fa-bell"></i>
               <el-dropdown class="dropdown" trigger="click">
                 <i class="fas fa-sort-down"></i>
@@ -140,12 +139,14 @@
 <script>
 import { EmojiPicker } from "vue-emoji-picker";
 import { boardService } from "@/services/board.service.js";
+import timeStamp from "./time-stamp.vue"
 
 export default {
   name: "task-updates",
   props: ["task"],
   components: {
     EmojiPicker,
+    timeStamp
   },
   data() {
     return {
@@ -154,6 +155,7 @@ export default {
       input: "",
       search: "",
       style: null,
+
     };
   },
   created() {
@@ -163,17 +165,12 @@ export default {
     insert(emoji) {
       this.input += emoji;
     },
-    async saveComment() {
-      try {
+    saveComment() {
         this.newComment.txt = this.$refs.input.value;
-        console.log(this.newComment.txt);
         if (!this.task.comments) this.task.comments = [];
         this.task.comments.push(this.newComment);
-        await this.$store.dispatch({ type: "editTask", task: this.task });
+        this.$emit("editTask", this.task);
         this.setEdit();
-      } catch (err) {
-        console.log("Error", err);
-      }
     },
     setEdit() {
       this.isEditMode = !this.isEditMode;
@@ -191,16 +188,6 @@ export default {
     },
   },
 
-  computed: {
-    updateTime() {
-      const currTime = Date.now();
-      const timeToFormat = currTime - this.comment.createdAt;
-      const diffHours = timeToFormat / (1000 * 3600);
-      let timeToDisplay;
-
-      // switch()
-    },
-  },
   mounted() {
     this.focusInput();
   },
