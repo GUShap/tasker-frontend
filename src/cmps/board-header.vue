@@ -42,19 +42,8 @@
               :key="idx"
             />
           </div>
-          <a @click="isInviteMode = true"
-            ><span class="icon-invite"></span>Invite
-          </a>
-          <ul v-if="isInviteMode" >
-            <li v-for="currUser in allUsers" :key="currUser._id">
-               <avatar
-              class="memebr-img"
-              :size="25"
-              :username="currUser.fullname"
-            />
-              {{currUser.fullname}}
-            </li>
-            </ul>
+          <a @click="setInviteMode"><span class="icon-invite"></span>Invite </a>
+
           <a><span class="icon-activities"></span>Activities</a>
           <a class="btn-add-board"><span class="icon-plus"></span>Add Board</a>
         </div>
@@ -100,15 +89,12 @@ export default {
       isShown: true,
       isFocus: false,
       isStared: false,
-      isInviteMode: false,
       currEditedVal: "",
       isEditedMode: false,
       invitedMembers: this.invitedMem,
     };
   },
-  created() {
-    console.log("allUsers", this.allUsers);
-  },
+  created() {},
   methods: {
     setEdit(val) {
       console.log(val);
@@ -127,9 +113,8 @@ export default {
       this.isStared = !this.isStared;
       console.log("added");
     },
-    getCmpInfo() {
-      console.log({ members: this.board.members, boardMembers: this.allUsers });
-      return { members: this.board.members, boardMembers: this.allUsers };
+    setInviteMode() {
+      this.$emit("screenCover", true);
     },
   },
   computed: {

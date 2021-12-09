@@ -26,7 +26,6 @@ export default {
     if (name === "landing-page" ||name === "login") {
         this.hideNav = true;
       }
-      console.log('created this.hideNav',this.hideNav);
   },
   methods: {
     detailsHover(isHovered) {
@@ -35,6 +34,7 @@ export default {
   },
   computed: {
     isTaskDetailsHover() {
+      console.log(this.$store.getters.taskHover);
       return this.$store.getters.taskHover;
     },
     loggedinUser() {

@@ -173,6 +173,7 @@ export default {
     },
     duplicateGroup() {
       let groupCopy = JSON.parse(JSON.stringify(this.group));
+      delete groupCopy.id
       groupCopy.id = utilService.makeId();
       this.$emit("addNewGroup", { group: groupCopy, groupIdx: this.groupIdx });
     },

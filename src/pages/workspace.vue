@@ -8,11 +8,38 @@
     ></pop-up-nav>
     <section class="workspace">
       <board-header
+        @screenCover="setInviteMode"
         :board="currBoard"
         :user="loggedinUser"
         :allBoards="boards"
         :allUsers="allUsers"
       />
+      <div class="cover" v-if="isInviteMode" @click="setInviteMode(false)"></div>
+
+      <div class="invite-container" v-if="isInviteMode">
+        <ul class="invite-list">
+          <span>Board Members</span>
+          <p>Subscribe people from your team</p>
+          <input type="text" placeholder="Enter name or email" />
+          <li class="flex" v-for="currUser in allUsers" :key="currUser._id">
+            <div class="user flex">
+              <avatar
+                class="memebr-img"
+                :size="30"
+                :src="
+                  currUser.imgUrl ? require(`@/pics/${currUser.imgUrl}`) : null
+                "
+                :username="currUser.fullname"
+              />
+              <span>{{ currUser.fullname }}</span>
+            </div>
+            <div class="list-btn">
+              <a class="icon-crown"></a>
+              <i class="fas fa-times"></i>
+            </div>
+          </li>
+        </ul>
+      </div>
       <task-actions-nav @sortBy="sortBy" @addNewGroup="addNewGroup" />
       <board-filter />
       <board-details
@@ -52,6 +79,7 @@ export default {
       boards: null,
       currBoardIdx: 0,
       user: 0,
+      isInviteMode: false,
     };
   },
   async created() {
@@ -71,7 +99,7 @@ export default {
 
   methods: {
     updateBoard(board) {
-      this.$store.commit({type:'saveBoard', board})
+      this.$store.commit({ type: "saveBoard", board });
     },
 
     async addTask(taskInfo) {
@@ -110,6 +138,9 @@ export default {
       this.$store.commit({ type: "setSort", sortBy });
       // this.$store.dispatch({ type: "loadBoards" });
     },
+    setInviteMode(isInvite) {
+      this.isInviteMode = isInvite;
+    },
   },
   computed: {
     currBoard() {
@@ -121,7 +152,7 @@ export default {
       return this.user;
     },
     allBoards() {
-     return this.$store.getters.allBoards;
+      return this.$store.getters.allBoards;
     },
     allUsers() {
       return this.$store.getters.getUsers;

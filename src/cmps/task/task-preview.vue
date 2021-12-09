@@ -78,6 +78,7 @@ export default {
     },
     duplicateTask() {
       let taskCopy = JSON.parse(JSON.stringify(this.task));
+      delete taskCopy.id
       taskCopy.id = utilService.makeId();
       taskCopy.isCopy = true;
       this.$store.dispatch({
