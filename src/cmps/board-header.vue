@@ -95,11 +95,7 @@ export default {
       isInviteMode: false,
       currEditedVal: "",
       isEditedMode: false,
-      invitedMembers: this.board
-        ? this.board.members
-          ? this.board.member.length
-          : null
-        : null,
+      invitedMembers: this.invitedMem,
     };
   },
   created() {
@@ -134,6 +130,9 @@ export default {
     },
     currUser() {
       return this.user ? this.user : null;
+    },
+    invitedMem() {
+      return this.board.members ? this.board.member.length : null;
     },
   },
 };

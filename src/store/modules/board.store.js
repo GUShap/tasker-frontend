@@ -25,6 +25,7 @@ export const boardStore = {
       return JSON.parse(JSON.stringify(state.boards));
     },
     currBoard(state) {
+
       const sortedBoard = JSON.parse(JSON.stringify(state.currBoard));
       const sortByCopy = JSON.parse(JSON.stringify(state.sortBy))
       if (sortByCopy.val === 'name') {
@@ -43,19 +44,32 @@ export const boardStore = {
           return member1.username.toLowerCase() >= member2.username.toLowerCase() ? 1 : -1;
         });
       }
-      // if (sortByCopy.val === 'status') {
-      //   sortedBoard.groups.forEach((group) => {
-      //     group.tasks.sort((task1, task2) => {
-      //       if (sortByCopy.order === 'ascending') {
-      //         return task1.labelId.toLowerCase() >= task2.labelId.toLowerCase() ? 1 : -1;
-      //       } else {
-      //         return task2.labelId.toLowerCase() >= task1.labelId.toLowerCase() ? 1 : -1;
-      //       }
-      //     });
-      //   });
-      // }
+      if (sortByCopy.val === 'status') {
+        sortedBoard.groups.forEach((group) => {
+          group.tasks.sort((task1, task2) => {
+            if (sortByCopy.order === 'ascending') {
+              return task1.labelId >= task2.labelId ? 1 : -1;
+            } else {
+              return task2.labelId >= task1.labelId ? 1 : -1;
+            }
+          });
+        });
+      }
+      if (sortByCopy.val === 'timeline') {
+        sortedBoard.groups.forEach((group) => {
+          group.tasks.sort((task1, task2) => {
+            if (sortByCopy.order === 'ascending') {
+              return task1.timeline[1] - task2.timeline[1] 
+            } else {
+              return task2.timeline[1]  - task1.timeline[1]
+            }
+          });
+        });
+
+      }
       return sortedBoard;
     },
+
     taskHover(state) {
       return state.isTaskDetailsHover;
     },
@@ -117,6 +131,7 @@ export const boardStore = {
         socketService.emit('update board', newBoard)
       } catch (err) {
         console.log(err);
+        console.log('Error saveBoard');
         commit({ type: "saveBoard", board: currBoard });
       }
     },
@@ -124,7 +139,6 @@ export const boardStore = {
     async editTask({ state, dispatch, commit }, { taskInfo }) {
       // const currUser = JSON.parse(JSON.stringify(commit.getters.loggedinUser));
       try {
-        console.log('taskInfo',taskInfo);
         if (taskInfo.detailsUpdate) taskInfo = getOrigin(taskInfo.task);
         const { task, taskIdx, groupIdx, activity } = taskInfo;
         const boardCopy = JSON.parse(JSON.stringify(state.currBoard));
