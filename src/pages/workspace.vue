@@ -90,7 +90,7 @@ export default {
     },
     sortBy(sortBy) {
       this.$store.commit({ type: "setSort", sortBy });
-      this.$store.dispatch({ type: "loadBoards" });
+      // this.$store.dispatch({ type: "loadBoards" });
     },
   },
   computed: {

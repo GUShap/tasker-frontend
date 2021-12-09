@@ -15,23 +15,27 @@ export const boardStore = {
     isTaskDetailsHover: false,
   },
   getters: {
-    currBoard(state) {
-      return JSON.parse(JSON.stringify(state.currBoard));
-    },
+    // currBoard(state) {
+    //   return JSON.parse(JSON.stringify(state.currBoard));
+    // },
     allBoards(state) {
       return JSON.parse(JSON.stringify(state.boards));
     },
-    sortBoard(state) {
-      const filteredTasks = [];
-      // state.sortedBoard = JSON.parse(JSON.stringify(state.currBoard));
-      // state.sortBy = JSON.parse(JSON.stringify(sortBy));
-      // const regex = new RegExp(state.sortBy.val.name, 'i');
-      state.sortedBoard.groups.forEach((group) => {
-        group.tasks.sort((task1, task2) => {
-          task1.title.toLowerCase() > task2.title.toLowerCase() ? 1 : -1;
+    currBoard(state) {
+      const sortedBoard = JSON.parse(JSON.stringify(state.currBoard));
+      const sortByCopy = JSON.parse(JSON.stringify(state.sortBy))
+      if (sortByCopy.val === 'name') {
+        sortedBoard.groups.forEach((group) => {
+          group.tasks.sort((task1, task2) => {
+            if (sortByCopy.order === 'ascending') {
+              return task1.title.toLowerCase() > task2.title.toLowerCase() ? 1 : -1;
+            } else {
+              return task2.title.toLowerCase() > task1.title.toLowerCase() ? 1 : -1;
+            }
+          });
         });
-      });
-      return (state.boards.tasks = filteredTasks);
+      }
+      return sortedBoard;
     },
     taskHover(state) {
       return state.isTaskDetailsHover;
@@ -133,24 +137,6 @@ export const boardStore = {
         console.log(err);
       }
     },
-
-    // storeSaveTask(context, { taskId, task }) {
-    //   const currUser = JSON.parse(JSON.stringify(context.getters.loggedinUser));
-    //   const activity = {
-    //     "id": makeId(),
-    //     "txt": "Changed Color",
-    //     "createdAt": Date.now(),
-    //     "byMember": currUser,
-    //     "task": task
-    //   }
-    //   try {
-    //     // const board = await boardService.saveTask(boardId, groupId, task, activity)
-    //     // commit(board)
-    //     // await context.dispatch({ type: 'addTask', activity});
-    //   } catch (err) {
-    //     console.log(err)
-    //   }
-    // },
 
     async removeTask({ state, dispatch, commit }, { taskInfo }) {
       // const currUser = JSON.parse(JSON.stringify(commit.getters.loggedinUser));
