@@ -16,8 +16,10 @@
       <task-actions-nav @sortBy="sortBy" @addNewGroup="addNewGroup" />
       <board-filter />
       <board-details
+        v-if="currBoard"
         :user="loggedinUser"
         :board="currBoard"
+        @updateBoard="updateBoard"
         @addTask="addTask"
         @removeGroup="removeGroup"
         @addNewGroup="addNewGroup"
@@ -68,6 +70,10 @@ export default {
   },
 
   methods: {
+    updateBoard(board) {
+      this.$store.commit({type:'saveBoard', board})
+    },
+
     async addTask(taskInfo) {
       try {
         console.log("workspace", taskInfo);
