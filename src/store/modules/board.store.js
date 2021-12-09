@@ -1,4 +1,3 @@
-import { boardService } from "@/services/board.service.js";
 import { remoteBoardService } from "@/services/board.service-remote.js";
 import { utilService } from "@/services/util.service.js";
 import { socketService } from "@/services/socket.service.js";
@@ -84,10 +83,6 @@ export const boardStore = {
     setSort(state, { sortBy }) {
       state.sortBy = sortBy;
     },
-    saveGroup(state, { groupInfo }) {
-      const { group, groupIdx } = groupInfo;
-      state.currBoard.groups[groupIdx] = group;
-    },
     hover(state, { isHover }) {
       state.isTaskDetailsHover = isHover;
     },
@@ -111,6 +106,7 @@ export const boardStore = {
     //     console.log(err);
     //   }
     // },
+
     async saveBoard({ commit, state }, { board }) {
       // optimistic
       const currBoard = JSON.parse(JSON.stringify(state.currBoard));
@@ -132,7 +128,7 @@ export const boardStore = {
         const { task, taskIdx, groupIdx, activity } = taskInfo;
         const boardCopy = JSON.parse(JSON.stringify(state.currBoard));
         if (task.id) {
-          if (task.isCopy){ boardCopy.groups[groupIdx].tasks.splice(taskIdx, 0, task)};
+          if (task.isCopy) { boardCopy.groups[groupIdx].tasks.splice(taskIdx, 0, task) };
           boardCopy.groups[groupIdx].tasks.splice(taskIdx, 1, task);
         } else {
           task.id = utilService.makeId();
@@ -152,8 +148,7 @@ export const boardStore = {
           },
         };
 
-        const updatedBoard = await remoteBoardService.save(boardCopy);
-        commit({ type: "updateBoard", board: updatedBoard });
+        dispatch({ type: "saveBoard", board: boardCopy });
       } catch (err) {
         console.log(err);
       }
@@ -167,8 +162,7 @@ export const boardStore = {
         const boardCopy = JSON.parse(JSON.stringify(state.currBoard));
         boardCopy.groups[groupIdx].tasks.splice(taskIdx, 1);
 
-        const updatedBoard = await remoteBoardService.save(boardCopy);
-        commit({ type: "updateBoard", board: updatedBoard });
+        dispatch({ type: "saveBoard", board: boardCopy })
       } catch (err) {
         console.log(err);
       }
@@ -180,8 +174,7 @@ export const boardStore = {
         const boardCopy = JSON.parse(JSON.stringify(state.currBoard));
         boardCopy.groups.splice(groupIdx, 1, group);
 
-        const updatedBoard = await remoteBoardService.save(boardCopy);
-        commit({ type: "updateBoard", board: updatedBoard });
+        dispatch({ type: "saveBoard", board: boardCopy })
       } catch (err) {
         console.log(err);
       }
@@ -199,8 +192,7 @@ export const boardStore = {
           boardCopy.groups.unshift(newGroup);
         }
 
-        const updatedBoard = await remoteBoardService.save(boardCopy);
-        commit({ type: "updateBoard", board: updatedBoard });
+        dispatch({ type: "saveBoard", board: boardCopy })
       } catch (err) {
         console.log(err);
       }
@@ -212,8 +204,7 @@ export const boardStore = {
         const boardCopy = JSON.parse(JSON.stringify(state.currBoard));
         boardCopy.groups.splice(groupIdx, 1);
 
-        const updatedBoard = await remoteBoardService.save(boardCopy);
-        commit({ type: "updateBoard", board: updatedBoard });
+        dispatch({ type: "saveBoard", board: boardCopy })
       } catch (err) {
         console.log(err);
       }
@@ -223,7 +214,7 @@ export const boardStore = {
       try {
         board.createdBy = rootGetters.loggedinUser;
         const savedBoard = await remoteBoardService.save(board);
-        // state.boards.push(board)
+
       } catch (err) {
         console.log(err);
       }
@@ -237,16 +228,13 @@ export const boardStore = {
         console.log(err);
       }
     },
-    async saveGroup({ commit, state }, { groupInfo }) {
+    async saveGroup({ state, dispatch, commit }, { groupInfo }) {
       try {
-        console.log("groupInfo", groupInfo);
         const { group, groupIdx } = groupInfo
-        const currBoard = JSON.parse(JSON.stringify(state.currBoard));
-        currBoard.groups.splice(groupIdx, 1, group);
+        const boardCopy = JSON.parse(JSON.stringify(state.currBoard));
+        boardCopy.groups.splice(groupIdx, 1, group);
 
-        const currGroup = await remoteBoardService.save(currBoard);
-        commit({ type: "saveGroup", groupInfo });
-        return currGroup;
+        dispatch({ type: "saveBoard", board: boardCopy })
       } catch (err) {
         console.log(err);
       }

@@ -30,9 +30,8 @@
             type="text"
             v-model="groupTitle"
             @change="updateGroup"
+            @keyup.enter="updateGroup"
             :style="{ color: group.style.color }"
-            v-on:keyup.enter="updateInfo"
-            @blur="updateInfo"
           />
         </div>
         <div v-for="(cmp, idx) in cmpsOrder" :key="idx">
@@ -198,19 +197,20 @@ export default {
       this.$refs.title.focus();
       this.isFocusOn = true;
     },
-    updateInfo() {
-      this.isFocusOn = false;
-    },
+    // updateInfo() {
+    //   },
     async updateGroup() {
       try {
-        console.log("updateGroup", this.groupTitle);
+        // console.log("updateGroup", this.groupTitle);
         const currGroup = this.group;
         currGroup.title = this.groupTitle;
+        // console.log('title',currGroup.title);
         const groupInfo = { group: currGroup, groupIdx: this.groupIdx };
         await this.$store.dispatch({
           type: "saveGroup",
           groupInfo,
         });
+          this.isFocusOn = false;
       } catch (err) {
         console.log(err);
       }
