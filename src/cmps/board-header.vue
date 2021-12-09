@@ -33,7 +33,7 @@
               <avatar :size="25" username="i" />
             </section>
             <avatar
-              class="memeber-img"
+              class="member-img"
               v-else
               v-for="(user, idx) in board.members"
               :size="25"
@@ -45,7 +45,16 @@
           <a @click="isInviteMode = true"
             ><span class="icon-invite"></span>Invite
           </a>
-          <member-picker v-if="isInviteMode" :info="getCmpInfo()" />
+          <ul v-if="isInviteMode" >
+            <li v-for="currUser in allUsers" :key="currUser._id">
+               <avatar
+              class="memebr-img"
+              :size="25"
+              :username="currUser.fullname"
+            />
+              {{currUser.fullname}}
+            </li>
+            </ul>
           <a><span class="icon-activities"></span>Activities</a>
           <a class="btn-add-board"><span class="icon-plus"></span>Add Board</a>
         </div>
@@ -81,10 +90,9 @@
 
 <script>
 import Avatar from "vue-avatar";
-import memberPicker from "./task/member-picker.vue";
 
 export default {
-  components: { Avatar, memberPicker },
+  components: { Avatar },
   name: "board-header",
   props: ["board", "user", "allUsers"],
   data() {
@@ -120,7 +128,7 @@ export default {
       console.log("added");
     },
     getCmpInfo() {
-      console.log(this.board.members);
+      console.log({ members: this.board.members, boardMembers: this.allUsers });
       return { members: this.board.members, boardMembers: this.allUsers };
     },
   },

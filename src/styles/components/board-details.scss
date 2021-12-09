@@ -101,16 +101,16 @@
         }
     }
 
-    .memeber-img {
+    .member-img {
         background-attachment: fixed;
         background-size: cover;
     }
     
-    .memeber-img:first-child{
+    &:first-child{
         margin-inline: -0.6rem;
     }
     
-    .memeber-img:last-child{
+    &:last-child{
         margin-inline: -0.6rem;
         
     }
