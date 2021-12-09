@@ -59,9 +59,9 @@ export const boardStore = {
         sortedBoard.groups.forEach((group) => {
           group.tasks.sort((task1, task2) => {
             if (sortByCopy.order === 'ascending') {
-              return task1.dueDate - task2.dueDate
+              return task1.timeline[1] - task2.timeline[1] 
             } else {
-              return task2.labelId - task1.labelId
+              return task2.timeline[1]  - task1.timeline[1]
             }
           });
         });
