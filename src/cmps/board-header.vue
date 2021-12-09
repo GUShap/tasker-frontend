@@ -85,7 +85,7 @@ import Avatar from "vue-avatar";
 export default {
   components: { Avatar },
   name: "board-header",
-  props: ["board", "user","allUsers"],
+  props: ["board", "user", "allUsers"],
   data() {
     return {
       isShown: true,
@@ -93,11 +93,11 @@ export default {
       isStared: false,
       currEditedVal: "",
       isEditedMode: false,
-      invitedMembers: this.board ? this.board.members ? this.board.member.length : null : null
-    }
+      invitedMembers: this.invitedMem,
+    };
   },
   created() {
-    console.log('allUsers',this.allUsers);
+    console.log("allUsers", this.allUsers);
   },
   methods: {
     setEdit(val) {
@@ -125,7 +125,9 @@ export default {
     currUser() {
       return this.user ? this.user : null;
     },
-    
+    invitedMem() {
+      return this.board.members ? this.board.member.length : null;
+    },
   },
 };
 </script>

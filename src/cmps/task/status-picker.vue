@@ -1,5 +1,5 @@
 <template>
-  <section class="status-picker">
+  <section class="status-picker" v-if="info">
     <div
       @click="editStatus('edit')"
       v-if="!isEditMode"
@@ -29,13 +29,13 @@ export default {
     return {
       isEditMode: false,
       showDoneGif: false,
-      status: this.info.labelId ? this.info.labelId : null,
-      statusStyle: this.info.labelId ? this.info.labelId.toLowerCase() : null,
+      status: this.info.status,
+      statusStyle: null,
       activity: null,
     };
   },
   created() {
-    this.status = this.info.labelId ? this.info.labelId : null;
+    this.statusStyle = this.info.status ? this.info.status.toLowerCase() : null;
   },
   methods: {
     editStatus(status) {
