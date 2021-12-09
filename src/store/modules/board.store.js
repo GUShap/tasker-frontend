@@ -48,9 +48,9 @@ export const boardStore = {
         sortedBoard.groups.forEach((group) => {
           group.tasks.sort((task1, task2) => {
             if (sortByCopy.order === 'ascending') {
-              return task1.labelId >= task2.labelId ? 1 : -1;
+              return task1.status >= task2.status ? 1 : -1;
             } else {
-              return task2.labelId >= task1.labelId ? 1 : -1;
+              return task2.status >= task1.status ? 1 : -1;
             }
           });
         });
@@ -58,14 +58,14 @@ export const boardStore = {
       if (sortByCopy.val === 'timeline') {
         sortedBoard.groups.forEach((group) => {
           group.tasks.sort((task1, task2) => {
+            if (!task1.timeline) return task1.timeline
             if (sortByCopy.order === 'ascending') {
-              return task1.timeline[1] - task2.timeline[1] 
+              return task1.timeline[1] - task2.timeline[1]
             } else {
-              return task2.timeline[1]  - task1.timeline[1]
+              return task2.timeline[1] - task1.timeline[1]
             }
           });
         });
-
       }
       return sortedBoard;
     },
