@@ -27,8 +27,8 @@
         </div>
         <div class="my-boards">
           <button>My Boards</button>
-          <ul >
-            <li v-for="(board,idx) in allBoards" :key="idx" ></li>
+          <ul v-if="allBoards">
+            <li v-for="board in boards" :key="board._id" ></li>
           <button>{{board.title}}</button>
           </ul>
         </div>
@@ -56,6 +56,10 @@ export default {
       isEditBoard: false,
     };
   },
+
+  created(){
+    console.log(this.allBoards);
+  },
   methods: {
     toggleNav() {
       this.isShown = !this.isShown;
@@ -82,6 +86,10 @@ export default {
     currUser() {
       return this.user ? this.user : null;
     },
+    boards(){
+      console.log(this.allBoards);
+      return this.allBoards
+    }
   },
 };
 </script>

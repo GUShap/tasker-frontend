@@ -76,12 +76,11 @@ async function getTaskRouteIdx(task, boardIdx) {
 
     var groupIdx = null;
     var taskIdx = null;
-    console.log("gBoards", gBoards);
-    const groups = gBoards[boardIdx].groups;
+    const groups = boards[boardIdx].groups;
     groups.forEach((g, idx) => {
       if (
         g.tasks.some((t, idx) => {
-          if (t.id === taskId) {
+          if (t.id === task.id) {
             taskIdx = idx;
             return true;
           }
@@ -90,8 +89,7 @@ async function getTaskRouteIdx(task, boardIdx) {
         groupIdx = idx;
       }
     });
-
-    return { task, taskIdx, groupIdx, activity : {type : title} };
+    return { task, taskIdx, groupIdx, activity : {type : 'title',newVal:task.title} };
   } catch (err) {
     console.log("Error", err);
     throw err;

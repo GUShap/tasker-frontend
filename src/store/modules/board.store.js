@@ -18,6 +18,9 @@ export const boardStore = {
     currBoard(state) {
       return JSON.parse(JSON.stringify(state.currBoard));
     },
+    currBoardIdx(state){
+      return state.currBoardIdx
+    },
     allBoards(state) {
       return JSON.parse(JSON.stringify(state.boards));
     },
@@ -172,7 +175,6 @@ export const boardStore = {
     async editGroup({ state, dispatch, commit }, { groupInfo }) {
       try {
         const { group, groupIdx } = groupInfo;
-        console.log(group);
         const boardCopy = JSON.parse(JSON.stringify(state.currBoard));
         boardCopy.groups.splice(groupIdx, 1, group);
 
