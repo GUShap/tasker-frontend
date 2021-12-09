@@ -9,7 +9,7 @@
     >
       <Draggable
         v-for="(group, groupIdx) in currGroups"
-        :key="group.id"
+        :key="groupIdx"
         style="
            {
             overflow: visible;
@@ -20,7 +20,6 @@
           v-if="group"
           :group="group"
           :user="loggedinUser"
-          :key="group.id"
           :board="board"
           :groupIdx="groupIdx"
           @addTask="addTask"
