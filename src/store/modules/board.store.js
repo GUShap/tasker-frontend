@@ -114,8 +114,7 @@ export const boardStore = {
         const { task, taskIdx, groupIdx, activity } = taskInfo;
         const boardCopy = JSON.parse(JSON.stringify(state.currBoard));
         if (task.id) {
-          if (task.isCopy)
-            boardCopy.groups[groupIdx].tasks.splice(taskIdx, 0, task);
+          if (task.isCopy){ boardCopy.groups[groupIdx].tasks.splice(taskIdx, 0, task)};
           boardCopy.groups[groupIdx].tasks.splice(taskIdx, 1, task);
         } else {
           task.id = utilService.makeId();
