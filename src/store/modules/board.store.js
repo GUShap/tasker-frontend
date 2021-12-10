@@ -16,9 +16,6 @@ export const boardStore = {
     isTaskDetailsHover: false,
   },
   getters: {
-    // currBoard(state) {
-    //   return JSON.parse(JSON.stringify(state.currBoard));
-    // },
     currBoardIdx(state) {
       return state.currBoardIdx;
     },
