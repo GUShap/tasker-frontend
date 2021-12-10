@@ -5,6 +5,7 @@
     @mouseover.self="pageHover(true)"
     @mouseleave="pageHover(false)"
   >
+  
     <i class="fa fa-times" @click="exitModal"></i>
     <div class="details-title flex">
       <input placeholder="title" v-model="task.title" @change="update" />
