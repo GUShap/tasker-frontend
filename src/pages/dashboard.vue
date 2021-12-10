@@ -14,9 +14,9 @@
     </header>
     <section class="charts-container">
       <div class="flex">
+      <doughnut-chart :labelsDate="statusLabelDate" :countsDate="statusCountsDate" class="chart"/>
       <doughnut-chart class="chart"/>
-      <doughnut-chart />
-      <doughnut-chart />
+      <doughnut-chart class="chart"/>
       </div>
     </section>
     </section>
@@ -53,6 +53,12 @@ export default {
     allUsers() {
       return this.$store.getters.getUsers;
     },
+    statusLabelDate(){
+        return ['Done','Work','Stuck']
+    },
+    statusCountsDate(){
+          return [3,5,6]
+    }
   },
   destroyed() {},
 };

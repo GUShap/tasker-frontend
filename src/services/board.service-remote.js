@@ -108,16 +108,25 @@ function _getBoardCopy(boardId) {
 }
 
 function filterBy(board, filterBy) {
-//   if (filterBy.filter === "searchKey") {
-//  board.groups = board.groups.map(group =>{
-//    group.tasks.filter(task=>{
-     
-//    })
-//    return group
-//  })
-//     return board
-//   }
-  return board;
+  console.log("filterBy", filterBy);
+  const regex = new RegExp(filterBy.val, "i");
+  var boardCopy = JSON.parse(JSON.stringify(board));
+  if (filterBy.filter === "searchKey") {
+    boardCopy.groups = boardCopy.groups.map((group) => {
+      group.tasks = group.tasks.filter((task) => {
+        if (!filterBy.val) return true;
+        console.log("task", task);
+        return regex.test(task.title)
+          ? true
+          : regex.test(task.status)
+          ? true
+          : regex.test(task.priority);
+      });
+      console.log(group);
+      return group;
+    });
+  }
+  return boardCopy;
 }
 
 async function getEmptyGroup() {
