@@ -8,7 +8,7 @@
 
 <script>
 import mainNav from "@/cmps/main-nav.vue";
-import {socketService} from "@/services/socket.service.js"
+import { socketService } from "@/services/socket.service.js";
 
 export default {
   components: {
@@ -17,18 +17,21 @@ export default {
   props: [],
   data() {
     return {
-      hideNav: true,
+      hideNav: null,
       isTaskDetails: null,
     };
   },
   created() {
-    this.$store.commit({type:'setLoggedinUser'})
-    const {name} = this.$route.params
-    if (name === "landing-page" ||name === "login") {
-        this.hideNav = true;
-      }
-if(this.loggedinUser) socketService.emit("user-watch", this.loggedinUser._id )
-socketService.on("")
+    const { name } = this.$route;
+    if (name === "landing-page" || name === "login") {
+      this.hideNav = true;
+    }
+
+    this.$store.commit({ type: "setLoggedinUser" });
+
+    if (this.loggedinUser)
+      socketService.emit("user-watch", this.loggedinUser._id);
+    socketService.on("");
   },
   methods: {
     detailsHover(isHovered) {
@@ -48,10 +51,9 @@ socketService.on("")
   watch: {
     $route: function (newVal, OldVal) {
       const { name } = newVal;
-      console.log('name',name);
-      if (name === "landing-page" ||name === "login") {
+      if (name === "landing-page" || name === "login") {
         this.hideNav = true;
-      }else{
+      } else {
         this.hideNav = false;
       }
     },

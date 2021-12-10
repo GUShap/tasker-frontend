@@ -19,7 +19,6 @@ export const remoteBoardService = {
 const BASE_URL = process.env.NODE_ENV !== "development" ? "board" : "board";
 
 async function query(filterBy = null) {
-  console.log('filterBy', filterBy);
   try {
     return await httpService.get(BASE_URL, filterBy);
   } catch (err) {

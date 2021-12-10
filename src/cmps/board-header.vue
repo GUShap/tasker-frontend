@@ -16,7 +16,7 @@
             v-show="isEditedMode && currEditedVal === 'title'"
             type="text"
             v-model="board.title"
-            v-on:keyup.enter="updateInfo"
+            @keyup.enter="updateInfo"
             @blur="updateInfo"
           />
           <a class="icon-info" @click="toggleDetails"></a>
@@ -54,7 +54,7 @@
           ref="description"
           type="text"
           v-model="currBoard.description"
-          v-on:keyup.enter="updateInfo"
+          @keyup.enter="updateInfo"
           @blur="updateInfo"
         />
       </div>
