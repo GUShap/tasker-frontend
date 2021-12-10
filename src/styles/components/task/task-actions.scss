@@ -109,10 +109,6 @@
     }
 }
 
-.fas,
-.far {
-    margin-right: 15px;
-}
 
 .el-select-dropdown {
     -webkit-animation: fade-in 0.5s ease-in-out both;
@@ -128,6 +124,10 @@
     gap: 10px;
     ul {
         margin: 1rem;
+    }
+    .fas,
+    .far {
+        margin-right: 15px;
     }
 }
 

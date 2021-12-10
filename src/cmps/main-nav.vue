@@ -3,7 +3,7 @@
     <nav class="page-nav">
       <router-link to="/home/" title="/Home/"
         ><span
-          ><img class="logo-img" :src="require(`@/pics/logo-task.png`)"  /></span
+          ><img class="logo-img" :src="require(`@/pics/logo-task.png`)" /></span
       ></router-link>
       <div class="pages">
         <router-link to="/board/" title="Workspace"
@@ -31,6 +31,7 @@
       <router-link to="/home/" class="fas fa-puzzle-piece" />
       <router-link to="/home/" class="icon-add-user" />
       <router-link to="/home/" class="icon-search" />
+      <i class="fas fa-sign-out-alt" @click="logout"></i>
       <router-link to="/home/" class="far fa-user-circle" />
       <!-- <img src="https://cdn.monday.com/icons/dapulse-person-column.svg"> -->
     </nav>
@@ -45,7 +46,12 @@ export default {
     return {};
   },
   created() {},
-  methods: {},
+  methods: {
+    logout() {
+      this.$store.dispatch("logout");
+      this.$router.push("/");
+    },
+  },
   computed: {},
   destroyed() {},
 };
