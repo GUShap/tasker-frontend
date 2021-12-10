@@ -108,7 +108,6 @@ function _getBoardCopy(boardId) {
 }
 
 function filterBy(board, filterBy) {
-  console.log("filterBy", filterBy);
   const regex = new RegExp(filterBy.val, "i");
   console.log(regex)
   var boardCopy = JSON.parse(JSON.stringify(board));

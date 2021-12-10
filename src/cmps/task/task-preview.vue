@@ -44,7 +44,7 @@ export default {
     taskDropdown,
   },
   props: [
-    "task",
+    "currentTask",
     "taskIdx",
     "groupIdx",
     "cmpsOrder",
@@ -52,7 +52,9 @@ export default {
     "boardMembers",
   ],
   data() {
-    return {};
+    return {
+      task : this.currTask
+    };
   },
   created() {},
   methods: {
@@ -91,22 +93,21 @@ export default {
       });
     },
     getCmpInfo(cmpType) {
-      const currTask = this.task;
+      const currentTask =this.currTask
       switch (cmpType) {
         case "title-picker":
-          return { taskId: currTask.id, title: currTask.title };
+          return { taskId: currentTask.id, title: currentTask.title };
         case "member-picker":
-          return { members: currTask.members, boardMembers: this.boardMembers };
+          return { members: currentTask.members, boardMembers: this.boardMembers };
         case "status-picker":
-          return { status: currTask.status };
+          return { status: currentTask.status };
         case "timeline-picker":
-          return { timeline: currTask.timeline, markerColor: this.markerColor };
+          return { timeline: currentTask.timeline, markerColor: this.markerColor };
         case "priority-picker":
-          return { priority: currTask.priority};
+          return { priority: currentTask.priority};
       }
     },
     updateTask(cmpType, ev) {
-      // console.log(ev)
       switch (cmpType) {
         case "title-picker":
           this.task.title = ev.title;
@@ -124,7 +125,6 @@ export default {
           this.task.priority = ev.priority;
           break;
       }
-      // console.log(ev.activity);
 
       const taskInfo = {
         task: this.task,
@@ -144,6 +144,13 @@ export default {
       // console.log(this.markerColor)
       return `8px solid ${this.markerColor}`;
     },
+    currTask(){
+      return this.currentTask
+    }
+
+  },
+  watch:{
+    
   },
   destroyed() {},
 };
