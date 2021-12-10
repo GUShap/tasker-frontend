@@ -185,8 +185,8 @@ export default {
     setEdit() {
       this.isFocusOn = true;
     },
-    // updateInfo() {
-      //   },
+    
+    
     async updateGroup() {
       try {
         this.isFocusOn = false;
