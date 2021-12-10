@@ -17,7 +17,7 @@
         "
       >
         <board-group
-          v-if="group && group.tasks && group.tasks.length"
+          v-if="group && group.tasks"
           :group="group"
           :user="loggedinUser"
           :board="board"
@@ -112,7 +112,7 @@ export default {
   },
   computed: {
     currGroups() {
-      console.log('this.board.groups', this.board.groups)
+      console.log(this.board)
       return this.board.groups;
     },
     loggedinUser() {

@@ -1,5 +1,6 @@
 <template>
-  <section class="task-container color-marker-after flex align-center">
+   
+  <section class="task-container color-marker-after flex align-center" v-if="currentTask">
     <task-dropdown
       @removeTask="removeTask"
       @openTaskDetails="openTaskDetails"
@@ -34,7 +35,6 @@ import { utilService } from "@/services/util.service.js";
 
 export default {
   name: "task-preview",
-  props:["markerColor"],
   components: {
     statusPicker,
     memberPicker,

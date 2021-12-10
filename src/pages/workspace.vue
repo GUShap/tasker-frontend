@@ -168,9 +168,7 @@ export default {
   computed: {
     currBoard() {
       const board =this.$store.getters.currBoard;
-      // if(board ){
-      //   console.log('workspace board getters',board.groups[0].tasks[0]);
-      // }
+      console.log('board',board);
       return board
     },
     loggedinUser() {
