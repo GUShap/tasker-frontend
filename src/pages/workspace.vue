@@ -19,31 +19,34 @@
         v-if="isInviteMode"
         @click="setInviteMode(false)"
       ></div>
-
-      <div class="invite-container" v-if="isInviteMode">
-        <ul class="invite-list">
-          <span>Board Members</span>
-          <p>Subscribe people from your team</p>
-          <input type="text" placeholder="Enter name or email" />
-          <li class="flex" v-for="currUser in allUsers" :key="currUser._id">
-            <div class="user flex">
-              <avatar
-                class="memebr-img"
-                :size="30"
-                :src="
-                  currUser.imgUrl ? require(`@/pics/${currUser.imgUrl}`) : null
-                "
-                :username="currUser.fullname"
-              />
-              <span>{{ currUser.fullname }}</span>
-            </div>
-            <div class="list-btn">
-              <a class="icon-crown"></a>
-              <i class="fas fa-times"></i>
-            </div>
-          </li>
-        </ul>
-      </div>
+      <transition>
+        <div class="invite-container" v-if="isInviteMode">
+          <ul class="invite-list">
+            <span>Board Members</span>
+            <p>Subscribe people from your team</p>
+            <input type="text" placeholder="Enter name or email" />
+            <li class="flex" v-for="currUser in allUsers" :key="currUser._id">
+              <div class="user flex" @click="addUserToBoard(currUser)">
+                <avatar
+                  class="memebr-img"
+                  :size="30"
+                  :src="
+                    currUser.imgUrl
+                      ? require(`@/pics/${currUser.imgUrl}`)
+                      : null
+                  "
+                  :username="currUser.fullname"
+                />
+                <span>{{ currUser.fullname }}</span>
+              </div>
+              <div class="list-btn">
+                <a class="icon-crown"></a>
+                <i class="fas fa-times"></i>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </transition>
       <task-actions-nav @sortBy="sortBy" @addNewGroup="addNewGroup" />
       <board-filter />
       <board-details
@@ -67,6 +70,7 @@ import boardHeader from "@/cmps/board-header.vue";
 import taskActionsNav from "@/cmps/task-actions-nav.vue";
 import popUpNav from "@/cmps/pop-up-nav.vue";
 import BoardDetails from "@/cmps/board/board-details.vue";
+import Avatar from "vue-avatar";
 
 export default {
   name: "workspace",
@@ -76,6 +80,7 @@ export default {
     taskActionsNav,
     popUpNav,
     BoardDetails,
+    Avatar,
   },
   props: [],
   data() {
@@ -108,7 +113,6 @@ export default {
 
     async addTask(taskInfo) {
       try {
-        // console.log("workspace", taskInfo);
         await this.$store.dispatch({ type: "editTask", taskInfo });
       } catch (err) {
         console.log("Error", err);
@@ -146,6 +150,14 @@ export default {
     },
     setInviteMode(isInvite) {
       this.isInviteMode = isInvite;
+    },
+    addUserToBoard(user) {
+      if (this.currBoard.members.some(
+          (member) => member.fullname === user.fullname))return;
+
+      this.currBoard.members.push(user);
+      this.$store.dispatch({type:'saveBoard', board: this.currBoard})
+      this.isInviteMode=false
     },
   },
   computed: {

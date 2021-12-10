@@ -1,4 +1,9 @@
-.task-details {
+.details-container{
+        position:absolute;
+        margin-left: 72vw;
+        // overflow:hidden;
+    
+    .task-details {
     position: sticky;
     margin: 0;
     display: flex;
@@ -7,20 +12,10 @@
     padding: 20px 10px;
     top: 10px;
     height: 100%;
-    margin-right: 50px;
-    min-width: 500px;
     z-index: 5;
     background-color: white;
-    width: 550px;
     text-align: center;
 
-    
-
-    // !!!!!!!!!
-    width: 650px;
-    // !!!!!!!!!
-
-    text-align: center;
 
     i {
         text-align: left;
@@ -111,4 +106,5 @@
         height: 100%;
     }
 
+}
 }
