@@ -12,13 +12,13 @@ import { faHome,faSortDown,faThLarge,faUserSecret } from '@fortawesome/free-soli
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import {InlineSvgPlugin} from 'vue-inline-svg';
 
-
+import VueDragResize from 'vue-drag-resize'
 
 library.add(faUserSecret ,faHome, faThLarge,faSortDown)
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 
-
+Vue.component('vue-drag-resize', VueDragResize)
 //=====
 Vue.use(InlineSvgPlugin);
 Vue.config.productionTip = false

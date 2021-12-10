@@ -1,5 +1,5 @@
 <template>
-  <section @click="editStatus" class="member-picker">
+  <section @click="editStatus" class="member-picker" v-if="info">
     <section>
       <section v-if="!selectedMembers">-</section>
       <avatar

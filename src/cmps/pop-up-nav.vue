@@ -27,6 +27,7 @@
         </div>
         <div class="my-boards">
           <button>My Boards</button>
+          <button @click="showDashboard">My Charts</button>
           <ul v-if="allBoards">
             <li v-for="board in boards" :key="board._id" ></li>
           <button>{{board.title}}</button>
@@ -58,7 +59,6 @@ export default {
   },
 
   created(){
-    console.log(this.allBoards);
   },
   methods: {
     toggleNav() {
@@ -78,6 +78,9 @@ export default {
     //   this.$store.dispatch({type:"addNewBoard"})
 
     // }
+    showDashboard(){
+      this.$router.push("/dashboard")
+    }
   },
   computed: {
     currBoard() {

@@ -1,34 +1,47 @@
 <template>
-  <section
+    <div class="details-container">
+  <VueDragResize
+  class="x"
+      :isActive="true"
+      :isDraggable="false"
+      :w="400"
+      
+      :h="1020"
+      :resizing="resize"
+      :dragging="resize"
+      :aspectRatio="false"
+      
+    >
+  <div
     v-if="task"
     class="task-details"
     @mouseover.self="pageHover(true)"
     @mouseleave="pageHover(false)"
   >
-    <i class="fa fa-times" @click="exitModal"></i>
-    <div class="details-title flex">
-      <input placeholder="title" v-model="task.title" @change="update" />
-      <div class="users">
-        <i class="fas fa-plus-circle"></i>
-        <i class="fas fa-user-circle"></i>
+      <i class="fa fa-times" @click="exitModal"></i>
+      <div class="details-title flex">
+        <input placeholder="title" v-model="task.title" @change="update" />
+        <div class="users">
+          <i class="fas fa-plus-circle"></i>
+          <i class="fas fa-user-circle"></i>
+        </div>
       </div>
-    </div>
-    <div class="log-menu flex">
-      <div class="nav-btn flex">
-        <button
-          class="flex"
-          :class="{ underline: component === 'task-updates' }"
-          @click="component = 'task-updates'"
-          @mouseover="btnHover(true, 'updates')"
-          @mouseleave="btnHover(false, null)"
-        >
-          updates
-          <btn-dropdown
-            class="dropdown-btn"
-            v-if="isBtnHover && hoveredBtn === 'updates'"
-          />
-        </button>
-        <!-- <button
+      <div class="log-menu flex">
+        <div class="nav-btn flex">
+          <button
+            class="flex"
+            :class="{ underline: component === 'task-updates' }"
+            @click="component = 'task-updates'"
+            @mouseover="btnHover(true, 'updates')"
+            @mouseleave="btnHover(false, null)"
+          >
+            updates
+            <btn-dropdown
+              class="dropdown-btn"
+              v-if="isBtnHover && hoveredBtn === 'updates'"
+            />
+          </button>
+          <!-- <button
           class="flex"
           :class="{ underline: component === 'task-files' }"
           @click="component = 'task-files'"
@@ -37,27 +50,32 @@
         >
           files<btn-dropdown v-if="isBtnHover && hoveredBtn === 'files'" />
         </button> -->
-        <button
-          class="flex"
-          :class="{ underline: component === 'activity-log' }"
-          @click="component = 'activity-log'"
-          @mouseover="btnHover(true, 'log')"
-          @mouseleave="btnHover(false, null)"
-        >
-          activity log<btn-dropdown v-if="isBtnHover && hoveredBtn === 'log'" />
-        </button>
+          <button
+            class="flex"
+            :class="{ underline: component === 'activity-log' }"
+            @click="component = 'activity-log'"
+            @mouseover="btnHover(true, 'log')"
+            @mouseleave="btnHover(false, null)"
+          >
+            activity log<btn-dropdown
+              v-if="isBtnHover && hoveredBtn === 'log'"
+            />
+          </button>
+        </div>
       </div>
+      <hr />
+      <template>
+        <component
+          :is="component"
+          :task="task"
+          class="cmp-container"
+          @editTask="editTask"
+        ></component>
+      </template>
+
+  </div>
+    </VueDragResize>
     </div>
-    <hr />
-    <template>
-      <component
-        :is="component"
-        :task="task"
-        class="cmp-container"
-        @editTask="editTask"
-      ></component>
-    </template>
-  </section>
 </template>
 
 <script>
@@ -66,6 +84,7 @@ import taskUpdates from "@/cmps/task/details cmps/task-updates.vue";
 import taskFiles from "@/cmps/task/details cmps/task-files.vue";
 import activityLog from "@/cmps/task/details cmps/activity-log.vue";
 import btnDropdown from "@/cmps/task/details cmps/btn-dropdown.vue";
+import VueDragResize from "vue-drag-resize";
 
 export default {
   name: "task-details",
@@ -74,6 +93,7 @@ export default {
     taskFiles,
     activityLog,
     btnDropdown,
+    VueDragResize,
   },
   data() {
     return {
@@ -81,6 +101,11 @@ export default {
       component: "task-updates",
       isBtnHover: false,
       hoveredBtn: null,
+
+      width: 0,
+      height: 0,
+      top: 0,
+      left: 0,
     };
   },
 
@@ -131,6 +156,12 @@ export default {
       } catch (err) {
         console.log(err);
       }
+    },
+    resize(newRect) {
+      this.width = newRect.width;
+      this.height = newRect.height;
+      this.top = newRect.top;
+      this.left = newRect.left;
     },
   },
 
