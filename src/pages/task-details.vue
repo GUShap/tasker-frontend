@@ -72,7 +72,6 @@
 <script>
 import { remoteBoardService } from "@/services/board.service-remote.js";
 import taskUpdates from "@/cmps/task/details cmps/task-updates.vue";
-import taskFiles from "@/cmps/task/details cmps/task-files.vue";
 import activityLog from "@/cmps/task/details cmps/activity-log.vue";
 import btnDropdown from "@/cmps/task/details cmps/btn-dropdown.vue";
 import VueDragResize from "vue-drag-resize";
@@ -81,7 +80,6 @@ export default {
   name: "task-details",
   components: {
     taskUpdates,
-    taskFiles,
     activityLog,
     btnDropdown,
     VueDragResize,
