@@ -181,7 +181,7 @@ export default {
       }
     },
     addNewGroup() {
-      this.$emit("addNewGroup");
+      this.$emit("addNewGroup", null);
     },
     sortVal(value) {
       const newSort = { ...this.sortBy };

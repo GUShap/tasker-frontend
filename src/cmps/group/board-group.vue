@@ -23,15 +23,17 @@
             style="padding-left: 10px; padding-right: 2px"
           />
           <i v-show="hover" class="group-drag-handle fas fa-grip-vertical" />
+
           <input
             class="input-group-name"
             :class="[isFocusOn ? 'border' : 'no-boder']"
             type="text"
-            v-model="groupTitle"
+            v-model="group.title"
             @change="updateGroup"
             @keyup.enter="updateGroup"
             :style="{ color: group.style.color }"
           />
+
         </div>
         <div v-for="(cmp, idx) in cmpsOrder" :key="idx">
           {{ cmpHeader(cmp) }}
@@ -103,7 +105,6 @@ import taskPreview from "@/cmps/task/task-preview.vue";
 import groupDropdown from "@/cmps/group/group-dropdown.vue";
 import { Container, Draggable } from "vue-smooth-dnd";
 import { applyDrag } from "../../services/dnd.util.js";
-import { utilService } from "@/services/util.service.js";
 
 export default {
   name: "board-group",
@@ -135,7 +136,7 @@ export default {
     };
   },
   created() {
-    console.log(this.group)
+    // console.log(this.group)
   },
   methods: {
     showGroup(val = null) {
@@ -163,8 +164,6 @@ export default {
     },
     duplicateGroup() {
       let groupCopy = JSON.parse(JSON.stringify(this.group));
-      delete groupCopy.id
-      groupCopy.id = utilService.makeId();
       this.$emit("addNewGroup", { group: groupCopy, groupIdx: this.groupIdx });
     },
     changeColor(color) {
@@ -181,18 +180,17 @@ export default {
       this.$emit("removeGroup", { group: this.group, groupIdx: this.groupIdx });
     },
     addNewGroup() {
-      this.$emit("addNewGroup", {});
+      this.$emit("addNewGroup", null);
     },
     setEdit() {
       this.isFocusOn = true;
     },
-    // updateInfo() {
-      //   },
+    
+    
     async updateGroup() {
       try {
         this.isFocusOn = false;
         const currGroup = this.group;
-        currGroup.title = this.groupTitle;
         const groupInfo = { group: currGroup, groupIdx: this.groupIdx };
         await this.$store.dispatch({
           type: "saveGroup",

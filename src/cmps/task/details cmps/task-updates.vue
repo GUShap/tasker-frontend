@@ -110,9 +110,14 @@
             </div>
             <div class="user-info">
               <div class="flex">
-                <img
-                  class="user-img"
-                  :src="require(`@/pics/${comment.byMember.imgUrl}`)"
+                <avatar
+                  class="member-img"
+                  :size="45"
+                  :src="
+                    comment.byMember.imgUrl
+                      ? require(`@/pics/${comment.byMember.imgUrl}`)
+                      : null
+                  "
                 />
                 <h3>{{ comment.byMember.fullname }}</h3>
               </div>
@@ -128,17 +133,92 @@
               <button><i class="far fa-thumbs-up"></i>like</button>
             </div>
             <div>
-              <button @click="replyMode">
+              <button @click="replyMode(comment)">
                 <i class="fas fa-reply"></i>reply
               </button>
             </div>
-            <input
-              type="text"
-              v-if="isReplyMode"
-              ref="reply"
-              @change="addReply"
-            />
-          </div>
+           
+          </div> 
+          
+        <form class="reply-form"
+              v-if="isReplyMode && currComment.id===comment.id"
+              @submit.prevent="saveComment"
+              @blur="setEdit"
+            >
+            
+              <div class="flex">
+                <avatar
+                  class="member-img"
+                  :size="35"
+                  :src="
+                    comment.byMember.imgUrl
+                      ? require(`@/pics/${comment.byMember.imgUrl}`)
+                      : null
+                  "
+                />
+
+                <div class="input-container">
+                  <input
+                    type="text"
+                    v-model="input"
+                    ref="input"
+                    :style="{ changeStyle }"
+                  />
+                </div>
+              </div>
+
+              <div class="actions-footer flex">
+                <div class="text-edit flex">
+                  <button><span class="icon-clip"></span> add files</button>
+                  <emoji-picker @emoji="insert" :search="search">
+                    <div
+                      slot="emoji-invoker"
+                      slot-scope="{ events: { click: clickEvent } }"
+                      @click.stop="clickEvent"
+                    >
+                      <button type="button">
+                        <span class="far fa-smile"></span> Emoji
+                      </button>
+                    </div>
+                    <div
+                      class="emoji-picker"
+                      slot="emoji-picker"
+                      slot-scope="{ emojis, insert }"
+                    >
+                      <div>
+                        <div class="emoji-search">
+                          <input
+                            type="text"
+                            v-model="search"
+                            placeholder="search"
+                          />
+                          <i class="fas fa-search"></i>
+                        </div>
+                        <div>
+                          <div
+                            v-for="(emojiGroup, category) in emojis"
+                            :key="category"
+                          >
+                            <h5>{{ category }}</h5>
+                            <div>
+                              <span
+                                v-for="(emoji, emojiName) in emojiGroup"
+                                :key="emojiName"
+                                @click="insert(emoji)"
+                                :title="emojiName"
+                                >{{ emoji }}</span
+                              >
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </emoji-picker>
+                  <button>@ mention</button>
+                </div>
+                <button class="save-btn">Reply</button>
+              </div>
+            </form>
         </div>
       </li>
     </ul>
@@ -149,6 +229,7 @@
 import { EmojiPicker } from "vue-emoji-picker";
 import { boardService } from "@/services/board.service.js";
 import timeStamp from "./time-stamp.vue";
+import Avatar from "vue-avatar";
 
 export default {
   name: "task-updates",
@@ -156,12 +237,14 @@ export default {
   components: {
     EmojiPicker,
     timeStamp,
+    Avatar,
   },
   data() {
     return {
       isEditMode: false,
       isReplyMode: false,
       newComment: null,
+      currComment:null,
       input: "",
       search: "",
       style: null,
@@ -175,6 +258,9 @@ export default {
       this.input += emoji;
     },
     saveComment() {
+      if(!this.$refs.input.value){
+      this.setEdit();
+        return}
       this.newComment.txt = this.$refs.input.value;
       if (!this.task.comments) this.task.comments = [];
       this.task.comments.push(this.newComment);
@@ -195,12 +281,12 @@ export default {
     focusInput() {
       // console.log(this.$refs.input);
     },
-    replyMode() {
+    replyMode(comment) {
+      this.currComment = comment
       this.isReplyMode = !this.isReplyMode;
     },
     addReply() {
-      if (!this.comment.replies) this.comment.replies=[]
-      
+      if (!this.comment.replies) this.comment.replies = [];
     },
   },
 

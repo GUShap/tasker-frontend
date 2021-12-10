@@ -141,7 +141,6 @@ export default {
     async addNewGroup(groupInfo) {
       try {
         await this.$store.dispatch({ type: "addNewGroup", groupInfo });
-        console.log("Group was add!");
       } catch (err) {
         console.log("Error", err);
       }
@@ -150,7 +149,6 @@ export default {
       this.$store.commit({ type: "setSort", sortBy });
     },
     filterBy(filterBy) {
-      console.log('workspace',filterBy);
       this.$store.commit({ type: "setFilter", filterBy });
     },
     setInviteMode(isInvite) {
@@ -168,9 +166,7 @@ export default {
   computed: {
     currBoard() {
       const board =this.$store.getters.currBoard;
-      // if(board ){
-      //   console.log('workspace board getters',board.groups[0].tasks[0]);
-      // }
+      // console.log('board',board);
       return board
     },
     loggedinUser() {

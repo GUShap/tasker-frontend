@@ -1,6 +1,6 @@
 <template>
-    <div class="details-container">
-  <VueDragResize
+    <!-- <div class="details-container"> -->
+  <!-- <VueDragResize
   class="x"
       :isActive="true"
       :isDraggable="false"
@@ -10,8 +10,7 @@
       :resizing="resize"
       :dragging="resize"
       :aspectRatio="false"
-      
-    >
+    > -->
   <div
     v-if="task"
     class="task-details"
@@ -41,15 +40,6 @@
               v-if="isBtnHover && hoveredBtn === 'updates'"
             />
           </button>
-          <!-- <button
-          class="flex"
-          :class="{ underline: component === 'task-files' }"
-          @click="component = 'task-files'"
-          @mouseover="btnHover(true,'files')"
-          @mouseleave="btnHover(false, null)"
-        >
-          files<btn-dropdown v-if="isBtnHover && hoveredBtn === 'files'" />
-        </button> -->
           <button
             class="flex"
             :class="{ underline: component === 'activity-log' }"
@@ -73,9 +63,9 @@
         ></component>
       </template>
 
-  </div>
+  <!-- </div> -->
   
-    </VueDragResize>
+    <!-- </VueDragResize> -->
     </div>
 </template>
 

@@ -1,5 +1,6 @@
 <template>
-  <section class="task-container color-marker-after flex align-center">
+   
+  <section class="task-container color-marker-after flex align-center" v-if="currentTask">
     <task-dropdown
       @removeTask="removeTask"
       @openTaskDetails="openTaskDetails"
@@ -49,6 +50,7 @@ export default {
     "cmpsOrder",
     "markerColor",
     "boardMembers",
+    "markerColor"
   ],
   data() {
     return {
@@ -107,30 +109,34 @@ export default {
       }
     },
     updateTask(cmpType, ev) {
+      let task = this.currentTask
+
+      console.log(task);
       switch (cmpType) {
         case "title-picker":
-          this.task.title = ev.title;
+          task.title = ev.title;
           break;
         case "member-picker":
-          this.task.members = ev.members;
+          task.members = ev.members;
           break;
         case "status-picker":
-          this.task.status = ev.status;
+          task.status = ev.status;
           break;
         case "timeline-picker":
-          this.task.timeline = ev.timeline;
+          task.timeline = ev.timeline;
           break;
         case "priority-picker":
-          this.task.priority = ev.priority;
+          task.priority = ev.priority;
           break;
       }
 
       const taskInfo = {
-        task: this.task,
+        task,
         groupIdx: this.groupIdx,
         taskIdx: this.taskIdx,
         activity: ev.activity,
       };
+
       this.$store.dispatch({
         type: "editTask",
         taskInfo,

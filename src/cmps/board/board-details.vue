@@ -17,7 +17,7 @@
         "
       >
         <board-group
-          v-if="group && group.tasks && group.tasks.length"
+          v-if="group && group.tasks"
           :group="group"
           :user="loggedinUser"
           :board="board"
@@ -39,6 +39,7 @@ import boardGroup from "@/cmps/group/board-group.vue";
 import { Container, Draggable } from "vue-smooth-dnd";
 import { applyDrag } from "@/services/dnd.util.js";
 import { socketService } from "@/services/socket.service.js";
+import { utilService } from "@/services/util.service.js";
 
 export default {
   name: "main-board",
@@ -93,9 +94,15 @@ export default {
       // }
     },
     addNewGroup(groupInfo) {
-      // group.boardId = this.board._id;
+      if (groupInfo) {
+        const { group } = groupInfo;
+        delete group.id;
+        group.id = utilService.makeId();
+      }
+      console.log(groupInfo);
       this.$emit("addNewGroup", groupInfo);
     },
+
     async onColumnDrop(dropResult) {
       try {
         const currBoard = Object.assign({}, this.board);
@@ -112,7 +119,7 @@ export default {
   },
   computed: {
     currGroups() {
-      console.log('this.board.groups', this.board.groups)
+      console.log(this.board)
       return this.board.groups;
     },
     loggedinUser() {
