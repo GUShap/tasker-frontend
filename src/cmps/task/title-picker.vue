@@ -36,17 +36,21 @@ export default {
     return {
       hover: false,
       isEditMode: false,
-      currTitle: this.info.title,
-      prevTitle : this.info.title,
+      currTitle: null,
+      prevTitle: null,
       activity: null,
       debounce: null,
     };
   },
-  created() {},
+  created() {
+    this.getInfo();
+  },
   methods: {
     openDetails() {
       if (this.isEditMode) return;
-      this.$router.push(`/board/task/${this.info.taskId}`).catch(()=>{});
+      const info = this.currInfo;
+      if (!info) return;
+      this.$router.push(`/board/task/${info.taskId}`).catch(() => {});
     },
     editMode(val) {
       this.isEditMode = !this.isEditMode;
@@ -55,7 +59,7 @@ export default {
       clearTimeout(this.debounce);
       this.prevTitle = this.currTitle;
       this.debounce = setTimeout(() => {
-        this
+        this;
         this.update();
       }, 800);
     },
@@ -67,11 +71,21 @@ export default {
       };
       this.$emit("updated", updateInfo);
     },
+    getInfo() {
+      const task = this.currInfo
+      this.currTitle = task.title;
+      this.prevTitle = task.title;
+    },
+  },
+  computed: {
+    currInfo() {
+      return this.info;
+    },
   },
   watch: {
     currTitle: function (newVal, oldVal) {
       if (newVal !== oldVal) {
-        this.activity = { type: "title", newVal, oldVal : this.prevTitle };
+        this.activity = { type: "title", newVal, oldVal: this.prevTitle };
       }
     },
   },

@@ -107,6 +107,10 @@ export default {
   },
 
   methods: {
+    // updateBoard(board) {
+    //         console.log("workspace",board.title);
+    //   this.$store.dispatch({ type: "updateFromSocket", board });
+    //},
     updateBoard(board) {
       this.$store.commit({ type: "saveBoard", board });
     },
@@ -161,7 +165,9 @@ export default {
   },
   computed: {
     currBoard() {
-      return this.$store.getters.currBoard;
+      const board =this.$store.getters.currBoard;
+      console.log('board',board);
+      return board
     },
     loggedinUser() {
       this.user = this.$store.getters.loggedinUser;

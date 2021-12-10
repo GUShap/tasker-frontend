@@ -38,18 +38,7 @@
         </div>
       </section>
     </header>
-    <!-- 
- <Container
-          lock-axis="x"
-          group-name="col"
-          :drop-placeholder="dropPlaceholderOptions"
-        >
-          <Draggable v-for="(cmp, idx) in cmpsOrder" :key="idx">
-            <div>
-              {{ cmpHeader(cmp) }}
-            </div>
-          </Draggable>
-        </Container> -->
+   
 
     <Container
       @drop="onTaskDrop(group.id, $event)"
@@ -69,9 +58,9 @@
       >
         <transition name="fade" :key="task.id">
           <task-preview
+          v-if="task"
             v-show="groupShow"
-            :key="task.id"
-            :task="task"
+            :currentTask="task"
             :taskIdx="taskIdx"
             @addTask="addTask"
             :cmpsOrder="board.cmpsOrder"
@@ -128,7 +117,7 @@ export default {
   data() {
     return {
       currGroups: null,
-      tasksList: this.group.tasks,
+      // tasksList: this.group.tasks,
       title: null,
       groupShow: true,
       groupTitle: this.group.title,
@@ -144,7 +133,9 @@ export default {
       },
     };
   },
-  created() {},
+  created() {
+    console.log(this.group)
+  },
   methods: {
     showGroup(val = null) {
       if (val) {
@@ -269,11 +260,14 @@ export default {
       const user = this.$store.getters.loggedinUser;
       return user;
     },
-  },
-  watch: {
-    group: function (newGroup, oldGroup) {
-      this.tasksList = newGroup.tasks;
+    tasksList() {
+      return this.group.tasks;
     },
   },
+  // watch: {
+  //   group: function (newGroup, oldGroup) {
+  //     this.tasksList = newGroup.tasks;
+  //   },
+  // },
 };
 </script>

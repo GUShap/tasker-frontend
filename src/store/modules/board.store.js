@@ -87,6 +87,7 @@ export const boardStore = {
       if (state.filterBy) {
         sortedBoard = remoteBoardService.filterBy(sortedBoard, state.filterBy);
       }
+      // console.log(sortedBoard)
       return sortedBoard;
     },
 
@@ -150,8 +151,22 @@ export const boardStore = {
       const currBoard = JSON.parse(JSON.stringify(state.currBoard));
       const newBoard = JSON.parse(JSON.stringify(board));
       try {
-        commit({ type: "saveBoard", board: newBoard });
         socketService.emit('board from store', newBoard)
+        commit({ type: "saveBoard", board: newBoard });
+        await remoteBoardService.save(newBoard);
+      } catch (err) {
+        console.log(err);
+        console.log("Error saveBoard");
+        commit({ type: "saveBoard", board: currBoard });
+      }
+    },
+    async updateFromSocket({ commit, state }, { board }) {
+      // optimistic
+      const currBoard = JSON.parse(JSON.stringify(state.currBoard));
+      const newBoard = JSON.parse(JSON.stringify(board));
+      try {
+        // socketService.emit('board from store', newBoard)
+        commit({ type: "saveBoard", board: newBoard });
         await remoteBoardService.save(newBoard);
       } catch (err) {
         console.log(err);

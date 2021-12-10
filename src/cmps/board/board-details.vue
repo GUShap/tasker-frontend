@@ -17,7 +17,7 @@
         "
       >
         <board-group
-          v-if="group && group.tasks && group.tasks.length"
+          v-if="group && group.tasks"
           :group="group"
           :user="loggedinUser"
           :board="board"
@@ -64,6 +64,11 @@ export default {
   },
   created() {
     socketService.emit("watch board", this.board._id);
+    
+  },
+  mounted(){
+    socketService.on("board updated", this.updateBoard);
+
   },
   methods: {
     updateBoard(board) {
@@ -114,15 +119,13 @@ export default {
   },
   computed: {
     currGroups() {
+      console.log(this.board)
       return this.board.groups;
     },
     loggedinUser() {
       const user = this.$store.getters.loggedinUser;
       return user;
     },
-  },
-  mounted() {
-    socketService.on("board updated", this.updateBoard);
   },
   destroyed() {},
 };

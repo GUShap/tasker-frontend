@@ -36,11 +36,19 @@
         >
           <div>
             <avatar
+              v-if="member.imgUrl"
               :size="22"
               :username="member.fullname"
               :src="require(`@/pics/${member.imgUrl}`)"
               :key="member._id"
             ></avatar>
+            <!-- <div
+              v-else
+              :size="22"
+              :username="member.fullname"
+              class="icon-user"
+              :key="member._id"
+            ></div> -->
           </div>
           <div>{{ member.fullname }}</div>
         </li>

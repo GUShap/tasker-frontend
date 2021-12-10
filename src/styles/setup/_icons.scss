@@ -117,6 +117,10 @@
     @include to-icon("\f075")
 }
 
+.icon-user{
+    font-family: monday;
+    @include to-icon("\f1c7")
+}
 .icon-invite{
     font-family: monday;
     @include to-icon("\f3fb")

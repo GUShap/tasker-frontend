@@ -19,7 +19,7 @@ export const remoteBoardService = {
 const BASE_URL = process.env.NODE_ENV !== "development" ? "board" : "board";
 
 async function query(filterBy = null) {
-  // console.log('filterBy', filterBy);
+  console.log('filterBy', filterBy);
   try {
     return await httpService.get(BASE_URL, filterBy);
   } catch (err) {
@@ -109,20 +109,41 @@ function _getBoardCopy(boardId) {
 
 function filterBy(board, filterBy) {
   const regex = new RegExp(filterBy.val, "i");
+  console.log(regex)
   var boardCopy = JSON.parse(JSON.stringify(board));
   if (filterBy.filter === "searchKey") {
-    boardCopy.groups = boardCopy.groups.map((group) => {
-      group.tasks = group.tasks.filter((task) => {
-        if (!filterBy.val) return true;
-        return regex.test(task.title)
-          ? true
-          : regex.test(task.status)
-          ? true
-          : regex.test(task.priority);
+    if (!filterBy.filter.type) {
+      boardCopy.groups = boardCopy.groups.map((group) => {
+        group.tasks = group.tasks.filter((task) => {
+          if (!filterBy.val) return true;
+          console.log("task", task);
+          return regex.test(task.title)
+            ? true
+            : regex.test(task.status)
+              ? true
+              : regex.test(task.priority);
+        });
+        return group;
       });
-      return group;
-    });
+    }
   }
+  else if (filterBy.filter === 'title') {
+     boardCopy.groups = boardCopy.groups.filter((group) => {
+      return regex.test(group.title)
+    })
+  }
+  // else if (filterBy.filter === 'member') {
+  //   boardCopy.groups = boardCopy.groups.map((group) => {
+  //     group.tasks.map((task) => {
+  //       task.members.filter((member) => {
+  //         return regex.test(member.fullname)
+  //       })
+  //       return group
+  //     })
+  //   })
+  // }
+  
+  // console.log(boardCopy, 'boardcopy')
   return boardCopy;
 }
 
