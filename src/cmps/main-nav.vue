@@ -1,32 +1,26 @@
 <template>
   <section class="main-nav">
-    <nav class="page-nav">
-      <router-link to="/home/" title="/Home/"
-        ><span
-          ><img class="logo-img" :src="require(`@/pics/logo-task.png`)"  /></span
-      ></router-link>
-      <div class="pages">
+    <nav class="sub-nav">
+      <router-link to="/home/" title="/Home/">
+      <img class="logo-img" :src="require(`@/pics/logo-task.png`)"/>
+      </router-link>
         <router-link to="/board/" title="Workspace"
           ><span class="icon-workspace"></span
         ></router-link>
-        <router-link
-          to="/home/"
-          title="notification"
-          class="far fa-bell fa-lg"
-        />
+        <router-link to="/home/" title="notification" class="far fa-bell" />
         <router-link
           to="/home/"
           title="calender"
           class="far fa-calendar-check"
-        />
-      </div>
+        />    
     </nav>
+
     <div class="side-msg">
       <span class="icon-two-stars" v-if="user">Hello {{ user.fullname }}</span>
       <span class="icon-two-stars" v-else>Hello Guest</span>
     </div>
 
-    <nav class="user-nav">
+    <nav class="sub-nav">
       <!-- <span class="icon_component surface-item-icon icon_component--no-focus-style"></span> -->
       <router-link to="/home/" class="fas fa-puzzle-piece" />
       <router-link to="/home/" class="icon-add-user" />

@@ -164,7 +164,7 @@ export default {
       isSearch: false,
       searchKey: "",
       isShown: false,
-      isFilterBy: true,
+      isFilterBy: false,
       sortBy: {
         val: null,
         order: "ascending",

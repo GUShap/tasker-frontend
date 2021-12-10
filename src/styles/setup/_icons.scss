@@ -130,6 +130,14 @@
     font-family: monday;
     @include to-icon("\f266")
 }
+.icon-toggle-left{
+    font-family: monday;
+    @include to-icon("\f108")
+}
+.icon-toggle-right{
+    font-family: monday;
+    @include to-icon("\f109")
+}
 
 // .icon-format{
 //     font-family: monday;

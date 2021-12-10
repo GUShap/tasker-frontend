@@ -1,54 +1,64 @@
 <template>
-  <section class="workspace-container flex">
+  <section class="workspace-container">
+
+    <!-- MEMBERS MODAL -->
+    <section
+      class="cover"
+      v-if="isInviteMode"
+      @click="setInviteMode(false)"
+    ></section>
+
+    <transition>
+      <section class="invite-container" v-if="isInviteMode">
+        <ul class="invite-list">
+          <span>Board Members</span>
+          <p>Subscribe people from your team</p>
+          <input type="text" placeholder="Enter name or email" />
+          <li class="flex" v-for="currUser in allUsers" :key="currUser._id">
+            <div class="user flex" @click="addUserToBoard(currUser)">
+              <avatar
+                class="memebr-img"
+                :size="30"
+                :src="
+                  currUser.imgUrl ? require(`@/pics/${currUser.imgUrl}`) : null
+                "
+                :username="currUser.fullname"
+              />
+              <span>{{ currUser.fullname }}</span>
+            </div>
+            <div class="list-btn">
+              <a class="icon-crown"></a>
+              <i class="fas fa-times"></i>
+            </div>
+          </li>
+        </ul>
+      </section>
+    </transition>
+    <!-- POP UP NAV -->
     <pop-up-nav
-      class="pop-up-nav"
       :board="currBoard"
       :allBoards="boards"
       :user="loggedinUser"
     ></pop-up-nav>
+    <!-- WORKSPACE -->
     <section class="workspace">
-      <board-header
-        @screenCover="setInviteMode"
-        :board="currBoard"
-        :user="loggedinUser"
-        :allBoards="boards"
-        :allUsers="allUsers"
-      />
-      <div
-        class="cover"
-        v-if="isInviteMode"
-        @click="setInviteMode(false)"
-      ></div>
-      <transition>
-        <div class="invite-container" v-if="isInviteMode">
-          <ul class="invite-list">
-            <span>Board Members</span>
-            <p>Subscribe people from your team</p>
-            <input type="text" placeholder="Enter name or email" />
-            <li class="flex" v-for="currUser in allUsers" :key="currUser._id">
-              <div class="user flex" @click="addUserToBoard(currUser)">
-                <avatar
-                  class="memebr-img"
-                  :size="30"
-                  :src="
-                    currUser.imgUrl
-                      ? require(`@/pics/${currUser.imgUrl}`)
-                      : null
-                  "
-                  :username="currUser.fullname"
-                />
-                <span>{{ currUser.fullname }}</span>
-              </div>
-              <div class="list-btn">
-                <a class="icon-crown"></a>
-                <i class="fas fa-times"></i>
-              </div>
-            </li>
-          </ul>
-        </div>
-      </transition>
-      <task-actions-nav @sortBy="sortBy" @filterBy="filterBy" @addNewGroup="addNewGroup" :allUsers="allUsers" :board="currBoard"/>
-      <board-filter />
+      <header>
+        <board-header
+          @screenCover="setInviteMode"
+          :board="currBoard"
+          :user="loggedinUser"
+          :allUsers="allUsers"
+        />
+
+        <task-actions-nav
+          @sortBy="sortBy"
+          @filterBy="filterBy"
+          @addNewGroup="addNewGroup"
+          :allUsers="allUsers"
+          :board="currBoard"
+        />
+        <!-- <board-filter /> -->
+      </header>
       <board-details
         v-if="currBoard"
         :user="loggedinUser"
@@ -150,26 +160,29 @@ export default {
       this.$store.commit({ type: "setSort", sortBy });
     },
     filterBy(filterBy) {
-      console.log('workspace',filterBy);
+      console.log("workspace", filterBy);
       this.$store.commit({ type: "setFilter", filterBy });
     },
     setInviteMode(isInvite) {
       this.isInviteMode = isInvite;
     },
     addUserToBoard(user) {
-      if (this.currBoard.members.some(
-          (member) => member.fullname === user.fullname))return;
+      if (
+        this.currBoard.members.some(
+          (member) => member.fullname === user.fullname
+        )
+      )
+        return;
 
       this.currBoard.members.push(user);
-      this.$store.dispatch({type:'saveBoard', board: this.currBoard})
-      this.isInviteMode=false
+      this.$store.dispatch({ type: "saveBoard", board: this.currBoard });
+      this.isInviteMode = false;
     },
   },
   computed: {
     currBoard() {
-      const board =this.$store.getters.currBoard;
-      console.log('board',board);
-      return board
+      const board = this.$store.getters.currBoard;
+      return board;
     },
     loggedinUser() {
       this.user = this.$store.getters.loggedinUser;
