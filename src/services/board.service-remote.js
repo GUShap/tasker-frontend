@@ -128,7 +128,7 @@ function filterBy(board, filterBy) {
     }
   }
   else if (filterBy.filter === 'title') {
-    boardCopy.groups = boardCopy.groups.filter((group) => {
+     boardCopy.groups = boardCopy.groups.filter((group) => {
       return regex.test(group.title)
     })
   }

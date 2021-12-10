@@ -35,7 +35,7 @@ import { utilService } from "@/services/util.service.js";
 
 export default {
   name: "task-preview",
-  components: {
+ components: {
     statusPicker,
     memberPicker,
     titlePicker,
