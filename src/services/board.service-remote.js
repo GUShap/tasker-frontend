@@ -19,7 +19,6 @@ export const remoteBoardService = {
 const BASE_URL = process.env.NODE_ENV !== "development" ? "board" : "board";
 
 async function query(filterBy = null) {
-  console.log('filterBy', filterBy);
   try {
     return await httpService.get(BASE_URL, filterBy);
   } catch (err) {
@@ -127,8 +126,11 @@ function filterBy(board, filterBy) {
       });
     }
   }
+  else if (filterBy.filter === 'all') {
+    return boardCopy;
+  }
   else if (filterBy.filter === 'title') {
-     boardCopy.groups = boardCopy.groups.filter((group) => {
+    boardCopy.groups = boardCopy.groups.filter((group) => {
       return regex.test(group.title)
     })
   }
@@ -138,12 +140,16 @@ function filterBy(board, filterBy) {
   //       task.members.filter((member) => {
   //         return regex.test(member.fullname)
   //       })
-  //       return group
   //     })
   //   })
   // }
-  
-  // console.log(boardCopy, 'boardcopy')
+  else if (filterBy.filter === 'status') {
+    boardCopy.groups = boardCopy.groups.map((group) => {
+      group.tasks.filter((task) => {
+        return regex.test(task.status)
+      })
+    })
+  }
   return boardCopy;
 }
 

@@ -1,7 +1,7 @@
 <template>
   <section @click="editStatus" class="member-picker" v-if="info">
     <section>
-      <section v-if="!selectedMembers">-</section>
+      <section v-if="!selectedMembers"><span class="icon-user"></span></section>
       <avatar
         v-else
         v-for="member in selectedMembers"

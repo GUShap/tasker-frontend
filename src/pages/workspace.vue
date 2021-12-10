@@ -151,7 +151,6 @@ export default {
     async addNewGroup(groupInfo) {
       try {
         await this.$store.dispatch({ type: "addNewGroup", groupInfo });
-        console.log("Group was add!");
       } catch (err) {
         console.log("Error", err);
       }
@@ -160,23 +159,34 @@ export default {
       this.$store.commit({ type: "setSort", sortBy });
     },
     filterBy(filterBy) {
-      console.log("workspace", filterBy);
       this.$store.commit({ type: "setFilter", filterBy });
     },
     setInviteMode(isInvite) {
       this.isInviteMode = isInvite;
     },
     addUserToBoard(user) {
-      if (
-        this.currBoard.members.some(
-          (member) => member.fullname === user.fullname
-        )
-      )
+      if (this.currBoard.members.some((member) => member._id === user._id))
         return;
 
       this.currBoard.members.push(user);
       this.$store.dispatch({ type: "saveBoard", board: this.currBoard });
       this.isInviteMode = false;
+    },
+    removeUserFromBoard(user) {
+      if (!this.currBoard.members.some((member) => member._id === user._id))
+        return;
+      console.log(user);
+
+      const idx = this.currBoard.members.findIndex(
+        (member) => member._id === user._id
+      );
+
+      this.currBoard.members.splice(idx, 1);
+      this.$store.dispatch({ type: "saveBoard", board: this.currBoard });
+      this.isInviteMode = false;
+    },
+     isMember(user) {
+     if(this.currBoard.members.some((member) => member._id === user._id)) return '#341ff5'
     },
   },
   computed: {
@@ -194,6 +204,7 @@ export default {
     allUsers() {
       return this.$store.getters.getUsers;
     },
+   
   },
   destroyed() {},
 };
