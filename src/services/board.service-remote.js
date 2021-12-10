@@ -108,15 +108,15 @@ function _getBoardCopy(boardId) {
 }
 
 function filterBy(board, filterBy) {
-  if (filterBy.filter === "searchKey") {
- board.groups = board.groups.map(group =>{
-   group.tasks.filter(task=>{
+//   if (filterBy.filter === "searchKey") {
+//  board.groups = board.groups.map(group =>{
+//    group.tasks.filter(task=>{
      
-   })
-   return group
- })
-    return board
-  }
+//    })
+//    return group
+//  })
+//     return board
+//   }
   return board;
 }
 

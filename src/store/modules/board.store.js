@@ -30,6 +30,7 @@ export const boardStore = {
       const sortByCopy = JSON.parse(JSON.stringify(state.sortBy))
       if (sortByCopy.val === 'name') {
         sortedBoard.groups.forEach((group) => {
+          if(!group.tasks) return [];
           group.tasks.sort((task1, task2) => {
             if (sortByCopy.order === "ascending") {
               return task1.title.toLowerCase() >= task2.title.toLowerCase()
@@ -148,6 +149,7 @@ export const boardStore = {
 
     async saveBoard({ commit, state }, { board }) {
       // optimistic
+      // console.log(board.groups[0].tasks[0])
       const currBoard = JSON.parse(JSON.stringify(state.currBoard));
       const newBoard = JSON.parse(JSON.stringify(board));
       try {

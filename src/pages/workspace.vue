@@ -14,7 +14,11 @@
         :allBoards="boards"
         :allUsers="allUsers"
       />
-      <div class="cover" v-if="isInviteMode" @click="setInviteMode(false)"></div>
+      <div
+        class="cover"
+        v-if="isInviteMode"
+        @click="setInviteMode(false)"
+      ></div>
 
       <div class="invite-container" v-if="isInviteMode">
         <ul class="invite-list">
@@ -99,7 +103,6 @@ export default {
 
   methods: {
     updateBoard(board) {
-      
       this.$store.commit({ type: "saveBoard", board });
     },
 
@@ -137,7 +140,6 @@ export default {
     },
     sortBy(sortBy) {
       this.$store.commit({ type: "setSort", sortBy });
-      // this.$store.dispatch({ type: "loadBoards" });
     },
     filterBy(filterBy) {
       this.$store.commit({ type: "setFilter", filterBy });
@@ -149,7 +151,6 @@ export default {
   computed: {
     currBoard() {
       return this.$store.getters.currBoard;
-      // return this.$store.getters.sortedBoard;
     },
     loggedinUser() {
       this.user = this.$store.getters.loggedinUser;
