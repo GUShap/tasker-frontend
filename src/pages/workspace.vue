@@ -41,13 +41,23 @@
               </div>
               <div class="list-btn">
                 <a class="icon-crown"></a>
-                <i class="fas fa-times"></i>
+                <i
+                  class="fas fa-times"
+                  :style="{color:isMember(currUser)}"
+                  @click="removeUserFromBoard(currUser)"
+                ></i>
               </div>
             </li>
           </ul>
         </div>
       </transition>
-      <task-actions-nav @sortBy="sortBy" @filterBy="filterBy" @addNewGroup="addNewGroup" :allUsers="allUsers" :board="currBoard"/>
+      <task-actions-nav
+        @sortBy="sortBy"
+        @filterBy="filterBy"
+        @addNewGroup="addNewGroup"
+        :allUsers="allUsers"
+        :board="currBoard"
+      />
       <board-filter />
       <board-details
         v-if="currBoard"
@@ -155,19 +165,35 @@ export default {
       this.isInviteMode = isInvite;
     },
     addUserToBoard(user) {
-      if (this.currBoard.members.some(
-          (member) => member.fullname === user.fullname))return;
+      if (this.currBoard.members.some((member) => member._id === user._id))
+        return;
 
       this.currBoard.members.push(user);
-      this.$store.dispatch({type:'saveBoard', board: this.currBoard})
-      this.isInviteMode=false
+      this.$store.dispatch({ type: "saveBoard", board: this.currBoard });
+      this.isInviteMode = false;
+    },
+    removeUserFromBoard(user) {
+      if (!this.currBoard.members.some((member) => member._id === user._id))
+        return;
+      console.log(user);
+
+      const idx = this.currBoard.members.findIndex(
+        (member) => member._id === user._id
+      );
+
+      this.currBoard.members.splice(idx, 1);
+      this.$store.dispatch({ type: "saveBoard", board: this.currBoard });
+      this.isInviteMode = false;
+    },
+     isMember(user) {
+     if(this.currBoard.members.some((member) => member._id === user._id)) return '#341ff5'
     },
   },
   computed: {
     currBoard() {
-      const board =this.$store.getters.currBoard;
+      const board = this.$store.getters.currBoard;
       // console.log('board',board);
-      return board
+      return board;
     },
     loggedinUser() {
       this.user = this.$store.getters.loggedinUser;
@@ -179,6 +205,7 @@ export default {
     allUsers() {
       return this.$store.getters.getUsers;
     },
+   
   },
   destroyed() {},
 };
