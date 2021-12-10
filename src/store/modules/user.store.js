@@ -68,7 +68,8 @@ export const userStore = {
             try {
                 const user = await userService.getById(userId);
                 commit({ type: 'setWatchedUser', user })
-                socketService.emit(SOCKET_EMIT_USER_WATCH, userId)
+                socketService.emit('set-user-socket', userId)
+                console.log('user socket sended');
                 socketService.off(SOCKET_EVENT_USER_UPDATED)
                 socketService.on(SOCKET_EVENT_USER_UPDATED, user => {
                     commit({ type: 'setWatchedUser', user })
