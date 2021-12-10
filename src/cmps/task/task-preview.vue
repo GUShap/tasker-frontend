@@ -34,8 +34,7 @@ import { utilService } from "@/services/util.service.js";
 
 export default {
   name: "task-preview",
-  props:["markerColor"],
-  components: {
+ components: {
     statusPicker,
     memberPicker,
     titlePicker,
