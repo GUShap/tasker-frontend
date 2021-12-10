@@ -166,7 +166,7 @@ export default {
   computed: {
     currBoard() {
       const board =this.$store.getters.currBoard;
-      console.log('board',board);
+      // console.log('board',board);
       return board
     },
     loggedinUser() {

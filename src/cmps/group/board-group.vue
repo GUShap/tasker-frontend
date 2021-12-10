@@ -134,7 +134,7 @@ export default {
     };
   },
   created() {
-    console.log(this.group)
+    // console.log(this.group)
   },
   methods: {
     showGroup(val = null) {
