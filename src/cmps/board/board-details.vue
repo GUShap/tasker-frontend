@@ -37,8 +37,8 @@
 <script>
 import boardGroup from "@/cmps/group/board-group.vue";
 import { Container, Draggable } from "vue-smooth-dnd";
-import { applyDrag } from "../../services/dnd.util.js";
-import { socketService } from "../../services/socket.service.js";
+import { applyDrag } from "@/services/dnd.util.js";
+import { socketService } from "@/services/socket.service.js";
 
 export default {
   name: "main-board",
@@ -63,7 +63,6 @@ export default {
   },
   created() {
     socketService.emit("watch board", this.board._id);
-    socketService.on("board updated", this.updateBoard);
   },
   methods: {
     updateBoard(board) {
@@ -115,6 +114,9 @@ export default {
       const user = this.$store.getters.loggedinUser;
       return user;
     },
+  },
+  mounted(){
+    socketService.on("board updated", this.updateBoard);
   },
   destroyed() {},
 };

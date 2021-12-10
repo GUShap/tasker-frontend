@@ -27,7 +27,7 @@
           
           </div>
         <div>
-          <div class="filter-options">
+          <div class="filter-options" v-if="board">
             <div class="member-avatars-filter">
               <h1>By members</h1>
               <section v-if="!allUsers">

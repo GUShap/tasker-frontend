@@ -8,6 +8,7 @@
 
 <script>
 import mainNav from "@/cmps/main-nav.vue";
+import {socketService} from "@/services/socket.service.js"
 
 export default {
   components: {
@@ -26,6 +27,8 @@ export default {
     if (name === "landing-page" ||name === "login") {
         this.hideNav = true;
       }
+socketService.emit("user-watch", this.loggedinUser._id)
+socketService.on("")
   },
   methods: {
     detailsHover(isHovered) {
