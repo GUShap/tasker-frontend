@@ -25,6 +25,7 @@
     "vue": "^2.6.11",
     "vue-avatar": "^2.3.3",
     "vue-chartjs": "^3.5.1",
+    "vue-drag-resize": "^1.5.4",
     "vue-emoji-picker": "^1.0.3",
     "vue-inline-svg": "^2.1.0",
     "vue-router": "^3.2.0",
