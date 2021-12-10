@@ -40,7 +40,7 @@
           </li>
         </ul>
       </div>
-      <task-actions-nav @sortBy="sortBy" @addNewGroup="addNewGroup" />
+      <task-actions-nav @sortBy="sortBy" @addNewGroup="addNewGroup" :allUsers="allUsers" :board="currBoard"/>
       <board-filter />
       <board-details
         v-if="currBoard"

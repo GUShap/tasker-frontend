@@ -15,16 +15,50 @@
         placeholder="Search"
         v-model="searchKey"
       />
-      <button>
+      <button @click="showModal('filter')">
         <span class="icon-filter"></span>Filter<span
           class="icon-arrow-down"
         ></span>
       </button>
       <div v-if="isFilterBy" class="filter-menu">
-        <div>Quick filters</div>
-        <div></div>
+        <div class="header flex space-between">
+          <div>Quick filters</div>
+          <div>Clear all</div>
+          
+          </div>
+        <div>
+          <div class="filter-options">
+            <div class="member-avatars-filter">
+              <h1>By members</h1>
+              <section v-if="!allUsers">
+                <avatar :size="30" username="i" />
+              </section>
+              <avatar
+                class="member-img"
+                v-else
+                @click="filterBy(user.fullname)"
+                v-for="(user, idx) in board.members"
+                :size="25"
+                :username="user.fullname"
+                :src="user.imgUrl ? require(`@/pics/${user.imgUrl}`) : null"
+                :key="idx"
+              />
+            </div>
+            <div class="groups">
+                 <h1>By group</h1>
+              <div class="group-title-container" v-for="(group, idx) in board.groups" :key="idx">
+                {{ group.title }}
+              </div>
+            </div>
+          </div>
+          <!-- <div class="status">
+            <div v-for="(task, idx) in board.groups.tasks" :key="idx">
+              {{ task }}
+            </div>
+          </div> -->
         </div>
-      <button @click="showModal">
+      </div>
+      <button @click="showModal('sort')">
         <span class="icon-sort-up-down"></span>Sort
       </button>
     </section>
@@ -54,11 +88,10 @@
               <el-option value="timeline" @click.native="sortVal('timeline')"
                 ><i class="fas fa-stream"></i>Timeline</el-option
               >
-                <el-option value="priority" @click.native="sortVal('priority')"
+              <el-option value="priority" @click.native="sortVal('priority')"
                 ><i class="fas fa-exclamation"></i>Priority</el-option
               >
             </el-select>
-            
           </div>
           <div>
             <el-select
@@ -87,14 +120,19 @@
 
 
 <script>
+import Avatar from "vue-avatar";
+
 export default {
+  components: { Avatar },
+
   name: "task-actions",
+  props: ["allUsers", "board"],
   data() {
     return {
       isSearch: false,
       searchKey: "",
       isShown: false,
-      isFilterBy: false,
+      isFilterBy: true,
       sortBy: {
         val: null,
         order: "ascending",
@@ -102,8 +140,13 @@ export default {
     };
   },
   methods: {
-    showModal() {
-      this.isShown = !this.isShown;
+    showModal(val) {
+      if (val === "filter") {
+        this.isFilterBy = !this.isFilterBy;
+      }
+      if (val === "sort") {
+        this.isShown = !this.isShown;
+      }
     },
     addNewGroup() {
       this.$emit("addNewGroup");
