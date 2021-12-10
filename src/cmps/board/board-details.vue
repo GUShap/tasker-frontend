@@ -39,6 +39,7 @@ import boardGroup from "@/cmps/group/board-group.vue";
 import { Container, Draggable } from "vue-smooth-dnd";
 import { applyDrag } from "@/services/dnd.util.js";
 import { socketService } from "@/services/socket.service.js";
+import { utilService } from "@/services/util.service.js";
 
 export default {
   name: "main-board",
@@ -66,7 +67,6 @@ export default {
   },
   methods: {
     updateBoard(board) {
-      console.log();
       this.$emit("updateBoard", board);
     },
 
@@ -89,9 +89,15 @@ export default {
       // }
     },
     addNewGroup(groupInfo) {
-      // group.boardId = this.board._id;
+      if (groupInfo) {
+        const { group } = groupInfo;
+        delete group.id;
+        group.id = utilService.makeId();
+      }
+      console.log(groupInfo);
       this.$emit("addNewGroup", groupInfo);
     },
+
     async onColumnDrop(dropResult) {
       try {
         const currBoard = Object.assign({}, this.board);
@@ -115,7 +121,7 @@ export default {
       return user;
     },
   },
-  mounted(){
+  mounted() {
     socketService.on("board updated", this.updateBoard);
   },
   destroyed() {},

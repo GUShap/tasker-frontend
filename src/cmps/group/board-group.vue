@@ -114,7 +114,6 @@ import taskPreview from "@/cmps/task/task-preview.vue";
 import groupDropdown from "@/cmps/group/group-dropdown.vue";
 import { Container, Draggable } from "vue-smooth-dnd";
 import { applyDrag } from "../../services/dnd.util.js";
-import { utilService } from "@/services/util.service.js";
 
 export default {
   name: "board-group",
@@ -172,8 +171,6 @@ export default {
     },
     duplicateGroup() {
       let groupCopy = JSON.parse(JSON.stringify(this.group));
-      delete groupCopy.id
-      groupCopy.id = utilService.makeId();
       this.$emit("addNewGroup", { group: groupCopy, groupIdx: this.groupIdx });
     },
     changeColor(color) {
@@ -190,7 +187,7 @@ export default {
       this.$emit("removeGroup", { group: this.group, groupIdx: this.groupIdx });
     },
     addNewGroup() {
-      this.$emit("addNewGroup", {});
+      this.$emit("addNewGroup", null);
     },
     setEdit() {
       this.isFocusOn = true;

@@ -16,9 +16,9 @@ export const boardStore = {
     isTaskDetailsHover: false,
   },
   getters: {
-    currBoard(state) {
-      return JSON.parse(JSON.stringify(state.currBoard));
-    },
+    // currBoard(state) {
+    //   return JSON.parse(JSON.stringify(state.currBoard));
+    // },
     currBoardIdx(state) {
       return state.currBoardIdx;
     },
@@ -30,7 +30,7 @@ export const boardStore = {
       const sortByCopy = JSON.parse(JSON.stringify(state.sortBy))
       if (sortByCopy.val === 'name') {
         sortedBoard.groups.forEach((group) => {
-          if(!group.tasks) return [];
+          if (!group.tasks) return [];
           group.tasks.sort((task1, task2) => {
             if (sortByCopy.order === "ascending") {
               return task1.title.toLowerCase() >= task2.title.toLowerCase()
@@ -87,7 +87,6 @@ export const boardStore = {
           });
         });
       }
-      console.log('label');
       if (state.filterBy) {
         sortedBoard = remoteBoardService.filterBy(sortedBoard, state.filterBy);
       }
@@ -230,15 +229,17 @@ export const boardStore = {
     async addNewGroup({ state, dispatch, commit }, { groupInfo }) {
       try {
         const boardCopy = JSON.parse(JSON.stringify(state.currBoard));
-
-        if (groupInfo) {
-          const { group, groupIdx } = groupInfo;
-          boardCopy.groups.splice(groupIdx, 0, group);
-        } else {
+        
+        if (!groupInfo) {
           const newGroup = await remoteBoardService.getEmptyGroup();
+          console.log(newGroup);
           boardCopy.groups.unshift(newGroup);
         }
-
+        else {
+          const { group, groupIdx } = groupInfo;
+          boardCopy.groups.splice(groupIdx, 0, group)
+        }
+        
         dispatch({ type: "saveBoard", board: boardCopy });
       } catch (err) {
         console.log(err);

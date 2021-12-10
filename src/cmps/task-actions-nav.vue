@@ -132,7 +132,7 @@ export default {
       isSearch: false,
       searchKey: "",
       isShown: false,
-      isFilterBy: true,
+      isFilterBy: false,
       sortBy: {
         val: null,
         order: "ascending",
@@ -149,7 +149,7 @@ export default {
       }
     },
     addNewGroup() {
-      this.$emit("addNewGroup");
+      this.$emit("addNewGroup", null);
     },
     sortVal(value) {
       const newSort = { ...this.sortBy };

@@ -137,7 +137,6 @@ export default {
     async addNewGroup(groupInfo) {
       try {
         await this.$store.dispatch({ type: "addNewGroup", groupInfo });
-        console.log("Group was add!");
       } catch (err) {
         console.log("Error", err);
       }
@@ -146,7 +145,6 @@ export default {
       this.$store.commit({ type: "setSort", sortBy });
     },
     filterBy(filterBy) {
-      console.log('workspace',filterBy);
       this.$store.commit({ type: "setFilter", filterBy });
     },
     setInviteMode(isInvite) {

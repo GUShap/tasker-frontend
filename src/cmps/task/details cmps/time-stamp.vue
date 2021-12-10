@@ -1,6 +1,6 @@
 
 <template>
-  <p>{{ updatedAt }}</p>
+  <p class="time-stamp">{{ updatedAt }}</p>
 </template>
 
 <script>

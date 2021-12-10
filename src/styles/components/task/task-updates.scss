@@ -2,7 +2,7 @@
     flex-direction: column;
     margin-top: 17px;
     padding: 0 30px;
-    overflow: scroll;
+    // overflow: hidden;
 
     input {
         padding: 10px;
@@ -106,6 +106,10 @@
         border-top: 2px solid rgb(170, 88, 238);
         text-align: left;
 
+        .time-stamp {
+            font: 12px roboto;
+        }
+
         .top {
             padding: 15px;
         }
@@ -138,12 +142,6 @@
                 padding-left: 60px;
             }
 
-            img {
-                width: 40px;
-                height: 40px;
-                border-radius: 50%;
-            }
-
             p {
                 padding: 20px 40px;
             }
@@ -166,6 +164,7 @@
 
         .action-btn {
             border-top: 1px solid rgba(180, 171, 171, 0.397);
+            border-bottom: 1px solid rgba(180, 171, 171, 0.397);
         }
         .action-btn :not(:last-child) {
             border-right: 1px solid rgba(180, 171, 171, 0.397);
@@ -175,6 +174,40 @@
         }
         button {
             width: 100%;
+        }
+    }
+
+    .reply-form {
+        margin-top: 40px;
+        
+        .input-container {
+            width: 87%;
+            height: 90px;
+            border: 1px solid #0073ea;
+            border-radius: 10px;
+            
+            input {
+                width: 100%;
+                padding-bottom: 50px;
+                outline: none;
+                border:none;
+            }
+        }
+        .member-img {
+            margin: 0 10px;
+        }
+
+        .actions-footer {
+            margin-left: 60px;
+            .text-edit {
+                margin-right: 30%;
+                & > * {
+                    width: 78px;
+                }
+            }
+            .save-btn {
+                width: 55px;
+            }
         }
     }
 }
