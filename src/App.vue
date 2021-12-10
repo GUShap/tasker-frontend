@@ -27,7 +27,7 @@ export default {
     if (name === "landing-page" ||name === "login") {
         this.hideNav = true;
       }
-socketService.emit("user-watch", this.loggedinUser._id)
+if(this.loggedinUser) socketService.emit("user-watch", this.loggedinUser._id )
 socketService.on("")
   },
   methods: {

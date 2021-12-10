@@ -16,9 +16,9 @@ export const boardStore = {
     isTaskDetailsHover: false,
   },
   getters: {
-    currBoard(state) {
-      return JSON.parse(JSON.stringify(state.currBoard));
-    },
+    // currBoard(state) {
+    //   return JSON.parse(JSON.stringify(state.currBoard));
+    // },
     currBoardIdx(state) {
       return state.currBoardIdx;
     },
@@ -87,7 +87,6 @@ export const boardStore = {
           });
         });
       }
-      console.log('label');
       if (state.filterBy) {
         sortedBoard = remoteBoardService.filterBy(sortedBoard, state.filterBy);
       }
@@ -154,8 +153,22 @@ export const boardStore = {
       const currBoard = JSON.parse(JSON.stringify(state.currBoard));
       const newBoard = JSON.parse(JSON.stringify(board));
       try {
-        commit({ type: "saveBoard", board: newBoard });
         socketService.emit('board from store', newBoard)
+        commit({ type: "saveBoard", board: newBoard });
+        await remoteBoardService.save(newBoard);
+      } catch (err) {
+        console.log(err);
+        console.log("Error saveBoard");
+        commit({ type: "saveBoard", board: currBoard });
+      }
+    },
+    async updateFromSocket({ commit, state }, { board }) {
+      // optimistic
+      const currBoard = JSON.parse(JSON.stringify(state.currBoard));
+      const newBoard = JSON.parse(JSON.stringify(board));
+      try {
+        // socketService.emit('board from store', newBoard)
+        commit({ type: "saveBoard", board: newBoard });
         await remoteBoardService.save(newBoard);
       } catch (err) {
         console.log(err);

@@ -108,14 +108,12 @@ function _getBoardCopy(boardId) {
 }
 
 function filterBy(board, filterBy) {
-  console.log("filterBy", filterBy);
   const regex = new RegExp(filterBy.val, "i");
   var boardCopy = JSON.parse(JSON.stringify(board));
   if (filterBy.filter === "searchKey") {
     boardCopy.groups = boardCopy.groups.map((group) => {
       group.tasks = group.tasks.filter((task) => {
         if (!filterBy.val) return true;
-        console.log("task", task);
         return regex.test(task.title)
           ? true
           : regex.test(task.status)

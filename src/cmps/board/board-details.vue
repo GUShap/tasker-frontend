@@ -63,10 +63,14 @@ export default {
   },
   created() {
     socketService.emit("watch board", this.board._id);
+    
+  },
+  mounted(){
+    socketService.on("board updated", this.updateBoard);
+
   },
   methods: {
     updateBoard(board) {
-      console.log();
       this.$emit("updateBoard", board);
     },
 
@@ -114,9 +118,6 @@ export default {
       const user = this.$store.getters.loggedinUser;
       return user;
     },
-  },
-  mounted(){
-    socketService.on("board updated", this.updateBoard);
   },
   destroyed() {},
 };
