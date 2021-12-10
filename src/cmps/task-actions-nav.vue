@@ -24,29 +24,32 @@
         <div class="header flex space-between">
           <div>Quick filters</div>
           <div>Clear all</div>
-          
-          </div>
+        </div>
         <div>
           <div class="filter-options" v-if="board">
             <div class="member-avatars-filter">
               <h1>By members</h1>
-              <section v-if="!allUsers">
-                <avatar :size="30" username="i" />
-              </section>
-              <avatar
-                class="member-img"
-                v-else
-                @click="filterBy(user.fullname)"
-                v-for="(user, idx) in board.members"
-                :size="25"
-                :username="user.fullname"
-                :src="user.imgUrl ? require(`@/pics/${user.imgUrl}`) : null"
-                :key="idx"
-              />
+              <div>
+                <div v-for="(user, idx) in allUsers" :key="idx">
+                  <div class="user-container">
+                    <img
+                      class="member-img"
+                      v-if="user.imgUrl"
+                      :src="require(`@/pics/${user.imgUrl}`)"
+                    />
+                    <a v-else class="icon-user"></a>
+                    {{ user.fullname }}
+                  </div>
+                </div>
+              </div>
             </div>
             <div class="groups">
-                 <h1>By group</h1>
-              <div class="group-title-container" v-for="(group, idx) in board.groups" :key="idx">
+              <h1>By group</h1>
+              <div
+                class="group-title-container"
+                v-for="(group, idx) in board.groups"
+                :key="idx"
+              >
                 {{ group.title }}
               </div>
             </div>
