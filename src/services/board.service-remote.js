@@ -116,12 +116,7 @@ function filterBy(board, filterBy) {
       boardCopy.groups = boardCopy.groups.map((group) => {
         group.tasks = group.tasks.filter((task) => {
           if (!filterBy.val) return true;
-          console.log("task", task);
-          return regex.test(task.title)
-            ? true
-            : regex.test(task.status)
-              ? true
-              : regex.test(task.priority);
+          return regex.test(task.title) ? true : regex.test(task.status) ? true : regex.test(task.priority);
         });
         return group;
       });
@@ -131,26 +126,30 @@ function filterBy(board, filterBy) {
     return boardCopy;
   }
   else if (filterBy.filter === 'title') {
+    console.log('not supposed to be here')
     boardCopy.groups = boardCopy.groups.filter((group) => {
       return regex.test(group.title)
     })
   }
-  // else if (filterBy.filter === 'member') {
-  //   boardCopy.groups = boardCopy.groups.map((group) => {
-  //     group.tasks.map((task) => {
-  //       task.members.filter((member) => {
-  //         return regex.test(member.fullname)
-  //       })
-  //     })
-  //   })
-  // }
-  else if (filterBy.filter === 'status') {
+  else if (filterBy.filter === 'member') {
     boardCopy.groups = boardCopy.groups.map((group) => {
-      group.tasks.filter((task) => {
-        return regex.test(task.status)
+      group.tasks.map((task) => {
+        task.members.filter((member) => {
+          return regex.test(member.fullname)
+        })
       })
     })
   }
+  else if (filterBy.filter === 'status') {
+    boardCopy.groups = boardCopy.groups.map((group) => {
+      group.tasks = group.tasks.filter((task) => {
+        if (!filterBy.val) return true;
+        return regex.test(task.status)
+      })
+      return group;
+    })
+  }
+  console.log(boardCopy, 'boardCopy')
   return boardCopy;
 }
 
