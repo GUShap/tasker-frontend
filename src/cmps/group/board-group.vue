@@ -23,15 +23,17 @@
             style="padding-left: 10px; padding-right: 2px"
           />
           <i v-show="hover" class="group-drag-handle fas fa-grip-vertical" />
+
           <input
             class="input-group-name"
             :class="[isFocusOn ? 'border' : 'no-boder']"
             type="text"
-            v-model="groupTitle"
+            v-model="group.title"
             @change="updateGroup"
             @keyup.enter="updateGroup"
             :style="{ color: group.style.color }"
           />
+
         </div>
         <div v-for="(cmp, idx) in cmpsOrder" :key="idx">
           {{ cmpHeader(cmp) }}
@@ -189,7 +191,6 @@ export default {
       try {
         this.isFocusOn = false;
         const currGroup = this.group;
-        currGroup.title = this.groupTitle;
         const groupInfo = { group: currGroup, groupIdx: this.groupIdx };
         await this.$store.dispatch({
           type: "saveGroup",
