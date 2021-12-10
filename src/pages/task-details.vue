@@ -74,6 +74,7 @@
       </template>
 
   </div>
+  
     </VueDragResize>
     </div>
 </template>
