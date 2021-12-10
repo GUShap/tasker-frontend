@@ -67,7 +67,6 @@
           </div>
           Table
         </button>
-        <button><span class="icon-calender"></span>Calendar</button>
         <button><span class="icon-calender"></span>Chart</button>
         <button><span class="icon-kanban"></span>Kanban</button>
       </div>

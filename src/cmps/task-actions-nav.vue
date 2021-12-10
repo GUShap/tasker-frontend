@@ -23,7 +23,7 @@
       <div v-if="isFilterBy" class="filter-menu">
         <div class="header flex space-between">
           <div>Quick filters</div>
-          <div>Clear all</div>
+          <div   @click.prevent.stop="filterBy({ filter: 'all', val: all })">Clear all</div>
         </div>
         <div>
           <div class="filter-options" v-if="board">
@@ -65,7 +65,7 @@
                   <span
                     class="icon-circle green"
                     value="done"
-                    @click="filterBy({ filter: 'status', val: value })"
+                    @click="filterBy({ filter: 'status', val: 'done' })"
                   ></span
                   >Done
                 </div>
@@ -73,7 +73,7 @@
                   <span
                     class="icon-circle red"
                     value="stuck"
-                    @click="filterBy({ filter: 'status', val: value })"
+                    @click="filterBy({ filter: 'status', val: 'stuck' })"
                   ></span
                   >Stuck
                 </div>
@@ -81,7 +81,7 @@
                   <span
                     class="icon-circle yellow"
                     value="working on it"
-                    @click="filterBy({ filter: 'status', val: value })"
+                    @click="filterBy({ filter: 'status', val: 'working on it' })"
                   ></span
                   >Working on it
                 </div>
@@ -164,7 +164,7 @@ export default {
       isSearch: false,
       searchKey: "",
       isShown: false,
-      isFilterBy: true,
+      isFilterBy: false,
       sortBy: {
         val: null,
         order: "ascending",
@@ -200,6 +200,7 @@ export default {
       this.isSearch = !this.isSearch;
     },
     filterBy(filter) {
+      console.log(filter)
       if (typeof filter === "object") {
         this.$emit("filterBy", filter);
       } else {

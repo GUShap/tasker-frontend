@@ -39,10 +39,6 @@
         gap: 15px;
     }
 
-    .email-container {
-        margin-inline-start: 12px;
-    }
-
     .header {
         h1 {
             margin-top: 34px;
@@ -110,6 +106,10 @@
         color: #777777;
     }
 
+    .labels {
+        width: 100px;
+    }
+
     .btn-signin-page {
         height: 100%;
         cursor: pointer;
@@ -133,6 +133,10 @@
             margin-left: 10px;
             font-weight: 400px;
         }
+    }
+
+    .labels {
+        width: 100px;
     }
 }
 
@@ -168,10 +172,6 @@
     .input-fullname {
         padding-right: 100px;
     }
-    .email-label {
-        margin-right: 15px;
-    }
-
     .btn-login-page {
         width: 60%;
     }

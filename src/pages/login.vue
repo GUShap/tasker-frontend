@@ -10,12 +10,17 @@
       <div class="submit-section">
         <form @submit.prevent="login">
           <div class="input">
-            <div class="input-email">
-              <div class="labels email-label">
+            <div class="input-fullname">
+              <div class="labels fullname-label">
                 <label class="label" for="fullname">Full Name</label>
               </div>
-              <div class="email-container">
-                <input id="fullname" class="email" v-model="userCreds.fullname" type="text" />
+              <div class="fullname-container">
+                <input
+                  id="fullname"
+                  class="fullname"
+                  v-model="userCreds.fullname"
+                  type="text"
+                />
               </div>
             </div>
             <div class="input-password">
@@ -24,7 +29,7 @@
               </div>
               <div>
                 <input
-                id="password"
+                  id="password"
                   class="password"
                   v-model="userCreds.password"
                   type="password"
@@ -54,7 +59,7 @@
       </div>
       <div class="submit-section">
         <form @submit.prevent="signup">
-                    <div class="input">
+          <div class="input">
             <div class="input-fullname">
               <div class="labels fullname-label">
                 <label class="label" for="fullname">Fullname</label>
@@ -88,9 +93,6 @@
               </div>
             </div>
             <input class="btn-login-page" type="submit" />
-            <!-- <router-link class="btn-login-page" to="/home"
-              >Sign in<i class="fas fa-arrow-right"></i
-            ></router-link> -->
           </div>
         </form>
       </div>
