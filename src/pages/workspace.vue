@@ -47,7 +47,7 @@
           </ul>
         </div>
       </transition>
-      <task-actions-nav @sortBy="sortBy" @addNewGroup="addNewGroup" />
+      <task-actions-nav @sortBy="sortBy" @filterBy="filterBy" @addNewGroup="addNewGroup" />
       <board-filter />
       <board-details
         v-if="currBoard"
@@ -146,6 +146,7 @@ export default {
       this.$store.commit({ type: "setSort", sortBy });
     },
     filterBy(filterBy) {
+      console.log('workspace',filterBy);
       this.$store.commit({ type: "setFilter", filterBy });
     },
     setInviteMode(isInvite) {

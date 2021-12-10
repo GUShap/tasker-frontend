@@ -9,7 +9,7 @@
         @blur="isSearchMode"
         id="search"
         ref="search"
-        @change="filterBy('searchKey')"
+        @input="filterBy('searchKey')"
         v-show="isSearch"
         type="text"
         placeholder="Search"

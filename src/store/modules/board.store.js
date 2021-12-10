@@ -26,7 +26,7 @@ export const boardStore = {
       return JSON.parse(JSON.stringify(state.boards));
     },
     currBoard(state) {
-      const sortedBoard = JSON.parse(JSON.stringify(state.currBoard));
+      var sortedBoard = JSON.parse(JSON.stringify(state.currBoard));
       const sortByCopy = JSON.parse(JSON.stringify(state.sortBy))
       if (sortByCopy.val === 'name') {
         sortedBoard.groups.forEach((group) => {
@@ -87,6 +87,7 @@ export const boardStore = {
           });
         });
       }
+      console.log('label');
       if (state.filterBy) {
         sortedBoard = remoteBoardService.filterBy(sortedBoard, state.filterBy);
       }

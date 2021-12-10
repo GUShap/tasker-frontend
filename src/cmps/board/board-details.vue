@@ -17,7 +17,7 @@
         "
       >
         <board-group
-          v-if="group"
+          v-if="group && group.tasks && group.tasks.length"
           :group="group"
           :user="loggedinUser"
           :board="board"
