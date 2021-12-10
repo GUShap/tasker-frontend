@@ -87,10 +87,10 @@ export const boardStore = {
           });
         });
       }
-      console.log('label');
       if (state.filterBy) {
         sortedBoard = remoteBoardService.filterBy(sortedBoard, state.filterBy);
       }
+      // console.log(sortedBoard)
       return sortedBoard;
     },
 

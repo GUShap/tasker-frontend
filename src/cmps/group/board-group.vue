@@ -145,7 +145,9 @@ export default {
       },
     };
   },
-  created() {},
+  created() {
+    console.log(this.group)
+  },
   methods: {
     showGroup(val = null) {
       if (val) {

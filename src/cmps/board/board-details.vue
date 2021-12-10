@@ -108,6 +108,7 @@ export default {
   },
   computed: {
     currGroups() {
+      console.log('this.board.groups', this.board.groups)
       return this.board.groups;
     },
     loggedinUser() {

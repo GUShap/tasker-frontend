@@ -30,7 +30,11 @@
             <div class="member-avatars-filter">
               <h1>By members</h1>
               <div>
-                <div v-for="(user, idx) in allUsers" :key="idx">
+                <div
+                  v-for="(user, idx) in allUsers"
+                  :key="idx"
+                  @click="filterBy({ filter: 'member', val: user.fullname })"
+                >
                   <div class="user-container">
                     <img
                       class="member-img"
@@ -46,6 +50,7 @@
             <div class="groups">
               <h1>By group</h1>
               <div
+                @click.prevent.stop="filterBy({ filter: 'title', val: group.title })"
                 class="group-title-container"
                 v-for="(group, idx) in board.groups"
                 :key="idx"
@@ -53,12 +58,36 @@
                 {{ group.title }}
               </div>
             </div>
-          </div>
-          <!-- <div class="status">
-            <div v-for="(task, idx) in board.groups.tasks" :key="idx">
-              {{ task }}
+            <div class="status">
+              <h1>By status</h1>
+              <div class="status-container">
+                <div>
+                  <span
+                    class="icon-circle green"
+                    value="done"
+                    @click="filterBy({ filter: 'status', val: value })"
+                  ></span
+                  >Done
+                </div>
+                <div>
+                  <span
+                    class="icon-circle red"
+                    value="stuck"
+                    @click="filterBy({ filter: 'status', val: value })"
+                  ></span
+                  >Stuck
+                </div>
+                <div>
+                  <span
+                    class="icon-circle yellow"
+                    value="working on it"
+                    @click="filterBy({ filter: 'status', val: value })"
+                  ></span
+                  >Working on it
+                </div>
+              </div>
             </div>
-          </div> -->
+          </div>
         </div>
       </div>
       <button @click="showModal('sort')">
@@ -171,7 +200,11 @@ export default {
       this.isSearch = !this.isSearch;
     },
     filterBy(filter) {
-      this.$emit("filterBy", { filter: filter, val: this.searchKey });
+      if (typeof filter === "object") {
+        this.$emit("filterBy", filter);
+      } else {
+        this.$emit("filterBy", { filter: filter, val: this.searchKey });
+      }
     },
   },
 };
