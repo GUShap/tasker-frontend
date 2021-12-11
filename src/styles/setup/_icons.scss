@@ -12,6 +12,16 @@
     color: white;
     @include to-icon("\f3aa");
 }
+.icon-dotes {
+    font-family: monday;
+    color: #323338;
+    transform: rotate(180deg);
+        @include to-icon("\f311");
+}
+.icon-comment {
+    font-family: monday;
+        @include to-icon("\f467");
+}
 
 .icon-circle {
     font-family: monday;

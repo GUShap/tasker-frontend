@@ -25,6 +25,7 @@
     >
       Edit
     </button>
+    <button class="comment-bubble"><a class="icon-comment"></a></button>
   </section>
 </template>
 

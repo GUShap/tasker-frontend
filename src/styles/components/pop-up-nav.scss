@@ -1,7 +1,7 @@
 .pop-up-container {
   .toggle-nav {
     position: absolute;
-    top: 1rem;
+    top: 20px;
     z-index: 100;
     color: black;
     padding: 4px 9px;
@@ -15,16 +15,16 @@
     }
   }
   .toggle-right {
-    left: 5.5rem;
+    left: 5.9rem;
     transition: left 0.3s;
   }
   .toggle-left {
-    left: 19.11875rem;
+    left: 22rem;
     transition: left 0.3s;
   }
 
   .show-pop-up {
-    width: rem(250px);
+    width: rem(291px);
     transition: width 0.3s;
   }
   .hide-pop-up {

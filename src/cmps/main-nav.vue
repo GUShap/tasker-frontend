@@ -1,6 +1,6 @@
 <template>
   <section class="main-nav">
-    <nav class="sub-nav">
+    <nav class="sub-nav-top">
       <router-link to="/home/" title="/Home/">
       <img class="logo-img" :src="require(`@/pics/logo-task.png`)"/>
       </router-link>
@@ -20,12 +20,12 @@
       <span class="icon-two-stars" v-else>Hello Guest</span>
     </div>
 
-    <nav class="sub-nav">
+    <nav class="sub-nav-bottom">
       <!-- <span class="icon_component surface-item-icon icon_component--no-focus-style"></span> -->
       <router-link to="/home/" class="fas fa-puzzle-piece" />
       <router-link to="/home/" class="icon-add-user" />
       <router-link to="/home/" class="icon-search" />
-      <i class="fas fa-sign-out-alt" @click="logout"></i>
+      <a class="fas fa-sign-out-alt" @click="logout"></a>
       <router-link to="/home/" class="far fa-user-circle" />
       <!-- <img src="https://cdn.monday.com/icons/dapulse-person-column.svg"> -->
     </nav>

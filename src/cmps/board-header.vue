@@ -26,7 +26,7 @@
             @click="stared"
           ></a>
         </div>
-        <div class="more-actions flex">
+        <section class="more-actions flex">
           <a>Board members </a>
           <div class="member-avatars">
             <section v-if="!allUsers">
@@ -46,7 +46,8 @@
 
           <a><span class="icon-activities"></span>Activities</a>
           <a class="btn-add-board"><span class="icon-plus"></span>Add Board</a>
-        </div>
+          <a class="icon-dotes"></a>
+        </section>
       </div>
 
       <div class="input-section" @click="setEdit('description')">

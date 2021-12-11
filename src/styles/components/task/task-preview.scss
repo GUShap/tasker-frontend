@@ -18,8 +18,8 @@
 
 .task-preview {
   width: 100%;
-  height: rem(35px);
-  margin: rem(1px) 0;
+  height: 35px;
+  margin: 1px 0;
   box-shadow: 0 1px 0 0 #e7e7e7;
   background-color: #f5f6f8;
   border-right: 8px solid #e6e9ef;
@@ -36,7 +36,7 @@
   .title-picker {
     display: flex;
     position: sticky;
-    justify-content: start;
+    justify-content: space-between;
     align-items: center;
     height: 100%;
     margin-left: 0.5rem;
@@ -44,6 +44,17 @@
     max-width: rem(800px);
     white-space: nowrap;
     text-overflow: ellipsis;
+    .comment-bubble{
+      color: #bec0c4;
+      border:none;
+      padding: 0 10px;
+      background-color: rgba(255, 255, 255, 0);
+      a:hover{
+        cursor: pointer;
+        background-color: rgba(255, 255, 255, 0);
+        color: #007dff;
+      }
+    }
   }
   .status-picker {
     display: flex;
@@ -123,6 +134,7 @@
   background-color: white;
   box-shadow: 1px 1px 5px 2px rgba(0, 0, 0, 0.26);
   li {
+    cursor: pointer;
     text-align: center;
     margin: 0.5rem;
     padding: 0.5rem 1.5rem;
