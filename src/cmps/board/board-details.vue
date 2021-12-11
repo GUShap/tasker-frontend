@@ -22,12 +22,12 @@
           :user="loggedinUser"
           :board="board"
           :groupIdx="groupIdx"
+          :isGroupShown="isGroupShown"
+          @isShowGroups="isShowGroups"
           @addTask="addTask"
-          @showGroups="showGroups"
           @removeGroup="removeGroup"
           @editGroup="editGroup"
           @addNewGroup="addNewGroup"
-          v-show="groupsShow"
         />
       </Draggable>
     </Container>
@@ -52,9 +52,9 @@ export default {
 
   data() {
     return {
+      isGroupShown : true,
       groups: null,
       openModal: false,
-      groupsShow: true,
       dropPlaceholderOptions: {
         className: "drop-preview",
         animationDuration: "150",
@@ -63,12 +63,11 @@ export default {
     };
   },
   created() {
+    this.isShowGroups(true)
     socketService.emit("watch board", this.board._id);
-    
   },
-  mounted(){
+  mounted() {
     socketService.on("board updated", this.updateBoard);
-
   },
   methods: {
     updateBoard(board) {
@@ -79,25 +78,26 @@ export default {
       // taskInfo.boardId = this.board._id;
       this.$emit("addTask", taskInfo);
     },
+
     editGroup(groupInfo) {
       this.$emit("editGroup", groupInfo);
     },
+
     removeGroup(groupInfo) {
       this.$emit("removeGroup", groupInfo);
     },
-    showGroups(val = null) {
-      // if (val) {
-      //   const tasks = this.groups.map((group) => {
-      //     return group.tasks;
-      //   });
-      //   return tasks;
-      // }
+
+    isShowGroups(val) {
+      console.log('bd', val);
+     this.isGroupShown = val;
     },
+
     addNewGroup(groupInfo) {
       if (groupInfo) {
         const { group } = groupInfo;
         delete group.id;
         group.id = utilService.makeId();
+        group.tasks.forEach((task) => (task.id = utilService.makeId()));
       }
       console.log(groupInfo);
       this.$emit("addNewGroup", groupInfo);
