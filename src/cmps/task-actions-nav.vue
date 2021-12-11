@@ -208,7 +208,6 @@ export default {
       this.isSearch = !this.isSearch;
     },
     filterBy(filter) {
-      this.isFilterBy = !this.isFilterBy;
       if (typeof filter === "object") {
         this.$emit("filterBy", filter);
       } else {
