@@ -37,16 +37,16 @@
           class="cpm-headers"
           v-for="(cmp, idx) in cmpsOrder"
           :key="idx"
-          @click="toggleIconVisibility()"
+          @click="setSort(cmpHeader(cmp)), toggleSortOrder()"
         >
-          <i
+          <!-- <i
             class="fas fa-sort"
             v-if="isToggleOn"
             @click="
               setSort(cmpHeader(cmp));
               toggleSortOrder();
             "
-          ></i>
+          ></i> -->
           {{ cmpHeader(cmp) }}
         </div>
       </section>
@@ -182,6 +182,10 @@ export default {
     toggleIconVisibility() {
       this.isToggleOn = !this.isToggleOn;
     },
+    toggleSortOrder(){
+        if (this.sortBy.order === 'ascending') return this.sortBy.order = 'descending'
+        if (this.sortBy.order === 'descending') return this.sortBy.order = 'ascending'
+    },
     changeColor(color) {
       console.log(color);
       this.markerColor = color;
@@ -294,12 +298,12 @@ export default {
     },
   },
   watch: {
-    isGroupShown:{
-     handler: function(newVal){
+    isGroupShown: {
+      handler: function (newVal) {
         console.log("newVal", newVal);
         this.groupShow = newVal.isShow;
-      }
-    } 
+      },
+    },
   },
 };
 </script>

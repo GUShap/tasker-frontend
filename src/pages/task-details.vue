@@ -59,6 +59,7 @@
           :is="component"
           :task="task"
           :currBoard="currBoard"
+          :users="allUsers"
           :loggedInUser="loggedInUser"
           class="cmp-container"
           @editTask="editTask"
@@ -109,6 +110,7 @@ export default {
         taskId,
       });
       this.task = task;
+      this.$store.commit({ type: "setLoggedinUser" });
     } catch (err) {
       console.log(err);
     }
@@ -155,8 +157,12 @@ export default {
     },
   },
   computed:{
+
+    allUsers(){
+      return this.$store.getters.getUsers
+    },
     loggedInUser(){
-      if(this.$store.getters.loggedinUser) return 'Guest'
+      if(!this.$store.getters.loggedinUser) return 'Guest'
       return this.$store.getters.loggedinUser
     },
 

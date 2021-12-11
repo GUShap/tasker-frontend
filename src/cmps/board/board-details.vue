@@ -98,7 +98,7 @@ export default {
         group.id = utilService.makeId();
         group.tasks.forEach((task) => (task.id = utilService.makeId()));
       }
-      console.log(groupInfo);
+      // console.log(groupInfo);
       this.$emit("addNewGroup", groupInfo);
     },
 
@@ -106,7 +106,7 @@ export default {
       try {
         const currBoard = Object.assign({}, this.board);
         currBoard.groups = applyDrag(currBoard.groups, dropResult);
-        console.log("board-details");
+        // console.log("board-details");
         await this.$store.dispatch({
           type: "saveBoard",
           board: currBoard,
