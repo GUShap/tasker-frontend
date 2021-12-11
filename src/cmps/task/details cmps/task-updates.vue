@@ -130,12 +130,23 @@
             </div>
             <div class="watchers">
               <i class="far fa-eye"></i>
-              <p>2 seen</p>
+              <p>{{ seenBy.length }} seen</p>
             </div>
           </div>
           <div class="action-btn flex">
             <div>
-              <button><i class="far fa-thumbs-up"></i>like</button>
+              <button @click.prevent.stop="toggleCommentLike(comment)">
+                <a
+                  class="far fa-thumbs-up"
+                  :class="[
+                    likedComments.some((c) => c.id === comment.id)
+                      ? 'like'
+                      : '',
+                  ]"
+                >
+                </a
+                >like
+              </button>
             </div>
             <div>
               <button @click="replyMode(comment)">
@@ -220,11 +231,11 @@
                 <button @click.prevent="mentionMode">@ mention</button>
               </div>
               <user-list
-          v-if="isReplyMode && isMentionMode"
-          :users="users"
-          @addMember="mentionMember"
-          @closeList="closeList"
-        />
+                v-if="isReplyMode && isMentionMode"
+                :users="users"
+                @addMember="mentionMember"
+                @closeList="closeList"
+              />
               <button class="save-btn">Reply</button>
             </div>
           </form>
@@ -259,11 +270,17 @@
                 </div>
                 <span>|</span>
                 <div class="flex">
-                  <p>2</p>
+                  <p>{{ seenBy.length }}</p>
                   <i class="far fa-eye"></i>
                 </div>
                 <span>|</span>
-                <i class="far fa-thumbs-up"></i>
+                <a class="far fa-thumbs-up" @click.prevent.stop="toggleReplyLike(reply)"
+                :class="[
+                    likedReplies.some((r) => r.id === reply.id)
+                      ? 'like'
+                      : '',
+                  ]"
+                ></a>
               </section>
             </li>
           </ul>
@@ -369,11 +386,11 @@
                 <button @click.prevent="mentionMode">@ mention</button>
               </div>
               <user-list
-          v-if="isSecondaryReplyMode && isMentionMode"
-          :users="users"
-          @addMember="mentionMember"
-          @closeList="closeList"
-        />
+                v-if="isSecondaryReplyMode && isMentionMode"
+                :users="users"
+                @addMember="mentionMember"
+                @closeList="closeList"
+              />
               <button class="save-btn">Reply</button>
             </div>
           </form>
@@ -408,6 +425,10 @@ export default {
       isSecondaryReplyMode: false,
       newComment: null,
       currComment: null,
+      seenBy: [],
+      likedComments: [],
+      likedReplies: [],
+
       input: "",
       search: "",
       style: null,
@@ -415,6 +436,7 @@ export default {
   },
   created() {
     this.newComment = boardService.getEmptyComment();
+    this.seenBy.push(this.loggedInUser);
   },
   methods: {
     insert(emoji) {
@@ -427,9 +449,7 @@ export default {
         return;
       }
       this.newComment.txt = this.input;
-      console.log(this.input);
       this.input = "";
-      console.log(this.input);
       this.newComment.byMember = this.loggedInUser;
       if (!this.task.comments) this.task.comments = [];
       this.task.comments.unshift(this.newComment);
@@ -466,10 +486,9 @@ export default {
       this.input += " @" + member.fullname;
     },
     closeList() {
-      this.isMentionMode = false
+      this.isMentionMode = false;
     },
     addReply(comment) {
-      // console.log(this.input);
       if (!this.input || !this.loggedInUser) {
         //add message cant add in Guest mode
         this.isReplyMode = false;
@@ -489,6 +508,23 @@ export default {
       this.isReplyMode = false;
       this.isSecondaryReplyMode = false;
     },
+
+    toggleCommentLike(comment) {
+      if(this.likedComments.some(c=> c.id===comment.id)){
+        const idx= this.likedComments.findIndex(c=> c.id===comment.id)
+        this.likedComments.splice(idx,1)
+      }
+      else this.likedComments.push(comment)
+    },
+
+    toggleReplyLike(reply){
+      if(this.likedReplies.some(c=> c.id===reply.id)){
+        const idx= this.likedReplies.findIndex(c=> c.id===reply.id)
+        this.likedReplies.splice(idx,1)
+      }
+      else this.likedReplies.push(reply)
+    }
+
   },
 };
 </script>
