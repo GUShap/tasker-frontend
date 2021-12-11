@@ -103,6 +103,11 @@
 
     a {
         text-align: right;
+        color:#9b9da5;
+    }
+    .like{
+        font-weight: bold;
+        color: #649aff;
     }
 
     .update-card {
@@ -281,6 +286,11 @@
                 color: #9b9da591;
             }
         }
+
+        .like{
+            font-weight: bold;
+            color: #649aff;
+        }
     }
 }
 
@@ -310,7 +320,8 @@
             border: none;
             border-top: 1px solid #9b9da591;
         }
-
+        
+        
         ul {
             .list-item {
                 gap: 10px;
@@ -335,5 +346,8 @@
                 color: white;
             }
         }
+        
     }
 }
+
+

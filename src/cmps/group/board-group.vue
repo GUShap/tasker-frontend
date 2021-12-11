@@ -85,7 +85,6 @@
         </transition>
       </Draggable>
     </Container>
-    <!-- @addTask="addTask(groupIdx, taskIdx, $event)"  -->
 
     <transition>
       <section

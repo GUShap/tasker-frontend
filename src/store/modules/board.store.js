@@ -187,9 +187,12 @@ export const boardStore = {
 
         if (task.id) {
           if (task.isCopy) {
+            delete task.id
+            task.id = utilService.makeId()
             boardCopy.groups[groupIdx].tasks.splice(taskIdx, 0, task);
           }
           boardCopy.groups[groupIdx].tasks.splice(taskIdx, 1, task);
+        
         } else {
           const currTask = {
            id : utilService.makeId(),
