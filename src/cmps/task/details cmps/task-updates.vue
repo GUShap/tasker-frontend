@@ -6,7 +6,6 @@
       placeholder="Write an update..."
       @focus="setEdit"
     />
-
     <form v-if="isEditMode" @submit.prevent="saveComment" @blur="setEdit">
       <div class="comment-form">
         <div class="text-edit">
@@ -67,9 +66,15 @@
               </div>
             </div>
           </emoji-picker>
-          <button @click.prevent>@ mention</button>
+          <button @click.prevent="mentionMode">@ mention</button>
         </div>
-        <button class="save-btn">Update</button>
+        <user-list
+          :users="users"
+          @addMember="mentionMember"
+          @closeList="closeList"
+          v-if="isEditMode && isMentionMode"
+        />
+        <button class="save-btn" @click="closeList">Update</button>
       </div>
     </form>
     <a href="#" v-if="!isEditMode"
@@ -106,7 +111,11 @@
             </div>
             <div class="user-info">
               <div class="flex">
+                <section v-if="!comment.byMember.imgUrl">
+                  <span class="icon-user"></span>
+                </section>
                 <avatar
+                  v-else
                   class="member-img"
                   :size="45"
                   :src="
@@ -142,7 +151,11 @@
             ref="reply"
           >
             <div class="flex">
+              <section v-if="!comment.byMember.imgUrl">
+                <span class="icon-user"></span>
+              </section>
               <avatar
+                v-else
                 class="member-img"
                 :size="38"
                 :src="
@@ -215,7 +228,11 @@
           <ul>
             <li v-for="(reply, idx) in comment.replies" :key="idx">
               <div class="reply-list-item flex">
+                <section v-if="!reply.createdBy.imgUrl">
+                  <span class="icon-user"></span>
+                </section>
                 <avatar
+                  v-else
                   class="member-img"
                   :size="30"
                   :src="
@@ -249,7 +266,11 @@
             v-if="comment.replies && !isSecondaryReplyMode"
             class="reply-secondary flex"
           >
+            <section v-if="!loggedInUser.imgUrl">
+              <span class="icon-user"></span>
+            </section>
             <avatar
+              v-else
               class="member-img"
               :size="30"
               :src="
@@ -272,7 +293,12 @@
             ref="reply"
           >
             <div class="flex">
+              <section v-if="!comment.byMember.imgUrl">
+                <span class="icon-user"></span>
+              </section>
+
               <avatar
+                v-else
                 class="member-img"
                 :size="38"
                 :src="
@@ -335,13 +361,11 @@
                   </div>
                 </emoji-picker>
                 <button @click.prevent>@ mention</button>
-                <member-picker :info="currBoard" />
               </div>
               <button class="save-btn">Reply</button>
             </div>
           </form>
         </section>
-
       </li>
     </ul>
   </section>
@@ -351,22 +375,23 @@
 import { utilService } from "@/services/util.service.js";
 import { EmojiPicker } from "vue-emoji-picker";
 import { boardService } from "@/services/board.service.js";
-import memberPicker from "../member-picker.vue";
+import userList from "./user-list.vue";
 import timeStamp from "./time-stamp.vue";
 import Avatar from "vue-avatar";
 
 export default {
   name: "task-updates",
-  props: ["task", "currBoard", "loggedInUser"],
+  props: ["task", "currBoard", "users", "loggedInUser"],
   components: {
     EmojiPicker,
-    memberPicker,
+    userList,
     timeStamp,
     Avatar,
   },
   data() {
     return {
       isEditMode: false,
+      isMentionMode: false,
       isReplyMode: false,
       isSecondaryReplyMode: false,
       newComment: null,
@@ -384,17 +409,19 @@ export default {
       this.input += emoji;
     },
     saveComment() {
-      if (!this.input) {
+      if (!this.input || !this.loggedInUser) {
+        //add message cant add in Guest mode
         this.setEdit();
         return;
       }
       this.newComment.txt = this.input;
-      this.newComment.byMember = this.loggedInUser
+      console.log(this.input);
+      this.input = "";
+      console.log(this.input);
+      this.newComment.byMember = this.loggedInUser;
       if (!this.task.comments) this.task.comments = [];
       this.task.comments.push(this.newComment);
       this.$emit("editTask", this.task);
-
-      this.value = "";
       this.setEdit();
     },
     setEdit() {
@@ -411,6 +438,10 @@ export default {
     focusInput() {
       // console.log(this.$refs.input);
     },
+    mentionMode(comment = this.newComment) {
+      this.isMentionMode = true;
+      // this.input += "@";
+    },
     replyMode(comment) {
       this.currComment = comment;
       this.isReplyMode = !this.isReplyMode;
@@ -419,10 +450,16 @@ export default {
       this.currComment = comment;
       this.isSecondaryReplyMode = !this.isSecondaryReplyMode;
     },
-
+    mentionMember(member) {
+      this.input += " @" + member.fullname;
+    },
+    closeList() {
+      this.isMentionMode = false
+    },
     addReply(comment) {
       // console.log(this.input);
-      if (!this.input) {
+      if (!this.input || !this.loggedInUser) {
+        //add message cant add in Guest mode
         this.isReplyMode = false;
         this.isSecondaryReplyMode = false;
         return;
@@ -440,10 +477,6 @@ export default {
       this.isReplyMode = false;
       this.isSecondaryReplyMode = false;
     },
-  },
-
-  mounted() {
-    this.focusInput();
   },
 };
 </script>
