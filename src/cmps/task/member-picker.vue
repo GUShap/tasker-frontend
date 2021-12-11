@@ -47,11 +47,10 @@
         </li>
       </ul>
     </section>
-      <section
+    <section
       class="cover-screen"
       v-if="isEditMode"
-      @mouseover="closeModal"
-      @click.prevent.stop="isEditMode = false"
+      @click.stop.prevent="closeScreen"
     ></section>
   </section>
 </template>
@@ -67,8 +66,6 @@ export default {
       isEditMode: false,
       selectedMembers: null,
       activity: null,
-            exitModal: null,
-
     };
   },
   created() {
@@ -92,11 +89,10 @@ export default {
       this.update();
     },
 
-    closeModal() {
-      clearTimeout(this.exitModal);
-      this.exitModal = setTimeout(() => {
-        this.isEditMode = false;
-      }, 2000);
+    closeScreen() {
+      console.log("here");
+      this.isEditMode = false;
+      console.log('isEditMode',this.isEditMode);
     },
 
     update() {

@@ -15,12 +15,14 @@
       <li @click="editStatus('Work')" class="work-bg">Working on it</li>
       <li @click="editStatus('Stuck')" class="stuck-bg">Stuck</li>
       <li @click="editStatus('Empty')" class="empty-bg">-</li>
-      <hr>
-      <li @click="editStatus('New status')" class="new-status-bg">+ New status</li>
+      <hr />
+      <li @click="editStatus('New status')" class="new-status-bg">
+        + New status
+      </li>
     </ul>
     <section
       class="cover-screen"
-      v-if="isEditMode" 
+      v-if="isEditMode"
       @mouseover="closeModal"
       @click="editStatus('edit')"
     ></section>
