@@ -5,16 +5,18 @@
       <button v-if="!isSearch" @click="isSearchMode">
         <label class="icon-search" form="search"></label>Search
       </button>
-      <input
-        @blur="isSearchMode"
-        id="search"
-        ref="search"
-        @input="filterBy('searchKey')"
-        v-show="isSearch"
-        type="text"
-        placeholder="Search"
-        v-model="searchKey"
-      />
+      <div v-show="isSearch" class="search-Board">
+        <input
+          @blur="isSearchMode"
+          id="search"
+          ref="search"
+          @input="filterBy('searchKey')"
+          type="text"
+          placeholder="Search"
+          v-model="searchKey"
+        />
+        <a @click.stop.prevent="searchKey = ''">x</a>
+      </div>
       <button @click="showModal('filter')">
         <span class="icon-filter"></span>Filter<span
           class="icon-arrow-down"
