@@ -34,7 +34,20 @@
             :style="{ color: group.style.color }"
           />
         </div>
-        <div v-for="(cmp, idx) in cmpsOrder" :key="idx">
+        <div
+          class="cpm-headers"
+          v-for="(cmp, idx) in cmpsOrder"
+          :key="idx"
+          @click="toggleIconVisibility()"
+        >
+          <i
+            class="fas fa-sort"
+            v-if="isToggleOn"
+            @click="
+              setSort(cmpHeader(cmp));
+              toggleSortOrder();
+            "
+          ></i>
           {{ cmpHeader(cmp) }}
         </div>
       </section>
@@ -122,6 +135,7 @@ export default {
   data() {
     return {
       currGroups: null,
+      isToggleOn: false,
       // tasksList: this.group.tasks,
       title: null,
       groupShow: true,
@@ -130,6 +144,10 @@ export default {
       isFocusOn: false,
       markerColor: null,
       hover: false,
+      sortBy: {
+        val: null,
+        order: "ascending",
+      },
       isSeen: false,
       dropPlaceholderOptions: {
         className: "drop-preview",
@@ -163,9 +181,17 @@ export default {
         });
       }
     },
+    setSort(value) {
+      const newSort = { ...this.sortBy };
+      newSort.val = value.toLowerCase();
+      this.$store.commit({ type: "setSort", sortBy: newSort });
+    },
     duplicateGroup() {
       let groupCopy = JSON.parse(JSON.stringify(this.group));
       this.$emit("addNewGroup", { group: groupCopy, groupIdx: this.groupIdx });
+    },
+    toggleIconVisibility() {
+      this.isToggleOn = !this.isToggleOn;
     },
     changeColor(color) {
       console.log(color);

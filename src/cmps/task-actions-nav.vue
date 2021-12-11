@@ -23,7 +23,10 @@
       <div v-if="isFilterBy" class="filter-menu">
         <div class="header flex space-between">
           <div>Quick filters</div>
-          <div @click.prevent.stop="filterBy({ filter: 'all', val: 'all' })">
+          <div
+            class="btn-clear"
+            @click.prevent.stop="filterBy({ filter: 'all', val: 'all' })"
+          >
             Clear all
           </div>
         </div>
@@ -35,7 +38,10 @@
                 <div v-for="(user, idx) in allUsers" :key="idx">
                   <div
                     class="user-container"
-                    @click.prevent.stop="filterBy({ filter: 'member', val: user.fullname })">
+                    @click.prevent.stop="
+                      filterBy({ filter: 'member', val: user.fullname })
+                    "
+                  >
                     <img
                       class="member-img"
                       v-if="user.imgUrl"
@@ -190,6 +196,7 @@ export default {
       this.isSearch = !this.isSearch;
     },
     filterBy(filter) {
+      this.isFilterBy = !this.isFilterBy;
       if (typeof filter === "object") {
         this.$emit("filterBy", filter);
       } else {
