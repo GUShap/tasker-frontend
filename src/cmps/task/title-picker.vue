@@ -6,26 +6,28 @@
     class="title-picker flex"
     @click.prevent.stop="openDetails"
   >
-    <span v-if="!isEditMode">{{ currTitle }}</span>
-    <input
-      v-on:keyup.enter="editMode"
-      @blur="
-        {
-          isEditMode = false;
-        }
-      "
-      @change="onchange"
-      v-else
-      v-model="currTitle"
-    />
-    <button
-      v-if="hover && !isEditMode"
-      @click.stop.prevent="editMode"
-      class="btn-edit"
-    >
-      Edit
-    </button>
-    <button class="comment-bubble"><a class="icon-comment"></a></button>
+    <div>
+      <span v-if="!isEditMode">{{ currTitle }}</span>
+      <input
+        v-on:keyup.enter="editMode"
+        @blur="
+          {
+            isEditMode = false;
+          }
+        "
+        @change="onchange"
+        v-else
+        v-model="currTitle"
+      />
+      <button
+        v-if="hover && !isEditMode"
+        @click.stop.prevent="editMode"
+        class="btn-edit"
+      >
+        Edit
+      </button>
+    </div>
+      <button class="comment-bubble"><a class="icon-comment"></a></button>
   </section>
 </template>
 

@@ -17,11 +17,10 @@
         width: 160px;
     }
 
-    .logo-img{
+    .logo-img {
         max-width: 2rem;
         box-shadow: none;
         top: 0;
-
     }
 
     .home-nav {
@@ -59,11 +58,6 @@
         text-decoration: none;
         line-height: 1;
     }
-
-    a:hover {
-        color: #4353ff;
-    }
-
     .info-section {
         display: flex;
         flex-direction: column;
@@ -595,7 +589,5 @@
             border-bottom: 1px solid #e0e0e0;
             cursor: pointer;
         }
-
-  
     }
 }

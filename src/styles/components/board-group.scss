@@ -160,7 +160,14 @@
   background-color: inherit;
   cursor: pointer;
   color: #504658dc;
-  left: 0;
+  margin-left: 18px;
+  padding: 5px;
+  &:hover{
+    background-color: white;
+    border-radius: 5px;
+  }
+
+
 }
 
 .dropdown {
