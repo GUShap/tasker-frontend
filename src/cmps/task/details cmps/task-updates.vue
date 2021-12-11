@@ -67,7 +67,7 @@
               </div>
             </div>
           </emoji-picker>
-          <button>@ mention</button>
+          <button @click.prevent>@ mention</button>
         </div>
         <button class="save-btn">Update</button>
       </div>
@@ -204,7 +204,7 @@
                     </div>
                   </div>
                 </emoji-picker>
-                <button>@ mention</button>
+                <button @click.prevent>@ mention</button>
               </div>
               <button class="save-btn">Reply</button>
             </div>
@@ -333,7 +333,7 @@
                     </div>
                   </div>
                 </emoji-picker>
-                <button>@ mention</button>
+                <button @click.prevent>@ mention</button>
                 <member-picker :info="currBoard" />
               </div>
               <button class="save-btn">Reply</button>
