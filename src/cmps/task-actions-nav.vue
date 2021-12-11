@@ -32,12 +32,10 @@
             <div class="member-avatars-filter">
               <h1>By members</h1>
               <div>
-                <div
-                  v-for="(user, idx) in allUsers"
-                  :key="idx"
-                  @click="filterBy({ filter: 'member', val: user.fullname })"
-                >
-                  <div class="user-container">
+                <div v-for="(user, idx) in allUsers" :key="idx">
+                  <div
+                    class="user-container"
+                    @click.prevent.stop="filterBy({ filter: 'member', val: user.fullname })">
                     <img
                       class="member-img"
                       v-if="user.imgUrl"
@@ -192,7 +190,6 @@ export default {
       this.isSearch = !this.isSearch;
     },
     filterBy(filter) {
-      console.log(filter);
       if (typeof filter === "object") {
         this.$emit("filterBy", filter);
       } else {
