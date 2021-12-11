@@ -31,7 +31,6 @@ import memberPicker from "./member-picker.vue";
 import timelinePicker from "./timeline-picker.vue";
 import priorityPicker from "./priority-picker.vue";
 import taskDropdown from "../task-dropdown.vue";
-import { utilService } from "@/services/util.service.js";
 
 export default {
   name: "task-preview",
@@ -52,20 +51,14 @@ export default {
     "boardMembers",
     "markerColor"
   ],
-  data() {
-    return {
-      task : this.currTask
-    };
-  },
-  created() {
-  },
+ 
   methods: {
     async removeTask() {
       try {
         this.$store.dispatch({
           type: "removeTask",
           taskInfo: {
-            task: this.task,
+            task: this.currTask,
             taskIdx: this.taskIdx,
             groupIdx: this.groupIdx,
           },
@@ -78,12 +71,10 @@ export default {
       this.$emit("sortBy", sortBy);
     },
     openTaskDetails() {
-      this.$router.push(`/board/task/${this.task.id}`);
+      this.$router.push(`/board/task/${this.currTask.id}`);
     },
     duplicateTask() {
-      let taskCopy = JSON.parse(JSON.stringify(this.task));
-      delete taskCopy.id
-      taskCopy.id = utilService.makeId();
+      let taskCopy = JSON.parse(JSON.stringify(this.currTask));
       taskCopy.isCopy = true;
       this.$store.dispatch({
         type: "editTask",

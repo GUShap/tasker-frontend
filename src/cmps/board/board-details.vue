@@ -75,7 +75,6 @@ export default {
     },
 
     addTask(taskInfo) {
-      // taskInfo.boardId = this.board._id;
       this.$emit("addTask", taskInfo);
     },
 
