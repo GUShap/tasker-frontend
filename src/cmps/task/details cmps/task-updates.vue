@@ -151,7 +151,7 @@
             ref="reply"
           >
             <div class="flex">
-              <section v-if="!comment.byMember.imgUrl">
+              <section v-if="!loggedInUser.imgUrl">
                 <span class="icon-user"></span>
               </section>
               <avatar
@@ -159,8 +159,8 @@
                 class="member-img"
                 :size="38"
                 :src="
-                  comment.byMember.imgUrl
-                    ? require(`@/pics/${comment.byMember.imgUrl}`)
+                  loggedInUser.imgUrl
+                    ? require(`@/pics/${loggedInUser.imgUrl}`)
                     : null
                 "
               />
@@ -217,8 +217,14 @@
                     </div>
                   </div>
                 </emoji-picker>
-                <button @click.prevent>@ mention</button>
+                <button @click.prevent="mentionMode">@ mention</button>
               </div>
+              <user-list
+          v-if="isReplyMode && isMentionMode"
+          :users="users"
+          @addMember="mentionMember"
+          @closeList="closeList"
+        />
               <button class="save-btn">Reply</button>
             </div>
           </form>
@@ -360,8 +366,14 @@
                     </div>
                   </div>
                 </emoji-picker>
-                <button @click.prevent>@ mention</button>
+                <button @click.prevent="mentionMode">@ mention</button>
               </div>
+              <user-list
+          v-if="isSecondaryReplyMode && isMentionMode"
+          :users="users"
+          @addMember="mentionMember"
+          @closeList="closeList"
+        />
               <button class="save-btn">Reply</button>
             </div>
           </form>
@@ -420,7 +432,7 @@ export default {
       console.log(this.input);
       this.newComment.byMember = this.loggedInUser;
       if (!this.task.comments) this.task.comments = [];
-      this.task.comments.push(this.newComment);
+      this.task.comments.unshift(this.newComment);
       this.$emit("editTask", this.task);
       this.setEdit();
     },
