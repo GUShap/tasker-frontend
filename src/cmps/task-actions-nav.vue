@@ -2,7 +2,7 @@
   <section>
     <section class="task-action-btn">
       <button @click="addNewGroup" class="btn-new-task">New Group</button>
-      <button v-if="!isSearch" @click="isSearchMode">
+      <button v-if="!isSearch" @click.prevent.stop="isSearchMode">
         <label class="icon-search" form="search"></label>Search
       </button>
       <div v-show="isSearch" class="search-Board">
@@ -88,7 +88,7 @@
           </div>
         </div>
       </div>
-      <button @click="showModal('sort')">
+      <button @click="showSortModal">
         <span class="icon-sort-up-down"></span>Sort
       </button>
     </section>
@@ -144,6 +144,12 @@
         </div>
       </div>
     </section>
+    <!-- <section
+      class="cover-screen"
+      v-if="isFilterBy"
+      @mouseover="closeModal"
+      @click="showFilterModal"
+    ></section> -->
   </section>
 </template>
 
@@ -163,6 +169,7 @@ export default {
       searchKey: "",
       isShown: false,
       isFilterBy: false,
+      exitModal: false,
       sortBy: {
         val: null,
         order: "ascending",
@@ -170,14 +177,18 @@ export default {
     };
   },
   methods: {
-    showModal(val) {
-      if (val === "filter") {
-        this.isFilterBy = !this.isFilterBy;
-      }
-      if (val === "sort") {
-        this.isShown = !this.isShown;
-      }
+    showSortModal() {
+      this.isShown = !this.isShown;
     },
+    showFilterModal() {
+      this.isFilterBy = !this.isFilterBy;
+    },
+    // closeModal() {
+    //   clearTimeout(this.exitModal);
+    //   this.exitModal = setTimeout(() => {
+    //     this.isFilterBy = false;
+    //   }, 3000);
+    // },
     addNewGroup() {
       this.$emit("addNewGroup", null);
     },
@@ -195,6 +206,7 @@ export default {
       this.isShown = !this.isShown;
     },
     isSearchMode() {
+       this.isFilterBy = false
       this.isSearch = !this.isSearch;
     },
     filterBy(filter) {
