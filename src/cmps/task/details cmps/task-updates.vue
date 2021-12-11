@@ -334,9 +334,7 @@
                   </div>
                 </emoji-picker>
                 <button>@ mention</button>
-                <member-picker
-                :info="currBoard"
-                />
+                <member-picker :info="currBoard" />
               </div>
               <button class="save-btn">Reply</button>
             </div>
@@ -351,13 +349,13 @@
 import { utilService } from "@/services/util.service.js";
 import { EmojiPicker } from "vue-emoji-picker";
 import { boardService } from "@/services/board.service.js";
-import memberPicker from "../member-picker.vue"
+import memberPicker from "../member-picker.vue";
 import timeStamp from "./time-stamp.vue";
 import Avatar from "vue-avatar";
 
 export default {
   name: "task-updates",
-  props: ["task","currBoard", "loggedInUser"],
+  props: ["task", "currBoard", "loggedInUser"],
   components: {
     EmojiPicker,
     memberPicker,
@@ -421,6 +419,10 @@ export default {
     },
 
     addReply(comment) {
+      if (!this.value) {
+        this.isSecondaryReplyMode = false;
+        return;
+      }
       if (!comment.replies) comment.replies = [];
       const reply = {
         id: utilService.makeId(),
