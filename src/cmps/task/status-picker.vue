@@ -20,7 +20,7 @@
     </ul>
     <section
       class="cover-screen"
-      v-if="isEditMode"
+      v-if="isEditMode" 
       @mouseover="closeModal"
       @click="editStatus('edit')"
     ></section>
