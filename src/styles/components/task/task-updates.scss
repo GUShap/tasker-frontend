@@ -6,10 +6,12 @@
     border-radius: 8px;
 
     i {
-        color: rgb(105, 105, 105);
+        color: rgba(105, 105, 105, 0.74);
     }
 
     input {
+        color: rgb(105, 105, 105);
+        font-size: 15px;
         padding: 10px;
         border-radius: 8px;
         border: 1px solid rgba(170, 88, 238, 0.698);
@@ -227,6 +229,7 @@
         .reply-list-item {
             gap: 10px;
             padding: 10px 8px;
+            border-radius: 16px;
 
             .creator-info {
                 padding: 10px 16px;
@@ -262,7 +265,7 @@
                 color: #9b9da5;
                 cursor: auto;
             }
-            
+
             i {
                 font-size: 12px;
             }
@@ -275,10 +278,62 @@
                 width: 90%;
                 border-radius: 16px;
                 border-color: #9b9da591;
-                color: #9b9da591
-
+                color: #9b9da591;
             }
-         
+        }
+    }
+}
+
+.cover-user {
+    position: absolute;
+    left: 0;
+    top: 25%;
+    width: 80%;
+    height: 60%;
+    background-color: transparent;
+
+    .user-list {
+        z-index: 10;
+        border-radius: 7px;
+        position: relative;
+        left: 7.6%;
+        width: 50%;
+        background-color: white;
+        border: 1px solid #9b9da591;
+        padding: 10px;
+        fieldset {
+            legend {
+                color: #9b9da5;
+                padding: 0 7px;
+                font-size: 16px;
+            }
+            border: none;
+            border-top: 1px solid #9b9da591;
+        }
+
+        ul {
+            .list-item {
+                gap: 10px;
+                width: 250px;
+                flex-direction: column;
+                li {
+                    align-items: center;
+                    width: 95%;
+                    height: 35px;
+                    padding-left: 15px;
+                    gap: 5px;
+                    cursor: pointer;
+                    div {
+                        color: #9b9da5;
+                        font-size: 14px;
+                    }
+                }
+            }
+            .list-item :hover {
+                border-radius: 7px;
+                background-color: #0085ff;
+                color: white;
+            }
         }
     }
 }
