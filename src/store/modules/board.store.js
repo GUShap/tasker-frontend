@@ -63,7 +63,7 @@ export const boardStore = {
       if (sortByCopy.val === "timeline") {
         sortedBoard.groups.forEach((group) => {
           group.tasks.sort((task1, task2) => {
-            if (!task1.timeline) return
+            // if (!task1.timeline) return
             if (sortByCopy.order === 'ascending') {
               return new Date(task1.timeline[1]) - new Date(task2.timeline[1])
             } else {

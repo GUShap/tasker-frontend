@@ -16,11 +16,12 @@
     font-family: monday;
     color: #323338;
     transform: rotate(180deg);
-        @include to-icon("\f311");
+    @include to-icon("\f311");
 }
 .icon-comment {
     font-family: monday;
-        @include to-icon("\f467");
+    color: #C5C7D0;
+    @include to-icon("\f467");
 }
 
 .icon-circle {
@@ -121,32 +122,32 @@
     @include to-icon("\f061");
 }
 
-
-.icon-bubble{
+.icon-bubble {
     font-family: monday;
-    @include to-icon("\f075")
+    @include to-icon("\f075");
 }
 
-.icon-user{
+.icon-user {
     font-family: monday;
-    @include to-icon("\f1c7")
+    color: #C5C7D0;
+    @include to-icon("\f1c7");
 }
-.icon-invite{
+.icon-invite {
     font-family: monday;
-    @include to-icon("\f3fb")
+    @include to-icon("\f3fb");
 }
 
-.icon-crown{
+.icon-crown {
     font-family: monday;
-    @include to-icon("\f266")
+    @include to-icon("\f266");
 }
-.icon-toggle-left{
+.icon-toggle-left {
     font-family: monday;
-    @include to-icon("\f108")
+    @include to-icon("\f108");
 }
-.icon-toggle-right{
+.icon-toggle-right {
     font-family: monday;
-    @include to-icon("\f109")
+    @include to-icon("\f109");
 }
 
 // .icon-format{

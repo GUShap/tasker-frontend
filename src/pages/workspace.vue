@@ -158,6 +158,7 @@ export default {
       }
     },
     sortBy(sortBy) {
+      console.log(sortBy)
       this.$store.commit({ type: "setSort", sortBy });
     },
     filterBy(filterBy) {
