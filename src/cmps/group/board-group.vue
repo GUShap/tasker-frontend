@@ -33,14 +33,12 @@
             @keyup.enter="updateGroup"
             :style="{ color: group.style.color }"
           />
-
         </div>
         <div v-for="(cmp, idx) in cmpsOrder" :key="idx">
           {{ cmpHeader(cmp) }}
         </div>
       </section>
     </header>
-   
 
     <Container
       @drop="onTaskDrop(group.id, $event)"
@@ -60,7 +58,7 @@
       >
         <transition name="fade" :key="task.id">
           <task-preview
-          v-if="task"
+            v-if="task"
             v-show="groupShow"
             :currentTask="task"
             :taskIdx="taskIdx"
@@ -94,8 +92,13 @@
           Add
         </button>
       </section>
-    </transition>
-    <footer class="group-footer flex justify-center align-center"></footer>
+      </transition>
+      <footer class="group-footer flex space-evenly align-center">
+        <div v-for="(cmp, idx) in cmpsOrder" :key="idx">
+          {{ cmpHeader(cmp) }}
+        </div>
+      </footer>
+      <footer class="group-footer"/>
   </section>
 </template>
 
@@ -135,8 +138,7 @@ export default {
       },
     };
   },
-  created() {
-  },
+  created() {},
   methods: {
     showGroup(val = null) {
       if (val) {
@@ -184,8 +186,7 @@ export default {
     setEdit() {
       this.isFocusOn = true;
     },
-    
-    
+
     async updateGroup() {
       try {
         this.isFocusOn = false;
