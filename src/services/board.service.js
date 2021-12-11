@@ -240,7 +240,7 @@ function getEmptyComment() {
     byMember: {
       _id: "u101",
       fullname: "Guy Shapira",
-      imgUrl: "guy-img.jpeg",
+      imgUrl: "guy-img.jpg",
     },
   };
 }

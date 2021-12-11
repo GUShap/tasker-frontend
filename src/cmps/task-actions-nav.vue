@@ -23,19 +23,19 @@
       <div v-if="isFilterBy" class="filter-menu">
         <div class="header flex space-between">
           <div>Quick filters</div>
-          <div   @click.prevent.stop="filterBy({ filter: 'all', val: all })">Clear all</div>
+          <div @click.prevent.stop="filterBy({ filter: 'all', val: 'all' })">
+            Clear all
+          </div>
         </div>
         <div>
           <div class="filter-options" v-if="board">
             <div class="member-avatars-filter">
               <h1>By members</h1>
               <div>
-                <div
-                  v-for="(user, idx) in allUsers"
-                  :key="idx"
-                  @click="filterBy({ filter: 'member', val: user.fullname })"
-                >
-                  <div class="user-container">
+                <div v-for="(user, idx) in allUsers" :key="idx">
+                  <div
+                    class="user-container"
+                    @click.prevent.stop="filterBy({ filter: 'member', val: user.fullname })">
                     <img
                       class="member-img"
                       v-if="user.imgUrl"
@@ -50,7 +50,9 @@
             <div class="groups">
               <h1>By group</h1>
               <div
-                @click.prevent.stop="filterBy({ filter: 'title', val: group.title })"
+                @click.prevent.stop="
+                  filterBy({ filter: 'title', val: group.title })
+                "
                 class="group-title-container"
                 v-for="(group, idx) in board.groups"
                 :key="idx"
@@ -61,28 +63,16 @@
             <div class="status">
               <h1>By status</h1>
               <div class="status-container">
-                <div>
-                  <span
-                    class="icon-circle green"
-                    value="done"
-                    @click="filterBy({ filter: 'status', val: 'done' })"
-                  ></span
-                  >Done
+                <div @click="filterBy({ filter: 'status', val: 'done' })">
+                  <span class="icon-circle green" value="done"></span>Done
                 </div>
-                <div>
-                  <span
-                    class="icon-circle red"
-                    value="stuck"
-                    @click="filterBy({ filter: 'status', val: 'stuck' })"
-                  ></span
-                  >Stuck
+                <div @click="filterBy({ filter: 'status', val: 'stuck' })">
+                  <span class="icon-circle red" value="stuck"></span>Stuck
                 </div>
-                <div>
-                  <span
-                    class="icon-circle yellow"
-                    value="working on it"
-                    @click="filterBy({ filter: 'status', val: 'working on it' })"
-                  ></span
+                <div
+                  @click="filterBy({ filter: 'status', val: 'working on it' })"
+                >
+                  <span class="icon-circle yellow" value="working on it"></span
                   >Working on it
                 </div>
               </div>
@@ -200,7 +190,6 @@ export default {
       this.isSearch = !this.isSearch;
     },
     filterBy(filter) {
-      console.log(filter)
       if (typeof filter === "object") {
         this.$emit("filterBy", filter);
       } else {

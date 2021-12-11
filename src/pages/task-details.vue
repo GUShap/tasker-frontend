@@ -58,6 +58,7 @@
         <component
           :is="component"
           :task="task"
+          :loggedInUser="loggedInUser"
           class="cmp-container"
           @editTask="editTask"
         ></component>
@@ -72,7 +73,6 @@
 <script>
 import { remoteBoardService } from "@/services/board.service-remote.js";
 import taskUpdates from "@/cmps/task/details cmps/task-updates.vue";
-import taskFiles from "@/cmps/task/details cmps/task-files.vue";
 import activityLog from "@/cmps/task/details cmps/activity-log.vue";
 import btnDropdown from "@/cmps/task/details cmps/btn-dropdown.vue";
 import VueDragResize from "vue-drag-resize";
@@ -81,7 +81,6 @@ export default {
   name: "task-details",
   components: {
     taskUpdates,
-    taskFiles,
     activityLog,
     btnDropdown,
     VueDragResize,
@@ -114,7 +113,6 @@ export default {
     }
   },
 
-  destroyed() {},
   methods: {
     exitModal() {
       this.pageHover(false);
@@ -154,6 +152,11 @@ export default {
       this.top = newRect.top;
       this.left = newRect.left;
     },
+  },
+  computed:{
+    loggedInUser(){
+      return this.$store.getters.loggedinUser
+    }
   },
 
   watch: {

@@ -23,12 +23,7 @@
         </div>
         <hr />
         <div class="comment-input">
-          <input
-            type="text"
-            v-model="input"
-            ref="input"
-            :style="{ changeStyle }"
-          />
+          <input type="text" v-model="input" :style="{ changeStyle }" />
         </div>
       </div>
 
@@ -82,12 +77,13 @@
     >
     <ul>
       <li v-for="(comment, idx) in task.comments" :key="idx">
-        <div class="update-card">
+        <section class="update-card">
           <div class="top">
-            <div class="card-btn">
-              <i class="far fa-clock"
-                ><time-stamp :time="comment.createdAt"
-              /></i>
+            <div class="card-btn flex">
+              <div class="time flex">
+                <i class="far fa-clock"></i>
+                <p><time-stamp :time="comment.createdAt" /></p>
+              </div>
               <i class="far fa-bell"></i>
               <el-dropdown class="dropdown" trigger="click">
                 <i class="fas fa-sort-down"></i>
@@ -137,95 +133,136 @@
                 <i class="fas fa-reply"></i>reply
               </button>
             </div>
-           
-          </div> 
-          
-        <form class="reply-form"
-              v-if="isReplyMode && currComment.id===comment.id"
-              @submit.prevent="saveComment"
-              @blur="setEdit"
-            >
-            
-              <div class="flex">
-                <avatar
-                  class="member-img"
-                  :size="35"
-                  :src="
-                    comment.byMember.imgUrl
-                      ? require(`@/pics/${comment.byMember.imgUrl}`)
-                      : null
-                  "
-                />
+          </div>
 
-                <div class="input-container">
-                  <input
-                    type="text"
-                    v-model="input"
-                    ref="input"
-                    :style="{ changeStyle }"
-                  />
-                </div>
+          <form
+            class="reply-form"
+            v-if="isReplyMode && currComment.id === comment.id"
+            @submit.prevent="addReply(comment)"
+            ref="reply"
+          >
+            <div class="flex">
+              <avatar
+                class="member-img"
+                :size="38"
+                :src="
+                  comment.byMember.imgUrl
+                    ? require(`@/pics/${comment.byMember.imgUrl}`)
+                    : null
+                "
+              />
+
+              <div class="input-container">
+                <input type="text" v-model="input" />
               </div>
+            </div>
 
-              <div class="actions-footer flex">
-                <div class="text-edit flex">
-                  <button><span class="icon-clip"></span> add files</button>
-                  <emoji-picker @emoji="insert" :search="search">
-                    <div
-                      slot="emoji-invoker"
-                      slot-scope="{ events: { click: clickEvent } }"
-                      @click.stop="clickEvent"
-                    >
-                      <button type="button">
-                        <span class="far fa-smile"></span> Emoji
-                      </button>
-                    </div>
-                    <div
-                      class="emoji-picker"
-                      slot="emoji-picker"
-                      slot-scope="{ emojis, insert }"
-                    >
+            <div class="actions-footer flex">
+              <div class="text-edit flex">
+                <button><span class="icon-clip"></span> add files</button>
+                <emoji-picker @emoji="insert" :search="search">
+                  <div
+                    slot="emoji-invoker"
+                    slot-scope="{ events: { click: clickEvent } }"
+                    @click.stop="clickEvent"
+                  >
+                    <button type="button">
+                      <span class="far fa-smile"></span> Emoji
+                    </button>
+                  </div>
+                  <div
+                    class="emoji-picker"
+                    slot="emoji-picker"
+                    slot-scope="{ emojis, insert }"
+                  >
+                    <div>
+                      <div class="emoji-search">
+                        <input
+                          type="text"
+                          v-model="search"
+                          placeholder="search"
+                        />
+                        <i class="fas fa-search"></i>
+                      </div>
                       <div>
-                        <div class="emoji-search">
-                          <input
-                            type="text"
-                            v-model="search"
-                            placeholder="search"
-                          />
-                          <i class="fas fa-search"></i>
-                        </div>
-                        <div>
-                          <div
-                            v-for="(emojiGroup, category) in emojis"
-                            :key="category"
-                          >
-                            <h5>{{ category }}</h5>
-                            <div>
-                              <span
-                                v-for="(emoji, emojiName) in emojiGroup"
-                                :key="emojiName"
-                                @click="insert(emoji)"
-                                :title="emojiName"
-                                >{{ emoji }}</span
-                              >
-                            </div>
+                        <div
+                          v-for="(emojiGroup, category) in emojis"
+                          :key="category"
+                        >
+                          <h5>{{ category }}</h5>
+                          <div>
+                            <span
+                              v-for="(emoji, emojiName) in emojiGroup"
+                              :key="emojiName"
+                              @click="insert(emoji)"
+                              :title="emojiName"
+                              >{{ emoji }}</span
+                            >
                           </div>
                         </div>
                       </div>
                     </div>
-                  </emoji-picker>
-                  <button>@ mention</button>
-                </div>
-                <button class="save-btn">Reply</button>
+                  </div>
+                </emoji-picker>
+                <button>@ mention</button>
               </div>
-            </form>
-        </div>
+              <button class="save-btn">Reply</button>
+            </div>
+          </form>
+        </section>
+        <section class="reply-list" v-if="comment.replies">
+          <ul>
+            <li v-for="(reply, idx) in comment.replies" :key="idx">
+              <div class="reply-list-item flex">
+                <avatar
+                  class="member-img"
+                  :size="30"
+                  :src="
+                    reply.createdBy.imgUrl
+                      ? require(`@/pics/${reply.createdBy.imgUrl}`)
+                      : null
+                  "
+                />
+                <div class="creator-info flex">
+                  <span>{{ reply.createdBy.fullname }}</span>
+                  <p>{{ reply.txt }}</p>
+                </div>
+              </div>
+              <section class="reply-info flex">
+                <div class="flex">
+                  <i class="far fa-clock"></i>
+                  <p><time-stamp :time="reply.createdAt" /></p>
+                </div>
+                <span>|</span>
+                <div class="flex">
+                  <p>2</p>
+                  <i class="far fa-eye"></i>
+                </div>
+                <span>|</span>
+                <i class="far fa-thumbs-up"></i>
+              </section>
+            </li>
+          </ul>
+          <section v-if="comment.replies" class="reply-secondary flex">
+            <avatar
+              class="member-img"
+              :size="30"
+              :src="
+                loggedInUser.imgUrl
+                  ? require(`@/pics/${loggedInUser.imgUrl}`)
+                  : null
+              "
+            />
+            <input type="text" placeholder="Write a reply..." />
+          </section>
+        </section>
       </li>
     </ul>
   </section>
 </template>
 
 <script>
+import { utilService } from "@/services/util.service.js";
 import { EmojiPicker } from "vue-emoji-picker";
 import { boardService } from "@/services/board.service.js";
 import timeStamp from "./time-stamp.vue";
@@ -233,7 +270,7 @@ import Avatar from "vue-avatar";
 
 export default {
   name: "task-updates",
-  props: ["task"],
+  props: ["task", "loggedInUser"],
   components: {
     EmojiPicker,
     timeStamp,
@@ -244,7 +281,7 @@ export default {
       isEditMode: false,
       isReplyMode: false,
       newComment: null,
-      currComment:null,
+      currComment: null,
       input: "",
       search: "",
       style: null,
@@ -258,13 +295,17 @@ export default {
       this.input += emoji;
     },
     saveComment() {
-      if(!this.$refs.input.value){
-      this.setEdit();
-        return}
-      this.newComment.txt = this.$refs.input.value;
+      if (!this.input) {
+        this.setEdit();
+        return;
+      }
+      console.log("comment text:", this.input);
+      this.newComment.txt = this.input;
       if (!this.task.comments) this.task.comments = [];
       this.task.comments.push(this.newComment);
       this.$emit("editTask", this.task);
+
+      this.value = "";
       this.setEdit();
     },
     setEdit() {
@@ -282,11 +323,22 @@ export default {
       // console.log(this.$refs.input);
     },
     replyMode(comment) {
-      this.currComment = comment
+      this.currComment = comment;
       this.isReplyMode = !this.isReplyMode;
     },
-    addReply() {
-      if (!this.comment.replies) this.comment.replies = [];
+
+    addReply(comment) {
+      if (!comment.replies) comment.replies = [];
+      const reply = {
+        id: utilService.makeId(),
+        txt: this.input,
+        createdAt: Date.now(),
+        createdBy: this.loggedInUser,
+      };
+      comment.replies.push(reply);
+      this.$emit("editTask", this.task);
+      this.input = "";
+      this.replyMode("");
     },
   },
 

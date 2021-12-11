@@ -21,9 +21,9 @@ export default {
     if (diffHours < 0.5) timeToDisplay = "Just Now";
     else if (diffHours < 24) timeToDisplay = `h ${diffHours}`;
     else {
-      if (diffHours / (24 * 7) < 1) timeToDisplay = `d ${Math.floor(diffHours/24)}`;
-      else if (diffHours / (24 * 30) < 1) timeToDisplay = `w ${Math.floor((diffHours / 24 * 7))}`;
-      else if (diffHours / (24 * 365) < 1) timeToDisplay = `m ${Math.floor(diffHours / (24 * 30))}`;
+      if (diffHours / (24 * 7) < 1) timeToDisplay = `${Math.floor(diffHours/24)}d`;
+      else if (diffHours / (24 * 30) < 1) timeToDisplay = `${Math.floor((diffHours / 24 * 7))}w`;
+      else if (diffHours / (24 * 365) < 1) timeToDisplay = `${Math.floor(diffHours / (24 * 30))}m`;
       else timeToDisplay = `y ${Math.floor((diffHours / 24 * 365))}`;
     }
 

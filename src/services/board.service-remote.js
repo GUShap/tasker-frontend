@@ -107,20 +107,15 @@ function _getBoardCopy(boardId) {
 }
 
 function filterBy(board, filterBy) {
+  if (!filterBy.val) return true;
   const regex = new RegExp(filterBy.val, "i");
-  console.log(regex)
   var boardCopy = JSON.parse(JSON.stringify(board));
   if (filterBy.filter === "searchKey") {
     if (!filterBy.filter.type) {
       boardCopy.groups = boardCopy.groups.map((group) => {
         group.tasks = group.tasks.filter((task) => {
-          if (!filterBy.val) return true;
-          console.log("task", task);
-          return regex.test(task.title)
-            ? true
-            : regex.test(task.status)
-              ? true
-              : regex.test(task.priority);
+          // if (!filterBy.val) return true;
+          return regex.test(task.title) ? true : regex.test(task.status) ? true : regex.test(task.priority);
         });
         return group;
       });
@@ -134,22 +129,37 @@ function filterBy(board, filterBy) {
       return regex.test(group.title)
     })
   }
-  // else if (filterBy.filter === 'member') {
-  //   boardCopy.groups = boardCopy.groups.map((group) => {
-  //     group.tasks.map((task) => {
-  //       task.members.filter((member) => {
-  //         return regex.test(member.fullname)
-  //       })
+  // else if (filterBy.filter === 'title' && filterBy.filter === 'status') {
+  //   boardCopy.groups = boardCopy.groups.filter((group) => {
+  //     const filteredGroup = regex.test(group.title)
+  //     filteredGroup.tasks = filteredGroup.tasks.filter((task) => {
+  //       if (!filterBy.val) return true;
+  //       return regex.test(task.status)
   //     })
+  //     return filteredGroup;
   //   })
   // }
-  else if (filterBy.filter === 'status') {
+  else if (filterBy.filter === 'member') {
     boardCopy.groups = boardCopy.groups.map((group) => {
-      group.tasks.filter((task) => {
-        return regex.test(task.status)
+      group.tasks = group.tasks.filter((task) => {
+        if (!task.members) return false
+        return task.members.some(member => {
+          return regex.test(member.fullname)
+        })
       })
+      return group
     })
   }
+  else if (filterBy.filter === 'status') {
+    boardCopy.groups = boardCopy.groups.map((group) => {
+      group.tasks = group.tasks.filter((task) => {
+        if (!filterBy.val) return true;
+        return regex.test(task.status)
+      })
+      return group;
+    })
+  }
+  console.log(boardCopy, 'boardCopy')
   return boardCopy;
 }
 
