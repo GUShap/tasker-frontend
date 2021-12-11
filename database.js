@@ -6,7 +6,7 @@ export const boardDb = {
   createdBy: {
     _id: "u101",
     fullname: "Guy Shapira",
-    imgUrl: "guy-img.jpeg"
+    imgUrl: "guy-img.jpg"
   },
   style: {},
   labels: [
@@ -21,7 +21,7 @@ export const boardDb = {
       _id: "u101",
       username: "Guy",
       fullname: "Guy Shapira",
-      imgUrl: "guy-img.jpeg",
+      imgUrl: "guy-img.jpg",
     },
     {
       _id: "u102",
@@ -54,7 +54,7 @@ export const boardDb = {
               byMember: {
                 _id: "u101",
                 fullname: "Guy Shapira",
-                imgUrl: "guy-img.jpeg"
+                imgUrl: "guy-img.jpg"
               }
             },
             {
@@ -64,7 +64,7 @@ export const boardDb = {
               byMember: {
                 _id: "u101",
                 fullname: "Guy Shapira",
-                imgUrl: "guy-img.jpeg"
+                imgUrl: "guy-img.jpg"
               },
             }
           ]
@@ -78,7 +78,7 @@ export const boardDb = {
               _id: "u101",
               username: "Guy",
               fullname: "Guy Shapira",
-              imgUrl: "guy-img.jpeg"
+              imgUrl: "guy-img.jpg"
             }
           ]
         },
@@ -154,7 +154,7 @@ export const boardDb = {
               byMember: {
                 _id: "u101",
                 fullname: "Guy Shapira",
-                imgUrl: "guy-img.jpeg"
+                imgUrl: "guy-img.jpg"
               }
             }
           ],
@@ -176,7 +176,7 @@ export const boardDb = {
               _id: "u101",
               username: "Guy",
               fullname: "Guy Shapira",
-              imgUrl: "guy-img.jpeg"
+              imgUrl: "guy-img.jpg"
             }
           ],
           labelId: "Done",
@@ -186,7 +186,7 @@ export const boardDb = {
             _id: "u101",
             username: "Guy",
             fullname: "Guy Shapira",
-            imgUrl: "guy-img.jpeg"
+            imgUrl: "guy-img.jpg"
           },
           style: {},
         },
@@ -230,7 +230,7 @@ export const boardDb = {
               byMember: {
                 _id: "u101",
                 fullname: "Guy Shapira",
-                imgUrl: "guy-img.jpeg"
+                imgUrl: "guy-img.jpg"
               }
             }
           ],
@@ -252,7 +252,7 @@ export const boardDb = {
               _id: "u101",
               username: "Guy",
               fullname: "Guy Shapira",
-              imgUrl: "guy-img.jpeg"
+              imgUrl: "guy-img.jpg"
             }
           ],
           labelId: "Done",
@@ -262,7 +262,7 @@ export const boardDb = {
             _id: "u101",
             username: "Guy",
             fullname: "Guy Shapira",
-            imgUrl: "guy-img.jpeg"
+            imgUrl: "guy-img.jpg"
           },
           style: {},
         },
@@ -306,7 +306,7 @@ export const boardDb = {
               byMember: {
                 _id: "u101",
                 fullname: "Guy Shapira",
-                imgUrl: "guy-img.jpeg"
+                imgUrl: "guy-img.jpg"
               }
             }
           ],
@@ -328,7 +328,7 @@ export const boardDb = {
               _id: "u101",
               username: "Guy",
               fullname: "Guy Shapira",
-              imgUrl: "guy-img.jpeg"
+              imgUrl: "guy-img.jpg"
             }
           ],
           labelId: "Done",
@@ -338,7 +338,7 @@ export const boardDb = {
             _id: "u101",
             username: "Guy",
             fullname: "Guy Shapira",
-            imgUrl: "guy-img.jpeg"
+            imgUrl: "guy-img.jpg"
           },
           style: {},
         },
@@ -356,7 +356,7 @@ export const boardDb = {
       byMember: {
         _id: "u101",
         fullname: "Guy Shapira",
-        imgUrl: "guy-img.jpeg"
+        imgUrl: "guy-img.jpg"
       },
       task: {
         id: "t101",
@@ -370,7 +370,7 @@ export const boardDb = {
       byMember: {
         _id: "u101",
         fullname: "Guy Shapira",
-        imgUrl: "guy-img.jpeg"
+        imgUrl: "guy-img.jpg"
       },
       task: {
         id: "t101",
@@ -384,7 +384,7 @@ export const boardDb = {
       byMember: {
         _id: "u101",
         fullname: "Guy Shapira",
-        imgUrl: "guy-img.jpeg"
+        imgUrl: "guy-img.jpg"
       },
       task: {
         id: "t101",

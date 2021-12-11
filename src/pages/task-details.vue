@@ -58,6 +58,7 @@
         <component
           :is="component"
           :task="task"
+          :loggedInUser="loggedInUser"
           class="cmp-container"
           @editTask="editTask"
         ></component>
@@ -112,7 +113,6 @@ export default {
     }
   },
 
-  destroyed() {},
   methods: {
     exitModal() {
       this.pageHover(false);
@@ -152,6 +152,11 @@ export default {
       this.top = newRect.top;
       this.left = newRect.left;
     },
+  },
+  computed:{
+    loggedInUser(){
+      return this.$store.getters.loggedinUser
+    }
   },
 
   watch: {

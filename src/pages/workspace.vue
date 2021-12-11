@@ -1,6 +1,5 @@
 <template>
   <section class="workspace-container">
-
     <!-- MEMBERS MODAL -->
     <section
       class="cover"
@@ -8,32 +7,35 @@
       @click="setInviteMode(false)"
     ></section>
 
-    <transition>
-      <section class="invite-container" v-if="isInviteMode">
-        <ul class="invite-list">
-          <span>Board Members</span>
-          <p>Subscribe people from your team</p>
-          <input type="text" placeholder="Enter name or email" />
-          <li class="flex" v-for="currUser in allUsers" :key="currUser._id">
-            <div class="user flex" @click="addUserToBoard(currUser)">
-              <avatar
-                class="memebr-img"
-                :size="30"
-                :src="
-                  currUser.imgUrl ? require(`@/pics/${currUser.imgUrl}`) : null
-                "
-                :username="currUser.fullname"
-              />
-              <span>{{ currUser.fullname }}</span>
-            </div>
-            <div class="list-btn">
-              <a class="icon-crown"></a>
-              <i class="fas fa-times"></i>
-            </div>
-          </li>
-        </ul>
-      </section>
-    </transition>
+    <section class="invite-container" v-if="isInviteMode">
+      <ul class="invite-list">
+        <span>Board Members</span>
+        <p>Subscribe people from your team</p>
+        <input type="text" placeholder="Enter name or email" />
+        <li class="flex" v-for="currUser in allUsers" :key="currUser._id">
+          <div class="user flex" @click="addUserToBoard(currUser)">
+            <avatar
+              class="memebr-img"
+              :size="30"
+              :src="
+                currUser.imgUrl ? require(`@/pics/${currUser.imgUrl}`) : null
+              "
+              :username="currUser.fullname"
+            />
+            <span>{{ currUser.fullname }}</span>
+          </div>
+          <div class="list-btn">
+            <a class="icon-crown"></a>
+            <i
+              class="fas fa-times"
+              :style="{ color: isMember(currUser) }"
+              @click="removeUserFromBoard(currUser)"
+            ></i>
+          </div>
+        </li>
+      </ul>
+    </section>
+
     <!-- POP UP NAV -->
     <pop-up-nav
       :board="currBoard"
@@ -185,8 +187,9 @@ export default {
       this.$store.dispatch({ type: "saveBoard", board: this.currBoard });
       this.isInviteMode = false;
     },
-     isMember(user) {
-     if(this.currBoard.members.some((member) => member._id === user._id)) return '#341ff5'
+    isMember(user) {
+      if (this.currBoard.members.some((member) => member._id === user._id))
+        return "#341ff5";
     },
   },
   computed: {
@@ -204,7 +207,6 @@ export default {
     allUsers() {
       return this.$store.getters.getUsers;
     },
-   
   },
   destroyed() {},
 };

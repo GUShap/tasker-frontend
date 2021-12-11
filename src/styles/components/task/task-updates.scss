@@ -2,7 +2,11 @@
     flex-direction: column;
     margin-top: 17px;
     padding: 0 30px;
-    // overflow: hidden;
+    overflow-y: scroll;
+
+    i {
+        color: rgb(105, 105, 105);
+    }
 
     input {
         padding: 10px;
@@ -12,9 +16,8 @@
 
     .comment-form {
         width: 100%;
-        border-radius: 8px;
         border: 1px solid rgba(170, 88, 238, 0.698);
-
+        border-radius: 8px;
         & > * {
             width: 100%;
         }
@@ -106,24 +109,31 @@
         border-top: 2px solid rgb(170, 88, 238);
         text-align: left;
 
-        .time-stamp {
-            font: 12px roboto;
-        }
-
         .top {
             padding: 15px;
         }
 
         .card-btn {
             float: right;
+            align-items: center;
             span {
                 font: 14px roboto;
             }
 
             & > * {
-                display: inline-block;
+                // display: inline-block;
                 margin: 0;
                 margin-left: 10px;
+            }
+            .time {
+                align-items: center;
+                margin: 0;
+                i {
+                    padding-right: 5px;
+                }
+                .time-stamp {
+                    font: 15px roboto;
+                }
             }
         }
         .dropdown {
@@ -164,7 +174,6 @@
 
         .action-btn {
             border-top: 1px solid rgba(180, 171, 171, 0.397);
-            border-bottom: 1px solid rgba(180, 171, 171, 0.397);
         }
         .action-btn :not(:last-child) {
             border-right: 1px solid rgba(180, 171, 171, 0.397);
@@ -179,18 +188,18 @@
 
     .reply-form {
         margin-top: 40px;
-        
+
         .input-container {
             width: 87%;
             height: 90px;
             border: 1px solid #0073ea;
             border-radius: 10px;
-            
+
             input {
                 width: 100%;
                 padding-bottom: 50px;
                 outline: none;
-                border:none;
+                border: none;
             }
         }
         .member-img {
@@ -207,6 +216,64 @@
             }
             .save-btn {
                 width: 55px;
+            }
+        }
+    }
+
+    .reply-list {
+        border: 1px solid rgba(180, 171, 171, 0.397);
+        border-top: none;
+        .reply-list-item {
+            gap: 10px;
+            padding: 10px 8px;
+
+            .creator-info {
+                padding: 10px 16px;
+                border-radius: 16px;
+                background-color: #e4edff;
+                align-items: center;
+                span {
+                    font-size: 16px;
+                    font-weight: 600;
+                    color: #0085ff;
+                }
+                p {
+                    font-size: 13px;
+                    color: #6c6f7a;
+                    padding-left: 5px;
+                }
+            }
+        }
+        .reply-info {
+            align-items: center;
+            margin: 10px 50px;
+            gap: 10px;
+
+            div {
+                align-items: center;
+                padding: 0 5px;
+                & > * {
+                    color: #9b9da5;
+                }
+            }
+
+            & > * {
+                color: #9b9da5;
+                cursor: auto;
+            }
+            
+            i {
+                font-size: 12px;
+            }
+        }
+        .reply-secondary {
+            padding: 10px 0 20px 10px;
+            gap: 10px;
+            input {
+                width: 90%;
+                border-radius: 16px;
+                border-color: #9b9da591;
+                color: #9b9da591
             }
         }
     }
