@@ -31,8 +31,7 @@
     <section
       class="cover-screen"
       v-if="isEditMode"
-      @mouseover="closeModal"
-      @click="editStatus"
+      @click.stop.prevent="editStatus"
     ></section>
   </section>
 </template>
@@ -49,7 +48,6 @@ export default {
       hover: false,
       percentage: "0%",
       activity: null,
-      exitModal: null,
     };
   },
   created() {
@@ -70,12 +68,6 @@ export default {
       return `${currentYear}-${currentMonth}-${today}`;
     },
 
-    closeModal() {
-      clearTimeout(this.exitModal);
-      this.exitModal = setTimeout(() => {
-        this.isEditMode = false;
-      }, 2000);
-    },
 
     update() {
       const updateInfo = {

@@ -5,16 +5,17 @@
       <button v-if="!isSearch" @click.prevent.stop="isSearchMode">
         <label class="icon-search" form="search"></label>Search
       </button>
-      <input
-        @blur="isSearchMode"
-        id="search"
-        ref="search"
-        @input="filterBy('searchKey')"
-        v-show="isSearch"
-        type="text"
-        placeholder="Search"
-        v-model="searchKey"
-      />
+      <div v-show="isSearch" class="search-Board">
+        <input
+          id="search"
+          ref="search"
+          @input="filterBy('searchKey')"
+          type="text"
+          placeholder="Search"
+          v-model="searchKey"
+        />
+        <a @click.stop.prevent="stopSearch">x</a>
+      </div>
       <button @click="showFilterModal">
         <span class="icon-filter"></span>Filter<span
           class="icon-arrow-down"
@@ -144,9 +145,8 @@
     </section>
     <!-- <section
       class="cover-screen"
-      v-if="isFilterBy"
-      @mouseover="closeModal"
-      @click="showFilterModal"
+      v-if="isFilterBy || isShown"
+      @click="(isFilterBy = false), (isShown = false)"
     ></section> -->
   </section>
 </template>
@@ -181,32 +181,39 @@ export default {
     showFilterModal() {
       this.isFilterBy = !this.isFilterBy;
     },
-    // closeModal() {
-    //   clearTimeout(this.exitModal);
-    //   this.exitModal = setTimeout(() => {
-    //     this.isFilterBy = false;
-    //   }, 3000);
-    // },
+
     addNewGroup() {
       this.$emit("addNewGroup", null);
     },
+
     sortVal(value) {
       const newSort = { ...this.sortBy };
       newSort.val = value;
       this.$emit("sortBy", newSort);
     },
+
     sortOrder(value) {
       const newSort = { ...this.sortBy };
       newSort.order = value;
       this.$emit("sortBy", newSort);
     },
+
+    stopSearch() {
+      console.log("stopSearch");
+      this.searchKey = null;
+      console.log(" this.searchKey", this.searchKey);
+      this.isSearch = false;
+      this.filterBy({ filter: "all", val: "all" });
+    },
+
     closeModal() {
       this.isShown = !this.isShown;
     },
+
     isSearchMode() {
-       this.isFilterBy = false
       this.isSearch = !this.isSearch;
     },
+
     filterBy(filter) {
       if (typeof filter === "object") {
         this.$emit("filterBy", filter);
