@@ -97,6 +97,7 @@
         padding: 20px 16px 30px;
         top: 120%;
         left: 0;
+        color: #504658dc;
         cursor: default;
     }
 
@@ -110,6 +111,7 @@
     .fas,
     .far {
         margin-right: 15px;
+        color: #504658dc;
     }
 }
 
@@ -156,6 +158,11 @@ select {
     color: #606266;
     cursor: pointer;
     outline: 0;
+
+    .fas,
+    .far {
+        color: #606266;
+    }
 }
 
 .el-dropdown-menu__item:hover {
@@ -188,13 +195,14 @@ select {
     top: 25%;
     padding: 16px 24px 24px;
     max-width: 600px;
+    color: #504658dc;
     .filter-options {
         display: flex;
         gap: 20px;
     }
 
-    .btn-clear{
-        border: 1px solid #E6E9EF;
+    .btn-clear {
+        border: 1px solid #e6e9ef;
         cursor: pointer;
         padding: 5px 10px;
     }

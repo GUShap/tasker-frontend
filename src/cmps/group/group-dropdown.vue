@@ -1,7 +1,10 @@
 <template>
   <section class="group-dropdown">
     <el-dropdown class="dropdown" trigger="click">
-      <a class="fas fa-caret-down" :style="{ 'background-color': group.style.color }"></a>
+      <a
+        class="fas fa-caret-down"
+        :style="{ 'background-color': group.style.color }"
+      ></a>
       <el-dropdown-menu trigger="click" size="large" slot="dropdown">
         <el-dropdown-item @click.native="showGroup(true)">
           <i class="fas fa-compress-alt"></i>Collapse this group
@@ -29,18 +32,32 @@
           <span class="icon-circle" :style="{ color: color }"></span>
           Change group color
         </el-dropdown-item>
-        <el-dropdown-item @click.native="removeGroup"
+        <el-dropdown-item @click.native="toggleModal" id="myBtn"
           ><i class="fas fa-trash"></i>Delete
         </el-dropdown-item>
       </el-dropdown-menu>
     </el-dropdown>
-   
+    <div v-if="!isHidden" id="myModal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1>Delete this item?</h1>
+          <i class="fas fa-times" @click="toggleModal"></i>
+        </div>
+        <div class="modal-body">
+          <div @click="toggleModal" class="btn-cancel">Cancel</div>
+          <div @click="removeGroup" class="btn-delete">Delete</div>
+        </div>
+      </div>
+    </div>
+
     <div class="color-container" v-show="isShown">
-      <div class="color" 
-      v-for="color in colors" 
-      :key="color.name" 
-      :class="color.name"
-      @click="changeColor(color.hexCode)"></div>
+      <div
+        class="color"
+        v-for="color in colors"
+        :key="color.name"
+        :class="color.name"
+        @click="changeColor(color.hexCode)"
+      ></div>
     </div>
   </section>
 </template>
@@ -57,11 +74,16 @@ export default {
     return {
       isShown: false,
       color: "#579BFC",
+      isHidden: true,
     };
   },
   methods: {
     removeGroup() {
       this.$emit("removeGroup");
+      this.isHidden = !this.isHidden;
+    },
+    toggleModal() {
+      this.isHidden = !this.isHidden;
     },
     showGroup(val) {
       this.$emit("showGroup", val);

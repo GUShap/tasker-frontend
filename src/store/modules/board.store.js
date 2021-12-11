@@ -53,6 +53,7 @@ export const boardStore = {
         sortedBoard.groups.forEach((group) => {
           group.tasks.sort((task1, task2) => {
             if (sortByCopy.order === "ascending") {
+              if (!task1.status) return
               return task1.status >= task2.status ? 1 : -1;
             } else {
               return task2.status >= task1.status ? 1 : -1;
@@ -63,8 +64,8 @@ export const boardStore = {
       if (sortByCopy.val === "timeline") {
         sortedBoard.groups.forEach((group) => {
           group.tasks.sort((task1, task2) => {
-            // if (!task1.timeline) return
             if (sortByCopy.order === 'ascending') {
+              if (!task1.timeline) return
               return new Date(task1.timeline[1]) - new Date(task2.timeline[1])
             } else {
               return new Date(task2.timeline[1]) - new Date(task1.timeline[1])
@@ -77,6 +78,7 @@ export const boardStore = {
         sortedBoard.groups.forEach((group) => {
           group.tasks.sort((task1, task2) => {
             if (sortByCopy.order === 'ascending') {
+              if (!task1.priority) return
               return task1.priority >= task2.priority ? 1 : -1;
             } else {
               return task2.priority >= task1.priority ? 1 : -1;
@@ -241,7 +243,7 @@ export const boardStore = {
     async addNewGroup({ state, dispatch, commit }, { groupInfo }) {
       try {
         const boardCopy = JSON.parse(JSON.stringify(state.currBoard));
-        
+
         if (!groupInfo) {
           const newGroup = await remoteBoardService.getEmptyGroup();
           console.log(newGroup);
@@ -251,7 +253,7 @@ export const boardStore = {
           const { group, groupIdx } = groupInfo;
           boardCopy.groups.splice(groupIdx, 0, group)
         }
-        
+
         dispatch({ type: "saveBoard", board: boardCopy });
       } catch (err) {
         console.log(err);
