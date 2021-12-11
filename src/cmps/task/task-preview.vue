@@ -57,7 +57,8 @@ export default {
       task : this.currTask
     };
   },
-  created() {},
+  created() {
+  },
   methods: {
     async removeTask() {
       try {
@@ -109,9 +110,8 @@ export default {
       }
     },
     updateTask(cmpType, ev) {
-      let task = this.currentTask
+      var task = JSON.parse(JSON.stringify(this.currentTask)) 
 
-      console.log(task);
       switch (cmpType) {
         case "title-picker":
           task.title = ev.title;
@@ -146,7 +146,6 @@ export default {
   computed: {
     marker() {
       if (!this.markerColor) return `8px solid #579BFC`;
-      // console.log(this.markerColor)
       return `8px solid ${this.markerColor}`;
     },
     currTask(){

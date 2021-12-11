@@ -14,8 +14,18 @@
       <li @click="editStatus('High')" class="high-bg">High</li>
       <li @click="editStatus('Medium')" class="medium-bg">Medium</li>
       <li @click="editStatus('Low')" class="low-bg">Low</li>
-      <!-- <li @click="editStatus"><button>Edit</button></li> -->
+      <li @click="editStatus('Empty')" class="empty-bg">-</li>
+      <hr />
+      <li @click="editStatus('New status')" class="new-status-bg">
+        + New status
+      </li>
     </ul>
+    <section
+      class="cover-screen"
+      v-if="isEditMode"
+      @mouseover="closeModal"
+      @click="editStatus('edit')"
+    ></section>
   </section>
 </template>
 
@@ -31,10 +41,13 @@ export default {
       priority: this.info.priority,
       priorityStyle: null,
       activity: null,
+      exitModal: null,
     };
   },
   created() {
-    this.priorityStyle = this.info.priority ? this.info.priority.toLowerCase() : null;
+    this.priorityStyle = this.info.priority
+      ? this.info.priority.toLowerCase()
+      : null;
   },
   methods: {
     editStatus(priority) {
@@ -44,6 +57,14 @@ export default {
       }
       this.isEditMode = !this.isEditMode;
     },
+
+    closeModal() {
+      clearTimeout(this.exitModal);
+      this.exitModal = setTimeout(() => {
+        this.isEditMode = false;
+      }, 2000);
+    },
+
     update() {
       const updateInfo = {
         priority: this.priority,
@@ -52,12 +73,19 @@ export default {
       this.$emit("updated", updateInfo);
     },
   },
-  computed: {
-  },
+  computed: {},
   watch: {
     priority: function (newVal, oldVal) {
       this.activity = { type: "priority", newVal, oldVal };
       this.update();
+    },
+    info: {
+      handler: function (newVal) {
+        if (newVal && newVal.priority) {
+          this.priority = newVal.priority;
+          this.priorityStyle = newVal.priority.toLowerCase();
+        }
+      },
     },
   },
 };

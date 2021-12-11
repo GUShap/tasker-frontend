@@ -88,7 +88,6 @@ export default {
     },
 
     isShowGroups(val) {
-      console.log('bd', val);
      this.isGroupShown = val;
     },
 

@@ -189,8 +189,15 @@ export const boardStore = {
           }
           boardCopy.groups[groupIdx].tasks.splice(taskIdx, 1, task);
         } else {
-          task.id = utilService.makeId();
-          boardCopy.groups[groupIdx].tasks.push(task);
+          const currTask = {
+           id : utilService.makeId(),
+           title : task.title,
+           prioraty: null,
+           status: null,
+           timeline: null,
+           members: null,
+          }
+          boardCopy.groups[groupIdx].tasks.push(currTask);
         }
 
         const activityLog = {

@@ -10,13 +10,20 @@
       {{ status }}
       <img v-if="showDoneGif" />
     </div>
-    <ul v-if="isEditMode" @blur="editStatus('edit')" class="status-modal">
+    <ul v-if="isEditMode" class="status-modal">
       <li @click="editStatus('Done')" class="done-bg">Done</li>
       <li @click="editStatus('Work')" class="work-bg">Working on it</li>
       <li @click="editStatus('Stuck')" class="stuck-bg">Stuck</li>
-      <li @click="editStatus('Empty')" class="empty-bg">Empty</li>
-      <!-- <li @click="editStatus"><button>Edit</button></li> -->
+      <li @click="editStatus('Empty')" class="empty-bg">-</li>
+      <hr>
+      <li @click="editStatus('New status')" class="new-status-bg">+ New status</li>
     </ul>
+    <section
+      class="cover-screen"
+      v-if="isEditMode"
+      @mouseover="closeModal"
+      @click="editStatus('edit')"
+    ></section>
   </section>
 </template>
 
@@ -30,8 +37,9 @@ export default {
       isEditMode: false,
       showDoneGif: false,
       status: this.info.status,
-      statusStyle: null,
+      statusStyle: this.BGstyle,
       activity: null,
+      exitModal: null,
     };
   },
   created() {
@@ -39,7 +47,7 @@ export default {
   },
   methods: {
     editStatus(status) {
-      if (status !== "edit") {
+      if (status !== "New status") {
         this.status = status;
         this.statusStyle = status.toLowerCase();
       }
@@ -51,6 +59,14 @@ export default {
       }
       this.isEditMode = !this.isEditMode;
     },
+
+    closeModal() {
+      clearTimeout(this.exitModal);
+      this.exitModal = setTimeout(() => {
+        this.isEditMode = false;
+      }, 2000);
+    },
+
     update() {
       const updateInfo = {
         status: this.status,
@@ -59,7 +75,11 @@ export default {
       this.$emit("updated", updateInfo);
     },
   },
-  computed: {},
+  computed: {
+    BGstyle() {
+      return this.info.status ? this.info.status.toLowerCase() : null;
+    },
+  },
   watch: {
     status: function (newVal, oldVal) {
       this.activity = { type: "status", newVal, oldVal };
@@ -67,8 +87,10 @@ export default {
     },
     info: {
       handler: function (newVal) {
-        this.status = newVal.status;
-        this.statusStyle = newVal.status.toLowerCase();
+        if (newVal && newVal.status) {
+          this.status = newVal.status;
+          this.statusStyle = newVal.status.toLowerCase();
+        }
       },
     },
   },

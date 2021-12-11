@@ -11,7 +11,7 @@
       <div class="myProgress">
         <div
           class="myBar"
-        :style="{ width: percentage, 'background-color': marker }"
+          :style="{ width: percentage, 'background-color': marker }"
         ></div>
       </div>
     </section>
@@ -28,6 +28,12 @@
       >
       </el-date-picker>
     </div>
+    <section
+      class="cover-screen"
+      v-if="isEditMode"
+      @mouseover="closeModal"
+      @click="editStatus"
+    ></section>
   </section>
 </template>
 
@@ -43,6 +49,7 @@ export default {
       hover: false,
       percentage: "0%",
       activity: null,
+      exitModal: null,
     };
   },
   created() {
@@ -54,6 +61,7 @@ export default {
     editStatus() {
       this.isEditMode = !this.isEditMode;
     },
+
     currDate() {
       const date = new Date();
       const currentYear = date.getFullYear();
@@ -61,6 +69,14 @@ export default {
       const currentMonth = date.getMonth() + 1;
       return `${currentYear}-${currentMonth}-${today}`;
     },
+
+    closeModal() {
+      clearTimeout(this.exitModal);
+      this.exitModal = setTimeout(() => {
+        this.isEditMode = false;
+      }, 2000);
+    },
+
     update() {
       const updateInfo = {
         timeline: this.timeline,
@@ -77,6 +93,13 @@ export default {
   },
   destroyed() {},
   watch: {
+    info: {
+      handler: function (newVal) {
+        if (newVal && newVal.timeline) {
+          this.timeline = newVal.timeline;
+        }
+      },
+    },
     timeline: function (newVal) {
       if (newVal === "") return;
       const prevTxt = this.txt;

@@ -44,12 +44,12 @@
     max-width: rem(800px);
     white-space: nowrap;
     text-overflow: ellipsis;
-    .comment-bubble{
+    .comment-bubble {
       color: #bec0c4;
-      border:none;
+      border: none;
       padding: 0 10px;
       background-color: rgba(255, 255, 255, 0);
-      a:hover{
+      a:hover {
         cursor: pointer;
         background-color: rgba(255, 255, 255, 0);
         color: #007dff;
@@ -118,9 +118,9 @@
       }
     }
 
-    .icon-user{
+    .icon-user {
       font-size: 25px;
-      color: #C5C7D0;
+      color: #c5c7d0;
     }
   }
 }
@@ -235,4 +235,12 @@
   z-index: 100;
   box-shadow: 1px 1px 5px 2px rgba(0, 0, 0, 0.26);
   background-color: #f5f6f8;
+}
+
+.cover-screen {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  z-index: 50;
+  background-color:  rgb(0, 0, 0, 0);
 }

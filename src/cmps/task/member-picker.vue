@@ -11,7 +11,7 @@
         :key="member._id"
       />
     </section>
-    <section v-show="isEditMode" @blur="editStatus" class="member-modal">
+    <section v-show="isEditMode" class="member-modal">
       <section class="selected-members">
         <div v-for="member in selectedMembers" :key="member._id">
           <avatar
@@ -42,18 +42,17 @@
               :src="require(`@/pics/${member.imgUrl}`)"
               :key="member._id"
             ></avatar>
-            <!-- <div
-              v-else
-              :size="22"
-              :username="member.fullname"
-              class="icon-user"
-              :key="member._id"
-            ></div> -->
           </div>
           <div>{{ member.fullname }}</div>
         </li>
       </ul>
     </section>
+      <section
+      class="cover-screen"
+      v-if="isEditMode"
+      @mouseover="closeModal"
+      @click.prevent.stop="isEditMode = false"
+    ></section>
   </section>
 </template>
 
@@ -68,6 +67,8 @@ export default {
       isEditMode: false,
       selectedMembers: null,
       activity: null,
+            exitModal: null,
+
     };
   },
   created() {
@@ -77,17 +78,27 @@ export default {
     editStatus() {
       this.isEditMode = !this.isEditMode;
     },
+
     addMember(member) {
       if (!this.selectedMembers) this.selectedMembers = [];
       // const idx = this.selectedMembers.length;
       this.selectedMembers.push(member);
       this.update();
     },
+
     removeMember(member) {
       const idx = this.selectedMembers.indexOf(member);
       this.selectedMembers.splice(idx, 1);
       this.update();
     },
+
+    closeModal() {
+      clearTimeout(this.exitModal);
+      this.exitModal = setTimeout(() => {
+        this.isEditMode = false;
+      }, 2000);
+    },
+
     update() {
       const updateInfo = {
         members: this.selectedMembers,
@@ -112,6 +123,13 @@ export default {
   watch: {
     selectedMembers: function (newVal, oldVal) {
       this.activity = { type: "members", newVal, oldVal };
+    },
+    info: {
+      handler: function (newVal) {
+        if (newVal && newVal.members) {
+          this.selectedMembers = newVal.members;
+        }
+      },
     },
   },
 };
