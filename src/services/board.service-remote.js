@@ -107,14 +107,13 @@ function _getBoardCopy(boardId) {
 }
 
 function filterBy(board, filterBy) {
-  if (!filterBy.val) return true;
   const regex = new RegExp(filterBy.val, "i");
   var boardCopy = JSON.parse(JSON.stringify(board));
   if (filterBy.filter === "searchKey") {
     if (!filterBy.filter.type) {
       boardCopy.groups = boardCopy.groups.map((group) => {
         group.tasks = group.tasks.filter((task) => {
-          // if (!filterBy.val) return true;
+          if (!filterBy.val) return true;
           return regex.test(task.title) ? true : regex.test(task.status) ? true : regex.test(task.priority);
         });
         return group;
@@ -125,6 +124,7 @@ function filterBy(board, filterBy) {
     return boardCopy;
   }
   else if (filterBy.filter === 'title') {
+    if (!filterBy.val) return true;
     boardCopy.groups = boardCopy.groups.filter((group) => {
       return regex.test(group.title)
     })
@@ -141,6 +141,7 @@ function filterBy(board, filterBy) {
   // }
   else if (filterBy.filter === 'member') {
     boardCopy.groups = boardCopy.groups.map((group) => {
+      if (!filterBy.val) return true;
       group.tasks = group.tasks.filter((task) => {
         if (!task.members) return false
         return task.members.some(member => {
@@ -152,6 +153,7 @@ function filterBy(board, filterBy) {
   }
   else if (filterBy.filter === 'status') {
     boardCopy.groups = boardCopy.groups.map((group) => {
+      if (!filterBy.val) return true;
       group.tasks = group.tasks.filter((task) => {
         if (!filterBy.val) return true;
         return regex.test(task.status)

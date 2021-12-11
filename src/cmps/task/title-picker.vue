@@ -73,7 +73,7 @@ export default {
       this.$emit("updated", updateInfo);
     },
     getInfo() {
-      const task = this.currInfo
+      const task = this.currInfo;
       this.currTitle = task.title;
       this.prevTitle = task.title;
     },
