@@ -210,6 +210,7 @@
             </div>
           </form>
         </section>
+
         <section class="reply-list" v-if="comment.replies">
           <ul>
             <li v-for="(reply, idx) in comment.replies" :key="idx">
@@ -340,6 +341,7 @@
             </div>
           </form>
         </section>
+
       </li>
     </ul>
   </section>
@@ -386,8 +388,8 @@ export default {
         this.setEdit();
         return;
       }
-      console.log("comment text:", this.input);
       this.newComment.txt = this.input;
+      this.newComment.byMember = this.loggedInUser
       if (!this.task.comments) this.task.comments = [];
       this.task.comments.push(this.newComment);
       this.$emit("editTask", this.task);
@@ -419,7 +421,9 @@ export default {
     },
 
     addReply(comment) {
-      if (!this.value) {
+      // console.log(this.input);
+      if (!this.input) {
+        this.isReplyMode = false;
         this.isSecondaryReplyMode = false;
         return;
       }
