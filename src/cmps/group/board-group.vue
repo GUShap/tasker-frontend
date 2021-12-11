@@ -1,6 +1,6 @@
 
 <template>
-  <section class="group flex column align-center">
+  <section class="group flex column align-center" >
     <header class="group-header flex start align-center">
       <group-dropdown
         :group="group"
@@ -105,11 +105,11 @@
         </button>
       </section>
     </transition>
-    <footer class="group-footer flex space-evenly align-center">
+    <!-- <footer class="group-footer flex space-evenly align-center">
       <div v-for="(cmp, idx) in cmpsOrder" :key="idx">
         {{ cmpHeader(cmp) }}
       </div>
-    </footer>
+    </footer> -->
     <footer class="group-footer" />
   </section>
 </template>

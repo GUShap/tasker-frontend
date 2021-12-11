@@ -7,7 +7,6 @@
       </button>
       <div v-show="isSearch" class="search-Board">
         <input
-          @blur="isSearchMode"
           id="search"
           ref="search"
           @input="filterBy('searchKey')"
@@ -15,9 +14,9 @@
           placeholder="Search"
           v-model="searchKey"
         />
-        <a @click.stop.prevent="searchKey = ''">x</a>
+        <a @click.stop.prevent="stopSearch">x</a>
       </div>
-      <button @click="showModal('filter')">
+      <button @click="showFilterModal">
         <span class="icon-filter"></span>Filter<span
           class="icon-arrow-down"
         ></span>
@@ -146,9 +145,8 @@
     </section>
     <!-- <section
       class="cover-screen"
-      v-if="isFilterBy"
-      @mouseover="closeModal"
-      @click="showFilterModal"
+      v-if="isFilterBy || isShown"
+      @click="(isFilterBy = false), (isShown = false)"
     ></section> -->
   </section>
 </template>
@@ -183,34 +181,40 @@ export default {
     showFilterModal() {
       this.isFilterBy = !this.isFilterBy;
     },
-    // closeModal() {
-    //   clearTimeout(this.exitModal);
-    //   this.exitModal = setTimeout(() => {
-    //     this.isFilterBy = false;
-    //   }, 3000);
-    // },
+
     addNewGroup() {
       this.$emit("addNewGroup", null);
     },
+
     sortVal(value) {
       const newSort = { ...this.sortBy };
       newSort.val = value;
       this.$emit("sortBy", newSort);
     },
+
     sortOrder(value) {
       const newSort = { ...this.sortBy };
       newSort.order = value;
       this.$emit("sortBy", newSort);
     },
+
+    stopSearch() {
+      console.log("stopSearch");
+      this.searchKey = null;
+      console.log(" this.searchKey", this.searchKey);
+      this.isSearch = false;
+      this.filterBy({ filter: "all", val: "all" });
+    },
+
     closeModal() {
       this.isShown = !this.isShown;
     },
+
     isSearchMode() {
-       this.isFilterBy = false
       this.isSearch = !this.isSearch;
     },
+
     filterBy(filter) {
-      this.isFilterBy = !this.isFilterBy;
       if (typeof filter === "object") {
         this.$emit("filterBy", filter);
       } else {
