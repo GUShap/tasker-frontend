@@ -7,7 +7,7 @@
         v-for="member in selectedMembers"
         :size="25"
         :username="member.fullname"
-        :src="require(`@/pics/${member.imgUrl}`)"
+        :src="member.imgUrl ? require(`@/pics/${member.imgUrl}`) : null"
         :key="member._id"
       />
     </section>
@@ -17,7 +17,7 @@
           <avatar
             :size="22"
             :username="member.fullname"
-            :src="require(`@/pics/${member.imgUrl}`)"
+            :src="member.imgUrl ? require(`@/pics/${member.imgUrl}`) : null"
             :key="member._id"
           ></avatar>
           {{ member.fullname }}
