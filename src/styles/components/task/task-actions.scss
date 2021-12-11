@@ -113,7 +113,6 @@
     }
 }
 
-
 .el-select-dropdown {
     -webkit-animation: fade-in 0.5s ease-in-out both;
     animation: fade-in 0.5s ease-in-out both;
@@ -179,14 +178,6 @@ select {
     border-radius: 30px;
 }
 .filter-menu {
-    // padding: 16px 24px 24px;
-    // max-width: 600px;
-    // z-index: 10;
-    // background-color: #fff;
-    // border-radius: 8px;
-    // box-shadow: 0 4px 17px 6px rgb(0 0 0 / 10%);
-    // position: absolute;
-    // padding: 20px 50px;
     left: 20%;
     font-size: 0.875rem;
     position: absolute;
@@ -194,12 +185,18 @@ select {
     box-shadow: 0 4px 17px 6px rgb(0 0 0 / 10%);
     background-color: #fff;
     border-radius: 8px;
-    top: 29%;
+    top: 25%;
     padding: 16px 24px 24px;
     max-width: 600px;
     .filter-options {
         display: flex;
         gap: 20px;
+    }
+
+    .btn-clear{
+        border: 1px solid #E6E9EF;
+        cursor: pointer;
+        padding: 5px 10px;
     }
 
     .header {
