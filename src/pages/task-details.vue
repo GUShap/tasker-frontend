@@ -156,6 +156,7 @@ export default {
   },
   computed:{
     loggedInUser(){
+      if(this.$store.getters.loggedinUser) return 'Guest'
       return this.$store.getters.loggedinUser
     },
 

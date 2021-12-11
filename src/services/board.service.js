@@ -237,11 +237,7 @@ function getEmptyComment() {
     id: utilService.makeId(),
     txt: "",
     createdAt: Date.now(),
-    byMember: {
-      _id: "u101",
-      fullname: "Guy Shapira",
-      imgUrl: "guy-img.jpg",
-    },
+    byMember: {},
   };
 }
 
