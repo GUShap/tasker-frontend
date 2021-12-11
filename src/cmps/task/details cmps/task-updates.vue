@@ -243,7 +243,11 @@
               </section>
             </li>
           </ul>
-          <section v-if="comment.replies" class="reply-secondary flex">
+
+          <section
+            v-if="comment.replies && !isSecondaryReplyMode"
+            class="reply-secondary flex"
+          >
             <avatar
               class="member-img"
               :size="30"
@@ -253,8 +257,90 @@
                   : null
               "
             />
-            <input type="text" placeholder="Write a reply..." />
+            <input
+              type="text"
+              placeholder="Write a reply..."
+              @click="secondaryReply(comment)"
+            />
           </section>
+
+          <form
+            class="reply-form"
+            v-if="isSecondaryReplyMode && currComment.id === comment.id"
+            @submit.prevent="addReply(comment)"
+            ref="reply"
+          >
+            <div class="flex">
+              <avatar
+                class="member-img"
+                :size="38"
+                :src="
+                  comment.byMember.imgUrl
+                    ? require(`@/pics/${comment.byMember.imgUrl}`)
+                    : null
+                "
+              />
+
+              <div class="input-container">
+                <input type="text" v-model="input" />
+              </div>
+            </div>
+
+            <div class="actions-footer flex">
+              <div class="text-edit flex">
+                <button><span class="icon-clip"></span> add files</button>
+                <emoji-picker @emoji="insert" :search="search">
+                  <div
+                    slot="emoji-invoker"
+                    slot-scope="{ events: { click: clickEvent } }"
+                    @click.stop="clickEvent"
+                  >
+                    <button type="button">
+                      <span class="far fa-smile"></span> Emoji
+                    </button>
+                  </div>
+                  <div
+                    class="emoji-picker"
+                    slot="emoji-picker"
+                    slot-scope="{ emojis, insert }"
+                  >
+                    <div>
+                      <div class="emoji-search">
+                        <input
+                          type="text"
+                          v-model="search"
+                          placeholder="search"
+                        />
+                        <i class="fas fa-search"></i>
+                      </div>
+                      <div>
+                        <div
+                          v-for="(emojiGroup, category) in emojis"
+                          :key="category"
+                        >
+                          <h5>{{ category }}</h5>
+                          <div>
+                            <span
+                              v-for="(emoji, emojiName) in emojiGroup"
+                              :key="emojiName"
+                              @click="insert(emoji)"
+                              :title="emojiName"
+                              >{{ emoji }}</span
+                            >
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </emoji-picker>
+                <button>@ mention</button>
+                <member-picker
+                :info="currBoard"
+                />
+              </div>
+              <button class="save-btn">Reply</button>
+            </div>
+          </form>
         </section>
       </li>
     </ul>
@@ -265,14 +351,16 @@
 import { utilService } from "@/services/util.service.js";
 import { EmojiPicker } from "vue-emoji-picker";
 import { boardService } from "@/services/board.service.js";
+import memberPicker from "../member-picker.vue"
 import timeStamp from "./time-stamp.vue";
 import Avatar from "vue-avatar";
 
 export default {
   name: "task-updates",
-  props: ["task", "loggedInUser"],
+  props: ["task","currBoard", "loggedInUser"],
   components: {
     EmojiPicker,
+    memberPicker,
     timeStamp,
     Avatar,
   },
@@ -280,6 +368,7 @@ export default {
     return {
       isEditMode: false,
       isReplyMode: false,
+      isSecondaryReplyMode: false,
       newComment: null,
       currComment: null,
       input: "",
@@ -326,6 +415,10 @@ export default {
       this.currComment = comment;
       this.isReplyMode = !this.isReplyMode;
     },
+    secondaryReply(comment) {
+      this.currComment = comment;
+      this.isSecondaryReplyMode = !this.isSecondaryReplyMode;
+    },
 
     addReply(comment) {
       if (!comment.replies) comment.replies = [];
@@ -338,7 +431,8 @@ export default {
       comment.replies.push(reply);
       this.$emit("editTask", this.task);
       this.input = "";
-      this.replyMode("");
+      this.isReplyMode = false;
+      this.isSecondaryReplyMode = false;
     },
   },
 

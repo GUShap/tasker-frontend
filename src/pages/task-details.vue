@@ -58,6 +58,7 @@
         <component
           :is="component"
           :task="task"
+          :currBoard="currBoard"
           :loggedInUser="loggedInUser"
           class="cmp-container"
           @editTask="editTask"
@@ -156,6 +157,10 @@ export default {
   computed:{
     loggedInUser(){
       return this.$store.getters.loggedinUser
+    },
+
+    currBoard(){
+      return this.$store.getters.currBoard
     }
   },
 
