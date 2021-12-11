@@ -5,17 +5,16 @@
       <group-dropdown
         :group="group"
         @removeGroup="removeGroup"
-        @showGroup="showGroup"
         @setEdit="setEdit"
         @changeColor="changeColor"
-        @showGroups="showGroups"
+        @isShowGroups="isShowGroups"
         @duplicateGroup="duplicateGroup"
         @addNewGroup="addNewGroup"
       />
       <section class="column-headers">
         <div @mouseover="hover = true" @mouseleave="hover = false">
           <i
-            @click="showGroup(false)"
+            @click="isShowGroups('switch')"
             v-show="hover"
             :class="[
               groupShow ? 'fas fa-caret-square-up' : 'fas fa-caret-square-down',
@@ -106,7 +105,12 @@
         </button>
       </section>
     </transition>
-    <footer class="group-footer flex justify-center align-center"></footer>
+    <footer class="group-footer flex space-evenly align-center">
+      <div v-for="(cmp, idx) in cmpsOrder" :key="idx">
+        {{ cmpHeader(cmp) }}
+      </div>
+    </footer>
+    <footer class="group-footer" />
   </section>
 </template>
 
@@ -126,24 +130,24 @@ export default {
     Draggable,
   },
 
-  props: ["group", "board", "groupIdx", "user"],
+  props: ["group", "board", "groupIdx", "user", "isGroupShown"],
   data() {
     return {
       currGroups: null,
-      isToggleOn: false,
-      // tasksList: this.group.tasks,
-      title: null,
-      groupShow: true,
       groupTitle: this.group.title,
+      title: null,
+      // tasksList: this.group.tasks,
+      groupShow: true,
       cmpHeaders: null,
-      isFocusOn: false,
       markerColor: null,
       hover: false,
+      isToggleOn: false,
+      isFocusOn: false,
+      isSeen: false,
       sortBy: {
         val: null,
         order: "ascending",
       },
-      isSeen: false,
       dropPlaceholderOptions: {
         className: "drop-preview",
         animationDuration: "150",
@@ -153,16 +157,6 @@ export default {
   },
   created() {},
   methods: {
-    showGroup(val = null) {
-      if (val) {
-        this.groupShow = false;
-      } else {
-        this.groupShow = !this.groupShow;
-      }
-    },
-    showBtn() {
-      this.isSeen = !this.isSeen;
-    },
     addTask(task) {
       if (task === "new") {
         if (!this.title) return;
@@ -194,9 +188,22 @@ export default {
       this.group.style.color = color;
       this.$emit("editGroup", { group: this.group, groupIdx: this.groupIdx });
     },
-    showGroups(val) {
-      this.$emit("showGroups", val);
+    showBtn() {
+      this.isSeen = !this.isSeen;
     },
+    isShowGroups(val = null) {
+      if (val === "switch") {
+        this.groupShow = !this.groupShow;
+        return;
+      }
+
+      if (!val.all) {
+        this.groupShow = val.isShow;
+      } else {
+        this.$emit("isShowGroups", val);
+      }
+    },
+
     removeGroup() {
       console.log("groupIdx", this.groupIdx);
       this.$emit("removeGroup", { group: this.group, groupIdx: this.groupIdx });
@@ -286,10 +293,13 @@ export default {
       return this.group.tasks;
     },
   },
-  // watch: {
-  //   group: function (newGroup, oldGroup) {
-  //     this.tasksList = newGroup.tasks;
-  //   },
-  // },
+  watch: {
+    isGroupShown:{
+     handler: function(newVal){
+        console.log("newVal", newVal);
+        this.groupShow = newVal.isShow;
+      }
+    } 
+  },
 };
 </script>

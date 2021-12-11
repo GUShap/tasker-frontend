@@ -90,6 +90,10 @@
         justify-content: center;
         min-width: rem(200px);
         align-items: end;
+        
+        > * {
+          color: #5b5b5b;
+        }
 
         &:first-of-type {
           display: flex;

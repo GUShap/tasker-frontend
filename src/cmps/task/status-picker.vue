@@ -59,12 +59,17 @@ export default {
       this.$emit("updated", updateInfo);
     },
   },
-  computed: {
-  },
+  computed: {},
   watch: {
     status: function (newVal, oldVal) {
       this.activity = { type: "status", newVal, oldVal };
       this.update();
+    },
+    info: {
+      handler: function (newVal) {
+        this.status = newVal.status;
+        this.statusStyle = newVal.status.toLowerCase();
+      },
     },
   },
 };

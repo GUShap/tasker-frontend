@@ -6,17 +6,17 @@
         :style="{ 'background-color': group.style.color }"
       ></a>
       <el-dropdown-menu trigger="click" size="large" slot="dropdown">
-        <el-dropdown-item @click.native="showGroup(true)">
+        <el-dropdown-item @click.native="isShowGroups({all : false , isShow : false})">
           <i class="fas fa-compress-alt"></i>Collapse this group
         </el-dropdown-item>
-        <el-dropdown-item class="last-child" @click.native="showGroups(true)"
+        <el-dropdown-item class="last-child" @click.native="isShowGroups({all : true , isShow : false})"
           ><i class="fas fa-compress-alt"></i>Collapse all
           groups</el-dropdown-item
         >
-        <el-dropdown-item @click.native="showGroup(false)"
+        <el-dropdown-item @click.native="isShowGroups({all : false , isShow : true})"
           ><i class="fas fa-expand-alt"></i>Open group</el-dropdown-item
         >
-        <el-dropdown-item class="last-child" @click.native="showGroups(false)"
+        <el-dropdown-item class="last-child" @click.native="isShowGroups({all : true , isShow : true})"
           ><i class="fas fa-expand-alt"></i>Open all groups</el-dropdown-item
         >
         <el-dropdown-item @click.native="addNewGroup"
@@ -85,11 +85,8 @@ export default {
     toggleModal() {
       this.isHidden = !this.isHidden;
     },
-    showGroup(val) {
-      this.$emit("showGroup", val);
-    },
-    showGroups(val) {
-      this.$emit("showGroups", val);
+    isShowGroups(val) {
+      this.$emit("isShowGroups", val);
     },
     setEdit() {
       this.$emit("setEdit");
