@@ -57,9 +57,6 @@ const routes = [
     name: 'login',
     component: login
   },
-  
-  
-
 ]
 
 const router = new VueRouter({
