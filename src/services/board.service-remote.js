@@ -116,7 +116,7 @@ function filterBy(board, filterBy) {
           if (!filterBy.val) return true;
           return regex.test(task.title) ? true : regex.test(task.status) ? true : regex.test(task.priority);
         });
-        if(!group.tasks.length) return null
+        if (!group.tasks.length) return null
         return group;
       });
     }
@@ -149,6 +149,7 @@ function filterBy(board, filterBy) {
           return regex.test(member.fullname)
         })
       })
+      if (!group.tasks.length) return null
       return group
     })
   }
@@ -159,6 +160,7 @@ function filterBy(board, filterBy) {
         if (!filterBy.val) return true;
         return regex.test(task.status)
       })
+      if(!group.tasks.length) return null
       return group;
     })
   }
