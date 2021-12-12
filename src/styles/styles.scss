@@ -30,7 +30,10 @@
 @import "./components/login-page";
 @import "./components/dashboard-charts";
 
-@import "./icons/fontawesome-free-5.15.4-web/scss/fontawesome.scss";
-$fa-font-path: "~@fortawesome/fontawesome-free/webfonts";
-@import "./icons/fontawesome-free-5.15.4-web/css/all.css";
+@import "@src/styles/icons/fontawesome-free-5.15.4-web/scss/fontawesome.scss";
+@import "@src/styles/icons/fontawesome-free-5.15.4-web/scss/regular.scss";
+@import "@src/styles/icons/fontawesome-free-5.15.4-web/scss/solid.scss";
+@import "@src/styles/icons/fontawesome-free-5.15.4-web/scss/fontawesome.scss";
+$fa-font-path: "@src/styles/icons/fontawesome-free-5.15.4-web/webfonts";
+// @import "./icons/fontawesome-free-5.15.4-web/css/all.css";
 

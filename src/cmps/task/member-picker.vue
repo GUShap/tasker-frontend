@@ -114,7 +114,7 @@ export default {
         const membersToShow = boardMembers.filter((member) => {
           return !selectedMembersId.includes(member._id);
         });
-        return membersToShow;
+        return boardMembers;
       }
     },
   },
