@@ -72,6 +72,13 @@ export default {
     this.selectedMembers = this.info.members || null;
   },
   methods: {
+     update() {
+      const updateInfo = {
+        members: this.selectedMembers,
+        activity: this.activity,
+      };
+      this.$emit("updated", updateInfo);
+    },
     editStatus() {
       this.isEditMode = !this.isEditMode;
     },
@@ -95,13 +102,7 @@ export default {
       console.log('isEditMode',this.isEditMode);
     },
 
-    update() {
-      const updateInfo = {
-        members: this.selectedMembers,
-        activity: this.activity,
-      };
-      this.$emit("updated", updateInfo);
-    },
+   
   },
   computed: {
     membersList() {

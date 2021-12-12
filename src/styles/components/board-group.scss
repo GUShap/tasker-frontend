@@ -7,7 +7,7 @@
     border: solid 1px black;
   }
 
-  .no-boder {
+  .no-border {
     border: none;
   }
 
@@ -33,12 +33,14 @@
         border: none;
       }
     }
-    .input-group-name {
-      position: absolute;
-      left: 100px;
-      margin-left: 0.2rem;
-      font-size: 18px;
-    }
+    // .input-group-name {
+    //   position: absolute;
+    //   left: 100px;
+    //   margin-left: 0.2rem;
+    //   font-size: 18px;
+    //   border: none;
+    //   outline: none;
+    // }
 
     .btn-add-task {
       padding: 0 10px;
@@ -53,7 +55,7 @@
 
   .group-header {
     width: 100%;
-    margin: 0.1rem 0;
+    margin: 0.2rem 0;
     background-color: #fff;
 
     input {
@@ -66,6 +68,27 @@
       display: flex;
       justify-items: center;
       padding-bottom: 5px;
+
+      > div {
+        height: 22px;
+      }
+
+      div:first-child {
+        display: flex;
+        margin: 0;
+        padding: 0;
+        justify-content: start;
+        .input-group-name {
+          position: absolute;
+          margin-left: 0.2rem;
+          font-size: 18px;
+          border: none;
+          border: 1px solid #29292900;
+          &:hover {
+            border: 1px solid #292929;
+          }
+        }
+      }
 
       .input {
         min-width: rem(306px);
@@ -91,7 +114,7 @@
         justify-content: center;
         min-width: rem(200px);
         align-items: end;
-        
+
         > * {
           color: #5b5b5b;
         }
@@ -163,12 +186,10 @@
   color: #504658dc;
   margin-left: 18px;
   padding: 5px;
-  &:hover{
+  &:hover {
     background-color: white;
     border-radius: 5px;
   }
-
-
 }
 
 .dropdown {

@@ -11,9 +11,9 @@
     flex: 1;
     font-size: rem(20px);
     font-family: roboto;
-    // width: 100%;
+    width: 100%;
     header {
-      padding-left: rem(10px);
+     margin-bottom: 5px;
     }
     .board-header {
       display: flex;
@@ -23,12 +23,12 @@
       font-size: 20px;
       font-family: roboto;
 
-      .no-boder {
+      .no-border {
         border: none;
       }
 
       .input-section {
-        margin-left: 1.2rem;
+        margin-left: 2.7rem;
         color: #676879;
       }
 
@@ -58,7 +58,7 @@
       align-items: center;
       justify-content: center;
       gap: 2px;
-      // margin-left: 1.2rem;
+      margin-left: 1.4rem;
 
       .fas.fa-share-alt {
         font-weight: 400px;

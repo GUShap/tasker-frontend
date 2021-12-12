@@ -23,9 +23,9 @@
           />
           <i v-show="hover" class="group-drag-handle fas fa-grip-vertical" />
 
+            <!-- :class="[isFocusOn ? 'border' : 'no-border']" -->
           <input
             class="input-group-name"
-            :class="[isFocusOn ? 'border' : 'no-boder']"
             type="text"
             v-model="group.title"
             @change="updateGroup"
@@ -139,7 +139,7 @@ export default {
       groupShow: true,
       cmpHeaders: null,
       markerColor: null,
-      hover: false,
+      hover: true,
       isToggleOn: false,
       isFocusOn: false,
       isSeen: false,
@@ -219,9 +219,11 @@ export default {
     },
 
     async updateGroup() {
+      console.log('group');
       try {
         this.isFocusOn = false;
-        const currGroup = this.group;
+        console.log('this.isFocusOn',this.isFocusOn);
+        const currGroup = JSON.parse(JSON.stringify(this.group))
         const groupInfo = { group: currGroup, groupIdx: this.groupIdx };
         await this.$store.dispatch({
           type: "saveGroup",
