@@ -95,24 +95,19 @@ export default {
       isBtnHover: false,
       hoveredBtn: null,
       isEditMode: false,
-      updatedTask : null
     };
   },
 
   async created() {
     try {
-      const { taskId } = this.$route.params;
-      if (this.task && this.task.id === taskId) return;
-      const task = await this.$store.dispatch({
-        type: "getTaskById",
-        taskId,
-      });
-      this.task = task;
-      console.log('when open details',this.task);
+
       this.$store.commit({ type: "setLoggedinUser" });
+      this.getTask();
 
       const boardIdx = this.$store.getters.currBoardIdx;
-      const taskInfo = await remoteBoardService.getTaskRouteIdx(task, boardIdx);
+      const taskInfo = await remoteBoardService.getTaskRouteIdx(this.task, boardIdx);
+
+      console.log(taskInfo);
       this.taskInfo = taskInfo;
     } catch (err) {
       console.log(err);
@@ -133,6 +128,9 @@ export default {
     pageHover(isHover) {
       this.$store.commit({ type: "hover", isHover });
     },
+    setTask(task) {
+      this.task = task;
+    },
     async editTask(task) {
       try {
         const boardIdx = this.$store.getters.currBoardIdx;
@@ -140,14 +138,28 @@ export default {
           task,
           boardIdx
         );
-        this.updatedTask = task
         this.$store.dispatch({ type: "editTask", taskInfo });
         this.isEditMode = false;
       } catch (err) {
         console.log(err);
       }
     },
+
+    async getTask() {
+      try {
+        const { taskId } = this.$route.params;
+        const task = await this.$store.dispatch({
+          type: "getTaskById",
+          taskId,
+        });
+        this.task = task;
+
+      } catch (err) {
+        console.log(err);
+      }
+    },
   },
+
   computed: {
     allUsers() {
       return this.$store.getters.getUsers;
@@ -160,31 +172,16 @@ export default {
     currBoard() {
       return this.$store.getters.currBoard;
     },
-    currTask() {
-      return this.task
-    },
   },
 
   watch: {
-    $route: async function (newVal) {
-      try {
-        const { taskId } = newVal.params;
-        const task = await this.$store.dispatch({
-          type: "getTaskById",
-          taskId,
-        });
-
-        this.task = task ;
-      } catch (err) {
-        console.log(err);
-      }
+    $route: function () {
+      this.getTask();
     },
-    updatedTask: {
-      handler: function(newVal){
-        console.log('task-details',newVal);
-        this.task = newVal
-      }
-    }
+
+    currBoard: function () {
+      this.getTask();
+    },
   },
 };
 </script>
