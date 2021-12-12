@@ -4,6 +4,7 @@
     height: inherit;
     font-family: sofia-pro;
     width: 100%;
+    overflow: scroll;
 
     .home-header {
         display: flex;
@@ -18,7 +19,7 @@
     }
 
     .logo-img {
-        max-width: 2rem;
+        max-width: 5rem;
         box-shadow: none;
         top: 0;
     }
