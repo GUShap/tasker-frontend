@@ -28,7 +28,15 @@
 
       <div class="actions-footer flex">
         <div class="text-edit flex">
-          <button><span class="icon-clip"></span> add files</button>
+          <button @click.prevent.stop="$refs.fileInput.click()">
+            <span class="icon-clip"></span> add files
+          </button>
+          <input
+            style="display: none"
+            ref="fileInput"
+            type="file"
+            @change="onFileSelected"
+          />
           <emoji-picker @emoji="insert" :search="search">
             <div
               slot="emoji-invoker"
@@ -68,6 +76,7 @@
           </emoji-picker>
           <button @click.prevent="mentionMode">@ mention</button>
         </div>
+
         <user-list
           :users="users"
           @addMember="mentionMember"
@@ -116,8 +125,7 @@
                 </section>
                 <avatar
                   v-else
-                  class="member-img"
-                  :size="45"
+                  :size="40"
                   :src="
                     comment.byMember.imgUrl
                       ? require(`@/pics/${comment.byMember.imgUrl}`)
@@ -167,7 +175,6 @@
               </section>
               <avatar
                 v-else
-                class="member-img"
                 :size="38"
                 :src="
                   loggedInUser.imgUrl
@@ -183,7 +190,9 @@
 
             <div class="actions-footer flex">
               <div class="text-edit flex">
-                <button><span class="icon-clip"></span> add files</button>
+                <button @click.prevent.stop>
+                  <span class="icon-clip"></span> add files
+                </button>
                 <emoji-picker @emoji="insert" :search="search">
                   <div
                     slot="emoji-invoker"
@@ -250,7 +259,6 @@
                 </section>
                 <avatar
                   v-else
-                  class="member-img"
                   :size="30"
                   :src="
                     reply.createdBy.imgUrl
@@ -274,11 +282,11 @@
                   <i class="far fa-eye"></i>
                 </div>
                 <span>|</span>
-                <a class="far fa-thumbs-up" @click.prevent.stop="toggleReplyLike(reply)"
-                :class="[
-                    likedReplies.some((r) => r.id === reply.id)
-                      ? 'like'
-                      : '',
+                <a
+                  class="far fa-thumbs-up"
+                  @click.prevent.stop="toggleReplyLike(reply)"
+                  :class="[
+                    likedReplies.some((r) => r.id === reply.id) ? 'like' : '',
                   ]"
                 ></a>
               </section>
@@ -294,8 +302,7 @@
             </section>
             <avatar
               v-else
-              class="member-img"
-              :size="30"
+              :size="25"
               :src="
                 loggedInUser.imgUrl
                   ? require(`@/pics/${loggedInUser.imgUrl}`)
@@ -322,8 +329,7 @@
 
               <avatar
                 v-else
-                class="member-img"
-                :size="38"
+                :size="33"
                 :src="
                   comment.byMember.imgUrl
                     ? require(`@/pics/${comment.byMember.imgUrl}`)
@@ -338,7 +344,9 @@
 
             <div class="actions-footer flex">
               <div class="text-edit flex">
-                <button><span class="icon-clip"></span> add files</button>
+                <button @click.prevent.stop>
+                  <span class="icon-clip"></span> add files
+                </button>
                 <emoji-picker @emoji="insert" :search="search">
                   <div
                     slot="emoji-invoker"
@@ -402,8 +410,8 @@
 
 <script>
 import { utilService } from "@/services/util.service.js";
+import { remoteBoardService } from "@/services/board.service-remote.js";
 import { EmojiPicker } from "vue-emoji-picker";
-import { boardService } from "@/services/board.service.js";
 import userList from "./user-list.vue";
 import timeStamp from "./time-stamp.vue";
 import Avatar from "vue-avatar";
@@ -435,7 +443,7 @@ export default {
     };
   },
   created() {
-    this.newComment = boardService.getEmptyComment();
+    this.newComment = remoteBoardService.getEmptyComment();
     this.seenBy.push(this.loggedInUser);
   },
   methods: {
@@ -484,6 +492,8 @@ export default {
     },
     mentionMember(member) {
       this.input += " @" + member.fullname;
+            this.isMentionMode = false;
+
     },
     closeList() {
       this.isMentionMode = false;
@@ -510,21 +520,27 @@ export default {
     },
 
     toggleCommentLike(comment) {
-      if(this.likedComments.some(c=> c.id===comment.id)){
-        const idx= this.likedComments.findIndex(c=> c.id===comment.id)
-        this.likedComments.splice(idx,1)
-      }
-      else this.likedComments.push(comment)
+      if (this.likedComments.some((c) => c.id === comment.id)) {
+        const idx = this.likedComments.findIndex((c) => c.id === comment.id);
+        this.likedComments.splice(idx, 1);
+      } else this.likedComments.push(comment);
     },
 
-    toggleReplyLike(reply){
-      if(this.likedReplies.some(c=> c.id===reply.id)){
-        const idx= this.likedReplies.findIndex(c=> c.id===reply.id)
-        this.likedReplies.splice(idx,1)
-      }
-      else this.likedReplies.push(reply)
-    }
+    toggleReplyLike(reply) {
+      if (this.likedReplies.some((c) => c.id === reply.id)) {
+        const idx = this.likedReplies.findIndex((c) => c.id === reply.id);
+        this.likedReplies.splice(idx, 1);
+      } else this.likedReplies.push(reply);
+    },
 
+    async onFileSelected() {
+      try {
+        const file=  this.$refs.fileInput.files[0];
+        await remoteBoardService.saveFile(file)
+      } catch (err) {
+        console.log(err);
+      }
+    },
   },
 };
 </script>

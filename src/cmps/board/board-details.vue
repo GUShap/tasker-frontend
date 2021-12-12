@@ -52,7 +52,7 @@ export default {
 
   data() {
     return {
-      isGroupShown : true,
+      isGroupShown: true,
       groups: null,
       openModal: false,
       dropPlaceholderOptions: {
@@ -63,7 +63,7 @@ export default {
     };
   },
   created() {
-    this.isShowGroups(true)
+    this.isShowGroups(true);
     socketService.emit("watch board", this.board._id);
   },
   mounted() {
@@ -87,7 +87,7 @@ export default {
     },
 
     isShowGroups(val) {
-     this.isGroupShown = val;
+      this.isGroupShown = val;
     },
 
     addNewGroup(groupInfo) {
