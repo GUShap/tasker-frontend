@@ -427,6 +427,7 @@ export default {
   },
   data() {
     return {
+      currTask: this.task,
       isEditMode: false,
       isMentionMode: false,
       isReplyMode: false,
@@ -460,8 +461,9 @@ export default {
       this.input = "";
       this.newComment.byMember = this.loggedInUser;
       if (!this.task.comments) this.task.comments = [];
-      this.task.comments.unshift(this.newComment);
-      this.$emit("editTask", this.task);
+      const currTask = this.task;
+      currTask.comments.unshift(this.newComment);
+      this.$emit("editTask", currTask);
       this.setEdit();
     },
     setEdit() {
@@ -492,8 +494,7 @@ export default {
     },
     mentionMember(member) {
       this.input += " @" + member.fullname;
-            this.isMentionMode = false;
-
+      this.isMentionMode = false;
     },
     closeList() {
       this.isMentionMode = false;
@@ -535,8 +536,8 @@ export default {
 
     async onFileSelected() {
       try {
-        const file=  this.$refs.fileInput.files[0];
-        await remoteBoardService.saveFile(file)
+        const file = this.$refs.fileInput.files[0];
+        await remoteBoardService.saveFile(file);
       } catch (err) {
         console.log(err);
       }
@@ -544,3 +545,4 @@ export default {
   },
 };
 </script>
+
