@@ -44,6 +44,18 @@
                 outline: none;
             }
         }
+
+        @media (max-width: 500px) {
+          
+                .comment-input {
+                    padding: 0;
+                    input{
+                        font-size: 12px;
+                        font-weight: 600;
+                    }
+                }
+     
+        }
     }
 
     .actions-footer {
@@ -99,13 +111,21 @@
             height: 32px;
             padding: 4px 8px;
         }
+
+        @media (max-width: 500px){
+            .save-btn {
+                position: absolute;
+                right: 45px;
+            }
+        }
+        
     }
 
     a {
         text-align: right;
-        color:#9b9da5;
+        color: #9b9da5;
     }
-    .like{
+    .like {
         font-weight: bold;
         color: #649aff;
     }
@@ -194,24 +214,22 @@
         }
     }
 
-    
     .reply-form {
         margin-top: 40px;
         padding-left: 5px;
-.input-container {
-        width: 87%;
-        height: 90px;
-        border: 1px solid #0073ea;
-        border-radius: 10px;
-margin-left: 8px;
-        input {
-            width: 100%;
-            padding-bottom: 50px;
-            outline: none;
-            border: none;
+        .input-container {
+            width: 87%;
+            height: 90px;
+            border: 1px solid #0073ea;
+            border-radius: 10px;
+            margin-left: 8px;
+            input {
+                width: 100%;
+                padding-bottom: 50px;
+                outline: none;
+                border: none;
+            }
         }
-    }
-
 
         .actions-footer {
             margin-left: 60px;
@@ -286,11 +304,12 @@ margin-left: 8px;
             }
         }
 
-        .like{
+        .like {
             font-weight: bold;
             color: #649aff;
         }
     }
+
 }
 
 .cover-user {
@@ -319,8 +338,7 @@ margin-left: 8px;
             border: none;
             border-top: 1px solid #9b9da591;
         }
-        
-        
+
         ul {
             .list-item {
                 gap: 10px;
@@ -345,8 +363,6 @@ margin-left: 8px;
                 color: white;
             }
         }
-        
     }
+    
 }
-
-

@@ -95,17 +95,19 @@ export default {
       isBtnHover: false,
       hoveredBtn: null,
       isEditMode: false,
-      updatedTask : null
     };
   },
 
   async created() {
     try {
-      this.getTask();
+
       this.$store.commit({ type: "setLoggedinUser" });
+      this.getTask();
 
       const boardIdx = this.$store.getters.currBoardIdx;
-      const taskInfo = await remoteBoardService.getTaskRouteIdx(task, boardIdx);
+      const taskInfo = await remoteBoardService.getTaskRouteIdx(this.task, boardIdx);
+
+      console.log(taskInfo);
       this.taskInfo = taskInfo;
     } catch (err) {
       console.log(err);
@@ -126,6 +128,9 @@ export default {
     pageHover(isHover) {
       this.$store.commit({ type: "hover", isHover });
     },
+    setTask(task) {
+      this.task = task;
+    },
     async editTask(task) {
       try {
         const boardIdx = this.$store.getters.currBoardIdx;
@@ -133,7 +138,6 @@ export default {
           task,
           boardIdx
         );
-        this.updatedTask = task
         this.$store.dispatch({ type: "editTask", taskInfo });
         this.isEditMode = false;
       } catch (err) {
@@ -148,13 +152,14 @@ export default {
           type: "getTaskById",
           taskId,
         });
+        this.task = task;
 
-        this.setTask(task);
       } catch (err) {
         console.log(err);
       }
     },
   },
+
   computed: {
     allUsers() {
       return this.$store.getters.getUsers;
@@ -166,9 +171,6 @@ export default {
 
     currBoard() {
       return this.$store.getters.currBoard;
-    },
-    currTask() {
-      return this.task
     },
   },
 
