@@ -219,7 +219,7 @@ function getColors() {
   return [
     {
       name: "darkGreen",
-      hexCode: "#037f4",
+      hexCode: "#359970",
     },
     {
       name: "green",

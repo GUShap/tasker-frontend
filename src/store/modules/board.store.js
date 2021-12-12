@@ -180,20 +180,10 @@ export const boardStore = {
     async editTask({ state, dispatch, commit }, { taskInfo }) {
       // const currUser = JSON.parse(JSON.stringify(commit.getters.loggedinUser));
       try {
-        if (taskInfo.detailsUpdate) taskInfo = getOrigin(taskInfo.task);
-
         const { task, taskIdx, groupIdx, activity } = taskInfo;
         const boardCopy = JSON.parse(JSON.stringify(state.currBoard));
 
-        if (task.id && task.isCopy) {
-
-          delete task.id
-          task.id = utilService.makeId()
-          boardCopy.groups[groupIdx].tasks.splice(taskIdx, 0, task);
-        } else if (task.id) {
-          boardCopy.groups[groupIdx].tasks.splice(taskIdx, 1, task);
-
-        } else {
+        if (!task.id) {
           const currTask = {
             id: utilService.makeId(),
             title: task.title,
@@ -204,6 +194,20 @@ export const boardStore = {
           }
           boardCopy.groups[groupIdx].tasks.push(currTask);
         }
+        
+        else {
+          if (task.isCopy) {
+            delete task.id
+            delete task.isCopy
+            task.id = utilService.makeId()
+            boardCopy.groups[groupIdx].tasks.splice(taskIdx, 0, task);
+
+          } else {
+            boardCopy.groups[groupIdx].tasks.splice(taskIdx, 1, task);
+          }
+        }
+
+
 
         const newActivity = {
           id: utilService.makeId(),
