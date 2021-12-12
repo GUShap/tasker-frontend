@@ -40,7 +40,7 @@
                   <div
                     class="user-container"
                     @click.prevent.stop="
-                      filterBy({ filter: 'member', val: user.fullname })
+                      filterBy({ filter: 'member', val: user.fullname})
                     "
                   >
                     <img
