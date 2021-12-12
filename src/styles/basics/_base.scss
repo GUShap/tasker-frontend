@@ -9,6 +9,11 @@
 html {
   height: 100%;
   overflow: hidden;
+
+  @media(max-width: 500px){
+    position: fixed;
+  }
+
 }
 
 body {

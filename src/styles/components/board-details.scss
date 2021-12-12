@@ -3,7 +3,9 @@
   font-family: roboto;
   height: 100%;
   flex: 1;
-
+  
+  @media(max-width: 500px){
+width: 400px;    }
   .workspace {
     display: flex;
     flex-direction: column;
@@ -11,7 +13,10 @@
     flex: 1;
     font-size: rem(20px);
     font-family: roboto;
-    width: 100%;
+    // width: 1000px;
+
+
+
     header {
       margin-bottom: 5px;
     }
@@ -116,6 +121,7 @@
       font-family: roboto;
       padding-left: rem(30px);
       // margin-left: 1.5rem;
+
     }
     .main-title {
       display: flex;
@@ -162,9 +168,7 @@
 
   .invite-container {
     position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(calc(-50% + 33px) ,-50%);
+    background-color: white;
     z-index: 50;
     width: 600px;
     border-radius: 10px;

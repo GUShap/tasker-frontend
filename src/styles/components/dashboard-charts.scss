@@ -1,5 +1,7 @@
 .dashboard-container{
-
+    @media(max-width: 500px){
+        overflow-x: scroll;
+      }
     .dashboard{
         header{
             display: flex;

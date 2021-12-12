@@ -101,14 +101,7 @@ export default {
 
   async created() {
     try {
-      const { taskId } = this.$route.params;
-      if (this.task && this.task.id === taskId) return;
-      const task = await this.$store.dispatch({
-        type: "getTaskById",
-        taskId,
-      });
-      this.task = task;
-      console.log('when open details',this.task);
+      this.getTask();
       this.$store.commit({ type: "setLoggedinUser" });
 
       const boardIdx = this.$store.getters.currBoardIdx;
@@ -147,6 +140,20 @@ export default {
         console.log(err);
       }
     },
+
+    async getTask() {
+      try {
+        const { taskId } = this.$route.params;
+        const task = await this.$store.dispatch({
+          type: "getTaskById",
+          taskId,
+        });
+
+        this.setTask(task);
+      } catch (err) {
+        console.log(err);
+      }
+    },
   },
   computed: {
     allUsers() {
@@ -166,25 +173,13 @@ export default {
   },
 
   watch: {
-    $route: async function (newVal) {
-      try {
-        const { taskId } = newVal.params;
-        const task = await this.$store.dispatch({
-          type: "getTaskById",
-          taskId,
-        });
-
-        this.task = task ;
-      } catch (err) {
-        console.log(err);
-      }
+    $route: function () {
+      this.getTask();
     },
-    updatedTask: {
-      handler: function(newVal){
-        console.log('task-details',newVal);
-        this.task = newVal
-      }
-    }
+
+    currBoard: function () {
+      this.getTask();
+    },
   },
 };
 </script>
