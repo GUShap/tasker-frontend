@@ -28,7 +28,7 @@
       <hr />
       <ul>
         <li
-          v-for="(member, idx) in membersList"
+          v-for="(member, idx) in membersToShow"
           :key="idx"
           :value="member"
           @click.prevent.stop="addMember(member)"
@@ -64,7 +64,7 @@ export default {
   data() {
     return {
       isEditMode: false,
-      selectedMembers: null,
+      selectedMembers: this.info.members,
       activity: null,
     };
   },
@@ -105,15 +105,16 @@ export default {
    
   },
   computed: {
-    membersList() {
+    membersToShow() {
+      var boardMembers = this.info.boardMembers;
       if (!this.selectedMembers) {
-        return this.info.boardMembers;
+        return boardMembers
       } else {
         const selectedMembersId = this.selectedMembers.map((m) => m._id);
-        const membersList = this.info.boardMembers.filter((member) => {
+        const membersToShow = boardMembers.filter((member) => {
           return !selectedMembersId.includes(member._id);
         });
-        return membersList;
+        return membersToShow;
       }
     },
   },
@@ -121,13 +122,13 @@ export default {
     selectedMembers: function (newVal, oldVal) {
       this.activity = { type: "members", newVal, oldVal };
     },
-    info: {
-      handler: function (newVal) {
-        if (newVal && newVal.members) {
-          this.selectedMembers = newVal.members;
-        }
-      },
-    },
+    // info: {
+    //   handler: function (newVal) {
+    //     if (newVal && newVal.members) {
+    //       this.selectedMembers = newVal.members;
+    //     }
+    //   },
+    // },
   },
 };
 </script>
