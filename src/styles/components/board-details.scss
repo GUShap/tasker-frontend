@@ -18,7 +18,7 @@ width: 400px;    }
 
 
     header {
-     margin-bottom: 5px;
+      margin-bottom: 5px;
     }
     .board-header {
       display: flex;
@@ -54,10 +54,15 @@ width: 400px;    }
         font-size: 30px;
         letter-spacing: 0px;
         // line-height: 32px;
-        font-family: roboto;
+      }
+      .icon-activities,
+      .icon-plus,
+      .icon-invite {
+        padding-right: 7px;
       }
     }
     .board-info {
+      font-family: roboto;
       display: flex;
       flex-direction: row;
       align-items: center;
@@ -84,9 +89,19 @@ width: 400px;    }
         padding-bottom: 0px;
         font-size: 18px;
       }
-      .btn-add-board{
+      .btn-add-board {
         border-radius: 5px;
-        border: 1px solid #bec0c4
+        border: 1px solid #bec0c4;
+        text-align: center;
+        background-color: inherit;
+        padding: 5px 15px;
+        span {
+          text-align: center;
+        }
+
+        &:hover{
+          background-color: #e6e9ef;;
+        }
       }
     }
 
@@ -113,7 +128,7 @@ width: 400px;    }
       justify-content: space-between;
       align-items: center;
       font-family: roboto;
-      width: 100%;
+      width: 98%;
       padding-top: 17px;
       padding-left: 24px;
       &:first-child {
@@ -131,20 +146,25 @@ width: 400px;    }
       align-items: center;
       flex-direction: row;
       position: relative;
+      padding: 5px;
       > * {
-        margin-inline:-.2rem ;
+        margin-inline: -0.2rem;
+      }
+      &:hover{
+        background-color: #e6e9ef;
+        border-radius: 5px;
       }
     }
   }
 
-  .member-avatars {
-    margin-right: 10px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: row;
-    position: relative;
-  }
+  // .member-avatars {
+  //   margin-right: 10px;
+  //   display: flex;
+  //   justify-content: center;
+  //   align-items: center;
+  //   flex-direction: row;
+  //   position: relative;
+  // }
 
   .invite-container {
     position: absolute;
@@ -152,7 +172,7 @@ width: 400px;    }
     z-index: 50;
     width: 600px;
     border-radius: 10px;
-    // margin-top: 20%;
+    background-color: white;
 
     .invite-list {
       padding: 20px 30px;
