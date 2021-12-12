@@ -86,9 +86,6 @@
         <button class="save-btn" @click="closeList">Update</button>
       </div>
     </form>
-    <a href="#" v-if="!isEditMode"
-      ><i class="far fa-envelope"></i>Write updates via email:</a
-    >
     <ul>
       <li v-for="(comment, idx) in task.comments" :key="idx">
         <section class="update-card">
@@ -536,7 +533,9 @@ export default {
     async onFileSelected() {
       try {
         const file=  this.$refs.fileInput.files[0];
-        await remoteBoardService.saveFile(file)
+        console.log(file);
+        this.input+=file.name
+        // await remoteBoardService.saveFile(file)
       } catch (err) {
         console.log(err);
       }

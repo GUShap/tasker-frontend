@@ -7,6 +7,10 @@
   height: 100%;
   color: white;
 
+@media(max-width: 500px){
+  display: none;
+}
+
   a:hover{
     background-color: #10131e ;
 

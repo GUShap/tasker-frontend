@@ -1,4 +1,9 @@
 .pop-up-container {
+
+  @media(max-width: 500px){
+    display: none;
+  }
+
   .toggle-nav {
     position: absolute;
     top: 20px;

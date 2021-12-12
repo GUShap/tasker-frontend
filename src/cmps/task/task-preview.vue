@@ -30,7 +30,6 @@ import statusPicker from "./status-picker.vue";
 import memberPicker from "./member-picker.vue";
 import timelinePicker from "./timeline-picker.vue";
 import priorityPicker from "./priority-picker.vue";
-
 import taskDropdown from "../task-dropdown.vue";
 
 export default {
@@ -103,6 +102,7 @@ export default {
     },
     updateTask(cmpType, ev) {
       var task = JSON.parse(JSON.stringify(this.currentTask)) 
+
       switch (cmpType) {
         case "title-picker":
           task.title = ev.title;
@@ -133,7 +133,6 @@ export default {
         taskInfo,
       });
     },
-    
   },
   computed: {
     marker() {
