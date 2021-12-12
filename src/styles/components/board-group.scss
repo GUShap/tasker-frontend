@@ -33,14 +33,7 @@
         border: none;
       }
     }
-    // .input-group-name {
-    //   position: absolute;
-    //   left: 100px;
-    //   margin-left: 0.2rem;
-    //   font-size: 18px;
-    //   border: none;
-    //   outline: none;
-    // }
+   
 
     .btn-add-task {
       padding: 0 10px;
@@ -126,6 +119,7 @@
         display: flex;
         justify-content: center;
         min-width: rem(200px);
+        border-left:1px solid rgb(0,0,0,0);
         align-items: end;
 
         > * {
@@ -134,10 +128,10 @@
 
         &:first-of-type {
           display: flex;
+          flex : 1;
           justify-content: start;
           align-items: center;
           min-width: 25.6rem;
-          max-width: rem(810px);
           margin-right: rem(11px);
 
           i {
@@ -145,7 +139,7 @@
           }
         }
         &:last-of-type {
-          margin-right: rem(10px);
+          margin-right: 4px;
         }
       }
     }

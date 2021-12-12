@@ -2,16 +2,16 @@
   display: flex;
   font-family: roboto;
   height: 100%;
-  flex: 1;
+  width: calc(100% - 66px);
 
   .workspace {
     display: flex;
     flex-direction: column;
-    overflow: hidden;
     flex: 1;
-    font-size: rem(20px);
+    font-size: 1.25rem;
     font-family: roboto;
-    width: 100%;
+    width: 80%;
+
     header {
       margin-bottom: 5px;
     }
@@ -109,13 +109,11 @@
     .board-container {
       display: flex;
       flex-direction: column;
-      height: 100%;
-      flex: 1;
+      height: fit-content;
       overflow: scroll;
-      max-width: 100%;
+      width: calc(100% - 10px);
       font-family: roboto;
-      padding-left: rem(30px);
-      // margin-left: 1.5rem;
+      padding-left: 1.875rem;
     }
     .main-title {
       display: flex;
