@@ -14,6 +14,10 @@ export const remoteBoardService = {
   getTaskById,
   getTaskRouteIdx,
   filterBy,
+  saveFile,
+  getEmptyComment,
+  getEmptyActivity
+
 };
 
 const BASE_URL = process.env.NODE_ENV !== "development" ? "board" : "board";
@@ -49,6 +53,15 @@ async function save(board) {
       : await httpService.post(BASE_URL, { board });
   } catch (err) {
     console.log("error:", err);
+  }
+}
+
+async function saveFile(file) {
+  try {
+    const fd = new FormData();
+    await httpService.post('/upload', fd);
+  } catch (err) {
+    console.log(err);
   }
 }
 
@@ -181,6 +194,26 @@ async function getEmptyGroup() {
     console.log(err);
   }
 }
+
+function getEmptyComment() {
+  return {
+    id: utilService.makeId(),
+    txt: "",
+    createdAt: Date.now(),
+    byMember: {},
+  };
+}
+
+function getEmptyActivity() {
+  return {
+    txt: "",
+    id: utilService.makeId(),
+    createdAt: Date.now(),
+    byMember: {},
+    task: {},
+  };
+}
+
 
 function getColors() {
   return [

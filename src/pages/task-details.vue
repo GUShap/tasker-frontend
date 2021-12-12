@@ -1,75 +1,73 @@
 <template>
-    <!-- <div class="details-container"> -->
-  <!-- <VueDragResize
-  class="x"
-      :isActive="true"
-      :isDraggable="false"
-      :w="400"
-      
-      :h="1020"
-      :resizing="resize"
-      :dragging="resize"
-      :aspectRatio="false"
-    > -->
   <div
     v-if="task"
     class="task-details"
     @mouseover.self="pageHover(true)"
     @mouseleave="pageHover(false)"
   >
-      <i class="fa fa-times" @click="exitModal"></i>
-      <div class="details-title flex">
-        <input placeholder="title" v-model="task.title" @change="update" />
-        <div class="users">
-          <i class="fas fa-plus-circle"></i>
-          <i class="fas fa-user-circle"></i>
-        </div>
-      </div>
-      <div class="log-menu flex">
-        <div class="nav-btn flex">
-          <button
-            class="flex"
-            :class="{ underline: component === 'task-updates' }"
-            @click="component = 'task-updates'"
-            @mouseover="btnHover(true, 'updates')"
-            @mouseleave="btnHover(false, null)"
-          >
-            updates
-            <btn-dropdown
-              class="dropdown-btn"
-              v-if="isBtnHover && hoveredBtn === 'updates'"
-            />
-          </button>
-          <button
-            class="flex"
-            :class="{ underline: component === 'activity-log' }"
-            @click="component = 'activity-log'"
-            @mouseover="btnHover(true, 'log')"
-            @mouseleave="btnHover(false, null)"
-          >
-            activity log<btn-dropdown
-              v-if="isBtnHover && hoveredBtn === 'log'"
-            />
-          </button>
-        </div>
-      </div>
-      <hr />
-      <template>
-        <component
-          :is="component"
-          :task="task"
-          :currBoard="currBoard"
-          :users="allUsers"
-          :loggedInUser="loggedInUser"
-          class="cmp-container"
-          @editTask="editTask"
-        ></component>
-      </template>
+    <i class="fa fa-times" @click="exitModal"></i>
+    <div class="details-title flex">
+      <input
+        placeholder="title"
+        v-model="task.title"
+        @change="editTask(task)"
+        @keyup.enter="editTask(task)"
+        @click="isEditMode = true"
+        @blur="isEditMode = false"
+      />
 
-  <!-- </div> -->
-  
-    <!-- </VueDragResize> -->
+      <section v-if="!loggedInUser.imgUrl">
+        <span class="icon-user"></span>
+      </section>
+      <avatar
+        v-else
+        :size="40"
+        :src="
+          loggedInUser.imgUrl ? require(`@/pics/${loggedInUser.imgUrl}`) : null
+        "
+      />
+      <i class="fas fa-plus-circle"></i>
     </div>
+    <div class="log-menu flex">
+      <div class="nav-btn flex">
+        <button
+          class="flex"
+          :class="{ underline: component === 'task-updates' }"
+          @click="component = 'task-updates'"
+          @mouseover="btnHover(true, 'updates')"
+          @mouseleave="btnHover(false, null)"
+        >
+          updates
+          <btn-dropdown
+            class="dropdown-btn"
+            v-if="isBtnHover && hoveredBtn === 'updates'"
+          />
+        </button>
+        <button
+          class="flex"
+          :class="{ underline: component === 'activity-log' }"
+          @click="component = 'activity-log'"
+          @mouseover="btnHover(true, 'log')"
+          @mouseleave="btnHover(false, null)"
+        >
+          activity log<btn-dropdown v-if="isBtnHover && hoveredBtn === 'log'" />
+        </button>
+      </div>
+    </div>
+    <hr />
+    <template>
+      <component
+        :is="component"
+        :taskInfo="taskInfo"
+        :task="task"
+        :currBoard="currBoard"
+        :users="allUsers"
+        :loggedInUser="loggedInUser"
+        class="cmp-container"
+        @editTask="editTask"
+      ></component>
+    </template>
+  </div>
 </template>
 
 <script>
@@ -78,6 +76,7 @@ import taskUpdates from "@/cmps/task/details cmps/task-updates.vue";
 import activityLog from "@/cmps/task/details cmps/activity-log.vue";
 import btnDropdown from "@/cmps/task/details cmps/btn-dropdown.vue";
 import VueDragResize from "vue-drag-resize";
+import Avatar from "vue-avatar";
 
 export default {
   name: "task-details",
@@ -86,18 +85,16 @@ export default {
     activityLog,
     btnDropdown,
     VueDragResize,
+    Avatar,
   },
   data() {
     return {
       task: null,
+      taskInfo: null,
       component: "task-updates",
       isBtnHover: false,
       hoveredBtn: null,
-
-      width: 0,
-      height: 0,
-      top: 0,
-      left: 0,
+      isEditMode: false,
     };
   },
 
@@ -111,6 +108,10 @@ export default {
       });
       this.task = task;
       this.$store.commit({ type: "setLoggedinUser" });
+
+      const boardIdx = this.$store.getters.currBoardIdx;
+      const taskInfo = await remoteBoardService.getTaskRouteIdx(task, boardIdx);
+      this.taskInfo = taskInfo;
     } catch (err) {
       console.log(err);
     }
@@ -125,10 +126,6 @@ export default {
     btnHover(isHovered, val) {
       this.isBtnHover = isHovered;
       this.hoveredBtn = val;
-    },
-    update() {
-      this.task;
-      this.$store.dispatch({ type: "", task: this.task });
     },
 
     pageHover(isHover) {
@@ -145,30 +142,24 @@ export default {
           boardIdx
         );
         this.$store.dispatch({ type: "editTask", taskInfo });
+        this.isEditMode = false;
       } catch (err) {
         console.log(err);
       }
     },
-    resize(newRect) {
-      this.width = newRect.width;
-      this.height = newRect.height;
-      this.top = newRect.top;
-      this.left = newRect.left;
-    },
   },
-  computed:{
-
-    allUsers(){
-      return this.$store.getters.getUsers
+  computed: {
+    allUsers() {
+      return this.$store.getters.getUsers;
     },
-    loggedInUser(){
-      if(!this.$store.getters.loggedinUser) return 'Guest'
-      return this.$store.getters.loggedinUser
+    loggedInUser() {
+      if (!this.$store.getters.loggedinUser) return "Guest";
+      return this.$store.getters.loggedinUser;
     },
 
-    currBoard(){
-      return this.$store.getters.currBoard
-    }
+    currBoard() {
+      return this.$store.getters.currBoard;
+    },
   },
 
   watch: {

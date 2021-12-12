@@ -55,6 +55,7 @@
 <script>
 export default {
   name: "activity-log",
+  props:["task","taskInfo","currBoard",],
   data() {
     return {
       typeIcon: null,

@@ -185,27 +185,27 @@ export const boardStore = {
         const { task, taskIdx, groupIdx, activity } = taskInfo;
         const boardCopy = JSON.parse(JSON.stringify(state.currBoard));
 
-        if (task.id) {
-          if (task.isCopy) {
-            delete task.id
-            task.id = utilService.makeId()
-            boardCopy.groups[groupIdx].tasks.splice(taskIdx, 0, task);
-          }
+        if (task.id && task.isCopy) {
+
+          delete task.id
+          task.id = utilService.makeId()
+          boardCopy.groups[groupIdx].tasks.splice(taskIdx, 0, task);
+        } else if (task.id) {
           boardCopy.groups[groupIdx].tasks.splice(taskIdx, 1, task);
-        
+
         } else {
           const currTask = {
-           id : utilService.makeId(),
-           title : task.title,
-           prioraty: null,
-           status: null,
-           timeline: null,
-           members: null,
+            id: utilService.makeId(),
+            title: task.title,
+            prioraty: null,
+            status: null,
+            timeline: null,
+            members: null,
           }
           boardCopy.groups[groupIdx].tasks.push(currTask);
         }
 
-        const activityLog = {
+        const newActivity = {
           id: utilService.makeId(),
           type: activity ? activity.type : null,
           newVal: activity ? activity.newVal : null,
@@ -216,7 +216,12 @@ export const boardStore = {
             id: task.id,
             title: task.title,
           },
+
         };
+
+        if (!boardCopy.groups[groupIdx].activityLog) boardCopy.groups[groupIdx].activityLog = []
+        boardCopy.groups[groupIdx].activityLog.push(newActivity)
+
 
         dispatch({ type: "saveBoard", board: boardCopy });
       } catch (err) {
