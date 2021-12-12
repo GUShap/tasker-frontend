@@ -108,7 +108,6 @@ export default {
         taskId,
       });
       this.task = task;
-      console.log('when open details',this.task);
       this.$store.commit({ type: "setLoggedinUser" });
 
       const boardIdx = this.$store.getters.currBoardIdx;
@@ -181,7 +180,7 @@ export default {
     },
     updatedTask: {
       handler: function(newVal){
-        console.log('task-details',newVal);
+        console.log('updatedTask',newVal);
         this.task = newVal
       }
     }
