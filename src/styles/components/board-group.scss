@@ -51,6 +51,19 @@
       cursor: pointer;
       position: sticky;
     }
+    ::-webkit-input-placeholder {
+      /* Edge */
+      padding-left: 8px;
+    }
+
+    :-ms-input-placeholder {
+      /* Internet Explorer 10-11 */
+      padding-left: 8px;
+    }
+
+    ::placeholder {
+      padding-left: 8px;
+    }
   }
 
   .group-header {
@@ -80,7 +93,7 @@
         justify-content: start;
         .input-group-name {
           position: absolute;
-          margin-left: 0.2rem;
+          margin-left: 0.5rem;
           font-size: 18px;
           border: none;
           border: 1px solid #29292900;
@@ -123,7 +136,7 @@
           display: flex;
           justify-content: start;
           align-items: center;
-          min-width: 24.5rem;
+          min-width: 25.6rem;
           max-width: rem(810px);
           margin-right: rem(11px);
 
@@ -158,7 +171,7 @@
     }
   }
   .group-footer {
-    height: 2rem;
+    height: 4rem;
     width: 100%;
     margin: 0.1rem 0;
   }

@@ -94,7 +94,7 @@
       >
         <input
           type="text"
-          placeholder="+Add"
+          placeholder="+ Add"
           v-model="title"
           @click="showBtn"
           @keyup.enter="addTask('new')"
