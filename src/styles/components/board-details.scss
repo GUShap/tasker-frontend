@@ -161,15 +161,14 @@
   // }
 
   .invite-container {
-    position: fixed;
-    background-color: white;
-    transform: translate(50%, 50%);
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(calc(-50% + 33px) ,-50%);
     z-index: 50;
     width: 600px;
-    top: -250px;
     border-radius: 10px;
-    margin: 200px;
-    // margin-top: 20%;
+    background-color: white;
 
     .invite-list {
       padding: 20px 30px;
