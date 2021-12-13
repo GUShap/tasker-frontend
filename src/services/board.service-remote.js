@@ -17,8 +17,7 @@ export const remoteBoardService = {
   saveFile,
   getEmptyComment,
   getEmptyActivity,
-  sortBy
-
+  sortBy,
 };
 
 const BASE_URL = process.env.NODE_ENV !== "development" ? "board" : "board";
@@ -60,15 +59,14 @@ async function save(board) {
 async function saveFile(file) {
   try {
     const fd = new FormData();
-    await httpService.post('/upload', fd);
+    await httpService.post("/upload", fd);
   } catch (err) {
     console.log(err);
   }
 }
 
-
 function sortBy(sortedBoard, sortByCopy) {
-  if (sortByCopy.val === 'name') {
+  if (sortByCopy.val === "name") {
     sortedBoard.groups.forEach((group) => {
       if (!group.tasks) return [];
       group.tasks.sort((task1, task2) => {
@@ -87,38 +85,48 @@ function sortBy(sortedBoard, sortByCopy) {
   if (sortByCopy.val === "person") {
     sortedBoard.groups.forEach((group) => {
       group.tasks.sort((task1, task2) => {
-        var tmpUser1 = false
-        var tmpUser2 = false
-        if ((!task1.members || !task1.members.length)) {
-          tmpUser1 = true
-          task1.members = [{ username: 'z' }]
+        var tmpUser1 = false;
+        var tmpUser2 = false;
+        if (!task1.members || !task1.members.length) {
+          tmpUser1 = true;
+          task1.members = [{ username: "z" }];
         }
-        if ((!task2.members || !task2.members.length)) {
-          tmpUser2 = true
-          task2.members = [{ username: 'z' }]
+        if (!task2.members || !task2.members.length) {
+          tmpUser2 = true;
+          task2.members = [{ username: "z" }];
         }
         task1.members.sort((member1, member2) => {
-          return member1.username.toLowerCase() >= member2.username.toLowerCase() ? 1 : -1;
-        })
+          return member1.username.toLowerCase() >=
+            member2.username.toLowerCase()
+            ? 1
+            : -1;
+        });
         task2.members.sort((member1, member2) => {
-          return member1.username.toLowerCase() >= member2.username.toLowerCase() ? 1 : -1;
-        })
-        var val = task1.members[0].username.toLowerCase() >= task2.members[0].username.toLowerCase() ? 1 : -1;
-        if (tmpUser1) task1.members = null
-        if (tmpUser2) task2.members = null
+          return member1.username.toLowerCase() >=
+            member2.username.toLowerCase()
+            ? 1
+            : -1;
+        });
+        var val =
+          task1.members[0].username.toLowerCase() >=
+          task2.members[0].username.toLowerCase()
+            ? 1
+            : -1;
+        if (tmpUser1) task1.members = null;
+        if (tmpUser2) task2.members = null;
         if (sortByCopy.order === "ascending") {
-          return val
+          return val;
         } else {
-          return val * -1
+          return val * -1;
         }
       });
-    })
+    });
   }
   if (sortByCopy.val === "status") {
     sortedBoard.groups.forEach((group) => {
       group.tasks.sort((task1, task2) => {
         if (sortByCopy.order === "ascending") {
-          if (!task1.status) return
+          if (!task1.status) return;
           return task1.status >= task2.status ? 1 : -1;
         } else {
           return task2.status >= task1.status ? 1 : -1;
@@ -129,23 +137,29 @@ function sortBy(sortedBoard, sortByCopy) {
   if (sortByCopy.val === "timeline") {
     sortedBoard.groups.forEach((group) => {
       group.tasks.sort((task1, task2) => {
-        if ((!task1.timeline || !task1.timeline.length) || (!task2.timeline || !task2.timeline.length)) return
-        console.log('task1', task1.timeline)
-        console.log('task2', task2.timeline)
-        if (sortByCopy.order === 'ascending') {
-          return new Date(task1.timeline[1]) - new Date(task2.timeline[1])
+        if (
+          !task1.timeline ||
+          !task1.timeline.length ||
+          !task2.timeline ||
+          !task2.timeline.length
+        )
+          return;
+        console.log("task1", task1.timeline);
+        console.log("task2", task2.timeline);
+        if (sortByCopy.order === "ascending") {
+          return new Date(task1.timeline[1]) - new Date(task2.timeline[1]);
         } else {
-          return new Date(task2.timeline[1]) - new Date(task1.timeline[1])
+          return new Date(task2.timeline[1]) - new Date(task1.timeline[1]);
         }
       });
     });
   }
-  if (sortByCopy.val === 'priority') {
-    console.log('priority')
+  if (sortByCopy.val === "priority") {
+    console.log("priority");
     sortedBoard.groups.forEach((group) => {
       group.tasks.sort((task1, task2) => {
-        if (sortByCopy.order === 'ascending') {
-          if (!task1.priority) return
+        if (sortByCopy.order === "ascending") {
+          if (!task1.priority) return;
           return task1.priority >= task2.priority ? 1 : -1;
         } else {
           return task2.priority >= task1.priority ? 1 : -1;
@@ -154,7 +168,7 @@ function sortBy(sortedBoard, sortByCopy) {
     });
   }
 
-
+  return sortedBoard;
 }
 
 async function getTaskById(taskId) {
@@ -219,45 +233,46 @@ function filterBy(board, filterBy) {
       boardCopy.groups = boardCopy.groups.map((group) => {
         group.tasks = group.tasks.filter((task) => {
           if (!filterBy.val) return true;
-          return regex.test(task.title) ? true : regex.test(task.status) ? true : regex.test(task.priority);
+          return regex.test(task.title)
+            ? true
+            : regex.test(task.status)
+            ? true
+            : regex.test(task.priority);
         });
-        if (!group.tasks.length) return null
+        if (!group.tasks.length) return null;
         return group;
       });
     }
   }
-  if (filterBy.filter === 'all') {
+  if (filterBy.filter === "all") {
     return boardCopy;
-  }
-  else if (filterBy.filter === 'title') {
+  } else if (filterBy.filter === "title") {
     if (!filterBy.val) return true;
     boardCopy.groups = boardCopy.groups.filter((group) => {
-      return regex.test(group.title)
-    })
-  }
-  else if (filterBy.filter === 'member') {
+      return regex.test(group.title);
+    });
+  } else if (filterBy.filter === "member") {
     boardCopy.groups = boardCopy.groups.map((group) => {
       if (!filterBy.val) return true;
       group.tasks = group.tasks.filter((task) => {
-        if (!task.members) return false
-        return task.members.some(member => {
-          return regex.test(member.fullname)
-        })
-      })
-      if (!group.tasks.length) return null
-      return group
-    })
-  }
-  else if (filterBy.filter === 'status') {
+        if (!task.members) return false;
+        return task.members.some((member) => {
+          return regex.test(member.fullname);
+        });
+      });
+      if (!group.tasks.length) return null;
+      return group;
+    });
+  } else if (filterBy.filter === "status") {
     boardCopy.groups = boardCopy.groups.map((group) => {
       if (!filterBy.val) return true;
       group.tasks = group.tasks.filter((task) => {
         if (!filterBy.val) return true;
-        return regex.test(task.status)
-      })
-      if (!group.tasks.length) return null
+        return regex.test(task.status);
+      });
+      if (!group.tasks.length) return null;
       return group;
-    })
+    });
   }
   return boardCopy;
 }
@@ -270,12 +285,12 @@ async function getEmptyGroup() {
       tasks: [
         {
           id: utilService.makeId(),
-          title: 'New Task',
+          title: "New Task",
           status: null,
           priority: null,
           timeline: null,
-          members: null
-        }
+          members: null,
+        },
       ],
       style: {
         color: "#579bfc",
@@ -294,7 +309,7 @@ function getEmptyComment() {
     byMember: {},
     style: [],
     seenBy: [],
-    isLike: false
+    isLike: false,
   };
 }
 
@@ -307,7 +322,6 @@ function getEmptyActivity() {
     task: {},
   };
 }
-
 
 function getColors() {
   return [
