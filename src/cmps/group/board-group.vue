@@ -25,7 +25,7 @@
             ]"
             style="padding-left: 10px; padding-right: 2px"
           />
-          <i  v-show="hover" class="group-drag-handle fas fa-grip-vertical" />
+          <i v-show="hover" class="group-drag-handle fas fa-grip-vertical" />
           <input
             class="input-group-name"
             type="text"
@@ -182,10 +182,11 @@ export default {
       this.isToggleOn = !this.isToggleOn;
     },
     toggleSortOrder() {
-      if (this.sortBy.order === "ascending")
-        return (this.sortBy.order = "descending");
-      if (this.sortBy.order === "descending")
-        return (this.sortBy.order = "ascending");
+      if (this.sortBy.order === "ascending") {
+        this.sortBy.order = "descending";
+      } else {
+        this.sortBy.order = "ascending";
+      }
     },
     changeColor(color) {
       console.log(color);
@@ -197,9 +198,9 @@ export default {
       this.isSeen = !this.isSeen;
     },
     dragTask(val) {
-      if(typeof(val) === "string"){
-        console.log("val",val)
-        this.isDragStart = val
+      if (typeof val === "string") {
+        console.log("val", val);
+        this.isDragStart = val;
       }
     },
     isShowGroups(val = null) {
@@ -290,7 +291,6 @@ export default {
         groupsInfo: groupsInfo,
       });
     },
-   
   },
   computed: {
     cmpsOrder() {

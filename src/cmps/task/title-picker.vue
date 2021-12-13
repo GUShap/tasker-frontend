@@ -88,7 +88,9 @@ export default {
     },
     seenTask() {
       const { seenBy, members } = this.info;
-      let isSeenTask = seenBy.some(
+      let isSeenTask = null;
+      if (!seenBy || !seenBy.length) isTaskMember = false;
+      isSeenTask = seenBy.some(
         (member) => member._id === this.loggedinUser._id
       );
 
@@ -99,7 +101,7 @@ export default {
           (member) => member._id === this.loggedinUser._id
         );
       }
-      
+
       if (this.loggedinUser) {
       }
     },
