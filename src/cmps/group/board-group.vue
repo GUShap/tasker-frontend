@@ -1,6 +1,6 @@
 
 <template>
-  <section class="group flex column align-center" >
+  <section class="group flex column align-center">
     <header class="group-header flex start align-center">
       <group-dropdown
         :group="group"
@@ -11,19 +11,21 @@
         @duplicateGroup="duplicateGroup"
         @addNewGroup="addNewGroup"
       />
-      <section class="column-headers">
-        <div @mouseover="hover = true" @mouseleave="hover = false">
+      <section
+        class="column-headers"
+        @mouseover="hover = true"
+        @mouseleave="hover = false"
+      >
+        <div>
           <i
-            @click="isShowGroups('switch')"
             v-show="hover"
+            @click="isShowGroups('switch')"
             :class="[
               groupShow ? 'fas fa-caret-square-up' : 'fas fa-caret-square-down',
             ]"
             style="padding-left: 10px; padding-right: 2px"
           />
-          <i v-show="hover" class="group-drag-handle fas fa-grip-vertical" />
-
-            <!-- :class="[isFocusOn ? 'border' : 'no-border']" -->
+          <i  v-show="hover" class="group-drag-handle fas fa-grip-vertical" />
           <input
             class="input-group-name"
             type="text"
@@ -139,7 +141,7 @@ export default {
       groupShow: true,
       cmpHeaders: null,
       markerColor: null,
-      hover: true,
+      hover: false,
       isToggleOn: false,
       isFocusOn: false,
       isSeen: false,
@@ -181,9 +183,11 @@ export default {
     toggleIconVisibility() {
       this.isToggleOn = !this.isToggleOn;
     },
-    toggleSortOrder(){
-        if (this.sortBy.order === 'ascending') return this.sortBy.order = 'descending'
-        if (this.sortBy.order === 'descending') return this.sortBy.order = 'ascending'
+    toggleSortOrder() {
+      if (this.sortBy.order === "ascending")
+        return (this.sortBy.order = "descending");
+      if (this.sortBy.order === "descending")
+        return (this.sortBy.order = "ascending");
     },
     changeColor(color) {
       console.log(color);
@@ -219,11 +223,11 @@ export default {
     },
 
     async updateGroup() {
-      console.log('group');
+      console.log("group");
       try {
         this.isFocusOn = false;
-        console.log('this.isFocusOn',this.isFocusOn);
-        const currGroup = JSON.parse(JSON.stringify(this.group))
+        console.log("this.isFocusOn", this.isFocusOn);
+        const currGroup = JSON.parse(JSON.stringify(this.group));
         const groupInfo = { group: currGroup, groupIdx: this.groupIdx };
         await this.$store.dispatch({
           type: "saveGroup",

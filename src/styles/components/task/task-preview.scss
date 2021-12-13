@@ -4,11 +4,6 @@
   width: 100%;
 }
 
-.smooth-dnd-container.vertical {
-  > .smooth-dnd-draggable-wrapper {
-    overflow: visible;
-  }
-}
 
 .task-container {
   width: 100%;
@@ -253,4 +248,15 @@
   height: 100vh;
   z-index: 50;
   background-color: rgb(0, 0, 0, 0);
+}
+
+
+.smooth-dnd-container.vertical {
+  > .smooth-dnd-draggable-wrapper {
+    overflow: visible;
+  }
+}
+.smooth-dnd-draggable-wrapper{
+  overflow: visible;
+
 }
