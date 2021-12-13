@@ -14,7 +14,7 @@
           placeholder="Search"
           v-model="searchKey"
         />
-        <a @click.stop.prevent="stopSearch">x</a>
+        <a @click.stop.prevent="stopSearch" class="fa fa-times"></a>
       </div>
       <button @click="showFilterModal">
         <span class="icon-filter"></span>Filter<span
