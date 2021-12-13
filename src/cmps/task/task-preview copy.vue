@@ -9,6 +9,7 @@
     />
     <section
       class="task-preview flex align-center"
+      :style="{ 'border-left': marker }"
     >
       <template v-for="(cmpType, idx) in cmpsOrder">
         <component
@@ -88,9 +89,9 @@ export default {
       const currentTask =this.currTask
       switch (cmpType) {
         case "title-picker":
-          return { taskId: currentTask.id, title: currentTask.title , marker:this.marker};
+          return { taskId: currentTask.id, title: currentTask.title };
         case "member-picker":
-          return { members: currentTask.members, boardMembers: this.boardMembers  };
+          return { members: currentTask.members, boardMembers: this.boardMembers };
         case "status-picker":
           return { status: currentTask.status };
         case "timeline-picker":

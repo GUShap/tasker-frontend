@@ -60,6 +60,8 @@
       group-name="col"
       :get-child-payload="getChildPayload"
       :drop-placeholder="dropPlaceholderOptions"
+      @drag-start="dragTask('grabbing')"
+      @drag-end="dragTask('grab')"
     >
       <Draggable
         v-for="(task, taskIdx) in tasksList"
@@ -106,11 +108,6 @@
         </button>
       </section>
     </transition>
-    <!-- <footer class="group-footer flex space-evenly align-center">
-      <div v-for="(cmp, idx) in cmpsOrder" :key="idx">
-        {{ cmpHeader(cmp) }}
-      </div>
-    </footer> -->
     <footer class="group-footer" />
   </section>
 </template>
@@ -145,6 +142,7 @@ export default {
       isToggleOn: false,
       isFocusOn: false,
       isSeen: false,
+      isDragStart: false,
       sortBy: {
         val: null,
         order: "ascending",
@@ -197,6 +195,12 @@ export default {
     },
     showBtn() {
       this.isSeen = !this.isSeen;
+    },
+    dragTask(val) {
+      if(typeof(val) === "string"){
+        console.log("val",val)
+        this.isDragStart = val
+      }
     },
     isShowGroups(val = null) {
       if (val === "switch") {
@@ -286,6 +290,7 @@ export default {
         groupsInfo: groupsInfo,
       });
     },
+   
   },
   computed: {
     cmpsOrder() {
