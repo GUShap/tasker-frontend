@@ -41,18 +41,19 @@ export const boardStore = {
           });
         });
       }
-      // if (sortByCopy.val === "person") {
-      //   sortedBoard.groups.forEach((group) => {
-      //     group.tasks.sort((task1, task2) => {
-      //       const firstTask = task1.members.sort((member1, member2) => {
-      //         return member1.username.toLowerCase() >= member2.username.toLowerCase() ? 1 : -1;
-      //       })
-      //       const secondTask = task2.members.sort((member1, member2) => {
-      //         return member1.username.toLowerCase() >= member2.username.toLowerCase() ? 1 : -1;
-      //       })
-      //     });
-      //   })
-      // }
+      if (sortByCopy.val === "person") {
+        sortedBoard.groups.forEach((group) => {
+          group.tasks.sort((task1, task2) => {
+            const firstTask = task1.members.sort((member1, member2) => {
+              console.log(firstTask)
+              return member1.username.toLowerCase() >= member2.username.toLowerCase() ? 1 : -1;
+            })
+            const secondTask = task2.members.sort((member1, member2) => {
+              return member1.username.toLowerCase() >= member2.username.toLowerCase() ? 1 : -1;
+            })
+          });
+        })
+      }
       if (sortByCopy.val === "status") {
         sortedBoard.groups.forEach((group) => {
           group.tasks.sort((task1, task2) => {
