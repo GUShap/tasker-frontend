@@ -17,6 +17,8 @@
     border: 2px white solid;
   }
 
+
+
   @media (max-width: 500px) {
     display: none;
   }
@@ -108,10 +110,15 @@
       color: white;
     }
 
-    .far.fa-user-circle {
-      margin-bottom: 9px;
-      font-size: 46px;
-    }
+    // .far.fa-user-circle {
+    //   margin-bottom: 9px;
+    //   font-size: 46px;
+    // }
+
+    .icon-user{
+      font-size: 40px;
+      color: white;
+  }
   }
 
   .fab,

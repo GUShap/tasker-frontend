@@ -500,6 +500,7 @@ export default {
     closeList() {
       this.isMentionMode = false;
     },
+
     addReply(comment) {
       if (!this.input || !this.loggedInUser) {
         //add message cant add in Guest mode
@@ -514,6 +515,7 @@ export default {
         createdAt: Date.now(),
         createdBy: this.loggedInUser,
         isLike: false,
+        seenBy: this.loggedInUser
       };
       comment.replies.push(reply);
       this.$emit("editTask", this.task);

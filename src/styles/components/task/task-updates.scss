@@ -135,6 +135,7 @@
 
         .top {
             padding: 15px;
+            overflow: hidden;
         }
 
         .card-btn {
@@ -170,20 +171,24 @@
             }
         }
 
-        
         .user-info {
             h3 {
                 transform: translateY(40%);
                 padding-left: 60px;
             }
-            
+
             p {
-                padding: 20px 40px;
+                padding: 20px 30px;
             }
-            @media (max-width: 500px){
+
+            @media (max-width: 500px) {
                 height: 50px;
-                h3{
+                h3 {
                     padding: 5px;
+                }
+
+                p {
+                    padding-top: 5px;
                 }
             }
         }
@@ -194,11 +199,17 @@
             p {
                 padding-left: 4px;
             }
+
         }
         .watchers > * {
             display: inline-block;
         }
-
+        @media (max-width: 500px) {
+            .watchers {
+                display: none;
+            }
+        }
+        
         hr {
             border: 2px solid rgba(180, 171, 171, 0.397);
         }
@@ -215,9 +226,8 @@
         button {
             width: 100%;
         }
-        
     }
-    
+
     .reply-form {
         margin-top: 40px;
         padding-left: 5px;
@@ -253,24 +263,23 @@
                 height: 40px;
                 input {
                     padding: 10px;
-                }}
-                .actions-footer {
+                }
+            }
+            .actions-footer {
+                margin: 0;
+                .text-edit {
                     margin: 0;
-                    .text-edit {
-                        margin: 0;
-                        .icon-clip {
-                            display: none;
-                        }
+                    .icon-clip {
+                        display: none;
                     }
-                    
                 }
-                .save-btn{
-
-                    // height: 25px;
-                    padding: 5px;
-                    margin: 8px 0px 15px 35px;
-                }
-                }
+            }
+            .save-btn {
+                // height: 25px;
+                padding: 5px;
+                margin: 8px 0px 15px 35px;
+            }
+        }
     }
 
     .reply-list {
