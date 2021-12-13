@@ -1,6 +1,7 @@
 .group {
   // margin-left: 1rem;
   width: 100%;
+  min-width: fit-content;
   font-family: roboto;
 
   .border {
@@ -13,13 +14,12 @@
 
   .add-task {
     display: flex;
-    width: 100%;
-    margin-left: 2.1rem;
+    margin-left: 16px;
     margin-top: 1px;
     background-color: #fff;
     box-shadow: 0 1px 0 0 #e7e7e7;
     border-right: 8px solid #e6e9ef;
-    width: calc(100% - 14px);
+    width: calc(100% - 26px);
 
     input {
       display: flex;
@@ -111,7 +111,7 @@
       div {
         display: flex;
         justify-content: center;
-        min-width: rem(200px);
+        min-width: rem(160px);
         border-left: 1px solid rgb(0, 0, 0, 0);
         align-items: end;
 
@@ -125,14 +125,14 @@
           justify-content: start;
           align-items: center;
           min-width: 25.6rem;
-          margin-right: rem(11px);
+          // margin-right: rem(11px);
 
           i {
             margin-right: 0.5rem;
           }
         }
         &:last-of-type {
-          margin-right: 4px;
+          margin-right: 11px;
         }
       }
     }

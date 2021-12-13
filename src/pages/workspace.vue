@@ -43,7 +43,8 @@
       :user="loggedinUser"
     ></pop-up-nav>
     <!-- WORKSPACE -->
-    <section class="workspace">
+    <transition name="fade">
+    <section class="workspace" v-show="currBoard">
       <header>
         <board-header
           @screenCover="setInviteMode"
@@ -71,6 +72,10 @@
         @addNewGroup="addNewGroup"
         @editGroup="editGroup"
       />
+    </section>
+    </transition>
+    <section class="gif-container" v-show="!currBoard">
+      <img src="../assets/gif/login-gif.gif" class="login-gif" />
     </section>
     <router-view></router-view>
   </section>
@@ -158,7 +163,7 @@ export default {
       }
     },
     sortBy(sortBy) {
-      console.log(sortBy)
+      console.log(sortBy);
       this.$store.commit({ type: "setSort", sortBy });
     },
     filterBy(filterBy) {

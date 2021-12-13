@@ -98,4 +98,14 @@
       background-color: white;
     }
   }
+
+  .fade-leave-active {
+    transition: opacity 0s;
+  }
+  .fade-enter-active {
+    transition: opacity 1s;
+  }
+  .fade-enter, .fade-leave-to{
+    opacity: 0;
+  }
 }
