@@ -64,15 +64,21 @@ export default {
   data() {
     return {
       isEditMode: false,
-      selectedMembers: this.info.members,
+      selectedMembers: null,
       activity: null,
     };
   },
   created() {
-    this.selectedMembers = this.info.members || null;
+    if(this.info.members){
+       if (!this.info.members.length) {
+            this.selectedMembers = null;
+          } else {
+            this.selectedMembers = this.info.members;
+          }
+    }
   },
   methods: {
-     update() {
+    update() {
       const updateInfo = {
         members: this.selectedMembers,
         activity: this.activity,
@@ -99,22 +105,20 @@ export default {
     closeScreen() {
       console.log("here");
       this.isEditMode = false;
-      console.log('isEditMode',this.isEditMode);
+      console.log("isEditMode", this.isEditMode);
     },
-
-   
   },
   computed: {
     membersToShow() {
       var boardMembers = this.info.boardMembers;
-      if (!this.selectedMembers) {
-        return boardMembers
+      if (!this.selectedMembers || !this.selectedMembers.length) {
+        return boardMembers;
       } else {
         const selectedMembersId = this.selectedMembers.map((m) => m._id);
         const membersToShow = boardMembers.filter((member) => {
           return !selectedMembersId.includes(member._id);
         });
-        return boardMembers;
+        return membersToShow;
       }
     },
   },
@@ -122,13 +126,17 @@ export default {
     selectedMembers: function (newVal, oldVal) {
       this.activity = { type: "members", newVal, oldVal };
     },
-    // info: {
-    //   handler: function (newVal) {
-    //     if (newVal && newVal.members) {
-    //       this.selectedMembers = newVal.members;
-    //     }
-    //   },
-    // },
+    info: {
+      handler: function (newVal) {
+        if (newVal && newVal.members) {
+          if (!newVal.members.length) {
+            this.selectedMembers = null;
+          } else {
+            this.selectedMembers = newVal.members;
+          }
+        }
+      },
+    },
   },
 };
 </script>

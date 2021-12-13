@@ -20,6 +20,7 @@
   .workspace {
     display: flex;
     flex-direction: column;
+    overflow: hidden;
     flex: 1;
     font-size: 1.25rem;
     font-family: roboto;
@@ -89,23 +90,29 @@
       margin-top: 4px;
       > * {
         font-size: 15px;
+        &:hover {
+          border-radius: 5px;
+          background-color: #e6e9ef;
+        }
       }
       a {
+        display: flex;
+        justify-content: center;
+        align-items: center;
         margin: 0 10px;
+        font-size: 15px;
+        span {
+          font-size: 15px;
+        }
       }
-      a:last-child {
-        padding-bottom: 0px;
-        font-size: 18px;
-      }
+
       .btn-add-board {
         border-radius: 5px;
-        border: 1px solid #bec0c4;
+        // border: 1px solid #bec0c4;
+        border: none;
         text-align: center;
         background-color: inherit;
         padding: 5px 15px;
-        span {
-          text-align: center;
-        }
 
         &:hover {
           background-color: #e6e9ef;
@@ -122,11 +129,12 @@
     .board-container {
       display: flex;
       flex-direction: column;
-      height: fit-content;
-      overflow: scroll;
-      width: calc(100% - 10px);
+      height: 100%;
+      overflow-x: auto;
+      overflow-y: scroll;
+      width: 100%;
       font-family: roboto;
-      padding-left: 1.875rem;
+      border-inline-start: 1.875rem solid #fff;
     }
     .main-title {
       display: flex;
@@ -145,13 +153,12 @@
       }
     }
     .member-avatars {
-      margin-right: 10px;
       display: flex;
       justify-content: center;
       align-items: center;
       flex-direction: row;
       position: relative;
-      padding: 5px;
+      padding: 10px;
       > * {
         margin-inline: -0.2rem;
       }
@@ -235,5 +242,25 @@
         }
       }
     }
+  }
+
+  .fade-leave-active {
+    transition: opacity .3s;
+  }
+  .fade-enter-active {
+    transition: opacity .3s;
+  }
+  .fade-enter, .fade-leave-to{
+    opacity: 0;
+  }
+}
+
+.gif-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  .login-gif {
+    width: 600px;
   }
 }

@@ -1,5 +1,6 @@
 <template>
   <section
+    :style="{ 'border-left': this.info.marker }"
     v-if="info"
     @mouseover="hover = true"
     @mouseleave="hover = false"
@@ -27,7 +28,7 @@
         Edit
       </button>
     </div>
-      <button class="comment-bubble"><a class="icon-comment"></a></button>
+    <button class="comment-bubble"><a class="icon-comment"></a></button>
   </section>
 </template>
 

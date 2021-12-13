@@ -5,9 +5,9 @@
 }
 
 .task-container {
-  width: 100%;
+  width: 99%;
   margin-right: 2rem;
-  margin-left: 0.5rem;
+  margin-left: 0.2rem;
 }
 
 .task-preview {
@@ -25,26 +25,46 @@
 
   & > section {
     display: flex;
-    flex-basis: rem(200px);
+    flex-basis: rem(160px);
     border-right: 1px solid white;
   }
   .title-picker {
-    display: flex;
-    flex: 1;
     position: sticky;
-    justify-content: space-between;
+    display: flex;
     align-items: center;
+    justify-content: space-between;
+    flex: 1;
+    left: 0;
     height: 100%;
-    margin-left: 0.5rem;
-    min-width: rem(400px);
+    background-color: #f5f6f8e8;
+    // margin-left: 0.5rem;
+    z-index: 2;
+    min-width: rem(300px);
     white-space: nowrap;
     text-overflow: ellipsis;
+    // cursor: grab;
+    &:hover {
+      background-color: #e7e7e7;
+    }
+
+    input {
+      margin-left: 5px;
+    }
+    span {
+      margin-left: 7px;
+    }
 
     .comment-bubble {
       color: #bec0c4;
       border: none;
       padding: 0 10px;
       background-color: rgba(255, 255, 255, 0);
+      .icon-comment {
+        color: #c5c7d0;
+      }
+      .unseen {
+        color: #007dff;
+      }
       a:hover {
         cursor: pointer;
         background-color: rgba(255, 255, 255, 0);
@@ -56,10 +76,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    min-width: rem(200px);
+    min-width: rem(160px);
     max-width: rem(400px);
     height: 100%;
-    border-right: 0.1rem solid #ffffffa1;
+    border-right: 1px solid #ffffff;
 
     img {
       position: absolute;
@@ -74,7 +94,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    min-width: rem(200px);
+    min-width: rem(160px);
     max-width: rem(400px);
     height: 100%;
     span {
@@ -83,7 +103,7 @@
       align-items: center;
       position: absolute;
       color: white;
-      min-width: 12.5rem;
+      min-width: 10.5rem;
     }
     .myProgress {
       width: 80%;
@@ -107,8 +127,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    border-right: 0.1rem solid white;
-    min-width: rem(200px);
+    border-right: 1px solid white;
+    min-width: rem(160px);
     max-width: rem(400px);
     height: 100%;
     > section {
@@ -250,7 +270,7 @@
 
 .smooth-dnd-container.vertical {
   > .smooth-dnd-draggable-wrapper {
-    overflow: visible;
+    overflow: visible !important;
   }
 }
 .smooth-dnd-draggable-wrapper {
@@ -268,4 +288,3 @@
     min-width: 15rem;
   }
 }
-

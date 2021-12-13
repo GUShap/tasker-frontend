@@ -28,7 +28,7 @@
         </div>
         <section class="more-actions flex">
           <div class="member-avatars">
-          <a>Board members </a>
+            <a>Board members </a>
             <section v-if="!allUsers">
               <avatar :size="25" username="i" />
             </section>
@@ -42,10 +42,15 @@
               :key="idx"
             />
           </div>
-          <a @click="setInviteMode"><span class="icon-invite"></span>Invite </a>
+          <a @click="setInviteMode"
+            ><span class="icon-invite"></span
+            ><span>Invite / {{ countMembers }}</span></a
+          >
 
           <a><span class="icon-activities"></span>Activities</a>
-          <button class="btn-add-board"><span class="icon-plus"></span>Add Board</button>
+          <button class="btn-add-board">
+            <span class="icon-plus"></span>Add Board
+          </button>
         </section>
       </div>
 
@@ -125,6 +130,13 @@ export default {
     },
     invitedMem() {
       return this.board.members ? this.board.member.length : null;
+    },
+    countMembers() {
+      if (this.board.members) {
+        return this.board.members.length;
+      } else {
+        return "";
+      }
     },
   },
 };
