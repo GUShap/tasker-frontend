@@ -11,7 +11,7 @@
     font-family: roboto;
     font-size: 12.6px;
     font-weight: 400;
-    
+
     button {
         border: none;
         background-color: inherit;
@@ -26,7 +26,7 @@
         display: flex;
         gap: 20px;
     }
-    
+
     .share {
         display: flex;
         flex-direction: row;
@@ -34,38 +34,36 @@
         justify-content: center;
         gap: 10px;
     }
-    
+
     el-dropdown {
         top: 265px;
         left: 271px;
         width: 200px;
         background-color: black;
     }
-    
-    
-    .fas.fa-chevron-down{
+
+    .fas.fa-chevron-down {
         text-align: center;
         margin-top: 10px;
     }
 
-    .icon-home{
+    .icon-home {
         font-size: 10px;
         margin-inline: -0.3rem;
     }
 
-    button{
+    button {
         display: flex;
         // padding: 10px;
         gap: 7px;
     }
     // .icon-main-table, .icon-calender, .icon-calender, .icon-kanban{
     //     margin-left: 10px;
-    
+
     // }
 }
 
+.board-btns {
+    margin-top: 0.7rem;
+}
 
-
-    .board-btns{
-        margin-top: 0.7rem;
-    }

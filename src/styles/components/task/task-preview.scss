@@ -263,3 +263,16 @@
 .smooth-dnd-draggable-wrapper {
   overflow: visible;
 }
+
+@media (max-width: 600px) {
+  .task-preview .title-picker {
+    min-width: 15rem;
+  }
+}
+
+@media (min-width: 600px) {
+  .task-preview .title-picker {
+    min-width: 15rem;
+  }
+}
+
