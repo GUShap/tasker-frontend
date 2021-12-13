@@ -10,14 +10,13 @@
   .user-img {
     width: 45px;
     height: 45px;
+    margin-left: 4.5px;
     border-radius: 50%;
     margin-top: 10px;
     cursor: pointer;
     margin-bottom: 10px;
     border: 2px white solid;
   }
-
-
 
   @media (max-width: 500px) {
     display: none;
@@ -115,10 +114,10 @@
     //   font-size: 46px;
     // }
 
-    .icon-user{
+    .icon-user {
       font-size: 40px;
       color: white;
-  }
+    }
   }
 
   .fab,

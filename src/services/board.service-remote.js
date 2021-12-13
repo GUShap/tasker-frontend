@@ -16,7 +16,8 @@ export const remoteBoardService = {
   filterBy,
   saveFile,
   getEmptyComment,
-  getEmptyActivity
+  getEmptyActivity,
+  sortBy
 
 };
 
@@ -63,6 +64,97 @@ async function saveFile(file) {
   } catch (err) {
     console.log(err);
   }
+}
+
+
+function sortBy(sortedBoard, sortByCopy) {
+  if (sortByCopy.val === 'name') {
+    sortedBoard.groups.forEach((group) => {
+      if (!group.tasks) return [];
+      group.tasks.sort((task1, task2) => {
+        if (sortByCopy.order === "ascending") {
+          return task1.title.toLowerCase() >= task2.title.toLowerCase()
+            ? 1
+            : -1;
+        } else {
+          return task2.title.toLowerCase() >= task1.title.toLowerCase()
+            ? 1
+            : -1;
+        }
+      });
+    });
+  }
+  if (sortByCopy.val === "person") {
+    sortedBoard.groups.forEach((group) => {
+      group.tasks.sort((task1, task2) => {
+        var tmpUser1 = false
+        var tmpUser2 = false
+        if ((!task1.members || !task1.members.length)) {
+          tmpUser1 = true
+          task1.members = [{ username: 'z' }]
+        }
+        if ((!task2.members || !task2.members.length)) {
+          tmpUser2 = true
+          task2.members = [{ username: 'z' }]
+        }
+        task1.members.sort((member1, member2) => {
+          return member1.username.toLowerCase() >= member2.username.toLowerCase() ? 1 : -1;
+        })
+        task2.members.sort((member1, member2) => {
+          return member1.username.toLowerCase() >= member2.username.toLowerCase() ? 1 : -1;
+        })
+        var val = task1.members[0].username.toLowerCase() >= task2.members[0].username.toLowerCase() ? 1 : -1;
+        if (tmpUser1) task1.members = null
+        if (tmpUser2) task2.members = null
+        if (sortByCopy.order === "ascending") {
+          return val
+        } else {
+          return val * -1
+        }
+      });
+    })
+  }
+  if (sortByCopy.val === "status") {
+    sortedBoard.groups.forEach((group) => {
+      group.tasks.sort((task1, task2) => {
+        if (sortByCopy.order === "ascending") {
+          if (!task1.status) return
+          return task1.status >= task2.status ? 1 : -1;
+        } else {
+          return task2.status >= task1.status ? 1 : -1;
+        }
+      });
+    });
+  }
+  if (sortByCopy.val === "timeline") {
+    sortedBoard.groups.forEach((group) => {
+      group.tasks.sort((task1, task2) => {
+        if ((!task1.timeline || !task1.timeline.length) || (!task2.timeline || !task2.timeline.length)) return
+        console.log('task1', task1.timeline)
+        console.log('task2', task2.timeline)
+        if (sortByCopy.order === 'ascending') {
+          return new Date(task1.timeline[1]) - new Date(task2.timeline[1])
+        } else {
+          return new Date(task2.timeline[1]) - new Date(task1.timeline[1])
+        }
+      });
+    });
+  }
+  if (sortByCopy.val === 'priority') {
+    console.log('priority')
+    sortedBoard.groups.forEach((group) => {
+      group.tasks.sort((task1, task2) => {
+        if (sortByCopy.order === 'ascending') {
+          if (!task1.priority) return
+          return task1.priority >= task2.priority ? 1 : -1;
+        } else {
+          return task2.priority >= task1.priority ? 1 : -1;
+        }
+      });
+    });
+  }
+
+
 }
 
 async function getTaskById(taskId) {
@@ -176,14 +268,14 @@ async function getEmptyGroup() {
       title: "New group",
       id: utilService.makeId(),
       tasks: [
-      {
-        id: utilService.makeId(),
-        title:'New Task',
-        status:null,
-        priority:null,
-        timeline:null,
-        members:null
-      }
+        {
+          id: utilService.makeId(),
+          title: 'New Task',
+          status: null,
+          priority: null,
+          timeline: null,
+          members: null
+        }
       ],
       style: {
         color: "#579bfc",
@@ -200,9 +292,9 @@ function getEmptyComment() {
     txt: "",
     createdAt: Date.now(),
     byMember: {},
-    style:[],
-    seenBy:[],
-    isLike:false
+    style: [],
+    seenBy: [],
+    isLike: false
   };
 }
 
