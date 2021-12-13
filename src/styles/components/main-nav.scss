@@ -10,6 +10,7 @@
   .user-img {
     width: 45px;
     height: 45px;
+    margin-left: 4.5px;
     border-radius: 50%;
     margin-top: 10px;
     cursor: pointer;
@@ -108,9 +109,14 @@
       color: white;
     }
 
-    .far.fa-user-circle {
-      margin-bottom: 9px;
-      font-size: 46px;
+    // .far.fa-user-circle {
+    //   margin-bottom: 9px;
+    //   font-size: 46px;
+    // }
+
+    .icon-user {
+      font-size: 40px;
+      color: white;
     }
   }
 

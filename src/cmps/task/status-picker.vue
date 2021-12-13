@@ -1,7 +1,7 @@
 <template>
   <section class="status-picker" v-if="info">
     <div
-      @click="editStatus('edit')"
+      @click="isEditMode = true"
       v-if="!isEditMode"
       class="status-picker empty"
       :class="statusStyle"
@@ -15,7 +15,7 @@
       <li @click="editStatus('Work')" class="work-bg">Working on it</li>
       <li @click="editStatus('Hold')" class="hold-bg">On Hold</li>
       <li @click="editStatus('Stuck')" class="stuck-bg">Stuck</li>
-      <li @click="editStatus('Empty')" class="empty-bg">-</li>
+      <li @click="editStatus('Empty')" class="empty-bg">Empty</li>
       <hr />
       <li @click="editStatus('New status')" class="new-status-bg">
         + New status
@@ -24,8 +24,7 @@
     <section
       class="cover-screen"
       v-if="isEditMode"
-      @mouseover="closeModal"
-      @click="editStatus('edit')"
+      @click.stop.prevent="closeModal"
     ></section>
   </section>
 </template>
@@ -64,10 +63,7 @@ export default {
     },
 
     closeModal() {
-      clearTimeout(this.exitModal);
-      this.exitModal = setTimeout(() => {
-        this.isEditMode = false;
-      }, 2000);
+      this.isEditMode = false;
     },
 
     update() {

@@ -23,8 +23,7 @@
     <section
       class="cover-screen"
       v-if="isEditMode"
-      @mouseover="closeModal"
-      @click="editStatus('edit')"
+      @click="closeModal"
     ></section>
   </section>
 </template>
@@ -41,7 +40,6 @@ export default {
       priority: this.info.priority,
       priorityStyle: null,
       activity: null,
-      exitModal: null,
     };
   },
   created() {
@@ -59,10 +57,7 @@ export default {
     },
 
     closeModal() {
-      clearTimeout(this.exitModal);
-      this.exitModal = setTimeout(() => {
         this.isEditMode = false;
-      }, 2000);
     },
 
     update() {

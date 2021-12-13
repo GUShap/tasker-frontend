@@ -1,8 +1,4 @@
 import { userService } from "../../services/user.service.js";
-// import { socketService, SOCKET_EMIT_USER_WATCH, SOCKET_EVENT_USER_UPDATED } from '../../services/socket.service'
-
-// var localLoggedinUser = null;
-// if (sessionStorage.user) localLoggedinUser = JSON.parse(sessionStorage.user || null);
 
 export const userStore = {
     state: {
@@ -23,7 +19,6 @@ export const userStore = {
     mutations: {
         setLoggedinUser(state) {
             state.loggedinUser = userService.getLoggedinUser()
-            // userService.getLoggedinUser(user);
         },
         setUsers(state, { users }) {
             state.users = users;
@@ -84,8 +79,6 @@ export const userStore = {
             }
         },
         async updateUserLog({ commit }, { user }, { taskInfo }) {
-            // console.log(user)
-            // console.log(taskInfo)
             try {
                 user = await userService.update(user);
                 commit({ type: 'setUser', user })
