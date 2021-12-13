@@ -28,7 +28,9 @@
         Edit
       </button>
     </div>
-    <button class="comment-bubble"><a class="icon-comment"></a></button>
+    <button class="comment-bubble">
+      <a class="icon-comment" :class="{ unseen: (isSeen = false) }"></a>
+    </button>
   </section>
 </template>
 
@@ -44,16 +46,20 @@ export default {
       prevTitle: null,
       activity: null,
       debounce: null,
+      isSeen: null,
+      user: null,
     };
   },
   created() {
     this.getInfo();
+    this.seenTask();
   },
   methods: {
     openDetails() {
       if (this.isEditMode) return;
       const info = this.currInfo;
       if (!info) return;
+      this.info.seenBy.push(this.loggedinUser);
       this.$router.push(`/board/task/${info.taskId}`).catch(() => {});
     },
     editMode(val) {
@@ -80,10 +86,30 @@ export default {
       this.currTitle = task.title;
       this.prevTitle = task.title;
     },
+    seenTask() {
+      const { seenBy, members } = this.info;
+      let isSeenTask = seenBy.some(
+        (member) => member._id === this.loggedinUser._id
+      );
+
+      let isTaskMember = null;
+      if (!members || !members.length) isTaskMember = false;
+      else {
+        isTaskMember = members.some(
+          (member) => member._id === this.loggedinUser._id
+        );
+      }
+      
+      if (this.loggedinUser) {
+      }
+    },
   },
   computed: {
     currInfo() {
       return this.info;
+    },
+    loggedinUser() {
+      return this.$store.getters.loggedinUser;
     },
   },
   watch: {

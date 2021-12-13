@@ -443,7 +443,9 @@ export default {
       if (this.seenBy.some((user) => user._id === this.loggedInUser._id))
         return;
       this.seenBy.push(this.loggedInUser);
+      this.task.seenBy.push(this.loggedInUser)
     },
+
     insert(emoji) {
       this.input += emoji;
     },

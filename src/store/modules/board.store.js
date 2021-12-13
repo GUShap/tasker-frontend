@@ -183,7 +183,7 @@ export const boardStore = {
       }
     },
 
-    async editTask({ state, dispatch, commit }, { taskInfo }) {
+    async editTask({ state, dispatch, commit, rootGetters }, { taskInfo }) {
       // const currUser = JSON.parse(JSON.stringify(commit.getters.loggedinUser));
       try {
         const { task, taskIdx, groupIdx, activity } = taskInfo;
@@ -197,6 +197,7 @@ export const boardStore = {
             status: null,
             timeline: null,
             members: null,
+            seenBy:[rootGetters.loggedinUser]
           }
           boardCopy.groups[groupIdx].tasks.push(currTask);
         }
