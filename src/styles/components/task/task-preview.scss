@@ -4,7 +4,6 @@
   width: 100%;
 }
 
-
 .task-container {
   width: 100%;
   margin-right: 2rem;
@@ -41,7 +40,7 @@
     white-space: nowrap;
     text-overflow: ellipsis;
 
-      .comment-bubble {
+    .comment-bubble {
       color: #bec0c4;
       border: none;
       padding: 0 10px;
@@ -85,7 +84,6 @@
       position: absolute;
       color: white;
       min-width: 12.5rem;
-
     }
     .myProgress {
       width: 80%;
@@ -250,13 +248,24 @@
   background-color: rgb(0, 0, 0, 0);
 }
 
-
 .smooth-dnd-container.vertical {
   > .smooth-dnd-draggable-wrapper {
     overflow: visible;
   }
 }
-.smooth-dnd-draggable-wrapper{
+.smooth-dnd-draggable-wrapper {
   overflow: visible;
-
 }
+
+@media (max-width: 600px) {
+  .task-preview .title-picker {
+    min-width: 15rem;
+  }
+}
+
+@media (min-width: 600px) {
+  .task-preview .title-picker {
+    min-width: 15rem;
+  }
+}
+

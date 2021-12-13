@@ -5,7 +5,7 @@
   display: flex;
   flex-direction: row;
   width: 100%;
-  gap: 10px;
+  // gap: 10px;
   color: #504658;
   .icon-search {
     color: #504658;
@@ -320,3 +320,17 @@ select {
     }
   }
 }
+
+
+@media (max-width: 600px) {
+  .board-action-btns {
+     gap: 5px
+  }
+}
+
+@media (min-width: 600px) {
+  .board-action-btns {
+      gap: 10px
+  }
+}
+
