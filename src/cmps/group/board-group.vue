@@ -245,7 +245,7 @@ export default {
       if (val === "status-picker") {
         return "Status";
       } else if (val === "member-picker") {
-        return "Member";
+        return "Members";
       } else if (val === "timeline-picker") {
         return "Timeline";
       } else if (val === "priority-picker") {

@@ -34,10 +34,10 @@
           @click.prevent.stop="addMember(member)"
           class="flex justify-center align-center"
         >
-          <div>
+          <div class="member-picker-selected"> 
             <avatar
               v-if="member.imgUrl"
-              :size="22"
+              :size="20"
               :username="member.fullname"
               :src="require(`@/pics/${member.imgUrl}`)"
               :key="member._id"
@@ -69,12 +69,12 @@ export default {
     };
   },
   created() {
-    if(this.info.members){
-       if (!this.info.members.length) {
-            this.selectedMembers = null;
-          } else {
-            this.selectedMembers = this.info.members;
-          }
+    if (this.info.members) {
+      if (!this.info.members.length) {
+        this.selectedMembers = null;
+      } else {
+        this.selectedMembers = this.info.members;
+      }
     }
   },
   methods: {
@@ -94,6 +94,7 @@ export default {
       // const idx = this.selectedMembers.length;
       this.selectedMembers.push(member);
       this.update();
+      this.isEditMode = false;
     },
 
     removeMember(member) {
