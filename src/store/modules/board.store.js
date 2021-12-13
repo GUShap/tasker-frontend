@@ -41,14 +41,18 @@ export const boardStore = {
           });
         });
       }
-      if (sortByCopy.val === "person") {
-        sortedBoard.members.sort((member1, member2) => {
-          return member1.username.toLowerCase() >=
-            member2.username.toLowerCase()
-            ? 1
-            : -1;
-        });
-      }
+      // if (sortByCopy.val === "person") {
+      //   sortedBoard.groups.forEach((group) => {
+      //     group.tasks.sort((task1, task2) => {
+      //       const firstTask = task1.members.sort((member1, member2) => {
+      //         return member1.username.toLowerCase() >= member2.username.toLowerCase() ? 1 : -1;
+      //       })
+      //       const secondTask = task2.members.sort((member1, member2) => {
+      //         return member1.username.toLowerCase() >= member2.username.toLowerCase() ? 1 : -1;
+      //       })
+      //     });
+      //   })
+      // }
       if (sortByCopy.val === "status") {
         sortedBoard.groups.forEach((group) => {
           group.tasks.sort((task1, task2) => {
@@ -64,8 +68,10 @@ export const boardStore = {
       if (sortByCopy.val === "timeline") {
         sortedBoard.groups.forEach((group) => {
           group.tasks.sort((task1, task2) => {
+            if ((!task1.timeline || !task1.timeline.length) || (!task2.timeline || !task2.timeline.length)) return
+            console.log('task1', task1.timeline)
+            console.log('task2', task2.timeline)
             if (sortByCopy.order === 'ascending') {
-              if (!task1.timeline) return
               return new Date(task1.timeline[1]) - new Date(task2.timeline[1])
             } else {
               return new Date(task2.timeline[1]) - new Date(task1.timeline[1])
@@ -194,7 +200,7 @@ export const boardStore = {
           }
           boardCopy.groups[groupIdx].tasks.push(currTask);
         }
-        
+
         else {
           if (task.isCopy) {
             delete task.id

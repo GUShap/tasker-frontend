@@ -13,6 +13,7 @@
     <ul v-if="isEditMode" class="status-modal">
       <li @click="editStatus('Done')" class="done-bg">Done</li>
       <li @click="editStatus('Work')" class="work-bg">Working on it</li>
+      <li @click="editStatus('Hold')" class="hold-bg">On Hold</li>
       <li @click="editStatus('Stuck')" class="stuck-bg">Stuck</li>
       <li @click="editStatus('Empty')" class="empty-bg">-</li>
       <hr />
