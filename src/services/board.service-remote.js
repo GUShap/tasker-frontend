@@ -165,7 +165,6 @@ function sortBy(sortedBoard, sortByCopy) {
       });
     });
   }
-
   return sortedBoard;
 }
 

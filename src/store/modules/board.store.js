@@ -24,16 +24,12 @@ export const boardStore = {
     },
     currBoard(state) {
       var sortedBoard = JSON.parse(JSON.stringify(state.currBoard));
-      const sortByCopy = JSON.parse(JSON.stringify(state.sortBy))
-      if (state.sortBy) {
-        sortedBoard = remoteBoardService.sortBy(sortedBoard, sortByCopy)
-      }
-      if (state.filterBy) {
-        sortedBoard = remoteBoardService.filterBy(sortedBoard, state.filterBy);
-      }
+      // const sortByCopy = JSON.parse(JSON.stringify(state.sortBy))
+      if (state.sortBy) {sortedBoard = remoteBoardService.sortBy(sortedBoard, state.sortBy)}
+      if (state.filterBy) {sortedBoard = remoteBoardService.filterBy(sortedBoard, state.filterBy);}
       return sortedBoard;
     },
-
+  
     taskHover(state) {
       return state.isTaskDetailsHover;
     },
