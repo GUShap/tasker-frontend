@@ -46,15 +46,13 @@
         }
 
         @media (max-width: 500px) {
-          
-                .comment-input {
-                    padding: 0;
-                    input{
-                        font-size: 12px;
-                        font-weight: 600;
-                    }
+            .comment-input {
+                padding: 0;
+                input {
+                    font-size: 12px;
+                    font-weight: 600;
                 }
-     
+            }
         }
     }
 
@@ -112,13 +110,15 @@
             padding: 4px 8px;
         }
 
-        @media (max-width: 500px){
+        @media (max-width: 500px) {
+            .text-edit {
+                margin: 0;
+            }
             .save-btn {
-                position: absolute;
-                right: 45px;
+                // position: absolute;
+                // margin-right: 40%;
             }
         }
-        
     }
 
     a {
@@ -243,6 +243,30 @@
                 width: 55px;
             }
         }
+
+        @media (max-width: 500px) {
+            .input-container {
+                height: 40px;
+                input {
+                    padding: 10px;
+                }}
+                .actions-footer {
+                    margin: 0;
+                    .text-edit {
+                        margin: 0;
+                        .icon-clip {
+                            display: none;
+                        }
+                    }
+                    
+                }
+                .save-btn{
+
+                    // height: 25px;
+                    padding: 5px;
+                    margin: 8px 0px 15px 35px;
+                }
+                }
     }
 
     .reply-list {
@@ -309,7 +333,6 @@
             color: #649aff;
         }
     }
-
 }
 
 .cover-user {
@@ -364,5 +387,4 @@
             }
         }
     }
-    
 }

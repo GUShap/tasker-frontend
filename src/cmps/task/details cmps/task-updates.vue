@@ -183,9 +183,9 @@
 
             <div class="actions-footer flex">
               <div class="text-edit flex">
-                <button @click.prevent.stop>
+                <!-- <button @click.prevent.stop>
                   <span class="icon-clip"></span> add files
-                </button>
+                </button> -->
                 <emoji-picker @emoji="insert" :search="search">
                   <div
                     slot="emoji-invoker"
@@ -335,9 +335,9 @@
 
             <div class="actions-footer flex">
               <div class="text-edit flex">
-                <button @click.prevent.stop>
+                <!-- <button @click.prevent.stop>
                   <span class="icon-clip"></span> add files
-                </button>
+                </button> -->
                 <emoji-picker @emoji="insert" :search="search">
                   <div
                     slot="emoji-invoker"
@@ -484,7 +484,6 @@ export default {
 
     mentionMode(comment = this.newComment) {
       this.isMentionMode = true;
-      // this.input += "@";
     },
     replyMode(comment) {
       this.currComment = comment;
