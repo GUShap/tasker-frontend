@@ -77,9 +77,12 @@
                 <div @click="filterBy({ filter: 'status', val: 'stuck' })">
                   <span class="icon-circle red" value="stuck"></span>Stuck
                 </div>
+                  <div @click="filterBy({ filter: 'status', val: 'hold' })">
+                  <span class="icon-circle dark-blue" value="hold"></span>On hold
+                </div>
                 <div
                   @click="
-                    filterBy({ filter: 'status', val: 'working on it' })
+                    filterBy({ filter: 'status', val: 'work' })
                   "
                 >
                   <span class="icon-circle yellow" value="working on it"></span

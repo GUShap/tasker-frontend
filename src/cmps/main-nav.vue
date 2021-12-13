@@ -23,15 +23,28 @@
       <router-link to="/home/" class="icon-add-user" />
       <router-link to="/home/" class="icon-search" />
       <a class="fas fa-sign-out-alt" @click="logout"></a>
-      <router-link to="/home/" class="icon-user" />
-      <!-- <section v-if="!user.imgUrl"><span class="icon-user"></span></section> -->
-      <!-- <avatar v-else :size="25" :src="user.imgUrl" :key="user._id" /> -->
+      <!-- <router-link to="/home/" class="icon-user" /> -->
+      <section v-if="user">
+        <section v-if="!user.imgUrl"><span class="icon-user"></span></section>
+        <img
+          class="user-img"
+          v-if="user.imgUrl"
+          :src="require(`@/pics/${user.imgUrl}`)"
+        />
+      </section>
+      <section v-else>
+        <span class="icon-user"></span>
+      </section>
     </nav>
   </section>
 </template>
 
 <script>
+import Avatar from "vue-avatar";
+
 export default {
+  components: { Avatar },
+
   components: {},
   props: ["user"],
   data() {

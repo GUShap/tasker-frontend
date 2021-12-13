@@ -1,7 +1,10 @@
 <template>
   <section class="login-page main-app">
     <nav class="login-nav">
-      <h1>Tasker</h1>
+      <div class="logo-section">
+        <img class="logo-img" :src="require(`@/pics/favicon-32x32.png`)" />
+        <div class="logo-home">tasker.com</div>
+      </div>
     </nav>
     <div class="input-container flex" v-if="loginPage">
       <div class="header">
