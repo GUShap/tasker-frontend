@@ -143,11 +143,7 @@
               <button @click.prevent.stop="toggleCommentLike(comment)">
                 <a
                   class="far fa-thumbs-up"
-                  :class="[
-                    likedComments.some((c) => c.id === comment.id)
-                      ? 'like'
-                      : '',
-                  ]"
+                  :class="[comment.isLike ? 'like' : '']"
                 >
                 </a
                 >like
@@ -282,9 +278,7 @@
                 <a
                   class="far fa-thumbs-up"
                   @click.prevent.stop="toggleReplyLike(reply)"
-                  :class="[
-                    likedReplies.some((r) => r.id === reply.id) ? 'like' : '',
-                  ]"
+                  :class="[reply.isLike ? 'like' : '']"
                 ></a>
               </section>
             </li>
@@ -484,11 +478,10 @@ export default {
       }
 
       if (style === "underline")
-        this.newComment.style.push("text-decoration: underline #2c41bb; ")
+        this.newComment.style.push("text-decoration: underline #2c41bb; ");
       return "text-decoration: underline #2c41bb; ";
     },
-    
-    
+
     mentionMode(comment = this.newComment) {
       this.isMentionMode = true;
       // this.input += "@";
@@ -521,6 +514,7 @@ export default {
         txt: this.input,
         createdAt: Date.now(),
         createdBy: this.loggedInUser,
+        isLike: false,
       };
       comment.replies.push(reply);
       this.$emit("editTask", this.task);
@@ -530,17 +524,13 @@ export default {
     },
 
     toggleCommentLike(comment) {
-      if (this.likedComments.some((c) => c.id === comment.id)) {
-        const idx = this.likedComments.findIndex((c) => c.id === comment.id);
-        this.likedComments.splice(idx, 1);
-      } else this.likedComments.push(comment);
+      comment.isLike = !comment.isLike;
+      this.$emit("editTask", this.task);
     },
 
     toggleReplyLike(reply) {
-      if (this.likedReplies.some((c) => c.id === reply.id)) {
-        const idx = this.likedReplies.findIndex((c) => c.id === reply.id);
-        this.likedReplies.splice(idx, 1);
-      } else this.likedReplies.push(reply);
+      reply.isLike = !reply.isLike;
+      this.$emit("editTask", this.task);
     },
 
     async onFileSelected() {

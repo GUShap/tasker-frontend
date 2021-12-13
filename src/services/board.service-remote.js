@@ -192,7 +192,8 @@ function getEmptyComment() {
     createdAt: Date.now(),
     byMember: {},
     style:[],
-    seenBy:[]
+    seenBy:[],
+    isLike:false
   };
 }
 
