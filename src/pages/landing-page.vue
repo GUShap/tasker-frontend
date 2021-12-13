@@ -2,8 +2,10 @@
   <section class="landing-page">
     <header class="home-header align-center">
       <section class="home-nav">
-        <img class="logo-img" :src="require(`@/pics/logo-task.png`)" />
+        <div class="logo-section">
+        <img class="logo-img" :src="require(`@/pics/favicon-32x32.png`)" />
         <div class="logo-home">tasker.com</div>
+        </div>
         <!-- <div id="toggle" class="action-btn" @click="toggleMenu">
             <span class="fa fa-bars"></span>
           </div> -->
