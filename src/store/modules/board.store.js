@@ -194,7 +194,7 @@ export const boardStore = {
           const currTask = {
             id: utilService.makeId(),
             title: task.title,
-            prioraty: null,
+            priority: null,
             status: null,
             timeline: null,
             members: null,
