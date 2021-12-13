@@ -37,20 +37,20 @@
             <div class="member-avatars-filter">
               <h1>By members</h1>
               <div>
-                <div v-for="(user, idx) in allUsers" :key="idx">
+                <div v-for="(member, idx) in board.members" :key="idx">
                   <div
                     class="user-container"
                     @click.prevent.stop="
-                      filterBy({ filter: 'member', val: user.fullname })
+                      filterBy({ filter: 'member', val: member.fullname })
                     "
                   >
                     <img
                       class="member-img"
-                      v-if="user.imgUrl"
-                      :src="require(`@/pics/${user.imgUrl}`)"
+                      v-if="member.imgUrl"
+                      :src="require(`@/pics/${member.imgUrl}`)"
                     />
                     <a v-else class="icon-user"></a>
-                    {{ user.fullname }}
+                    {{ member.fullname }}
                   </div>
                 </div>
               </div>

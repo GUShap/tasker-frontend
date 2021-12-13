@@ -153,8 +153,7 @@ function sortBy(sortedBoard, sortByCopy) {
       });
     });
   }
-
-
+  return sortedBoard;
 }
 
 async function getTaskById(taskId) {
