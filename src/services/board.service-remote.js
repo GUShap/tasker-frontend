@@ -175,7 +175,16 @@ async function getEmptyGroup() {
     return {
       title: "New group",
       id: utilService.makeId(),
-      tasks: [],
+      tasks: [
+      {
+        id: utilService.makeId(),
+        title:'New Task',
+        status:null,
+        priority:null,
+        timeline:null,
+        members:null
+      }
+      ],
       style: {
         color: "#579bfc",
       },
