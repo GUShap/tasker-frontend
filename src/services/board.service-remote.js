@@ -201,6 +201,8 @@ function getEmptyComment() {
     txt: "",
     createdAt: Date.now(),
     byMember: {},
+    style:[],
+    seenBy:[]
   };
 }
 

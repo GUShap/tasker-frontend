@@ -4,7 +4,6 @@
   width: 100%;
 }
 
-
 .task-container {
   width: 100%;
   margin-right: 2rem;
@@ -41,8 +40,15 @@
     white-space: nowrap;
     text-overflow: ellipsis;
 
-      .comment-bubble {
-      color: #bec0c4;
+    .icon-comment {
+      color: #c5c7d0;
+
+    }
+    .unseen {
+      color: #007dff;
+    }
+
+    .comment-bubble {
       border: none;
       padding: 0 10px;
       background-color: rgba(255, 255, 255, 0);
@@ -85,7 +91,6 @@
       position: absolute;
       color: white;
       min-width: 12.5rem;
-
     }
     .myProgress {
       width: 80%;
@@ -250,13 +255,11 @@
   background-color: rgb(0, 0, 0, 0);
 }
 
-
 .smooth-dnd-container.vertical {
   > .smooth-dnd-draggable-wrapper {
     overflow: visible;
   }
 }
-.smooth-dnd-draggable-wrapper{
+.smooth-dnd-draggable-wrapper {
   overflow: visible;
-
 }
