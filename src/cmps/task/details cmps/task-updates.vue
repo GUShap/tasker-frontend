@@ -442,9 +442,13 @@ export default {
   },
   created() {
     this.newComment = remoteBoardService.getEmptyComment();
-    this.seenBy.push(this.loggedInUser);
+    this.setSeenBy();
   },
   methods: {
+    setSeenBy() {
+      if(this.seenBy.some(user=> user._id===this.loggedInUser._id)) return 
+      this.seenBy.push(this.loggedInUser);
+    },
     insert(emoji) {
       this.input += emoji;
     },
@@ -533,9 +537,9 @@ export default {
 
     async onFileSelected() {
       try {
-        const file=  this.$refs.fileInput.files[0];
+        const file = this.$refs.fileInput.files[0];
         console.log(file);
-        this.input+=file.name
+        this.input += file.name;
         // await remoteBoardService.saveFile(file)
       } catch (err) {
         console.log(err);
