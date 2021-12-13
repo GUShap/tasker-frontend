@@ -25,78 +25,12 @@ export const boardStore = {
     currBoard(state) {
       var sortedBoard = JSON.parse(JSON.stringify(state.currBoard));
       const sortByCopy = JSON.parse(JSON.stringify(state.sortBy))
-      if (sortByCopy.val === 'name') {
-        sortedBoard.groups.forEach((group) => {
-          if (!group.tasks) return [];
-          group.tasks.sort((task1, task2) => {
-            if (sortByCopy.order === "ascending") {
-              return task1.title.toLowerCase() >= task2.title.toLowerCase()
-                ? 1
-                : -1;
-            } else {
-              return task2.title.toLowerCase() >= task1.title.toLowerCase()
-                ? 1
-                : -1;
-            }
-          });
-        });
-      }
-      if (sortByCopy.val === "person") {
-        sortedBoard.groups.forEach((group) => {
-          group.tasks.sort((task1, task2) => {
-            const firstTask = task1.members.sort((member1, member2) => {
-              console.log(firstTask)
-              return member1.username.toLowerCase() >= member2.username.toLowerCase() ? 1 : -1;
-            })
-            const secondTask = task2.members.sort((member1, member2) => {
-              return member1.username.toLowerCase() >= member2.username.toLowerCase() ? 1 : -1;
-            })
-          });
-        })
-      }
-      if (sortByCopy.val === "status") {
-        sortedBoard.groups.forEach((group) => {
-          group.tasks.sort((task1, task2) => {
-            if (sortByCopy.order === "ascending") {
-              if (!task1.status) return
-              return task1.status >= task2.status ? 1 : -1;
-            } else {
-              return task2.status >= task1.status ? 1 : -1;
-            }
-          });
-        });
-      }
-      if (sortByCopy.val === "timeline") {
-        sortedBoard.groups.forEach((group) => {
-          group.tasks.sort((task1, task2) => {
-            if ((!task1.timeline || !task1.timeline.length) || (!task2.timeline || !task2.timeline.length)) return
-            console.log('task1', task1.timeline)
-            console.log('task2', task2.timeline)
-            if (sortByCopy.order === 'ascending') {
-              return new Date(task1.timeline[1]) - new Date(task2.timeline[1])
-            } else {
-              return new Date(task2.timeline[1]) - new Date(task1.timeline[1])
-            }
-          });
-        });
-      }
-      if (sortByCopy.val === 'priority') {
-        console.log('priority')
-        sortedBoard.groups.forEach((group) => {
-          group.tasks.sort((task1, task2) => {
-            if (sortByCopy.order === 'ascending') {
-              if (!task1.priority) return
-              return task1.priority >= task2.priority ? 1 : -1;
-            } else {
-              return task2.priority >= task1.priority ? 1 : -1;
-            }
-          });
-        });
+      if (state.sortBy) {
+        sortedBoard = remoteBoardService.sortBy(sortedBoard, sortByCopy)
       }
       if (state.filterBy) {
         sortedBoard = remoteBoardService.filterBy(sortedBoard, state.filterBy);
       }
-      // console.log(sortedBoard)
       return sortedBoard;
     },
 
