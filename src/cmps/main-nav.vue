@@ -19,13 +19,13 @@
     </div>
 
     <nav class="sub-nav-bottom">
-      <!-- <span class="icon_component surface-item-icon icon_component--no-focus-style"></span> -->
       <router-link to="/home/" class="fas fa-puzzle-piece" />
       <router-link to="/home/" class="icon-add-user" />
       <router-link to="/home/" class="icon-search" />
       <a class="fas fa-sign-out-alt" @click="logout"></a>
       <router-link to="/home/" class="icon-user" />
-      <!-- <img src="https://cdn.monday.com/icons/dapulse-person-column.svg"> -->
+      <!-- <section v-if="!user.imgUrl"><span class="icon-user"></span></section> -->
+      <!-- <avatar v-else :size="25" :src="user.imgUrl" :key="user._id" /> -->
     </nav>
   </section>
 </template>

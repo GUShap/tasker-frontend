@@ -31,12 +31,12 @@
           <button @click.prevent.stop="$refs.fileInput.click()">
             <span class="icon-clip"></span> add files
           </button>
-          <input
+          <!-- <input
             style="display: none"
             ref="fileInput"
             type="file"
             @change="onFileSelected"
-          />
+          /> -->
           <emoji-picker @emoji="insert" :search="search">
             <div
               slot="emoji-invoker"
@@ -442,9 +442,14 @@ export default {
   },
   created() {
     this.newComment = remoteBoardService.getEmptyComment();
-    this.seenBy.push(this.loggedInUser);
+    this.setSeenBy();
   },
   methods: {
+    setSeenBy() {
+      if (this.seenBy.some((user) => user._id === this.loggedInUser._id))
+        return;
+      this.seenBy.push(this.loggedInUser);
+    },
     insert(emoji) {
       this.input += emoji;
     },
@@ -457,6 +462,7 @@ export default {
       this.newComment.txt = this.input;
       this.input = "";
       this.newComment.byMember = this.loggedInUser;
+      this.seenBy.push(this.loggedInUser);
       if (!this.task.comments) this.task.comments = [];
       const currTask = this.task;
       currTask.comments.unshift(this.newComment);
@@ -467,16 +473,22 @@ export default {
       this.isEditMode = !this.isEditMode;
     },
     changeStyle(style) {
-      if (style === "bold")
-        return (this.newComment.style = "font-weight: bold; ");
-      if (style === "italic")
-        return (this.newComment.style = "font-style: italic; ");
+      if (style === "bold") {
+        this.newComment.style.push("font-weight: bold;");
+        return "font-weight: bold; ";
+      }
+
+      if (style === "italic") {
+        this.newComment.style.push("font-style: italic; ");
+        return "font-style: italic; ";
+      }
+
       if (style === "underline")
-        return (this.newComment.style = "border: 1px solid blue; ");
+        this.newComment.style.push("text-decoration: underline #2c41bb; ")
+      return "text-decoration: underline #2c41bb; ";
     },
-    focusInput() {
-      // console.log(this.$refs.input);
-    },
+    
+    
     mentionMode(comment = this.newComment) {
       this.isMentionMode = true;
       // this.input += "@";
@@ -533,9 +545,9 @@ export default {
 
     async onFileSelected() {
       try {
-        const file=  this.$refs.fileInput.files[0];
+        const file = this.$refs.fileInput.files[0];
         console.log(file);
-        this.input+=file.name
+        this.input += file.name;
         // await remoteBoardService.saveFile(file)
       } catch (err) {
         console.log(err);

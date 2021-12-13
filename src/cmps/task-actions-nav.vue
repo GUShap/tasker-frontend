@@ -26,6 +26,7 @@
           <div>Quick filters</div>
           <div
             class="btn-clear"
+            :style="{ isActive: 'active' }"
             @click.prevent.stop="filterBy({ filter: 'all', val: 'all' })"
           >
             Clear all
@@ -40,7 +41,7 @@
                   <div
                     class="user-container"
                     @click.prevent.stop="
-                      filterBy({ filter: 'member', val: user.fullname})
+                      filterBy({ filter: 'member', val: user.fullname })
                     "
                   >
                     <img
@@ -77,7 +78,9 @@
                   <span class="icon-circle red" value="stuck"></span>Stuck
                 </div>
                 <div
-                  @click="filterBy({ filter: 'status', val: 'working on it' })"
+                  @click="
+                    filterBy({ filter: 'status', val: 'working on it' })
+                  "
                 >
                   <span class="icon-circle yellow" value="working on it"></span
                   >Working on it
@@ -166,6 +169,7 @@ export default {
       isSearch: false,
       searchKey: "",
       isShown: false,
+      isActive: false,
       isFilterBy: false,
       exitModal: false,
       sortBy: {
@@ -213,8 +217,8 @@ export default {
     isSearchMode() {
       this.isSearch = !this.isSearch;
     },
-
     filterBy(filter) {
+      console.log(filter);
       if (typeof filter === "object") {
         this.$emit("filterBy", filter);
       } else {
@@ -224,3 +228,10 @@ export default {
   },
 };
 </script>
+
+
+<style>
+.active {
+  background-color: blue;
+}
+</style>

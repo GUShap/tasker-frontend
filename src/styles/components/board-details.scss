@@ -7,6 +7,15 @@
 
   @media (max-width: 500px) {
     width: 400px;
+    .more-actions {
+      display: none;
+    }
+  }
+
+  @media (min-width: 500px) {
+    .main-title {
+      font-size: 30px;
+    }
   }
   .workspace {
     display: flex;

@@ -134,7 +134,7 @@ function filterBy(board, filterBy) {
       });
     }
   }
-  else if (filterBy.filter === 'all') {
+  if (filterBy.filter === 'all') {
     return boardCopy;
   }
   else if (filterBy.filter === 'title') {
@@ -143,16 +143,6 @@ function filterBy(board, filterBy) {
       return regex.test(group.title)
     })
   }
-  // else if (filterBy.filter === 'title' && filterBy.filter === 'status') {
-  //   boardCopy.groups = boardCopy.groups.filter((group) => {
-  //     const filteredGroup = regex.test(group.title)
-  //     filteredGroup.tasks = filteredGroup.tasks.filter((task) => {
-  //       if (!filterBy.val) return true;
-  //       return regex.test(task.status)
-  //     })
-  //     return filteredGroup;
-  //   })
-  // }
   else if (filterBy.filter === 'member') {
     boardCopy.groups = boardCopy.groups.map((group) => {
       if (!filterBy.val) return true;
@@ -173,7 +163,7 @@ function filterBy(board, filterBy) {
         if (!filterBy.val) return true;
         return regex.test(task.status)
       })
-      if(!group.tasks.length) return null
+      if (!group.tasks.length) return null
       return group;
     })
   }
@@ -201,6 +191,8 @@ function getEmptyComment() {
     txt: "",
     createdAt: Date.now(),
     byMember: {},
+    style:[],
+    seenBy:[]
   };
 }
 
