@@ -29,7 +29,7 @@
       </button>
     </div>
     <button class="comment-bubble">
-      <a class="icon-comment" :class="{ unseen: (isSeen = false) }"></a>
+      <a class="icon-comment" :class="{ unseen: !isSeen }"></a>
     </button>
   </section>
 </template>
@@ -47,6 +47,8 @@ export default {
       activity: null,
       debounce: null,
       isSeen: null,
+      seenBy:null,
+      members:null,
       user: null,
     };
   },
@@ -59,9 +61,17 @@ export default {
       if (this.isEditMode) return;
       const info = this.currInfo;
       if (!info) return;
-      this.info.seenBy.push(this.loggedinUser);
+
+      if (
+        !this.info.seenBy.some((member) => member._id === this.loggedinUser._id)
+      ) {
+        this.info.seenBy.push(this.loggedinUser);
+      }
+      this.isSeen = true;
+      // this.update();
       this.$router.push(`/board/task/${info.taskId}`).catch(() => {});
     },
+
     editMode(val) {
       this.isEditMode = !this.isEditMode;
     },
@@ -78,6 +88,7 @@ export default {
       const updateInfo = {
         title: this.currTitle,
         activity: this.activity,
+        seenBy: this.info.seenBy,
       };
       this.$emit("updated", updateInfo);
     },
@@ -85,32 +96,40 @@ export default {
       const task = this.currInfo;
       this.currTitle = task.title;
       this.prevTitle = task.title;
+      this.seenBy = task.seenBy
+      this.members=task.members
+
     },
+
     seenTask() {
-      const { seenBy, members } = this.info;
-      let isSeenTask = null;
-      if (!seenBy || !seenBy.length) isTaskMember = false;
-      isSeenTask = seenBy.some(
+      let isSeenTask = this.seenBy.some(
         (member) => member._id === this.loggedinUser._id
       );
 
       let isTaskMember = null;
-      if (!members || !members.length) isTaskMember = false;
+      if (!this.members || !this.members.length) isTaskMember = false;
       else {
-        isTaskMember = members.some(
+        isTaskMember = this.members.some(
           (member) => member._id === this.loggedinUser._id
         );
       }
 
-      if (this.loggedinUser) {
+      if (!isTaskMember) this.isSeen = true;
+      else if(isSeenTask) this.isSeen = true
+
+      else if (isTaskMember && !isSeenTask) {
+        this.isSeen = false;
       }
     },
   },
+
   computed: {
     currInfo() {
       return this.info;
     },
     loggedinUser() {
+      if (!this.$store.getters.loggedinUser)
+        return { title: "Guest", _id: "1234" };
       return this.$store.getters.loggedinUser;
     },
   },
@@ -120,6 +139,19 @@ export default {
         this.activity = { type: "title", newVal, oldVal: this.prevTitle };
       }
     },
+    info: {
+      handler: function (newVal) {
+        if (newVal && newVal.seenBy) {
+          this.info.seenBy = newVal.seenBy;
+          this.getInfo()
+          this.seenTask()
+        }
+      },
+    },
+    isSeen: function () {
+      this.update();
+    },
+    // isSeen:
   },
 };
 </script>

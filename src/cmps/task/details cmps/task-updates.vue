@@ -443,7 +443,7 @@ export default {
       if (this.seenBy.some((user) => user._id === this.loggedInUser._id))
         return;
       this.seenBy.push(this.loggedInUser);
-      this.task.seenBy.push(this.loggedInUser)
+      this.task.seenBy.push(this.loggedInUser);
     },
 
     insert(emoji) {
@@ -460,8 +460,11 @@ export default {
       this.newComment.byMember = this.loggedInUser;
       this.seenBy.push(this.loggedInUser);
       if (!this.task.comments) this.task.comments = [];
+
       const currTask = this.task;
       currTask.comments.unshift(this.newComment);
+
+      currTask.seenBy = [this.loggedInUser];
       this.$emit("editTask", currTask);
       this.setEdit();
     },
@@ -505,7 +508,6 @@ export default {
 
     addReply(comment) {
       if (!this.input || !this.loggedInUser) {
-        //add message cant add in Guest mode
         this.isReplyMode = false;
         this.isSecondaryReplyMode = false;
         return;
@@ -517,9 +519,11 @@ export default {
         createdAt: Date.now(),
         createdBy: this.loggedInUser,
         isLike: false,
-        seenBy: this.loggedInUser
+        seenBy: this.loggedInUser,
       };
       comment.replies.push(reply);
+
+      this.task.seenBy=[this.loggedInUser]
       this.$emit("editTask", this.task);
       this.input = "";
       this.isReplyMode = false;

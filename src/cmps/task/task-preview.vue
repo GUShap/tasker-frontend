@@ -117,6 +117,7 @@ export default {
       switch (cmpType) {
         case "title-picker":
           task.title = ev.title;
+          task.seenBy= ev.seenBy
           break;
         case "member-picker":
           task.members = ev.members;
