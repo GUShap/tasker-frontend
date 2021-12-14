@@ -55,20 +55,37 @@
     }
 
     .comment-bubble {
+      position: relative;
       color: #bec0c4;
       border: none;
       padding: 0 10px;
       background-color: rgba(255, 255, 255, 0);
+      font-weight: bolder;
+      
       .icon-comment {
+        font-size: 24px;
         color: #c5c7d0;
       }
+      
+      .icon-plus {
+        position: absolute;
+        font-size: 18px;
+        left: 16.5px;
+        top: 1.8px;
+        color: #c5c7d0;
+      }
+
       .unseen {
         color: #007dff;
+        text-shadow: 1px 1px 3px white,2px 2px 3px white, 1px 1px 2px #007dff;
       }
-      a:hover {
-        cursor: pointer;
-        background-color: rgba(255, 255, 255, 0);
-        color: #007dff;
+
+      &:hover {
+        > a {
+          cursor: pointer;
+          background-color: rgba(255, 255, 255, 0);
+          color: #007dff;
+        }
       }
     }
   }
@@ -143,8 +160,6 @@
       color: #c5c7d0;
     }
   }
-  
- 
 }
 
 .status-modal {
