@@ -58,11 +58,11 @@
             <div class="groups">
               <h1>By group</h1>
               <div
+                class="group-title-container"
+                v-for="(group, idx) in currGroups"
                 @click.prevent.stop="
                   filterBy({ filter: 'title', val: group.title })
                 "
-                class="group-title-container"
-                v-for="(group, idx) in board.groups"
                 :key="idx"
               >
                 {{ group.title }}
@@ -77,14 +77,11 @@
                 <div @click="filterBy({ filter: 'status', val: 'stuck' })">
                   <span class="icon-circle red" value="stuck"></span>Stuck
                 </div>
-                  <div @click="filterBy({ filter: 'status', val: 'hold' })">
-                  <span class="icon-circle dark-blue" value="hold"></span>On hold
+                <div @click="filterBy({ filter: 'status', val: 'hold' })">
+                  <span class="icon-circle dark-blue" value="hold"></span>On
+                  hold
                 </div>
-                <div
-                  @click="
-                    filterBy({ filter: 'status', val: 'work' })
-                  "
-                >
+                <div @click="filterBy({ filter: 'status', val: 'work' })">
                   <span class="icon-circle yellow" value="working on it"></span
                   >Working on it
                 </div>
@@ -221,20 +218,19 @@ export default {
       this.isSearch = !this.isSearch;
     },
     filterBy(filter) {
-      console.log(filter);
       if (typeof filter === "object") {
         this.$emit("filterBy", filter);
       } else {
         this.$emit("filterBy", { filter: filter, val: this.searchKey });
       }
+      this.isFilterBy = false;
+    },
+  },
+  computed: {
+    currGroups() {
+      return this.$store.getters.allBoards[0].groups;
     },
   },
 };
 </script>
 
-
-<style>
-.active {
-  background-color: blue;
-}
-</style>

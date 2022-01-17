@@ -89,11 +89,11 @@ function sortBy(sortedBoard, sortByCopy) {
         var tmpUser2 = false;
         if (!task1.members || !task1.members.length) {
           tmpUser1 = true;
-          task1.members = [{ username: "z" }];
+          task1.members = [{ username: "zzz" }];
         }
         if (!task2.members || !task2.members.length) {
           tmpUser2 = true;
-          task2.members = [{ username: "z" }];
+          task2.members = [{ username: "zzz" }];
         }
         task1.members.sort((member1, member2) => {
           return member1.username.toLowerCase() >=
@@ -144,8 +144,6 @@ function sortBy(sortedBoard, sortByCopy) {
           !task2.timeline.length
         )
           return;
-        console.log("task1", task1.timeline);
-        console.log("task2", task2.timeline);
         if (sortByCopy.order === "ascending") {
           return new Date(task1.timeline[1]) - new Date(task2.timeline[1]);
         } else {
