@@ -25,11 +25,15 @@ export const boardStore = {
     currBoard(state) {
       var sortedBoard = JSON.parse(JSON.stringify(state.currBoard));
       // const sortByCopy = JSON.parse(JSON.stringify(state.sortBy))
-      if (state.sortBy) {sortedBoard = remoteBoardService.sortBy(sortedBoard, state.sortBy)}
-      if (state.filterBy) {sortedBoard = remoteBoardService.filterBy(sortedBoard, state.filterBy);}
+      if (state.sortBy) {
+        sortedBoard = remoteBoardService.sortBy(sortedBoard, state.sortBy);
+      }
+      if (state.filterBy) {
+        sortedBoard = remoteBoardService.filterBy(sortedBoard, state.filterBy);
+      }
       return sortedBoard;
     },
-  
+
     taskHover(state) {
       return state.isTaskDetailsHover;
     },
@@ -90,7 +94,7 @@ export const boardStore = {
       const currBoard = JSON.parse(JSON.stringify(state.currBoard));
       const newBoard = JSON.parse(JSON.stringify(board));
       try {
-        socketService.emit('board from store', newBoard)
+        socketService.emit("board from store", newBoard);
         commit({ type: "saveBoard", board: newBoard });
         await remoteBoardService.save(newBoard);
       } catch (err) {
@@ -128,24 +132,19 @@ export const boardStore = {
             status: null,
             timeline: null,
             members: null,
-            seenBy:[rootGetters.loggedinUser]
-          }
+            seenBy: [rootGetters.loggedinUser],
+          };
           boardCopy.groups[groupIdx].tasks.push(currTask);
-        }
-
-        else {
+        } else {
           if (task.isCopy) {
-            delete task.id
-            delete task.isCopy
-            task.id = utilService.makeId()
+            delete task.id;
+            delete task.isCopy;
+            task.id = utilService.makeId();
             boardCopy.groups[groupIdx].tasks.splice(taskIdx, 0, task);
-
           } else {
             boardCopy.groups[groupIdx].tasks.splice(taskIdx, 1, task);
           }
         }
-
-
 
         const newActivity = {
           id: utilService.makeId(),
@@ -158,12 +157,11 @@ export const boardStore = {
             id: task.id,
             title: task.title,
           },
-
         };
 
-        if (!boardCopy.groups[groupIdx].activityLog) boardCopy.groups[groupIdx].activityLog = []
-        boardCopy.groups[groupIdx].activityLog.push(newActivity)
-
+        if (!boardCopy.groups[groupIdx].activityLog)
+          boardCopy.groups[groupIdx].activityLog = [];
+        boardCopy.groups[groupIdx].activityLog.push(newActivity);
 
         dispatch({ type: "saveBoard", board: boardCopy });
       } catch (err) {
@@ -205,10 +203,9 @@ export const boardStore = {
           const newGroup = await remoteBoardService.getEmptyGroup();
           console.log(newGroup);
           boardCopy.groups.unshift(newGroup);
-        }
-        else {
+        } else {
           const { group, groupIdx } = groupInfo;
-          boardCopy.groups.splice(groupIdx, 0, group)
+          boardCopy.groups.splice(groupIdx, 0, group);
         }
 
         dispatch({ type: "saveBoard", board: boardCopy });
