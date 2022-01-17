@@ -69,7 +69,8 @@ function sortBy(sortedBoard, sortByCopy) {
   if (sortByCopy.val === "name") {
     sortedBoard.groups.forEach((group) => {
       if (!group.tasks) return [];
-      group.tasks.sort((task1, task2) => sortByCopy.order === "ascending" ? (task1.title.toLowerCase() >= task2.title.toLowerCase() ? 1 : -1) : (task2.title.toLowerCase() >= task1.title.toLowerCase() ? 1 : -1));});
+      group.tasks.sort((task1, task2) => sortByCopy.order === "ascending" ? (task1.title.toLowerCase() >= task2.title.toLowerCase() ? 1 : -1) : (task2.title.toLowerCase() >= task1.title.toLowerCase() ? 1 : -1));
+    });
   }
   if (sortByCopy.val === "person") {
     sortedBoard.groups.forEach((group) => {
@@ -126,9 +127,7 @@ function sortBy(sortedBoard, sortByCopy) {
   if (sortByCopy.val === "timeline") {
     sortedBoard.groups.forEach((group) => {
       group.tasks.sort((task1, task2) => {
-        if (
-          !task1.timeline ||
-          !task1.timeline.length ||
+        if (!task1.timeline || !task1.timeline.length ||
           !task2.timeline ||
           !task2.timeline.length
         )
@@ -144,9 +143,12 @@ function sortBy(sortedBoard, sortByCopy) {
   if (sortByCopy.val === "priority") {
     console.log("priority");
     sortedBoard.groups.forEach((group) => {
-      group.tasks.sort((task1, task2) => {
-        if (sortByCopy.order === "ascending") {
-          if (!task1.priority) return;
+      group.tasks.sort((task1, task2) =>  {
+        if (!task1.priority) return;
+        
+        if (sortByCopy.order === "ascending")
+        
+        {
           return task1.priority >= task2.priority ? 1 : -1;
         } else {
           return task2.priority >= task1.priority ? 1 : -1;
@@ -275,7 +277,7 @@ async function getEmptyGroup() {
           status: null,
           priority: null,
           timeline: null,
-          members: null,
+          members: [],
         },
       ],
       style: {

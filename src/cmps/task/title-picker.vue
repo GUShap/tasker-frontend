@@ -52,29 +52,32 @@ export default {
       activity: null,
       debounce: null,
       isSeen: null,
-      seenBy:null,
-      members:null,
+      seenBy: null,
+      members: null,
       user: null,
     };
   },
   created() {
     this.getInfo();
-    this.seenTask();
+    // this.seenTask();
   },
   methods: {
     openDetails() {
       if (this.isEditMode) return;
       const info = this.currInfo;
       if (!info) return;
-
-      if (
-        !this.info.seenBy.some((member) => member._id === this.loggedinUser._id)
-      ) {
-        this.info.seenBy.push(this.loggedinUser);
+      else {
+        if (
+          !this.info.seenBy.some(
+            (member) => member._id === this.loggedinUser._id
+          )
+        ) {
+          this.info.seenBy.push(this.loggedinUser);
+        }
+        this.isSeen = true;
+        // this.update();
+        this.$router.push(`/board/task/${info.taskId}`).catch(() => {});
       }
-      this.isSeen = true;
-      // this.update();
-      this.$router.push(`/board/task/${info.taskId}`).catch(() => {});
     },
 
     editMode(val) {
@@ -101,27 +104,25 @@ export default {
       const task = this.currInfo;
       this.currTitle = task.title;
       this.prevTitle = task.title;
-      this.seenBy = task.seenBy
-      this.members=task.members
-
+      this.seenBy = task.seenBy;
+      this.members = task.members;
     },
 
     seenTask() {
+      let isTaskMember = null;
+      // if (!this.members || !this.members.length) return;
+
       let isSeenTask = this.seenBy.some(
         (member) => member._id === this.loggedinUser._id
       );
-
-      let isTaskMember = null;
       if (!this.members || !this.members.length) isTaskMember = false;
       else {
         isTaskMember = this.members.some(
           (member) => member._id === this.loggedinUser._id
         );
       }
-
       if (!isTaskMember) this.isSeen = true;
-      else if(isSeenTask) this.isSeen = true
-
+      else if (isSeenTask) this.isSeen = true;
       else if (isTaskMember && !isSeenTask) {
         this.isSeen = false;
       }
@@ -148,8 +149,8 @@ export default {
       handler: function (newVal) {
         if (newVal && newVal.seenBy) {
           this.info.seenBy = newVal.seenBy;
-          this.getInfo()
-          this.seenTask()
+          this.getInfo();
+          this.seenTask();
         }
       },
     },
