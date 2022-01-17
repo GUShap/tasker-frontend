@@ -156,6 +156,7 @@ export default {
       }
     },
     async addNewGroup(groupInfo) {
+      console.log('groupInfo',groupInfo);
       try {
         await this.$store.dispatch({ type: "addNewGroup", groupInfo });
       } catch (err) {
