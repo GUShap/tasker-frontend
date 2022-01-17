@@ -106,8 +106,6 @@ export default {
 
       const boardIdx = this.$store.getters.currBoardIdx;
       const taskInfo = await remoteBoardService.getTaskRouteIdx(this.task, boardIdx);
-
-      console.log(taskInfo);
       this.taskInfo = taskInfo;
     } catch (err) {
       console.log(err);
