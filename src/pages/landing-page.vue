@@ -13,7 +13,7 @@
           <router-link to="/"
             >Product<i class="fas fa-chevron-down"></i
           ></router-link>
-          <router-link to="/about"
+          <router-link to="/"
             >Solutions<i class="fas fa-chevron-down"></i
           ></router-link>
           <router-link to="/home">Templates</router-link>

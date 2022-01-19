@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import landingPage from '../pages/landing-page.vue'
-import about from '../pages/about.vue'
 import home from '../pages/home.vue'
 import workspace from '../pages/workspace.vue'
 import taskDetails from '../pages/task-details.vue'
@@ -19,11 +18,6 @@ const routes = [
     path: '/',
     name: 'landing-page',
     component: landingPage
-  },
-  {
-    path: '/about',
-    name: 'about',
-    component: about
   },
   {
     path: '/home',

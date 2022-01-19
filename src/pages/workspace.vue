@@ -156,9 +156,9 @@ export default {
       }
     },
     async addNewGroup(groupInfo) {
-      console.log('groupInfo',groupInfo);
+      console.log(groupInfo)
       try {
-        await this.$store.dispatch({ type: "addNewGroup", groupInfo });
+        await this.$store.dispatch({ type: "addNewGroup"});
       } catch (err) {
         console.log("Error", err);
       }

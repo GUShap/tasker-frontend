@@ -201,14 +201,12 @@ export const boardStore = {
       }
     },
 
-    async addNewGroup({ state, dispatch, commit }, { groupInfo }) {
+    async addNewGroup({ state, dispatch }, { groupInfo }) {
       try {
         const boardCopy = JSON.parse(JSON.stringify(state.currBoard));
-
         if (!groupInfo) {
           console.log('addNewGroup : groupInfo',groupInfo);
           const newGroup = await remoteBoardService.getEmptyGroup();
-          console.log(newGroup);
           boardCopy.groups.unshift(newGroup);
         } else {
           const { group, groupIdx } = groupInfo;
