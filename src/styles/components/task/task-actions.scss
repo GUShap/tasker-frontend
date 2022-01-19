@@ -322,22 +322,34 @@ select {
     .red {
       color: #e2445c;
     }
-    .dark-blue{
-      color: #3886BB;
+    .dark-blue {
+      color: #3886bb;
     }
   }
 }
 
-
 @media (max-width: 600px) {
   .board-action-btns {
-     gap: 5px
+    gap: 5px;
+  }
+  input {
+    max-width: 80px;
+  }
+  .task-action-btn {
+    .search-Board {
+      a {
+        left: 65px;
+      }
+    }
+    .btn-new-task{
+
+      padding: 4px 3px
+    }
   }
 }
 
 @media (min-width: 600px) {
   .board-action-btns {
-      gap: 10px
+    gap: 10px;
   }
 }
-

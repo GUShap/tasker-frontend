@@ -67,3 +67,30 @@
     margin-top: 0.7rem;
 }
 
+@media (max-width: 660px) {
+    .filter-menu {
+        font-size: 10px;
+        left: 26px;
+        padding: 16px 24px 24px;
+        max-width: 300px;
+
+        .status-container,
+        .user-container,
+        .group-title-container {
+            padding: 5px;
+            font-size: 13px;
+        }
+
+        .filter-options{
+            gap: 0px;
+        }
+    }
+
+    .pop-up-modal {
+        .sort-menu{
+            left: -80px;
+            width: 323px;
+        }
+
+    }
+}
