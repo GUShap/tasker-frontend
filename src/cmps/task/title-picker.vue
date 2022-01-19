@@ -32,10 +32,6 @@
       <a class="icon-comment" :class="{ unseen: !isSeen }"></a>
       <a class="icon-plus" :class="{ unseen: !isSeen }"></a>
     </button>
-    <!-- <button class="comment-bubble">
-      <a class="icon-comment" :class="{ unseen: !isSeen }"></a>
-      <a class="icon-plus" :class="{ unseen: !isSeen }"></a>
-    </button> -->
   </section>
 </template>
 

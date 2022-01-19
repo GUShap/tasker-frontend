@@ -150,7 +150,7 @@ export default {
     async removeGroup(groupInfo) {
       try {
         await this.$store.dispatch({ type: "removeGroup", groupInfo });
-        console.log("Group was deleted!");
+        console.log("Group was deleted!" , groupInfo);
       } catch (err) {
         console.log("Error", err);
       }

@@ -108,6 +108,7 @@
     }
   }
   .timeline-picker {
+    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -115,6 +116,7 @@
     max-width: rem(400px);
     height: 100%;
     span {
+      position:absolute;
       display: flex;
       justify-content: center;
       align-items: center;

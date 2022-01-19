@@ -44,6 +44,12 @@ export const boardStore = {
       state.currBoard = boards[currBoardIdx];
       state.currBoardIdx = currBoardIdx;
     },
+    setCurrGroups(state, { currGroups }) {
+      state.currBoard.groups = currGroups;
+    },
+    setTasksList(state, { groupIdx, tasksList }) {
+      state.currBoard.groups[groupIdx].tasks = tasksList;
+    },
     saveBoard(state, { board }) {
       state.currBoard = board;
     },
@@ -200,6 +206,7 @@ export const boardStore = {
         const boardCopy = JSON.parse(JSON.stringify(state.currBoard));
 
         if (!groupInfo) {
+          console.log('addNewGroup : groupInfo',groupInfo);
           const newGroup = await remoteBoardService.getEmptyGroup();
           console.log(newGroup);
           boardCopy.groups.unshift(newGroup);
@@ -254,6 +261,7 @@ export const boardStore = {
         console.log(err);
       }
     },
+
   },
   modules: {},
 };

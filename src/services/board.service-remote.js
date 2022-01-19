@@ -287,6 +287,7 @@ async function getEmptyGroup() {
           priority: null,
           timeline: null,
           members: null,
+          seenBy : [],
         },
       ],
       style: {
