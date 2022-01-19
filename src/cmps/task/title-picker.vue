@@ -110,7 +110,7 @@ export default {
       let isTaskMember = null;
 
       if (!this.seenBy || !this.seenBy.length) {
-        let isSeenTask = this.seenBy.some(
+        var isSeenTask = this.seenBy.some(
           (member) => member._id === this.loggedinUser._id
         );
       }
