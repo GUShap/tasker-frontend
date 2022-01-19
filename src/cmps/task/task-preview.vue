@@ -89,7 +89,7 @@ export default {
       const currentTask =this.currTask
       switch (cmpType) {
         case "title-picker":
-          return { taskId: currentTask.id, title: currentTask.title };
+          return { taskId: currentTask.id, title: currentTask.title, boardMembers: this.boardMembers, seenBy: currentTask.seenBy};
         case "member-picker":
           return { members: currentTask.members, boardMembers: this.boardMembers };
         case "status-picker":

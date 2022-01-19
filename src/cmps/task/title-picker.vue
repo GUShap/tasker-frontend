@@ -48,8 +48,8 @@ export default {
       activity: null,
       debounce: null,
       isSeen: null,
-      seenBy: null,
-      members: null,
+      seenBy: [],
+      members: [],
       user: null,
     };
   },
@@ -61,11 +61,11 @@ export default {
     openDetails() {
       if (this.isEditMode) return;
       const info = this.currInfo;
+      console.log(info, info);
       if (!info) return;
       else {
-        // text ishay
-        const seenByEmpty =  (this.info.seenBy || this.info.seenBy.length) ? true : false
-        if (seenByEmpty &&
+        // const seenByEmpty =  (this.info.seenBy || this.info.seenBy.length) ? true : false
+        if (
           !this.info.seenBy.some(
             (member) => member._id === this.loggedinUser._id
           )
@@ -100,30 +100,28 @@ export default {
     },
     getInfo() {
       const task = this.currInfo;
+      console.log(task, 'task')
       this.currTitle = task.title;
       this.prevTitle = task.title;
       this.seenBy = task.seenBy;
       this.members = task.members;
+      console.log('task.members', task.members)
     },
 
     seenTask() {
       let isTaskMember = null;
 
-      if (!this.seenBy || !this.seenBy.length) {
-        let isSeenTask = this.seenBy.some(
-          (member) => member._id === this.loggedinUser._id
-        );
-      }
-
-      if (!this.members || !this.members.length) isTaskMember = false;
-      else {
-        isTaskMember = this.members.some(
-          (member) => member._id === this.loggedinUser._id
-        );
-      }
-
-      if (!isTaskMember) this.isSeen = true;
-      else if (isSeenTask) this.isSeen = true;
+      var isSeenTask = this.seenBy.some(
+        (member) => member._id === this.loggedinUser._id
+      );
+      if (!this.members) {
+        isTaskMember = false;
+        this.isSeen = true
+      } else { 
+        isTaskMember = this.members.some((member) =>{ 
+                 member._id === this.loggedinUser._id});
+        }
+       if (isSeenTask) this.isSeen = true;
       else if (isTaskMember && !isSeenTask) {
         this.isSeen = false;
       }
