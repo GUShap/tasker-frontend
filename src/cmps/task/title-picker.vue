@@ -55,7 +55,7 @@ export default {
   },
   created() {
     this.getInfo();
-    // this.seenTask();
+    this.seenTask();
   },
   methods: {
     openDetails() {
@@ -63,7 +63,9 @@ export default {
       const info = this.currInfo;
       if (!info) return;
       else {
-        if (
+        // text ishay
+        const seenByEmpty =  (this.info.seenBy || this.info.seenBy.length) ? true : false
+        if (seenByEmpty &&
           !this.info.seenBy.some(
             (member) => member._id === this.loggedinUser._id
           )
@@ -106,17 +108,20 @@ export default {
 
     seenTask() {
       let isTaskMember = null;
-      // if (!this.members || !this.members.length) return;
 
-      let isSeenTask = this.seenBy.some(
-        (member) => member._id === this.loggedinUser._id
-      );
+      if (!this.seenBy || !this.seenBy.length) {
+        let isSeenTask = this.seenBy.some(
+          (member) => member._id === this.loggedinUser._id
+        );
+      }
+
       if (!this.members || !this.members.length) isTaskMember = false;
       else {
         isTaskMember = this.members.some(
           (member) => member._id === this.loggedinUser._id
         );
       }
+
       if (!isTaskMember) this.isSeen = true;
       else if (isSeenTask) this.isSeen = true;
       else if (isTaskMember && !isSeenTask) {

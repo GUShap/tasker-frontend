@@ -146,11 +146,6 @@
         </div>
       </div>
     </section>
-    <!-- <section
-      class="cover-screen"
-      v-if="isFilterBy || isShown"
-      @click="(isFilterBy = false), (isShown = false)"
-    ></section> -->
   </section>
 </template>
 

@@ -143,12 +143,10 @@ function sortBy(sortedBoard, sortByCopy) {
   if (sortByCopy.val === "priority") {
     console.log("priority");
     sortedBoard.groups.forEach((group) => {
-      group.tasks.sort((task1, task2) =>  {
+      group.tasks.sort((task1, task2) => {
         if (!task1.priority) return;
-        
-        if (sortByCopy.order === "ascending")
-        
-        {
+
+        if (sortByCopy.order === "ascending") {
           return task1.priority >= task2.priority ? 1 : -1;
         } else {
           return task2.priority >= task1.priority ? 1 : -1;
@@ -180,7 +178,6 @@ async function getTaskById(taskId) {
 async function getTaskRouteIdx(task, boardIdx) {
   try {
     const boards = await query();
-
     var groupIdx = null;
     var taskIdx = null;
     const groups = boards[boardIdx].groups;
@@ -217,21 +214,38 @@ function filterBy(board, filterBy) {
   const regex = new RegExp(filterBy.val, "i");
   var boardCopy = JSON.parse(JSON.stringify(board));
   if (filterBy.filter === "searchKey") {
-    if (!filterBy.filter.type) {
       boardCopy.groups = boardCopy.groups.map((group) => {
+        // const currGroup = JSON.parse(JSON.stringify(group))
         group.tasks = group.tasks.filter((task) => {
           if (!filterBy.val) return true;
           return regex.test(task.title)
-            ? true
-            : regex.test(task.status)
-              ? true
-              : regex.test(task.priority);
+          ? true
+          : regex.test(task.status)
+          ? true
+          : regex.test(task.priority);
         });
+        
         if (!group.tasks.length) return null;
         return group;
-      });
-    }
+      });   
   }
+  // if (filterBy.filter === "searchKey") {
+  //   console.log('filterBy', filterBy);
+  //   if (!filterBy.filter.type) {
+  //     boardCopy.groups = boardCopy.groups.map((group) => {
+  //       group.tasks = group.tasks.filter((task) => {
+  //         if (!filterBy.val) return true;
+  //         return regex.test(task.title)
+  //           ? true
+  //           : regex.test(task.status)
+  //             ? true
+  //             : regex.test(task.priority);
+  //       });
+  //       if (!group.tasks.length) return null;
+  //       return group;
+  //     });
+  //   }
+  // }
   if (filterBy.filter === "all") {
     return boardCopy;
   } else if (filterBy.filter === "title") {
@@ -278,7 +292,7 @@ async function getEmptyGroup() {
           priority: null,
           timeline: null,
           members: null,
-          seenBy : [],
+          seenBy: [],
         },
       ],
       style: {
