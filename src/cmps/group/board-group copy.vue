@@ -54,42 +54,35 @@
       </section>
     </header>
 
-    <Container
-      @drop="onTaskDrop(group.id, $event)"
-      lock-axis="y"
-      group-name="col"
-      :get-child-payload="getChildPayload"
-      :drop-placeholder="dropPlaceholderOptions"
-      @drag-start="dragTask('grabbing')"
-      @drag-end="dragTask('grab')"
-    >
-      <Draggable
-        v-for="(task, taskIdx) in tasksList"
-        :key="task.id"
-        style="
-           {
-            overflow: visible;
-          }
-        "
-      >
-        <transition name="fade" :key="task.id">
-          <task-preview
-            v-if="task"
-            v-show="groupShow"
-            :currentTask="task"
-            :taskIdx="taskIdx"
-            @addTask="addTask"
-            :cmpsOrder="board.cmpsOrder"
-            :groupIdx="groupIdx"
-            :boardMembers="board.members"
-            :markerColor="group.style.color"
-            :user="loggedinUser"
-            class="flex"
-          />
-        </transition>
-      </Draggable>
-    </Container>
-
+    <draggable v-model="tasksList" class="single-task">
+      <transition-group>
+        <section
+          v-for="(task, taskIdx) in tasksList"
+          :key="task.id"
+          style="
+             {
+              overflow: visible;
+            }
+          "
+        >
+          <transition name="fade" :key="task.id">
+            <task-preview
+              v-if="task"
+              v-show="groupShow"
+              :currentTask="task"
+              :taskIdx="taskIdx"
+              @addTask="addTask"
+              :cmpsOrder="board.cmpsOrder"
+              :groupIdx="groupIdx"
+              :boardMembers="board.members"
+              :markerColor="group.style.color"
+              :user="loggedinUser"
+              class="flex"
+            />
+          </transition>
+        </section>
+      </transition-group>
+    </draggable>
     <transition>
       <section
         class="add-task"
@@ -116,16 +109,14 @@
 <script>
 import taskPreview from "@/cmps/task/task-preview.vue";
 import groupDropdown from "@/cmps/group/group-dropdown.vue";
-import { Container, Draggable } from "vue-smooth-dnd";
-import { applyDrag } from "../../services/dnd.util.js";
+import draggable from "vuedraggable";
 
 export default {
   name: "board-group",
   components: {
     taskPreview,
     groupDropdown,
-    Container,
-    Draggable,
+    draggable,
   },
 
   props: ["group", "board", "groupIdx", "user", "isGroupShown"],
@@ -230,7 +221,6 @@ export default {
       console.log("group");
       try {
         this.isFocusOn = false;
-        console.log("this.isFocusOn", this.isFocusOn);
         const currGroup = JSON.parse(JSON.stringify(this.group));
         const groupInfo = { group: currGroup, groupIdx: this.groupIdx };
         await this.$store.dispatch({
@@ -253,43 +243,6 @@ export default {
       }
       return val;
     },
-
-    async onTaskDrop(groupId, dropResult) {
-      try {
-        if (
-          dropResult.removedIndex !== null ||
-          dropResult.addedIndex !== null
-        ) {
-          const board = Object.assign({}, this.board);
-          // const board = JSON.parse(JSON.stringify(this.board));
-          const group = board.groups.filter((g) => g.id === groupId)[0];
-          const groupIdx = board.groups.indexOf(group);
-          const newGroup = Object.assign({}, group);
-          // const newGroup = JSON.parse(JSON.stringify(group));
-          const newTasks = Object.assign({}, newGroup.tasks);
-          newGroup.tasks = applyDrag(newGroup.tasks, dropResult);
-          board.groups.splice(groupIdx, 1, newGroup);
-          console.log("board-group");
-          await this.$store.dispatch({
-            type: "saveBoard",
-            board: board,
-          });
-        }
-      } catch (err) {
-        console.log("Error", err);
-      }
-    },
-    getChildPayload(index) {
-      return this.group.tasks[index];
-    },
-    onGroupDrop(dropResult) {
-      this.currGroups = applyDrag(this.currGroups, dropResult);
-      const groupsInfo = { groups: this.currGroups };
-      this.$store.dispatch({
-        type: "saveGroups",
-        groupsInfo: groupsInfo,
-      });
-    },
   },
   computed: {
     cmpsOrder() {
@@ -302,8 +255,16 @@ export default {
       const user = this.$store.getters.loggedinUser;
       return user;
     },
-    tasksList() {
-      return this.group.tasks;
+    tasksList: {
+      set(value) {
+        this.$store.commit("setTasksList", {
+          groupIdx: this.groupIdx,
+          tasksList: value,
+        });
+      },
+      get() {
+        return this.group.tasks;
+      },
     },
   },
   watch: {

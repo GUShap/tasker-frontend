@@ -1,16 +1,15 @@
 <template>
-   
-  <section class="task-container color-marker-after flex align-center" v-if="currentTask">
+  <section
+    class="task-container color-marker-after flex align-center"
+    v-if="currentTask"
+  >
     <task-dropdown
       @removeTask="removeTask"
       @openTaskDetails="openTaskDetails"
       @duplicateTask="duplicateTask"
       @sortBy="sortBy"
     />
-    <section
-      class="task-preview flex align-center"
-      :style="{ 'border-left': marker }"
-    >
+    <section class="task-preview flex align-center">
       <template v-for="(cmpType, idx) in cmpsOrder">
         <component
           @updated="updateTask(cmpType, $event)"
@@ -34,7 +33,7 @@ import taskDropdown from "../task-dropdown.vue";
 
 export default {
   name: "task-preview",
- components: {
+  components: {
     statusPicker,
     memberPicker,
     titlePicker,
@@ -49,9 +48,9 @@ export default {
     "cmpsOrder",
     "markerColor",
     "boardMembers",
-    "markerColor"
+    "markerColor",
   ],
- 
+
   methods: {
     async removeTask() {
       try {
@@ -86,26 +85,39 @@ export default {
       });
     },
     getCmpInfo(cmpType) {
-      const currentTask =this.currTask
+      const currentTask = this.currTask;
       switch (cmpType) {
         case "title-picker":
-          return { taskId: currentTask.id, title: currentTask.title };
+          return {
+            taskId: currentTask.id,
+            title: currentTask.title,
+            marker: this.marker,
+            members: currentTask.members,
+            seenBy: currentTask.seenBy,
+          };
         case "member-picker":
-          return { members: currentTask.members, boardMembers: this.boardMembers };
+          return {
+            members: currentTask.members,
+            boardMembers: this.boardMembers,
+          };
         case "status-picker":
           return { status: currentTask.status };
         case "timeline-picker":
-          return { timeline: currentTask.timeline, markerColor: this.markerColor };
+          return {
+            timeline: currentTask.timeline,
+            markerColor: this.markerColor,
+          };
         case "priority-picker":
-          return { priority: currentTask.priority};
+          return { priority: currentTask.priority };
       }
     },
     updateTask(cmpType, ev) {
-      var task = JSON.parse(JSON.stringify(this.currentTask)) 
+      var task = JSON.parse(JSON.stringify(this.currentTask));
 
       switch (cmpType) {
         case "title-picker":
           task.title = ev.title;
+          task.seenBy= ev.seenBy
           break;
         case "member-picker":
           task.members = ev.members;
@@ -139,14 +151,11 @@ export default {
       if (!this.markerColor) return `8px solid #579BFC`;
       return `8px solid ${this.markerColor}`;
     },
-    currTask(){
-      return this.currentTask
-    }
-
+    currTask() {
+      return this.currentTask;
+    },
   },
-  watch:{
-    
-  },
+  watch: {},
   destroyed() {},
 };
 </script>

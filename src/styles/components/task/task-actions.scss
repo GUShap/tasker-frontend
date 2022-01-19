@@ -332,8 +332,10 @@ select {
   .board-action-btns {
     gap: 5px;
   }
-  input {
-    max-width: 80px;
+  .search-Board {
+    input {
+      max-width: 80px;
+    }
   }
   .task-action-btn {
     .search-Board {
@@ -341,9 +343,8 @@ select {
         left: 65px;
       }
     }
-    .btn-new-task{
-
-      padding: 4px 3px
+    .btn-new-task {
+      padding: 4px 3px;
     }
   }
 }
