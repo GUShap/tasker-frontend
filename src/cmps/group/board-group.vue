@@ -41,14 +41,6 @@
           :key="idx"
           @click="setSort(cmpHeader(cmp)), toggleSortOrder()"
         >
-          <!-- <i
-            class="fas fa-sort"
-            v-if="isToggleOn"
-            @click="
-              setSort(cmpHeader(cmp));
-              toggleSortOrder();
-            "
-          ></i> -->
           {{ cmpHeader(cmp) }}
         </div>
       </section>

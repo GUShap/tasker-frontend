@@ -100,10 +100,8 @@ export default {
 
   async created() {
     try {
-
       this.$store.commit({ type: "setLoggedinUser" });
-      this.getTask();
-
+      await this.getTask();
       const boardIdx = this.$store.getters.currBoardIdx;
       const taskInfo = await remoteBoardService.getTaskRouteIdx(this.task, boardIdx);
       this.taskInfo = taskInfo;
@@ -151,7 +149,6 @@ export default {
           taskId,
         });
         this.task = task;
-
       } catch (err) {
         console.log(err);
       }

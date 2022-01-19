@@ -60,7 +60,6 @@
           :allUsers="allUsers"
           :board="currBoard"
         />
-        <!-- <board-filter /> -->
       </header>
       <board-details
         v-if="currBoard"

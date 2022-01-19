@@ -1,55 +1,53 @@
 
 <template>
   <section class="board-container" v-if="board">
-    <draggable
-      v-model="currGroups"
-      group="people"
-      @start="drag = true"
-      @end="drag = false" 
-      class="group-container"
+    <Container
+      orientation="vertical"
+      lock-axis="y"
+      @drop="onColumnDrop($event)"
+      drag-handle-selector=".group-drag-handle"
+      :drop-placeholder="dropPlaceholderOptions"
     >
-      <transition-group>
-        <div
-        class="single-group"
-          v-for="(group, groupIdx) in currGroups"
-          :key="groupIdx"
-          style="
-             {
-              overflow: visible;
-            }
-          "
-        >
-          <board-group
-            v-if="group && group.tasks"
-            :group="group"
-            :user="loggedinUser"
-            :board="board"
-            :groupIdx="groupIdx"
-            :isGroupShown="isGroupShown"
-            @isShowGroups="isShowGroups"
-            @addTask="addTask"
-            @removeGroup="removeGroup"
-            @editGroup="editGroup"
-            @addNewGroup="addNewGroup"
-          />
-        </div>
-      </transition-group>
-    </draggable>
+      <Draggable
+        v-for="(group, groupIdx) in currGroups"
+        :key="groupIdx"
+        style="
+           {
+            overflow: visible;
+          }
+        "
+      >
+        <board-group
+          v-if="group && group.tasks"
+          :group="group"
+          :user="loggedinUser"
+          :board="board"
+          :groupIdx="groupIdx"
+          :isGroupShown="isGroupShown"
+          @isShowGroups="isShowGroups"
+          @addTask="addTask"
+          @removeGroup="removeGroup"
+          @editGroup="editGroup"
+          @addNewGroup="addNewGroup"
+        />
+      </Draggable>
+    </Container>
   </section>
 </template>
 
 <script>
 import boardGroup from "@/cmps/group/board-group.vue";
+import { Container, Draggable } from "vue-smooth-dnd";
 import { applyDrag } from "@/services/dnd.util.js";
 import { socketService } from "@/services/socket.service.js";
 import { utilService } from "@/services/util.service.js";
-import draggable from "vuedraggable";
 
 export default {
   name: "main-board",
   components: {
     boardGroup,
-    draggable,
+    Container,
+    Draggable,
   },
   props: ["board", "user"],
 
@@ -103,19 +101,28 @@ export default {
       // console.log(groupInfo);
       this.$emit("addNewGroup", groupInfo);
     },
+
+    async onColumnDrop(dropResult) {
+      try {
+        const currBoard = Object.assign({}, this.board);
+        currBoard.groups = applyDrag(currBoard.groups, dropResult);
+        // console.log("board-details");
+        await this.$store.dispatch({
+          type: "saveBoard",
+          board: currBoard,
+        });
+      } catch (err) {
+        console.log("Error", err);
+      }
+    },
   },
   computed: {
+    currGroups() {
+      return this.board.groups;
+    },
     loggedinUser() {
       const user = this.$store.getters.loggedinUser;
       return user;
-    },
-    currGroups: {
-      get() {
-        return this.board.groups;
-      },
-      set(value) {
-        this.$store.commit("setCurrGroups", {currGroups :value});
-      },
     },
   },
   destroyed() {},
