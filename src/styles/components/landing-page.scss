@@ -44,7 +44,7 @@
         display: flex;
         gap: 20px;
         align-items: center;
-
+        display: none;
         .get-started {
             color: #fff;
             background-color: #4353ff;
@@ -225,10 +225,9 @@
         .info-heading {
             font-size: 80px;
         }
-
-        // .action-btn {
-        //     display: none;
-        // }
+        .action-btn {
+            display: block;
+        }
 
         .btn-menu {
             display: none;
@@ -378,13 +377,11 @@
         .landing-page {
             padding: 20px;
         }
-
         .header-container {
             display: flex;
             justify-content: space-between;
             align-self: center;
         }
-
         .logo-home {
             margin-right: 150px;
         }
