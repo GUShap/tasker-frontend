@@ -89,6 +89,8 @@
       }
     }
   }
+
+
   .status-picker {
     display: flex;
     justify-content: center;
@@ -299,11 +301,7 @@
 @media (max-width: 600px) {
   .task-preview .title-picker {
     min-width: 15rem;
+    position:relative;
   }
 }
 
-@media (min-width: 600px) {
-  .task-preview .title-picker {
-    min-width: 15rem;
-  }
-}
