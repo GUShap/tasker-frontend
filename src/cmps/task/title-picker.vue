@@ -100,12 +100,10 @@ export default {
     },
     getInfo() {
       const task = this.currInfo;
-      console.log(task, 'task')
       this.currTitle = task.title;
       this.prevTitle = task.title;
       this.seenBy = task.seenBy;
       this.members = task.members;
-      console.log('task.members', task.members)
     },
 
     seenTask() {

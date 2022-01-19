@@ -6,7 +6,7 @@
   // flex: 1;
 
   @media (max-width: 500px) {
-    width: 400px;
+    width: calc(100% - 33px);
     .more-actions {
       display: none;
     }
@@ -50,6 +50,10 @@
         border: none;
         min-width: 350px;
         min-height: 20px;
+
+        @media (max-width : 500px) {
+          min-width: 250px;
+        }
       }
 
       a {
@@ -266,3 +270,4 @@
     width: 200px;
   }
 }
+
