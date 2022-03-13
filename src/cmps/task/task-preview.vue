@@ -14,8 +14,8 @@
       <template v-for="(cmpType, idx) in cmpsOrder">
         <component
           @updated="updateTask(cmpType, $event)"
-          :is="cmpType"
           :info="getCmpInfo(cmpType)"
+          :is="cmpType"
           :key="idx"
           :markerColor="markerColor"
         />
